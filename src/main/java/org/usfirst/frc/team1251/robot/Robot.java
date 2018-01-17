@@ -8,6 +8,8 @@ import org.usfirst.frc.team1251.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.commands.MoveElevator;
 import org.usfirst.frc.team1251.robot.subsystems.Elevator;
+import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1251.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,6 +25,8 @@ public class Robot extends IterativeRobot {
     public static final Elevator elevator = new Elevator();
     public static final Arm ARM_CLAW = new Arm();
     public static final Elevator exampleSubsystem = new Elevator();
+    public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+    public static final DriveTrain DriveTrain= new DriveTrain();
     public static OI oi;
 
     //public static final DriveTrain driveTrain = new DriveTrain();
@@ -110,4 +114,5 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
+
 }
