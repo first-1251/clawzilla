@@ -29,4 +29,12 @@ public class RobotMap {
     //Claw ports
     public static final int clawSolenoidLeft = 0;
     public static final int clawSolenoidRight = 1;
+
+    // Left talons
+    public static final int LEFT_TALON_1 = 0;
+    public static final int LEFT_TALON_2 = 1;
+
+    // Right Talons
+    public static final int RIGHT_TALON_1 = 2;
+    public static final int RIGHT_TALON_2 = 3;
 }
