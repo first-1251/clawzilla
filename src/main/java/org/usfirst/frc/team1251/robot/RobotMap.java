@@ -7,7 +7,13 @@ package org.usfirst.frc.team1251.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
+public class RobotMap
+{
+    public static final int LEFT_TALON_1 = 0;
+    public static final int LEFT_TALON_2 = 1;
+
+    public static final int RIGHT_TALON_1 = 2;
+    public static final int RIGHT_TALON_2 = 3;
     // For example to map the left and right motors, you could define the
     // following variables to use with your drive-train subsystem.
     // public static int leftMotor = 1;

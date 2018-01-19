@@ -28,8 +28,8 @@ public class RobotDance extends Command
     protected void execute()
     {
         super.execute();
-        this.driveTrain.setLeftSpeed();
-        this.driveTrain.setRightSpeed();
+        this.driveTrain.setLeftSpeed(joystick.getRawAxis(1));
+        this.driveTrain.setRightSpeed(joystick.getRawAxis(3));
 
         if (OI.stick.getRawAxis(1) > 0)
         {
