@@ -37,4 +37,7 @@ public class RobotMap {
     // Right Talons
     public static final int RIGHT_TALON_1 = 2;
     public static final int RIGHT_TALON_2 = 3;
+
+    // Elevator Motors
+
 }
