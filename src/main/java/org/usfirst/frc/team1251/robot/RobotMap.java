@@ -14,6 +14,13 @@ public class RobotMap
 
     public static final int RIGHT_TALON_1 = 2;
     public static final int RIGHT_TALON_2 = 3;
+
+    //Collector Class
+
+
+
+
+
     // For example to map the left and right motors, you could define the
     // following variables to use with your drive-train subsystem.
     // public static int leftMotor = 1;

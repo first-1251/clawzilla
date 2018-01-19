@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team1251.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1251.robot.subsystems.Collector;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.commands.MoveElevator;
 import org.usfirst.frc.team1251.robot.subsystems.Elevator;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
     public static final Elevator exampleSubsystem = new Elevator();
     public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
     public static final DriveTrain DriveTrain= new DriveTrain();
+    public static Collector collector = new Collector();
     public static OI oi;
 
     //public static final DriveTrain driveTrain = new DriveTrain();
