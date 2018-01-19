@@ -70,9 +70,9 @@ public class Collector extends Subsystem
         }
 
 
-        if rightSwtich.get())
+        if (rightSwtich.get())
         {
-            rightMotor.set(speed);
+            //rightMotor.set();
         }
 
 
