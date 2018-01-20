@@ -1,14 +1,13 @@
 package org.usfirst.frc.team1251.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team1251.robot.RobotMap;
+import org.usfirst.frc.team1251.robot.CrateDetector;
 import org.usfirst.frc.team1251.robot.commands.CollectorMain;
 
 public class Collector extends Subsystem
 {
-    //Bag Motors
+    //Bag Motors For Things
 
     //The left bag motor, when looking from the rear perspective.
     private SpeedController leftMotor;
@@ -16,16 +15,7 @@ public class Collector extends Subsystem
     //The right bag motor, when looking from the rear perspective.
     private SpeedController rightMotor;
 
-    //Collector Button Limits
-
-    //One of the 3 switches used to align the crate. On left side when looking from the rear perspective.
-    private DigitalInput leftSwitch;
-
-    //One of the 3 switches used to align the crate. In the middle.
-    private DigitalInput middleSwitch;
-
-    //One of the 3 switches used to align the crate. On right side when looking from the rear perspective.
-    private DigitalInput rightSwtich;
+    private CrateDetector crateDetector;
 
     public Collector()
     {
@@ -42,62 +32,42 @@ public class Collector extends Subsystem
     }
 
 
-    public boolean isLeftOnly() //Only left button is pressed
+    public void runCollectorWheels()
     {
-        return leftSwitch.get() && !middleSwitch.get() && !rightSwtich.get();
-    }
-    public boolean isMiddleOnly() //Only middle button is pressed
-    {
-        return middleSwitch.get() && !leftSwitch.get() && !rightSwtich.get();
-    }
-    public boolean isRightOnly() //Only right button is pressed
-    {
-        return rightSwtich.get() && !middleSwitch.get() && !leftSwitch.get();
-    }
-    public boolean isLeftMiddle() //Left and Middle is pressed
-    {
-        return leftSwitch.get() && middleSwitch.get() && !leftSwitch.get();
-    }
-    public boolean isRightMiddle() //Right and Middle is pressed
-    {
-        return rightSwtich.get() && middleSwitch.get() && !leftSwitch.get();
-    }
-    public boolean isAllPressed() //Right and Middle is pressed
-    {
-        return rightSwtich.get() && middleSwitch.get() && leftSwitch.get();
-    }
+        CrateDetector.CrateState crateState = this.crateDetector.getCrateState();
 
+        if (crateState == CrateDetector.CrateState.SKEWED_LEFT)
+        {
+            rightMotor.set(1);
+            leftMotor.set(1);
+            return;
+        }
 
-    public void buttonPressed()
-    {
-        if (isLeftOnly()) {
+        if (crateState == CrateDetector.CrateState.DIAGONAL)
+        {
             rightMotor.set(1);
             leftMotor.set(1);
             return;
         }
-        if (isLeftMiddle()) {
-            rightMotor.set(1);
-            leftMotor.set(1);
-            return;
-        }
-        if (isMiddleOnly()) {
-            rightMotor.set(1);
-            leftMotor.set(1);
-            return;
-        }
-        if (isRightOnly()) {
+
+        if (crateState == CrateDetector.CrateState.SKEWED_RIGHT)
+        {
             rightMotor.set(-1);
             leftMotor.set(-1);
             return;
         }
-        if (isRightMiddle()) {
-            rightMotor.set(-1);
-            leftMotor.set(-1);
-            return;
-        }
-        if (isAllPressed()) {
+
+        if (crateState == CrateDetector.CrateState.CRATE_COLLECTED)
+        {
             rightMotor.set(0);
             leftMotor.set(0);
+            return;
+        }
+        if (crateState == CrateDetector.CrateState.NONE)
+        {
+            //Sucks in crate
+            rightMotor.set(1);
+            leftMotor.set(-1);
             return;
         }
 
