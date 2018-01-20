@@ -73,26 +73,32 @@ public class Collector extends Subsystem
         if (isLeftOnly()) {
             rightMotor.set(1);
             leftMotor.set(1);
+            return;
         }
         if (isLeftMiddle()) {
             rightMotor.set(1);
             leftMotor.set(1);
+            return;
         }
         if (isMiddleOnly()) {
             rightMotor.set(1);
             leftMotor.set(1);
+            return;
         }
         if (isRightOnly()) {
             rightMotor.set(-1);
             leftMotor.set(-1);
+            return;
         }
         if (isRightMiddle()) {
             rightMotor.set(-1);
             leftMotor.set(-1);
+            return;
         }
         if (isAllPressed()) {
             rightMotor.set(0);
             leftMotor.set(0);
+            return;
         }
 
     }
