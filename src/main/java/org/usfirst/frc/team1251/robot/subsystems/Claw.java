@@ -23,7 +23,7 @@ public class Claw extends Subsystem {
     public void leftSolenoid () {
 
     }
-//comment
+
     //Right claw solenoid movement
     public void rightSolenoid () {
 
