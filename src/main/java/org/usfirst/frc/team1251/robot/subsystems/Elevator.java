@@ -13,7 +13,7 @@ public class Elevator extends Subsystem {
     // Motor(s) for elevators (move it up and down)
     private Victor elevatorMotor1;
 
-    // private Encoder elevatorEncoder; // Maybe?
+    // private Encoder elevatorEncoder; //TODO: DETERMINE ENCODER USAGE
 
     // Limit Switches that prevent the elevator from overextending
     private DigitalInput elevatorLimitSwitch;
@@ -29,6 +29,7 @@ public class Elevator extends Subsystem {
 
     // goUp() and goDown() methods will use a speed variable until control type is determined
     // Defaulted to joystick
+    //TODO: DETERMINE CONTROL TYPE FOR ELEV. (BUTTON, JOYSTICK, ETC.)
 
     // Have the elevator go upwards
     public void goUp(double speed) {

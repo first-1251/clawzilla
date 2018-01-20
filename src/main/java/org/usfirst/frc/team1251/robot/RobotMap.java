@@ -1,4 +1,6 @@
 package org.usfirst.frc.team1251.robot;
+
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -40,7 +42,9 @@ public class RobotMap {
 
     // Elevator Motors - MUST CORRECT PORT VALUES
     public static final int ELEVATOR_VICTOR = 1;
+    //TODO: UPDATE VICTOR PORT ACCORDINGLY
 
     // Elevator Limit Switch - MUST CORRECT PORT VALUES
     public static final int ELEVATOR_LIMIT_SWITCH = 1;
+    //TODO: UPDATE LS PORT ACCORDINGLY
 }
