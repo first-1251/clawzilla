@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team1251.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.commands.MoveElevator;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,10 +25,10 @@ public class Robot extends IterativeRobot {
     public static final Elevator exampleSubsystem = new Elevator();
     public static OI oi;
 
-    public static final DriveTrain driveTrain = new DriveTrain();
+    //public static final DriveTrain driveTrain = new DriveTrain();
 
-    Command autonomousCommand;
-    SendableChooser chooser;
+    private Command autonomousCommand;
+    private SendableChooser chooser;
 
     /**
      * This function is run when the robot is first started up and should be
