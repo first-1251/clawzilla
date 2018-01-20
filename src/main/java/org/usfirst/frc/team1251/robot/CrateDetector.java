@@ -17,6 +17,7 @@ public class CrateDetector
     //One of the 3 switches used to align the crate. On right side when looking from the rear perspective.
     private DigitalInput rightSwtich;
 
+
     public enum CrateState {
         SKEWED_LEFT, DIAGONAL, SKEWED_RIGHT, CRATE_COLLECTED, NONE
     }
