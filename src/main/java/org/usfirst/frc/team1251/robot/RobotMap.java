@@ -9,11 +9,7 @@ package org.usfirst.frc.team1251.robot;
  */
 public class RobotMap
 {
-    public static final int LEFT_TALON_1 = 0;
-    public static final int LEFT_TALON_2 = 1;
 
-    public static final int RIGHT_TALON_1 = 2;
-    public static final int RIGHT_TALON_2 = 3;
 
     //collector Class
 

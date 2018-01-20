@@ -27,14 +27,14 @@ public class CrateDetector
         if (isLeftOnly()) {
             return CrateState.SKEWED_LEFT;
         }
-        if (isMiddleOnly()) {
-            return CrateState.DIAGONAL;
-        }
         if (isLeftMiddle()) {
             return CrateState.SKEWED_LEFT;
         }
         if (isRightOnly()) {
             return CrateState.SKEWED_RIGHT;
+        }
+        if (isMiddleOnly()) {
+            return CrateState.DIAGONAL;
         }
         if (isRightMiddle()) {
             return CrateState.SKEWED_RIGHT;
