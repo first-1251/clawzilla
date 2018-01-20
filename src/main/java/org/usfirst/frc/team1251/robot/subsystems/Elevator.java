@@ -10,7 +10,7 @@ import org.usfirst.frc.team1251.robot.RobotMap;
  */
 public class Elevator extends Subsystem {
 
-    // CIM Motor(s) for elevators (move it up and down)
+    // Motor(s) for elevators (move it up and down)
     private Victor elevatorMotor1;
 
     // private Encoder elevatorEncoder; // Maybe?
