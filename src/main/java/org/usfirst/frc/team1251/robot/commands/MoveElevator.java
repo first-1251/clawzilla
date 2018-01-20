@@ -24,11 +24,11 @@ public class MoveElevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        /*
-        this.elevator.goUp(joystick.getRawAxis(1));
-        this.elevator.goDown(joystick.getRawAxis(1));
-        */
-        //TODO: CREATE IF STATEMENT FOR JOYSTICK :3
+        if(joystick.getRawAxis(1) > 0){ //TODO: CHANGE AXES ACCORDINGLY? ¯\_(ツ)_/¯
+            this.elevator.goUp(joystick.getRawAxis(1));
+        } else {
+            this.elevator.goDown(joystick.getRawAxis(1));
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,6 +41,6 @@ public class MoveElevator extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
         this.elevator.stopPlease();
-        // Must figure out whether we use joystick or button
+        //TODO: DETERMINE CONTROL STYLE (BUTTON, JOYSTICK, ETC.) ¯\_(ツ)_/¯
     }
 }

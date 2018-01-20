@@ -49,10 +49,8 @@ public class RobotMap {
     public static final int ELEVATOR_LIMIT_SWITCH = 1;
     //TODO: UPDATE LS PORT ACCORDINGLY
 
-    // Elevator Encoder
-    public static final int ELEVATOR_ENCODER = 1;
-    //TODO: UPDATE ENCODER PORT ACCORDINGLY
-
     // DIO ports for Encoder?
-    //TODO: ADD DIO PORTS
+    public static final int ELEVATOR_ENCODER_PORT1 = 1;
+    public static final int ELEVATOR_ENCODER_PORT2 = 1;
+    //TODO: UPDATE LS PORT ACCORDINGLY
 }

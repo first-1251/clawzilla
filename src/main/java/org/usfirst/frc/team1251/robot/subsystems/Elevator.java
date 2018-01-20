@@ -18,12 +18,12 @@ public class Elevator extends Subsystem {
     private final static double LIMIT_SWITCH_IDLE_SPEED = 0;
     // Encoder for elevator
     private Encoder elevatorEncoder;
+    //TODO: FIGURE OUT WHAT TO DO WITH ENCODER ¯\_(ツ)_/¯
     // Limit Switches that prevent the elevator from overextending
     private DigitalInput elevatorLimitSwitch;
 
     public Elevator(){
-        //TODO: FIX ENCODER INITIALIZATION
-        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER, RobotMap.ELEVATOR_ENCODER);
+        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER_PORT1, RobotMap.ELEVATOR_ENCODER_PORT2);
         elevatorMotor1 = new Victor(RobotMap.ELEVATOR_VICTOR);
         elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
     }
@@ -53,10 +53,9 @@ public class Elevator extends Subsystem {
     // Prevents the elevator from overreaching by checking limit switch state
     public void stopPlease(){
         if (elevatorLimitSwitch.get()){
-            elevatorMotor1.set(LIMIT_SWITCH_IDLE_SPEED);
-            //TODO: EDIT TO 0
+            elevatorMotor1.set(0);
         }
     }
 }
 
-// Water game confirmed.
+// Water game confirmed? ¯\_(ツ)_/¯ ?????

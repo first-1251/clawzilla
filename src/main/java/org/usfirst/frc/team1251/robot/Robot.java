@@ -22,7 +22,6 @@ public class Robot extends IterativeRobot {
 
     public static final Elevator elevator = new Elevator();
     public static final Arm ARM_CLAW = new Arm();
-    public static final Elevator exampleSubsystem = new Elevator();
     public static OI oi;
 
     //public static final DriveTrain driveTrain = new DriveTrain();
