@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
+import org.usfirst.frc.team1251.robot.commands.CollectorMain;
 
 public class Collector extends Subsystem
 {
@@ -34,7 +35,10 @@ public class Collector extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
+        this.getDefaultCommand(new CollectorMain());
+    }
 
+    private void getDefaultCommand(CollectorMain collectorMain) {
     }
 
 
@@ -90,7 +94,6 @@ public class Collector extends Subsystem
             rightMotor.set(0);
             leftMotor.set(0);
         }
-
 
     }
 }
