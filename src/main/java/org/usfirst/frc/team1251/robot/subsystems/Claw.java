@@ -2,14 +2,15 @@ package org.usfirst.frc.team1251.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class Claw extends Subsystem {
 
     private Solenoid clawSolenoidLeft, clawSolenoidRight;
 
     public Claw(){
-       // clawSolenoidLeft = new solenoid();
-        //clawSolenoidRight = new solenoid();
+       clawSolenoidLeft = new Solenoid(RobotMap.clawSolenoidLeft);
+       clawSolenoidRight = new Solenoid(RobotMap.clawSolenoidRight);
 
     }
 
@@ -19,14 +20,16 @@ public class Claw extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 
-    //Left claw solenoid movement
-    public void leftSolenoid () {
-
+    //Pistons set to default state and opens
+    public void openClaw (){
+        clawSolenoidLeft.set(false);
+        clawSolenoidRight.set(false);
     }
-    //comment comment
 
-    //Right claw solenoid movement
-    public void rightSolenoid () {
+    //Pistons fire and extend to close
+    public void closeClaw () {
+        clawSolenoidLeft.set(true);
+        clawSolenoidRight.set(true);
 
     }
 
