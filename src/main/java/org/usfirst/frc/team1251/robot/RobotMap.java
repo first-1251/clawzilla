@@ -18,6 +18,7 @@ public class RobotMap {
 
 
     //Ports
+    //MUST CHANGE THE PORT #S TO PROPER PORTS ON ROBOT
 
 
     //Arm ports

@@ -26,7 +26,7 @@ public class Claw extends Subsystem {
         clawSolenoidRight.set(false);
     }
 
-    //Pistons fire and extend to close
+    //Pistons extend to close claw
     public void closeClaw () {
         clawSolenoidLeft.set(true);
         clawSolenoidRight.set(true);

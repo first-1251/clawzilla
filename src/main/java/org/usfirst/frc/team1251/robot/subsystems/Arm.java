@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1251.robot.subsystems;
 
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
@@ -23,7 +24,7 @@ public class Arm extends Subsystem {
         armLimitSwitch = new DigitalInput(RobotMap.armLimitSwitch);
 
         //Arm pivot motor
-        armMotor = new Victor(RobotMap.armMotor);
+        armMotor = new CANTalon(RobotMap.armMotor);
 
         //Arm potentiometer
         //Calculates range of motion for arm
@@ -36,7 +37,7 @@ public class Arm extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    
+
 
     //Arm tilts up
     //Arm should pivot up. If button pressed, motor must stop immediately
@@ -54,7 +55,6 @@ public class Arm extends Subsystem {
     //Arm should pivot down, no button pressed
     public void pivotDown(double speed){
         armMotor.set(speed);
-
     }
 
 }
