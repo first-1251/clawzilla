@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
@@ -12,15 +13,17 @@ public class Elevator extends Subsystem {
 
     // Motor(s) for elevators (move it up and down)
     private Victor elevatorMotor1;
-
     //Maintains position (counteracts gravity) while holding crate at limit switch
     //TODO: FIND CORRECT LS IDLING SPEED
-    private final static double LIMIT_SWITCH_IDLE_SPEED = 0.1;
-
+    private final static double LIMIT_SWITCH_IDLE_SPEED = 0;
+    // Encoder for elevator
+    private Encoder elevatorEncoder;
     // Limit Switches that prevent the elevator from overextending
     private DigitalInput elevatorLimitSwitch;
 
     public Elevator(){
+        //TODO: FIX ENCODER INITIALIZATION
+        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER, RobotMap.ELEVATOR_ENCODER);
         elevatorMotor1 = new Victor(RobotMap.ELEVATOR_VICTOR);
         elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
     }
