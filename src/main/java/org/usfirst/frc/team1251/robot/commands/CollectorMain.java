@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.OI;
 import org.usfirst.frc.team1251.robot.Robot;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
-
-import java.util.stream.Collector;
 
 public class CollectorMain extends Command
 {
