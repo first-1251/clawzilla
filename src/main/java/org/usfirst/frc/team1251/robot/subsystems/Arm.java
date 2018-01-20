@@ -16,7 +16,6 @@ public class Arm extends Subsystem {
     private SpeedController armMotor;
 
 
-
     public Arm() {
 
         //Button
@@ -48,7 +47,7 @@ public class Arm extends Subsystem {
                 return 0;
             }
 
-        }
+        };
 
     }
 
@@ -57,8 +56,6 @@ public class Arm extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-
-
 
 
 

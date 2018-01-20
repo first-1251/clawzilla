@@ -8,8 +8,8 @@ public class Claw extends Subsystem {
     private Solenoid clawSolenoidLeft, clawSolenoidRight;
 
     public Claw(){
-        clawSolenoidLeft = new solenoid();
-        clawSolenoidRight = new solenoid();
+       // clawSolenoidLeft = new solenoid();
+        //clawSolenoidRight = new solenoid();
 
     }
 
@@ -23,6 +23,7 @@ public class Claw extends Subsystem {
     public void leftSolenoid () {
 
     }
+    //comment comment
 
     //Right claw solenoid movement
     public void rightSolenoid () {
