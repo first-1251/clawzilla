@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1251.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team1251.robot.RobotMap;
 
 /**
  * Created by nick2 on 1/18/18
@@ -11,43 +11,45 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Elevator extends Subsystem {
 
     // CIM Motor(s) for elevators (move it up and down)
-    private SpeedController elevatorMotor1;
+    private Victor elevatorMotor1;
 
-    // private SpeedController elevatorMotor2; May only use one control for both motors
-
-    // private Encoder elevatorEncoder; Maybe?
+    // private Encoder elevatorEncoder; // Maybe?
 
     // Limit Switches that prevent the elevator from overextending
     private DigitalInput elevatorLimitSwitch;
 
     public Elevator(){
-        elevatorMotor1 = null;
-        elevatorLimitSwitch = null;
+        elevatorMotor1 = new Victor(RobotMap.ELEVATOR_VICTOR);
+        elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
     }
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        // Initial action will be to stay still :)
     }
 
+    // goUp() and goDown() methods will use a speed variable until control type is determined
+    // Defaulted to joystick
+
     // Have the elevator go upwards
-    public void goUpPlease(double speed) {
+    public void goUp(double speed) {
         if (!elevatorLimitSwitch.get()){
             elevatorMotor1.set(speed);
-        } else { //
+        } else {
             elevatorMotor1.set(0);
         }
     }
 
     // Have the elevator go downwards (will go down over time?)
-    public void goDownPlease(double speed) {
+    public void goDown(double speed) {
         elevatorMotor1.set(-speed);
     }
 
-    // Method which prevents the arm from overreaching by checking limit switch state
+    // Prevents the elevator from overreaching by checking limit switch state
     public void stopPlease(){
         if (elevatorLimitSwitch.get()){
             elevatorMotor1.set(0);
         }
     }
 }
+
+// Water game confirmed.

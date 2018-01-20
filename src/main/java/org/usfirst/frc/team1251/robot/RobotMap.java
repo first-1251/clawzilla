@@ -38,6 +38,9 @@ public class RobotMap {
     public static final int RIGHT_TALON_1 = 2;
     public static final int RIGHT_TALON_2 = 3;
 
-    // Elevator Motors
+    // Elevator Motors - MUST CORRECT PORT VALUES
+    public static final int ELEVATOR_VICTOR = 1;
 
+    // Elevator Limit Switch - MUST CORRECT PORT VALUES
+    public static final int ELEVATOR_LIMIT_SWITCH = 1;
 }
