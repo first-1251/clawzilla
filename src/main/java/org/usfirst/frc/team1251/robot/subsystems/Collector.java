@@ -50,37 +50,47 @@ public class Collector extends Subsystem
     {
         return rightSwtich.get() && !middleSwitch.get() && !leftSwitch.get();
     }
+    public boolean isLeftMiddle() //Left and Middle is pressed
+    {
+        return leftSwitch.get() && middleSwitch.get() && !leftSwitch.get();
+    }
+    public boolean isRightMiddle() //Right and Middle is pressed
+    {
+        return rightSwtich.get() && middleSwitch.get() && !leftSwitch.get();
+    }
+    public boolean isAllPressed() //Right and Middle is pressed
+    {
+        return rightSwtich.get() && middleSwitch.get() && leftSwitch.get();
+    }
 
 
     public void buttonPressed()
     {
-        if (leftSwitch.get())
-        {
-            if (middleSwitch.get()) //Both left and middle switch pressed
-            {
-                rightMotor.set(-1);
-                leftMotor.set(-1);
-
-            } else { //Just left switch is pressed
-
-                rightMotor.set(-1);
-                leftMotor.set(-1);
-            }
-
+        if (isLeftOnly()) {
+            rightMotor.set(1);
+            leftMotor.set(1);
         }
-
-
-        if (rightSwtich.get())
-        {
-            //rightMotor.set();
+        if (isLeftMiddle()) {
+            rightMotor.set(1);
+            leftMotor.set(1);
         }
-
+        if (isMiddleOnly()) {
+            rightMotor.set(1);
+            leftMotor.set(1);
+        }
+        if (isRightOnly()) {
+            rightMotor.set(-1);
+            leftMotor.set(-1);
+        }
+        if (isRightMiddle()) {
+            rightMotor.set(-1);
+            leftMotor.set(-1);
+        }
+        if (isAllPressed()) {
+            rightMotor.set(0);
+            leftMotor.set(0);
+        }
 
 
     }
-
-
-
-
-
 }
