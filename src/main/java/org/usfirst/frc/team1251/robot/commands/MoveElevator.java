@@ -24,8 +24,11 @@ public class MoveElevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        /*
         this.elevator.goUp(joystick.getRawAxis(1));
         this.elevator.goDown(joystick.getRawAxis(1));
+        */
+        //TODO: CREATE IF STATEMENT FOR JOYSTICK :3
     }
 
     // Make this return true when this Command no longer needs to run execute()

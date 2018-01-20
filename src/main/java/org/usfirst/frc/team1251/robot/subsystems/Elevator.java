@@ -54,6 +54,7 @@ public class Elevator extends Subsystem {
     public void stopPlease(){
         if (elevatorLimitSwitch.get()){
             elevatorMotor1.set(LIMIT_SWITCH_IDLE_SPEED);
+            //TODO: EDIT TO 0
         }
     }
 }
