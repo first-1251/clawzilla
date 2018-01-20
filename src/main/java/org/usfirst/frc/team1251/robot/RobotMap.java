@@ -15,7 +15,7 @@ public class RobotMap
     public static final int RIGHT_TALON_1 = 2;
     public static final int RIGHT_TALON_2 = 3;
 
-    //Collector Class
+    //collector Class
 
 
 

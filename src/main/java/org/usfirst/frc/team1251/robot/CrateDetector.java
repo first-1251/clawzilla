@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class CrateDetector
 {
-    //Honorary Name: Collector Crate Detector
+    //Honorary Name: collector Crate Detector
 
-    //Collector Button Limits
+    //collector Button Limits
 
     //One of the 3 switches used to align the crate. On left side when looking from the rear perspective.
     private DigitalInput leftSwitch;

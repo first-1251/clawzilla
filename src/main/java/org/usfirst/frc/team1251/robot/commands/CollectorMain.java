@@ -12,7 +12,7 @@ public class CollectorMain extends Command
     public CollectorMain()
     {
         this.joystick = OI.stick;
-        this.requires(Robot.Collector);
+        this.requires(Robot.collector);
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.CrateDetector;
+import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.commands.CollectorMain;
 
 public class Collector extends Subsystem
@@ -19,7 +20,10 @@ public class Collector extends Subsystem
 
     public Collector()
     {
-
+        this.crateDetector = Robot.crateDetector;
+        //TODO: Create Speed Controllers
+        //this.leftMotor = new (TO DO)
+        //this.rightMotor = new (TO DO)
     }
 
     @Override
