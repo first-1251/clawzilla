@@ -23,6 +23,7 @@ public class Collector extends Subsystem
     public Collector()
     {
         this.crateDetector = Robot.crateDetector;
+        //Bag Motors
         this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_VICTOR);
         this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_VICTOR);
     }
