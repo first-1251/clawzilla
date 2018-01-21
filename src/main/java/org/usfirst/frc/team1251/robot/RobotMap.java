@@ -64,4 +64,8 @@ public class RobotMap
 
     // DIO ports for Encoder?
     //TODO: ADD DIO PORTS
+
+    //Collector Victors
+    public static final int COLLECTOR_LEFT_VICTOR = 2;
+    public static final int COLLECTOR_RIGHT_VICTOR = 3;
 }
