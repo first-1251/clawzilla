@@ -41,14 +41,6 @@ public class RobotMap
     public static final int clawSolenoidLeft = 0;
     public static final int clawSolenoidRight = 1;
 
-    // Left talons
-    public static final int LEFT_TALON_1 = 0;
-    public static final int LEFT_TALON_2 = 1;
-
-    // Right Talons
-    public static final int RIGHT_TALON_1 = 2;
-    public static final int RIGHT_TALON_2 = 3;
-
     // Elevator Motors - MUST CORRECT PORT VALUES
     // Elevator Motors
     public static final int ELEVATOR_VICTOR = 1;
@@ -68,4 +60,21 @@ public class RobotMap
     //Collector Victors
     public static final int COLLECTOR_LEFT_VICTOR = 2;
     public static final int COLLECTOR_RIGHT_VICTOR = 3;
+
+    //Drivetrain port values / Device IDs
+    public static final int LEFT_MASTER_MOTOR_ID = 0;
+    public static final int LEFT_SLAVE_MOTOR1_ID = 1;
+    public static final int LEFT_SLAVE_MOTOR2_ID = 2;
+    public static final int LEFT_SLAVE_MOTOR3_ID = 3;
+
+    public static final int RIGHT_MASTER_MOTOR_ID = 4;
+    public static final int RIGHT_SLAVE_MOTOR1_ID = 5;
+    public static final int RIGHT_SLAVE_MOTOR2_ID = 6;
+    public static final int RIGHT_SLAVE_MOTOR3_ID = 7;
+
+    public static final int LEFT_ENCODER_PORT1 = 0;
+    public static final int LEFT_ENCODER_PORT2 = 1;
+
+    public static final int RIGHT_ENCODER_PORT1 = 2;
+    public static final int RIGHT_ENCODER_PORT2 = 3;
 }
