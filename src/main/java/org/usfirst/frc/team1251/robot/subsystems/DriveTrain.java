@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
+// Talon SRX software manual:
+// https://docs.google.com/viewerng/viewer?url=https://link.vex.com/vexpro/pdf/217-8080-Talon-SRX-Software-Reference-Manual
+// Victor SPX is mostly the same as that
 public class DriveTrain extends Subsystem {
 
     //PID Values for Drivetrain
@@ -27,8 +30,11 @@ public class DriveTrain extends Subsystem {
     private VictorSPX rightSlaveMotor2;
     private VictorSPX rightSlaveMotor3;
 
-    private Encoder leftDistance;
-    private Encoder rightDistance;
+    private int leftDistance;
+    private int rightDistance;
+
+    private int leftVelocity;
+    private int rightVelocity;
 
     public DriveTrain() {
         //create left motors
@@ -52,13 +58,6 @@ public class DriveTrain extends Subsystem {
         rightSlaveMotor1.follow(rightMasterMotor);
         rightSlaveMotor2.follow(rightMasterMotor);
         rightSlaveMotor3.follow(rightMasterMotor);
-
-        // create encoders
-        leftDistance = new Encoder(RobotMap.LEFT_ENCODER_PORT1, RobotMap.LEFT_ENCODER_PORT2,
-                false, CounterBase.EncodingType.k4X);
-
-        rightDistance = new Encoder(RobotMap.RIGHT_ENCODER_PORT1, RobotMap.RIGHT_ENCODER_PORT2,
-                false, CounterBase.EncodingType.k4X);
 
         //Setup voltage limiting
         leftMasterMotor.configVoltageCompSaturation(9.0, 0);
@@ -84,5 +83,13 @@ public class DriveTrain extends Subsystem {
 
     public void enableRegularMode() {
 
+    }
+
+    private void updateSensorData() {
+        leftDistance = leftMasterMotor.getSelectedSensorPosition(0);
+        rightDistance = rightMasterMotor.getSelectedSensorPosition(0);
+
+        leftVelocity = leftMasterMotor.getSelectedSensorVelocity(0);
+        rightVelocity = rightMasterMotor.getSelectedSensorVelocity(0);
     }
 }
