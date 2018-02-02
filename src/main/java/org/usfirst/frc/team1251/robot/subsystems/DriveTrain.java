@@ -1,10 +1,9 @@
 package org.usfirst.frc.team1251.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.CounterBase;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
@@ -36,6 +35,8 @@ public class DriveTrain extends Subsystem {
     private int leftVelocity;
     private int rightVelocity;
 
+    private ControlMode mode;
+
     public DriveTrain() {
         //create left motors
         leftMasterMotor = new TalonSRX(RobotMap.LEFT_MASTER_MOTOR_ID);
@@ -66,6 +67,11 @@ public class DriveTrain extends Subsystem {
         //Setup encoders
         leftMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0 , 0);
         rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0 , 0);
+
+        //Setup PIDF
+
+
+
     }
 
     @Override
@@ -74,22 +80,51 @@ public class DriveTrain extends Subsystem {
     }
 
     public void enablePIDMode() {
-
+        this.mode = ControlMode.Position;
     }
 
     public void enableMotionProfileMode() {
-
+        this.mode = ControlMode.MotionMagic;
     }
 
     public void enableRegularMode() {
+        this.mode = ControlMode.PercentOutput;
+    }
 
+    public ControlMode getMode() {
+        return this.mode;
+    }
+
+    public void set(double value) {
+        leftMasterMotor.set(mode, value);
+        rightMasterMotor.set(mode, value);
+    }
+
+    public int getLeftDistance() {
+        updateSensorData();
+        return this.leftDistance;
+    }
+
+    public int getRightDistance() {
+        updateSensorData();
+        return this.rightDistance;
+    }
+
+    public int getLeftVelocity() {
+        updateSensorData();
+        return this.leftVelocity;
+    }
+
+    public int getRightVelocity() {
+        updateSensorData();
+        return this.rightVelocity;
     }
 
     private void updateSensorData() {
-        leftDistance = leftMasterMotor.getSelectedSensorPosition(0);
-        rightDistance = rightMasterMotor.getSelectedSensorPosition(0);
+        this.leftDistance = leftMasterMotor.getSelectedSensorPosition(0);
+        this.rightDistance = rightMasterMotor.getSelectedSensorPosition(0);
 
-        leftVelocity = leftMasterMotor.getSelectedSensorVelocity(0);
-        rightVelocity = rightMasterMotor.getSelectedSensorVelocity(0);
+        this.leftVelocity = leftMasterMotor.getSelectedSensorVelocity(0);
+        this.rightVelocity = rightMasterMotor.getSelectedSensorVelocity(0);
     }
 }
