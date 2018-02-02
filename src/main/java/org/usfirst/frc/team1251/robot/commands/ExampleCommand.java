@@ -11,6 +11,7 @@ import org.usfirst.frc.team1251.robot.subsystems.ExampleSubsystem;
 public class ExampleCommand extends Command {
 
     private final ExampleSubsystem exampleSubsystem;
+    private static int count = 0;
 
     public ExampleCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -25,10 +26,9 @@ public class ExampleCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-        this.exampleSubsystem.isSwitchOne();
-        if (exampleSubsystem.isSwitchOne())
+        if (this.exampleSubsystem.isSwitchOne())
         {
-            System.out.println("Is On");
+            System.out.println("Is On " + count++);
         }
 
     }

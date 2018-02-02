@@ -21,7 +21,7 @@ public class ExampleSubsystem extends Subsystem {
 
     public boolean isSwitchOne()
     {
-        return newLimitSwitch.get();
+        return !newLimitSwitch.get();
     }
 
 
