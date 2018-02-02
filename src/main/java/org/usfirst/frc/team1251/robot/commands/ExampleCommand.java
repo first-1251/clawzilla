@@ -3,15 +3,19 @@ package org.usfirst.frc.team1251.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team1251.robot.Robot;
+import org.usfirst.frc.team1251.robot.subsystems.ExampleSubsystem;
 
 /**
  *
  */
 public class ExampleCommand extends Command {
 
+    private final ExampleSubsystem exampleSubsystem;
+
     public ExampleCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.exampleSubsystem);
+        this.exampleSubsystem = Robot.exampleSubsystem;
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +23,14 @@ public class ExampleCommand extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute()
+    {
+        this.exampleSubsystem.isSwitchOne();
+        if (exampleSubsystem.isSwitchOne())
+        {
+            System.out.println("Is On");
+        }
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
