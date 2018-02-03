@@ -24,7 +24,7 @@ public class RobotMap {
 
 
     //Arm ports
-    public static final int armMotor = 0;
+    //public static final int armMotor = 0;
     public static final int armLimitSwitch = 0;
     public static final int armPotentiometer = 0;
 
@@ -33,12 +33,12 @@ public class RobotMap {
     public static final int clawSolenoidRight = 1;
 
     // Left talons
-    public static final int LEFT_TALON_1 = 0;
-    public static final int LEFT_TALON_2 = 1;
+    //public static final int LEFT_TALON_1 = 0;
+    //public static final int LEFT_TALON_2 = 1;
 
     // Right Talons
-    public static final int RIGHT_TALON_1 = 2;
-    public static final int RIGHT_TALON_2 = 3;
+    //public static final int RIGHT_TALON_1 = 2;
+    //public static final int RIGHT_TALON_2 = 3;
 
     // Elevator Motors - MUST CORRECT PORT VALUES
     // Elevator Motors
@@ -48,6 +48,6 @@ public class RobotMap {
     public static final int ELEVATOR_LIMIT_SWITCH = 1;
 
     // DIO ports for Encoder?
-    public static final int ELEVATOR_ENCODER_PORT1 = 1;
-    public static final int ELEVATOR_ENCODER_PORT2 = 1;
+    //public static final int ELEVATOR_ENCODER_PORT1 = 1;
+    //public static final int ELEVATOR_ENCODER_PORT2 = 1;
 }
