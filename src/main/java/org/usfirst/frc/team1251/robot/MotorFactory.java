@@ -6,6 +6,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.MotorSafety;
 
+/**
+ * This class uses mostly Team254's code from their factory in their 2017 code.
+ * This class is updated for the 2018 libraries, and allows VictorSPXs to be constructed as well as TalonSRXs
+ */
 public class MotorFactory {
 
     public static class Configuration {
