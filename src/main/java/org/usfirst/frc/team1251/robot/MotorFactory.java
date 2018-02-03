@@ -100,7 +100,7 @@ public class MotorFactory {
         return talonSRX;
     }
 
-    public VictorSPX createVictor(int id, Configuration config) {
+    public static VictorSPX createVictor(int id, Configuration config) {
         VictorSPX victorSPX = new VictorSPX(id);
         victorSPX.set(ControlMode.Current, 0);
         victorSPX.changeMotionControlFramePeriod(config.MOTION_CONTROL_FRAME_PERIOD_MS);
