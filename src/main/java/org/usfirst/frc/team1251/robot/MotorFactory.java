@@ -40,8 +40,8 @@ public class MotorFactory {
         public double VOLTAGE_RAMP_RATE = 0;
     }
 
-    private static final Configuration kDefaultConfiguration = new Configuration();
-    private static final Configuration kSlaveConfiguration = new Configuration();
+    public static final Configuration kDefaultConfiguration = new Configuration();
+    public static final Configuration kSlaveConfiguration = new Configuration();
 
     static {
         kSlaveConfiguration.CONTROL_FRAME_PERIOD_MS = 1000;
