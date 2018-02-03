@@ -24,7 +24,7 @@ public class Arm extends Subsystem {
         armLimitSwitch = new DigitalInput(RobotMap.armLimitSwitch);
 
         //Arm pivot motor
-        armMotor = new CANTalon(RobotMap.armMotor);
+        //armMotor = new CANTalon(RobotMap.armMotor);
 
         //Arm potentiometer
         //Calculates range of motion for arm

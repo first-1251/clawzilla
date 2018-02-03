@@ -6,10 +6,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team1251.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
-import org.usfirst.frc.team1251.robot.commands.MoveElevator;
-import org.usfirst.frc.team1251.robot.subsystems.Elevator;
+//import org.usfirst.frc.team1251.robot.commands.MoveElevator;
+//import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team1251.robot.subsystems.Elevator;
+import org.usfirst.frc.team1251.robot.subsystems.ExampleDriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
     public static final Elevator elevator = new Elevator();
+    public static final ExampleDriveTrain EXAMPLE_DRIVE_TRAIN = new ExampleDriveTrain();
     public static final Arm ARM_CLAW = new Arm();
     public static OI oi;
 
@@ -36,7 +39,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new MoveElevator());
+       // chooser.addDefault("Default Auto", new MoveElevator());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }
