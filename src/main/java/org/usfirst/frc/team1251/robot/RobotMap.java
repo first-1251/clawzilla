@@ -43,14 +43,11 @@ public class RobotMap {
     // Elevator Motors - MUST CORRECT PORT VALUES
     // Elevator Motors
     public static final int ELEVATOR_VICTOR = 0;
-    //TODO: UPDATE VICTOR PORT ACCORDINGLY
 
     // Elevator Limit Switch
     public static final int ELEVATOR_LIMIT_SWITCH = 1;
-    //TODO: UPDATE LS PORT ACCORDINGLY
 
     // DIO ports for Encoder?
     public static final int ELEVATOR_ENCODER_PORT1 = 1;
     public static final int ELEVATOR_ENCODER_PORT2 = 1;
-    //TODO: UPDATE LS PORT ACCORDINGLY
 }

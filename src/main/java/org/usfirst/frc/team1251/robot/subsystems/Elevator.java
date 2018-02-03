@@ -20,7 +20,6 @@ public class Elevator extends Subsystem {
     private Victor elevatorMotor1;
 
     //Maintains position (counteracts gravity) while holding crate at limit switch
-    //TODO: FIND CORRECT LIMIT SWITCH IDLING SPEED
     private final static double LIMIT_SWITCH_IDLE_SPEED = 0.1;
 
     // Encoder for elevator
@@ -65,7 +64,6 @@ public class Elevator extends Subsystem {
         return elevatorLimitSwitch.get();
     }
 
-    //TODO: CREATE RANGE MAP FOR SPEEDS
     /*public double map(double[][] range, double joystickPosition){
         double speed = 0;
         return speed;

@@ -32,7 +32,7 @@ public class MoveElevator extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (!this.elevator.limitSwitchIsActive()) {
-            if(joystick.getRawAxis(1) >= joystickIdle){ //TODO: CHANGE AXES ACCORDINGLY? ¯\_(ツ)_/¯
+            if(joystick.getRawAxis(1) >= joystickIdle){
                 this.elevator.goUp(joystick.getRawAxis(1));
             } else if (joystick.getRawAxis(1) >= againstGravity) {
                 this.elevator.goDown(joystick.getRawAxis(1));
