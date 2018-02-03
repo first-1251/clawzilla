@@ -1,15 +1,17 @@
 package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team1251.robot.subsystems.Collector;
-import org.usfirst.frc.team1251.robot.subsystems.Arm;
-import org.usfirst.frc.team1251.robot.commands.MoveElevator;
-import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team1251.robot.commands.MoveElevator;
+import org.usfirst.frc.team1251.robot.subsystems.Arm;
+import org.usfirst.frc.team1251.robot.subsystems.Collector;
+import org.usfirst.frc.team1251.robot.subsystems.Elevator;
+import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,11 +38,12 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        oi = new OI();
+        oi = new OI(new ModernGamePad(new Joystick(0)));
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new MoveElevator());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+
     }
 
     /**
