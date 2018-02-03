@@ -3,6 +3,7 @@ package org.usfirst.frc.team1251.robot;
 import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.MotorSafety;
 
 public class MotorFactory {
@@ -53,49 +54,106 @@ public class MotorFactory {
     }
 
     public static TalonSRX createTalon(int id, Configuration config) {
-        TalonSRX talon = new TalonSRX(id);
-        talon.set(ControlMode.Current, 0);
-        talon.changeMotionControlFramePeriod(config.MOTION_CONTROL_FRAME_PERIOD_MS);
-        talon.setIntegralAccumulator(0, 0, 0);
-        talon.clearMotionProfileHasUnderrun(0);
-        talon.clearMotionProfileTrajectories();
-        talon.clearStickyFaults(0);
-        //talon.configForwardLimitSwitchSource(LimitSwitchSource.RemoteTalonSRXconfig.LIMIT_SWITCH_NORMALLY_OPEN);
-        talon.configVoltageCompSaturation(config.MAX_OUTPUT_VOLTAGE, 0);
-        //talon.ConfigRevLimitSwitchNormallyOpen(config.LIMIT_SWITCH_NORMALLY_OPEN);
-        talon.setNeutralMode(config.ENABLE_BRAKE);
-        talon.enableCurrentLimit(config.ENABLE_CURRENT_LIMIT);
-        talon.configForwardSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
-        //talon.enableLimitSwitch(config.ENABLE_LIMIT_SWITCH, config.ENABLE_LIMIT_SWITCH);
-        talon.configReverseSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
-        //talon.enableZeroSensorPositionOnForwardLimit(false);
-        //talon.enableZeroSensorPositionOnIndex(false, false);
-        //talon.enableZeroSensorPositionOnReverseLimit(false);
-        //talon.reverseOutput(false);
-        talon.setSensorPhase(false);
-        //talon.setAnalogPosition(0);
-        talon.configContinuousCurrentLimit(config.CURRENT_LIMIT, 0);
-        //talon.setExpiration(config.EXPIRATION_TIMEOUT_SECONDS);
-        talon.configForwardSoftLimitThreshold(config.FORWARD_SOFT_LIMIT, 0);
-        talon.setInverted(config.INVERTED);
-        //talon.setNominalClosedLoopVoltage(config.NOMINAL_CLOSED_LOOP_VOLTAGE);
-        //talon.setPosition(0);
-        //talon.setProfile(0);
-        talon.selectProfileSlot(0, 0);
-        talon.configReverseSoftLimitThreshold(config.REVERSE_SOFT_LIMIT, 0);
-        //talon.setSafetyEnabled(config.SAFETY_ENABLED);
-        talon.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
-        talon.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
-        talon.configClosedloopRamp(config.VOLTAGE_COMPENSATION_RAMP_RATE, 0);
-        talon.configOpenloopRamp(config.VOLTAGE_RAMP_RATE, 0);
+        TalonSRX talonSRX = new TalonSRX(id);
+        talonSRX.set(ControlMode.Current, 0);
+        talonSRX.changeMotionControlFramePeriod(config.MOTION_CONTROL_FRAME_PERIOD_MS);
+        talonSRX.setIntegralAccumulator(0, 0, 0);
+        talonSRX.clearMotionProfileHasUnderrun(0);
+        talonSRX.clearMotionProfileTrajectories();
+        talonSRX.clearStickyFaults(0);
+        //talonSRX.configForwardLimitSwitchSource(LimitSwitchSource.RemoteTalonSRXconfig.LIMIT_SWITCH_NORMALLY_OPEN);
+        talonSRX.configVoltageCompSaturation(config.MAX_OUTPUT_VOLTAGE, 0);
+        //talonSRX.ConfigRevLimitSwitchNormallyOpen(config.LIMIT_SWITCH_NORMALLY_OPEN);
+        talonSRX.setNeutralMode(config.ENABLE_BRAKE);
+        talonSRX.enableCurrentLimit(config.ENABLE_CURRENT_LIMIT);
+        talonSRX.configForwardSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
+        //talonSRX.enableLimitSwitch(config.ENABLE_LIMIT_SWITCH, config.ENABLE_LIMIT_SWITCH);
+        talonSRX.configReverseSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
+        //talonSRX.enableZeroSensorPositionOnForwardLimit(false);
+        //talonSRX.enableZeroSensorPositionOnIndex(false, false);
+        //talonSRX.enableZeroSensorPositionOnReverseLimit(false);
+        //talonSRX.reverseOutput(false);
+        talonSRX.setSensorPhase(false);
+        //talonSRX.setAnalogPosition(0);
+        talonSRX.configContinuousCurrentLimit(config.CURRENT_LIMIT, 0);
+        //talonSRX.setExpiration(config.EXPIRATION_TIMEOUT_SECONDS);
+        talonSRX.configForwardSoftLimitThreshold(config.FORWARD_SOFT_LIMIT, 0);
+        talonSRX.setInverted(config.INVERTED);
+        //talonSRX.setNominalClosedLoopVoltage(config.NOMINAL_CLOSED_LOOP_VOLTAGE);
+        //talonSRX.setPosition(0);
+        //talonSRX.setProfile(0);
+        talonSRX.selectProfileSlot(0, 0);
+        talonSRX.configReverseSoftLimitThreshold(config.REVERSE_SOFT_LIMIT, 0);
+        //talonSRX.setSafetyEnabled(config.SAFETY_ENABLED);
+        talonSRX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
+        talonSRX.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
+        talonSRX.configClosedloopRamp(config.VOLTAGE_COMPENSATION_RAMP_RATE, 0);
+        talonSRX.configOpenloopRamp(config.VOLTAGE_RAMP_RATE, 0);
 
-        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
-        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);
-        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, config.QUAD_ENCODER_STATUS_FRAME_RATE_MS, 0);
-        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_4_AinTempVbat,
+        talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
+        talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);
+        talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, config.QUAD_ENCODER_STATUS_FRAME_RATE_MS, 0);
+        talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_4_AinTempVbat,
                 config.ANALOG_TEMP_VBAT_STATUS_FRAME_RATE_MS, 0);
-        talon.setStatusFramePeriod(StatusFrameEnhanced.Status_8_PulseWidth, config.PULSE_WIDTH_STATUS_FRAME_RATE_MS, 0);
+        talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_8_PulseWidth, config.PULSE_WIDTH_STATUS_FRAME_RATE_MS, 0);
 
-        return talon;
+        return talonSRX;
+    }
+
+    public VictorSPX createVictor(int id, Configuration config) {
+        VictorSPX victorSPX = new VictorSPX(id);
+        victorSPX.set(ControlMode.Current, 0);
+        victorSPX.changeMotionControlFramePeriod(config.MOTION_CONTROL_FRAME_PERIOD_MS);
+        victorSPX.setIntegralAccumulator(0, 0, 0);
+        victorSPX.clearMotionProfileHasUnderrun(0);
+        victorSPX.clearMotionProfileTrajectories();
+        victorSPX.clearStickyFaults(0);
+        //victorSPX.configForwardLimitSwitchSource(LimitSwitchSource.RemoteTalonSRXconfig.LIMIT_SWITCH_NORMALLY_OPEN);
+        victorSPX.configVoltageCompSaturation(config.MAX_OUTPUT_VOLTAGE, 0);
+        //victorSPX.ConfigRevLimitSwitchNormallyOpen(config.LIMIT_SWITCH_NORMALLY_OPEN);
+        victorSPX.setNeutralMode(config.ENABLE_BRAKE);
+
+        // Victor SPX can't do this
+        //victorSPX.enableCurrentLimit(config.ENABLE_CURRENT_LIMIT);
+
+        victorSPX.configForwardSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
+        //victorSPX.enableLimitSwitch(config.ENABLE_LIMIT_SWITCH, config.ENABLE_LIMIT_SWITCH);
+        victorSPX.configReverseSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
+        //victorSPX.enableZeroSensorPositionOnForwardLimit(false);
+        //victorSPX.enableZeroSensorPositionOnIndex(false, false);
+        //victorSPX.enableZeroSensorPositionOnReverseLimit(false);
+        //victorSPX.reverseOutput(false);
+        victorSPX.setSensorPhase(false);
+        //victorSPX.setAnalogPosition(0);
+
+        // Victor SPX can't do this
+        //victorSPX.configContinuousCurrentLimit(config.CURRENT_LIMIT, 0);
+
+        //victorSPX.setExpiration(config.EXPIRATION_TIMEOUT_SECONDS);
+        victorSPX.configForwardSoftLimitThreshold(config.FORWARD_SOFT_LIMIT, 0);
+        victorSPX.setInverted(config.INVERTED);
+        //victorSPX.setNominalClosedLoopVoltage(config.NOMINAL_CLOSED_LOOP_VOLTAGE);
+        //victorSPX.setPosition(0);
+        //victorSPX.setProfile(0);
+        victorSPX.selectProfileSlot(0, 0);
+        victorSPX.configReverseSoftLimitThreshold(config.REVERSE_SOFT_LIMIT, 0);
+        //victorSPX.setSafetyEnabled(config.SAFETY_ENABLED);
+        victorSPX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
+        victorSPX.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
+        victorSPX.configClosedloopRamp(config.VOLTAGE_COMPENSATION_RAMP_RATE, 0);
+        victorSPX.configOpenloopRamp(config.VOLTAGE_RAMP_RATE, 0);
+
+        victorSPX.setStatusFramePeriod(StatusFrame.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
+        victorSPX.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);
+
+        // Victor SPX can't do this
+        //victorSPX.setStatusFramePeriod(StatusFrame.Status_3_Quadrature, config.QUAD_ENCODER_STATUS_FRAME_RATE_MS, 0);
+        victorSPX.setStatusFramePeriod(StatusFrame.Status_4_AinTempVbat,
+                config.ANALOG_TEMP_VBAT_STATUS_FRAME_RATE_MS, 0);
+
+        // Victor SPX can't do this
+        //victorSPX.setStatusFramePeriod(StatusFrame.Status_8_PulseWidth, config.PULSE_WIDTH_STATUS_FRAME_RATE_MS, 0);
+
+        return victorSPX;
     }
 }
