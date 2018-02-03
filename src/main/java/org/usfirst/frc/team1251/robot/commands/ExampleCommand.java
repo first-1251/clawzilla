@@ -12,6 +12,7 @@ public class ExampleCommand extends Command {
 
     private final ExampleSubsystem exampleSubsystem;
     private static int count = 0;
+    private static int donut = 0;
 
     public ExampleCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -26,12 +27,23 @@ public class ExampleCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-        if (this.exampleSubsystem.isSwitchOne())
+        if (this.exampleSubsystem.isSwitchOn())
         {
-            System.out.println("Is On " + count++);
+            this.exampleSubsystem.setMotorSpeed(1.0);
+
+            double motorSpeed = exampleSubsystem.getMotorSpeed();
+            System.out.println(motorSpeed);
+
+                //todo auto stop motor.
+        } else {
+
+            this.exampleSubsystem.setMotorSpeed(0.0);
+
         }
 
     }
+
+
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
