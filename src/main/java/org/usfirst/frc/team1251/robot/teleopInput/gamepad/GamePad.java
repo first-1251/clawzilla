@@ -32,20 +32,20 @@ package org.usfirst.frc.team1251.robot.teleopInput.gamepad;
  *
  */
 abstract public class GamePad {
-    private GamePadButton a;
-    private GamePadButton b;
-    private GamePadButton x;
-    private GamePadButton y;
-    private GamePadButton rb;
-    private GamePadButton lb;
-    private GamePadButton rsClick;
-    private GamePadButton lsClick;
-    private GamePadButton start;
-    private GamePadButton select;
-    private TriggerButton lt;
-    private TriggerButton rt;
-    private Stick ls;
-    private Stick rs;
+    GamePadButton a;
+    GamePadButton b;
+    GamePadButton x;
+    GamePadButton y;
+    GamePadButton rb;
+    GamePadButton lb;
+    GamePadButton rsClick;
+    GamePadButton lsClick;
+    GamePadButton start;
+    GamePadButton select;
+    TriggerButton lt;
+    TriggerButton rt;
+    Stick ls;
+    Stick rs;
 
 
     public GamePadButton a() {

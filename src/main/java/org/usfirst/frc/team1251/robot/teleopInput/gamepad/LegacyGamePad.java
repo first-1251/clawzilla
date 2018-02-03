@@ -5,21 +5,21 @@ import edu.wpi.first.wpilibj.GenericHID;
 public class LegacyGamePad extends GamePad {
 
     public LegacyGamePad(GenericHID rawDevice) {
-        this.A = new DigitalButton(1, rawDevice);
-        this.B = new DigitalButton(2, rawDevice);
-        this.X = new DigitalButton(0, rawDevice);
-        this.Y = new DigitalButton(3, rawDevice);
-        this.LB = new DigitalButton(4, rawDevice);
-        this.RB = new DigitalButton(5, rawDevice);
-        this.Select = new DigitalButton(8, rawDevice);
-        this.Start = new DigitalButton(9, rawDevice);
-        this.RSClick = new DigitalButton(10, rawDevice);
-        this.LSClick = new DigitalButton(11, rawDevice);
-        this.LT = new DigitalTriggerButton(6, rawDevice);
-        this.RT = new DigitalTriggerButton(7, rawDevice);
+        this.a = new DigitalButton(1, rawDevice);
+        this.b = new DigitalButton(2, rawDevice);
+        this.x = new DigitalButton(0, rawDevice);
+        this.y = new DigitalButton(3, rawDevice);
+        this.lb = new DigitalButton(4, rawDevice);
+        this.rb = new DigitalButton(5, rawDevice);
+        this.select = new DigitalButton(8, rawDevice);
+        this.start = new DigitalButton(9, rawDevice);
+        this.rsClick = new DigitalButton(10, rawDevice);
+        this.lsClick = new DigitalButton(11, rawDevice);
+        this.lt = new DigitalTriggerButton(6, rawDevice);
+        this.rt = new DigitalTriggerButton(7, rawDevice);
 
-        this.LS = new Stick(0, 1, rawDevice);
-        this.RS = new Stick(2, 3, rawDevice);
+        this.ls = new Stick(0, 1, rawDevice);
+        this.rs = new Stick(2, 3, rawDevice);
     }
 
     @Override
