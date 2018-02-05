@@ -5,10 +5,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team1251.robot.commands.ExampleCommand;
-import org.usfirst.frc.team1251.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team1251.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1251.robot.commands.TestCommand;
+import org.usfirst.frc.team1251.robot.commands.TestTimedCommand;
+import org.usfirst.frc.team1251.robot.subsystems.ControllerTestBed;
+import org.usfirst.frc.team1251.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 
 /**
@@ -19,6 +22,8 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
  * directory.
  */
 public class Robot extends IterativeRobot {
+
+    public static final ControllerTestBed testSubsystem = new ControllerTestBed("Test Subsystem");
 
     public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
     public static OI oi;
@@ -32,11 +37,82 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
         oi = new OI(new ModernGamePad(new Joystick(0)));
+
+        // Use this for checking controller mappings.
+        // this.addListenersForButtonTests();
+
+        // Use this for checking behavior of various controller event combinations.
+        // this.addListenersForEventTests();
+
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
 
+    }
+
+    private void addListenersForButtonTests() {
+        oi.xListener.whileHeld(new TestCommand(testSubsystem, "X", true));
+        oi.yListener.whileHeld(new TestCommand(testSubsystem, "Y", true));
+        oi.aListener.whileHeld(new TestCommand(testSubsystem, "A", true));
+        oi.bListener.whileHeld(new TestCommand(testSubsystem, "B", true));
+        oi.rtListener.whileHeld(new TestCommand(testSubsystem, "RT", true));
+        oi.ltListener.whileHeld(new TestCommand(testSubsystem, "LT", true));
+        oi.rbListener.whileHeld(new TestCommand(testSubsystem, "RB", true));
+        oi.lbListener.whileHeld(new TestCommand(testSubsystem, "LB", true));
+        oi.rsClickListener.whileHeld(new TestCommand(testSubsystem, "RS-Click", true));
+        oi.lsClickListener.whileHeld(new TestCommand(testSubsystem, "LS-Click", true));
+        oi.startListener.whileHeld(new TestCommand(testSubsystem, "Start", true));
+        oi.selectListener.whileHeld(new TestCommand(testSubsystem, "Select", true));
+    }
+
+    private void addListenersForEventTests() {
+
+        // A command that runs forever, but yields to other commands that want to use its subsystem.
+        Command politeCommand = new TestCommand(testSubsystem, "politeCommand", true);
+
+        // A command that runs for only 5 seconds, but refuses to yield to other commands.
+        Command stubbornCommand = new TestTimedCommand(testSubsystem, "stubbornCommand", 5, false);
+
+        // A command that runs for 60 seconds but can be interrupted.
+        Command longCommand = new TestTimedCommand(testSubsystem, "timedCommand", 60, true);
+
+
+        // Test 1: Start/stop with buttons.
+        //   Press X (See that politeCommand is running)
+        //   Press Y (See that politeCommand has stopped)
+        oi.xListener.whenPressed(politeCommand);
+        oi.yListener.cancelWhenPressed(politeCommand);
+
+        // Test 2: Timed run
+        //   Press A (See that "stubbornCommand" runs for 5 seconds, then stops)
+        oi.aListener.whenPressed(stubbornCommand);
+
+
+        // Test 3: Interrupt
+        //   Press X (See that politeCommand is running)
+        //   Press A (See that politeCommand is interrupted, stubbornCommand takes over)
+
+        // Test 3: No Interrupt
+        // TODO-discover: Will "politeCommand" run after stubborn finishes? (Hypothesis: no)
+        //    Press A (See that "stubbornCommand" runs)
+        //    Press X (See that "stubbornCommand" continues to run)
+
+        // Test 4: Toggle
+        // TODO-discover: Does cancel supersede timeout (Hypothesis: yes)
+        //    Press B (See that longCommand runs)
+        //    Press B (See that longCommand stops)
+        oi.bListener.toggleWhenPressed(longCommand);
+
+        // Test 5: While Held
+        //    Hold RB (See that "politeCommand" runs)
+        //    Release RB (See that "politeCommand" stops)
+        oi.rbListener.whileHeld(politeCommand);
+
+        // Test 6: When Released
+        //   Hold LB (See that nothing happens)
+        //   Release LB (See that "stubbornCommand" runs)
+        oi.lbListener.whenReleased(politeCommand);
     }
 
     /**
