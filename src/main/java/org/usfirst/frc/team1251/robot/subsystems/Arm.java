@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.subsystems;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
@@ -15,7 +16,7 @@ public class Arm extends Subsystem {
     //Declare variables
     private DigitalInput armLimitSwitch;
     private Potentiometer armPotentiometer;
-    private SpeedController armMotor;
+    private VictorSPX armMotor;
 
 
     public Arm() {
@@ -24,7 +25,7 @@ public class Arm extends Subsystem {
         armLimitSwitch = new DigitalInput(RobotMap.armLimitSwitch);
 
         //Arm pivot motor
-        armMotor = new CANTalon(RobotMap.armMotor);
+        armMotor = new VictorSPX(RobotMap.armMotor);
 
         //Arm potentiometer
         //Calculates range of motion for arm
@@ -44,9 +45,9 @@ public class Arm extends Subsystem {
     public void pivotUp(double speed){
 
         if (!armLimitSwitch.get()){
-            armMotor.set(speed);
+            armMotor.set(ControlMode.PercentOutput, speed);
         } else {
-            armMotor.set(0);
+            armMotor.set(ControlMode.PercentOutput, 0);
         }
 
     }
@@ -54,7 +55,7 @@ public class Arm extends Subsystem {
     //Arm tilts down
     //Arm should pivot down, no button pressed
     public void pivotDown(double speed){
-        armMotor.set(speed);
+        armMotor.set(ControlMode.PercentOutput, speed);
     }
 
 }
