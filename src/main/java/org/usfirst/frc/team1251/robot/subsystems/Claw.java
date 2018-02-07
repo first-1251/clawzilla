@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
+/**
+ * @deprecated See Clawlector
+ */
 public class Claw extends Subsystem {
 
     private Solenoid clawSolenoidLeft, clawSolenoidRight;
