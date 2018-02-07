@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1251.robot.sensors;
 
+import org.usfirst.frc.team1251.robot.RobotPosition;
+
 /**
  * Uses raw sensor data to derive the position of the Robot on the field.
  */

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1251.robot.sensors;
+package org.usfirst.frc.team1251.robot;
 
 /**
  * Represents the bot's coordinates and heaing.

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.sensors;
 
 import edu.wpi.first.wpilibj.Encoder;
+import org.usfirst.frc.team1251.robot.RobotPosition;
 
 /**
  * Derives and reports the Robot's position on the field using sensors related directly to the DriveTrain.
