@@ -40,7 +40,7 @@ public class OI {
         this.lbListener = new GamePadButtonTrigger(gamePad.lb());
         this.rbListener = new GamePadButtonTrigger(gamePad.rb());
         this.rsClickListener = new GamePadButtonTrigger(gamePad.rsClick());
-        this.lsClickListener = new GamePadButtonTrigger(gamePad.rsClick());
+        this.lsClickListener = new GamePadButtonTrigger(gamePad.lsClick());
         this.startListener = new GamePadButtonTrigger(gamePad.start());
         this.selectListener = new GamePadButtonTrigger(gamePad.select());
     }
