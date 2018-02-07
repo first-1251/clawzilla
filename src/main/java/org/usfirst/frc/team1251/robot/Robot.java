@@ -13,6 +13,7 @@ import org.usfirst.frc.team1251.robot.subsystems.Collector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
+import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 
 /**
  * The VM is configured to automatically run this class, and to call the

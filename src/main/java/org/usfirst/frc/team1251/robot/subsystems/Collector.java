@@ -3,7 +3,7 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team1251.robot.CrateDetector;
+import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.commands.CollectorMain;
