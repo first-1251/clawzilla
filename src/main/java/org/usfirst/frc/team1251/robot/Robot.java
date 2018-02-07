@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.MoveElevator;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.subsystems.Collector;
+import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
     public static final Arm ARM_CLAW = new Arm();
     public static final Collector collector = new Collector();
     public static final CrateDetector crateDetector =  new CrateDetector();
+    public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
     public static OI oi;
 
     //public static final DriveTrain driveTrain = new DriveTrain();

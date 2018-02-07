@@ -72,9 +72,14 @@ public class RobotMap
     public static final int RIGHT_SLAVE_MOTOR2_ID = 6;
     public static final int RIGHT_SLAVE_MOTOR3_ID = 7;
 
+    public static final int DRIVE_GEAR_SHIFT_PORT1 = 0;
+    public static final int DRIVE_GEAR_SHIFT_PORT2 = 1;
+
     public static final int LEFT_ENCODER_PORT1 = 0;
     public static final int LEFT_ENCODER_PORT2 = 1;
 
     public static final int RIGHT_ENCODER_PORT1 = 2;
     public static final int RIGHT_ENCODER_PORT2 = 3;
+
+    public static final double DRIVE_TICK_VELOCITY_TO_SHIFT = 15;
 }

@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
@@ -29,6 +30,8 @@ public class DriveTrain extends Subsystem {
     private VictorSPX rightSlaveMotor2;
     private VictorSPX rightSlaveMotor3;
 
+    private DoubleSolenoid gearShifter;
+
     private int leftDistance;
     private int rightDistance;
 
@@ -38,6 +41,9 @@ public class DriveTrain extends Subsystem {
     private ControlMode mode;
 
     public DriveTrain() {
+        //setup solenoid
+        gearShifter = new DoubleSolenoid(RobotMap.DRIVE_GEAR_SHIFT_PORT1, RobotMap.DRIVE_GEAR_SHIFT_PORT2);
+
         //create left motors
         leftMasterMotor = new TalonSRX(RobotMap.LEFT_MASTER_MOTOR_ID);
         leftSlaveMotor1 = new VictorSPX(RobotMap.LEFT_SLAVE_MOTOR1_ID);
@@ -100,31 +106,40 @@ public class DriveTrain extends Subsystem {
         rightMasterMotor.set(mode, value);
     }
 
+    public void set(double left, double right) {
+        leftMasterMotor.set(mode, left);
+        rightMasterMotor.set(mode, right);
+    }
+
     public int getLeftDistance() {
-        updateSensorData();
         return this.leftDistance;
     }
 
     public int getRightDistance() {
-        updateSensorData();
         return this.rightDistance;
     }
 
     public int getLeftVelocity() {
-        updateSensorData();
         return this.leftVelocity;
     }
 
     public int getRightVelocity() {
-        updateSensorData();
         return this.rightVelocity;
     }
 
-    private void updateSensorData() {
+    public void updateSensorData() {
         this.leftDistance = leftMasterMotor.getSelectedSensorPosition(0);
         this.rightDistance = rightMasterMotor.getSelectedSensorPosition(0);
 
         this.leftVelocity = leftMasterMotor.getSelectedSensorVelocity(0);
         this.rightVelocity = rightMasterMotor.getSelectedSensorVelocity(0);
+    }
+
+    public DoubleSolenoid.Value getShiftState() {
+        return gearShifter.get();
+    }
+
+    public void setGearShifter(DoubleSolenoid.Value shifting) {
+        gearShifter.set(shifting);
     }
 }
