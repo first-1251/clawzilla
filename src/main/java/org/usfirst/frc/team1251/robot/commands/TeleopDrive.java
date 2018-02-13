@@ -31,6 +31,8 @@ public class TeleopDrive extends Command{
         this.driveStick = Robot.oi.gamePad;
         this.driveTrain = Robot.DRIVE_TRAIN;
 
+        requires(Robot.DRIVE_TRAIN);
+
         leftSmoothing = new double[JOYSTICK_SMOOTHING_SAMPLES];
         rightSmoothing = new double[JOYSTICK_SMOOTHING_SAMPLES];
     }
@@ -58,6 +60,10 @@ public class TeleopDrive extends Command{
         driveShifting();
     }
 
+    /**
+     * @param left the joystick left value
+     * @return the speed the left drivetrain should go, smoothed over JOYSTICK_SMOOTHING_SAMPLES
+     */
     private double calculateLeftSmoothed(double left) {
         double sum = 0.0;
         for (int i = 0; i < JOYSTICK_SMOOTHING_SAMPLES; i++) {
