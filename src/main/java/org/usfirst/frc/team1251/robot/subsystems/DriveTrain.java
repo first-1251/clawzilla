@@ -152,12 +152,4 @@ public class DriveTrain extends Subsystem {
     public void setGearShifter(DoubleSolenoid.Value shifting) {
         gearShifter.set(shifting);
     }
-
-    public double convertToEncoder(double wheelSpeed) {
-        if (gearShifter.get() == LOW_GEAR) {
-            return wheelSpeed * WHEEL_TO_ENCODER;
-        } else {
-            return wheelSpeed * WHEEL_TO_ENCODER;
-        }
-    }
 }
