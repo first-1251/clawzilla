@@ -6,7 +6,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team1251.robot.MotorFactory;
 import org.usfirst.frc.team1251.robot.RobotMap;
+import org.usfirst.frc.team1251.robot.commands.TeleopDrive;
 
 // Talon SRX software manual:
 // https://docs.google.com/viewerng/viewer?url=https://link.vex.com/vexpro/pdf/217-8080-Talon-SRX-Software-Reference-Manual
@@ -45,7 +47,7 @@ public class DriveTrain extends Subsystem {
         gearShifter = new DoubleSolenoid(RobotMap.DRIVE_GEAR_SHIFT_PORT1, RobotMap.DRIVE_GEAR_SHIFT_PORT2);
 
         //create left motors
-        leftMasterMotor = new TalonSRX(RobotMap.LEFT_MASTER_MOTOR_ID);
+        leftMasterMotor = MotorFactory.createTalon(RobotMap.LEFT_MASTER_MOTOR_ID, MotorFactory.kDefaultConfiguration);
         leftSlaveMotor1 = new VictorSPX(RobotMap.LEFT_SLAVE_MOTOR1_ID);
         leftSlaveMotor2 = new VictorSPX(RobotMap.LEFT_SLAVE_MOTOR2_ID);
         leftSlaveMotor3 = new VictorSPX(RobotMap.LEFT_SLAVE_MOTOR3_ID);
@@ -56,7 +58,7 @@ public class DriveTrain extends Subsystem {
         leftSlaveMotor3.follow(leftMasterMotor);
 
         //create right motors
-        rightMasterMotor = new TalonSRX(RobotMap.RIGHT_MASTER_MOTOR_ID);
+        rightMasterMotor = MotorFactory.createTalon(RobotMap.RIGHT_MASTER_MOTOR_ID, MotorFactory.kDefaultConfiguration);
         rightSlaveMotor1 = new VictorSPX(RobotMap.RIGHT_SLAVE_MOTOR1_ID);
         rightSlaveMotor2 = new VictorSPX(RobotMap.RIGHT_SLAVE_MOTOR2_ID);
         rightSlaveMotor3 = new VictorSPX(RobotMap.RIGHT_SLAVE_MOTOR3_ID);
@@ -66,23 +68,25 @@ public class DriveTrain extends Subsystem {
         rightSlaveMotor2.follow(rightMasterMotor);
         rightSlaveMotor3.follow(rightMasterMotor);
 
-        //Setup voltage limiting
-        leftMasterMotor.configVoltageCompSaturation(9.0, 0);
-        rightMasterMotor.configVoltageCompSaturation(9.0, 0);
-
         //Setup encoders
         leftMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0 , 0);
         rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0 , 0);
 
         //Setup PIDF
+        leftMasterMotor.config_kP(0, K_P, 0);
+        leftMasterMotor.config_kI(0, K_I, 0);
+        leftMasterMotor.config_kD(0, K_D, 0);
+        leftMasterMotor.config_kF(0, K_F, 0);
 
-
-
+        rightMasterMotor.config_kP(0, K_P, 0);
+        rightMasterMotor.config_kI(0, K_I, 0);
+        rightMasterMotor.config_kD(0, K_D, 0);
+        rightMasterMotor.config_kF(0, K_F, 0);
     }
 
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new TeleopDrive());
     }
 
     public void enablePIDMode() {
