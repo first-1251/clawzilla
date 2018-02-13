@@ -22,6 +22,13 @@ public class DriveTrain extends Subsystem {
     private final int K_F = 0;
     private final int K_INTERCEPT = 0;
 
+    public static final DoubleSolenoid.Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
+    public static final DoubleSolenoid.Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
+
+    // Encoder ratio constants
+    public static final double WHEEL_TO_ENCODER_LOW_GEAR = 0;
+    public static final double WHEEL_TO_ENCODER_HIGH_GEAR = 0;
+
     private TalonSRX leftMasterMotor;
     private VictorSPX leftSlaveMotor1;
     private VictorSPX leftSlaveMotor2;
@@ -145,5 +152,13 @@ public class DriveTrain extends Subsystem {
 
     public void setGearShifter(DoubleSolenoid.Value shifting) {
         gearShifter.set(shifting);
+    }
+
+    public double convertToEncoder(double wheelSpeed) {
+        if (gearShifter.get() == LOW_GEAR) {
+            return wheelSpeed * WHEEL_TO_ENCODER_LOW_GEAR;
+        } else {
+            return wheelSpeed * WHEEL_TO_ENCODER_HIGH_GEAR;
+        }
     }
 }

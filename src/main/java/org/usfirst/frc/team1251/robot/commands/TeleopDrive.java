@@ -11,8 +11,6 @@ public class TeleopDrive extends Command{
 
     private static final int JOYSTICK_SMOOTHING_SAMPLES = 5;
 
-    private static final DoubleSolenoid.Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
-    private static final DoubleSolenoid.Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
     private static final double SHIFTING_TIME = 1.0; // seconds
     private static final double SHIFTING_SPEED = 150.0; // encoder ticks / second
 
@@ -97,7 +95,7 @@ public class TeleopDrive extends Command{
     private void driveShifting() {
         driveTrain.updateSensorData();
         double averageSpeed = (driveTrain.getLeftVelocity() + driveTrain.getRightVelocity()) / 2.0;
-        if (driveTrain.getShiftState() == LOW_GEAR) {
+        if (driveTrain.getShiftState() == DriveTrain.LOW_GEAR) {
             considerLowGear(averageSpeed);
         } else {
             considerHighGear(averageSpeed);
@@ -106,7 +104,7 @@ public class TeleopDrive extends Command{
 
     private void considerLowGear(double averageSpeed) {
         if (averageSpeed > SHIFTING_SPEED) {
-            timerCountdown(HIGH_GEAR);
+            timerCountdown(DriveTrain.HIGH_GEAR);
         } else {
             if (timerStarted) {
                 timerStarted = false;
@@ -116,7 +114,7 @@ public class TeleopDrive extends Command{
 
     private void considerHighGear(double averageSpeed) {
         if (averageSpeed < SHIFTING_SPEED) {
-            timerCountdown(LOW_GEAR);
+            timerCountdown(DriveTrain.LOW_GEAR);
         } else {
             if (timerStarted) {
                 timerStarted = false;

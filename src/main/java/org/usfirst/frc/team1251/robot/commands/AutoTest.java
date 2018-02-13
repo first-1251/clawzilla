@@ -21,7 +21,7 @@ public class AutoTest extends TimedCommand{
 
     @Override
     protected void execute() {
-        driveTrain.set(100);
+        driveTrain.set(driveTrain.convertToEncoder(1));
     }
 
     @Override
