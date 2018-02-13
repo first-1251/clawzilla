@@ -26,8 +26,7 @@ public class DriveTrain extends Subsystem {
     public static final DoubleSolenoid.Value HIGH_GEAR = DoubleSolenoid.Value.kForward;
 
     // Encoder ratio constants
-    public static final double WHEEL_TO_ENCODER_LOW_GEAR = 0;
-    public static final double WHEEL_TO_ENCODER_HIGH_GEAR = 0;
+    public static final double WHEEL_TO_ENCODER = 4.0 * 125.0; //gear ratio 4 to 1, 125 encoders ticks per wheel turn
 
     private TalonSRX leftMasterMotor;
     private VictorSPX leftSlaveMotor1;
@@ -156,9 +155,9 @@ public class DriveTrain extends Subsystem {
 
     public double convertToEncoder(double wheelSpeed) {
         if (gearShifter.get() == LOW_GEAR) {
-            return wheelSpeed * WHEEL_TO_ENCODER_LOW_GEAR;
+            return wheelSpeed * WHEEL_TO_ENCODER;
         } else {
-            return wheelSpeed * WHEEL_TO_ENCODER_HIGH_GEAR;
+            return wheelSpeed * WHEEL_TO_ENCODER;
         }
     }
 }
