@@ -11,7 +11,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
  */
 public class OI {
 
-    // TODO: Stop using this.
+    // TODO: stop using this.
     public static final Joystick stick = new Joystick(0);
 
     public final GamePad gamePad;

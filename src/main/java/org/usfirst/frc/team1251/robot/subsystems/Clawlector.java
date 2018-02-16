@@ -56,45 +56,28 @@ public class Clawlector extends Subsystem {
 
     }
 
-    public void runCollectorWheels()
+    public void stop()
     {
-        CrateDetector.CrateState crateState = this.crateDetector.getCrateState();
-
-        if (crateState == CrateDetector.CrateState.SKEWED_LEFT)
-        {
-            rightMotor.set(1);
-            leftMotor.set(1);
-            return;
-        }
-
-        if (crateState == CrateDetector.CrateState.DIAGONAL)
-        {
-            rightMotor.set(1);
-            leftMotor.set(1);
-            return;
-        }
-
-        if (crateState == CrateDetector.CrateState.SKEWED_RIGHT)
-        {
-            rightMotor.set(-1);
-            leftMotor.set(-1);
-            return;
-        }
-
-        if (crateState == CrateDetector.CrateState.CRATE_COLLECTED)
-        {
-            rightMotor.set(0);
-            leftMotor.set(0);
-            return;
-        }
-        if (crateState == CrateDetector.CrateState.NONE)
-        {
-            //Sucks in crate
-            rightMotor.set(1);
-            leftMotor.set(-1);
-            return;
-        }
-
+        rightMotor.set(0);
+        leftMotor.set(0);
+        return;
     }
-
+    public void pullInLeft()
+    {
+        rightMotor.set(-1);
+        leftMotor.set(1);
+        return;
+    }
+    public void pullIn()
+    {
+        rightMotor.set(1);
+        leftMotor.set(1);
+        return;
+    }
+    public void pullInRight()
+    {
+        rightMotor.set(-1);
+        leftMotor.set(-1);
+        return;
+    }
 }
