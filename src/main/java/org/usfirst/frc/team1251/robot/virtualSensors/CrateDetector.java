@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.virtualSensors;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import org.usfirst.frc.team1251.robot.Robot;
 
 public class CrateDetector
 {
@@ -48,27 +49,45 @@ public class CrateDetector
 
     private boolean isLeftOnly() //Only left button is pressed
     {
-        return leftSwitch.get() && !middleSwitch.get() && !rightSwtich.get();
+        return isLeftPressed() && !isMiddlePressed() && !isRightPressed();
     }
     private boolean isMiddleOnly() //Only middle button is pressed
     {
-        return middleSwitch.get() && !leftSwitch.get() && !rightSwtich.get();
+        return isMiddlePressed() && !isLeftPressed() && !isRightPressed();
     }
     private boolean isRightOnly() //Only right button is pressed
     {
-        return rightSwtich.get() && !middleSwitch.get() && !leftSwitch.get();
+        return isRightPressed() && !isMiddlePressed() && !isLeftPressed();
     }
     private boolean isLeftMiddle() //Left and Middle is pressed
     {
-        return leftSwitch.get() && middleSwitch.get() && !leftSwitch.get();
+        return isLeftPressed() && isMiddlePressed() && !isLeftPressed();
     }
     private boolean isRightMiddle() //Right and Middle is pressed
     {
-        return rightSwtich.get() && middleSwitch.get() && !leftSwitch.get();
+        return isRightPressed() && isMiddlePressed() && !isLeftPressed();
     }
     private boolean isAllPressed() //Right and Middle is pressed
     {
-        return rightSwtich.get() && middleSwitch.get() && leftSwitch.get();
+        return isRightPressed() && isMiddlePressed() && isLeftPressed();
+    }
+
+    private boolean isRightPressed() {
+        // TODO: Use real switch instead of controller button.
+        return Robot.oi.gamePad.b().isPressed();
+//        return rightSwtich.get();
+    }
+
+    private boolean isLeftPressed() {
+        // TODO: Use real switch instead of controller button.
+        return Robot.oi.gamePad.x().isPressed();
+//        return leftSwitch.get();
+    }
+
+    private boolean isMiddlePressed() {
+        // TODO: Use real switch instead of controller button.
+        return Robot.oi.gamePad.y().isPressed();
+//        return middleSwitch.get();
     }
 
 
