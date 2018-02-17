@@ -25,7 +25,7 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  */
 public class Robot extends IterativeRobot {
 
-    //public static final Elevator elevator = new Elevator();
+    public static final Elevator elevator = new Elevator();
     public static final ArmPosition armPosition = new ArmPosition();
     public static final Arm arm = new Arm();
     public static final CrateDetector crateDetector =  new CrateDetector();
