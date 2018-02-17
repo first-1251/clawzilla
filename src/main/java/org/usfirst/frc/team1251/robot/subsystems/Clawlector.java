@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team1251.robot.Claw;
+import org.usfirst.frc.team1251.robot.Collector;
 import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
@@ -17,73 +19,21 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  */
 public class Clawlector extends Subsystem {
 
-    private static final int MOTOR_LEFT_FORWARD = 1; //Gas Gas Gas
-    private static final int MOTOR_RIGHT_FORWARD = 1;
-    private static final int MOTOR_LEFT_BACKWARD = -1;
-    private static final int MOTOR_RIGHT_BACKWARD = -1;
-    private static final int MOTOR_STOP = 0;
+    private Claw claw = new Claw();
+    private Collector collector = new Collector();
 
-    private Solenoid clawSolenoidLeft, clawSolenoidRight;
+    public Claw getClaw() {
+        return claw;
+    }
 
-    //The left bag motor, when looking from the rear perspective.
-    private SpeedController leftMotor;
-
-    //The right bag motor, when looking from the rear perspective.
-    private SpeedController rightMotor;
-
-    private CrateDetector crateDetector;
-
-    public Clawlector(){
-        clawSolenoidLeft = new Solenoid(RobotMap.clawSolenoidLeft);
-        clawSolenoidRight = new Solenoid(RobotMap.clawSolenoidRight);
-
-        this.crateDetector = Robot.crateDetector;
-        this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_VICTOR);
-        this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_VICTOR);
-
+    public Collector getCollector() {
+        return collector;
     }
 
     //This just needs to be here
+    @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    }
-
-    //Pistons set to default state and opens
-    public void openClaw (){
-        clawSolenoidLeft.set(false);
-        clawSolenoidRight.set(false);
-    }
-
-    //Pistons extend to close claw
-    public void closeClaw () {
-        clawSolenoidLeft.set(true);
-        clawSolenoidRight.set(true);
-
-    }
-
-    //Below includes Motor commands for collector victor's
-    public void stop()
-    {
-        rightMotor.set(MOTOR_STOP);
-        leftMotor.set(MOTOR_STOP);
-        return;
-    }
-    public void pullInLeft()
-    {
-        rightMotor.set(MOTOR_RIGHT_BACKWARD);
-        leftMotor.set(MOTOR_LEFT_FORWARD);
-        return;
-    }
-    public void pullIn()
-    {
-        rightMotor.set(MOTOR_RIGHT_FORWARD);
-        leftMotor.set(MOTOR_LEFT_FORWARD);
-    }
-    public void pullInRight()
-    {
-        rightMotor.set(MOTOR_RIGHT_BACKWARD);
-        leftMotor.set(MOTOR_LEFT_BACKWARD);
-        return;
     }
 }
