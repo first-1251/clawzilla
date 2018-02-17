@@ -29,8 +29,10 @@ public class Robot extends IterativeRobot {
     public static final ArmPosition armPosition = new ArmPosition();
     public static final CrateDetector crateDetector =  new CrateDetector();
     public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
-    public static final Clawlector CLAWLECTOR = new Clawlector();
+    //public static final Clawlector CLAWLECTOR = new Clawlector();
     public static OI oi;
+    public static final Claw CLAW = new Claw();
+    public static final Collector COLLECTOR = new Collector();
 
 
     //public static final DriveTrain driveTrain = new DriveTrain();
