@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1251.robot.subsystems;
+package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -9,13 +9,10 @@ import org.usfirst.frc.team1251.robot.RobotMap;
 /**
  * Created by nick2 on 1/18/18
  */
-public class Elevator extends Subsystem {
+public class Elevator {
 
     // Motor(s) for elevators (move it up and down)
     private Victor elevatorMotor1;
-    //Maintains position (counteracts gravity) while holding crate at limit switch
-    //TODO: FIND CORRECT LS IDLING SPEED
-    private final static double LIMIT_SWITCH_IDLE_SPEED = 0;
     // Encoder for elevator
     private Encoder elevatorEncoder;
     // Limit Switches that prevent the elevator from overextending
@@ -28,20 +25,14 @@ public class Elevator extends Subsystem {
         elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
     }
 
-    public void initDefaultCommand() {
-        // Initial action will be to stay still :)
-    }
-
     // goUp() and goDown() methods will use a speed variable until control type is determined
-    // Defaulted to joystick
-    //TODO: DETERMINE CONTROL TYPE FOR ELEV. (BUTTON, JOYSTICK, ETC.)
 
     // Have the elevator go upwards
     public void goUp(double speed) {
         if (!elevatorLimitSwitch.get()){
             elevatorMotor1.set(speed);
         } else {
-            elevatorMotor1.set(LIMIT_SWITCH_IDLE_SPEED);
+            elevatorMotor1.set(0);
         }
     }
 
@@ -53,8 +44,7 @@ public class Elevator extends Subsystem {
     // Prevents the elevator from overreaching by checking limit switch state
     public void stopPlease(){
         if (elevatorLimitSwitch.get()){
-            elevatorMotor1.set(LIMIT_SWITCH_IDLE_SPEED);
-            //TODO: EDIT TO 0
+            elevatorMotor1.set(0);
         }
     }
 }

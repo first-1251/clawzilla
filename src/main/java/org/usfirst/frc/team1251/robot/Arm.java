@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1251.robot.subsystems;
+package org.usfirst.frc.team1251.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -15,7 +15,7 @@ import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
  * Potentiometer(port #, degree range, offset)
  *
  */
-public class Arm extends Subsystem {
+public class Arm {
 
     //Declare variables
     private DigitalInput armLimitSwitch;
@@ -35,13 +35,6 @@ public class Arm extends Subsystem {
 
         this.armPosition = Robot.armPosition;
 
-
-    }
-
-    //This just needs to be here
-    //sets default command for arm
-    public void initDefaultCommand() {
-        this.setDefaultCommand(new MoveArm());
 
     }
 

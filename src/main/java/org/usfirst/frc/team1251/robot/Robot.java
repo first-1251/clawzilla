@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.CollectCrate;
 import org.usfirst.frc.team1251.robot.commands.MoveElevator;
-import org.usfirst.frc.team1251.robot.subsystems.Arm;
+import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
@@ -25,9 +25,8 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  */
 public class Robot extends IterativeRobot {
 
-    //public static final Elevator elevator = new Elevator();
+    public static final Armevator ARMEVATOR = new Armevator();
     public static final ArmPosition armPosition = new ArmPosition();
-    public static final Arm arm = new Arm();
     public static final CrateDetector crateDetector =  new CrateDetector();
     public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
     public static final Clawlector CLAWLECTOR = new Clawlector();
