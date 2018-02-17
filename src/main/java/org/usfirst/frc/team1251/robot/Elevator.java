@@ -20,7 +20,7 @@ public class Elevator {
 
     public Elevator(){
         //TODO: FIX ENCODER INITIALIZATION
-        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER, RobotMap.ELEVATOR_ENCODER);
+        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER-1, RobotMap.ELEVATOR_ENCODER);
         elevatorMotor1 = new Victor(RobotMap.ELEVATOR_VICTOR);
         elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
     }

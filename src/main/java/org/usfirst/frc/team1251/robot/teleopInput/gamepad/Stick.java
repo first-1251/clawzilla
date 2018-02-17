@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.teleopInput.gamepad;
 
 
+import com.sun.org.apache.regexp.internal.RE;
 import edu.wpi.first.wpilibj.GenericHID;
 
 /**
@@ -31,7 +32,24 @@ public class Stick {
      *         upward position.
      */
     public double getVertical() {
-        return rawDevice.getRawAxis(this.verticalAxisID);
+        return this.getVertical(.05);
+
+    }
+
+    /**
+     * Provides the current vertical position of the stick with the option to invert it.
+     * @param invert if true, then operated like a flight stick, where down on the stick is an
+     * opposite value
+     * @return A value between -1 and 1 where < 0 represents a downward position and +1 represents an
+     *         upward position if invert is false otherwise the values will be multiplied by -1.
+     */
+    public double getVertical(boolean invert)
+    {
+        if (invert) {
+            return rawDevice.getRawAxis(this.verticalAxisID);
+        } else {
+            return this.getVertical();
+        }
     }
 
     /**
@@ -46,7 +64,7 @@ public class Stick {
      *     upward position.
      */
     public double getVertical(double deadZone) {
-        return this.applyDeadZone(deadZone, this.getVertical());
+        return this.applyDeadZone(deadZone, rawDevice.getRawAxis(this.verticalAxisID) * -1);
     }
 
     /**
@@ -56,7 +74,8 @@ public class Stick {
      *     rightward position.
      */
     public double getHorizontal() {
-        return rawDevice.getRawAxis(this.horizontalAxisID);
+        return this.getHorizontal(.05);
+
     }
 
     /**
@@ -71,7 +90,7 @@ public class Stick {
      *     rightward position.
      */
     public double getHorizontal(double deadZone) {
-        return this.applyDeadZone(deadZone, this.getHorizontal());
+        return this.applyDeadZone(deadZone, rawDevice.getRawAxis(this.horizontalAxisID));
     }
 
     /**

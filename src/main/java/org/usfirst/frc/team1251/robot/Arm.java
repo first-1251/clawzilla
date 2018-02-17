@@ -46,7 +46,7 @@ public class Arm {
     public void pivotUp(double speed){
        // armMotor.set(speed);
 
-        System.out.println(this.armPosition);
+        //System.out.println(this.armPosition);
         if (this.armPosition.isArmUp()){
             armMotor.set(0);
         } else {

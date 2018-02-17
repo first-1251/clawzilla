@@ -34,7 +34,7 @@ public class RobotMap
 
     //Arm ports
     public static final int armMotor = 5;
-    public static final int armLimitSwitch = 0;
+    public static final int armLimitSwitch = 3;
 
     public static final int armPotentiometer = 0;
 
@@ -48,7 +48,7 @@ public class RobotMap
     //TODO: UPDATE VICTOR PORT ACCORDINGLY
 
     // Elevator Limit Switch
-    public static final int ELEVATOR_LIMIT_SWITCH = 1;
+    public static final int ELEVATOR_LIMIT_SWITCH = 2;
     //TODO: UPDATE LS PORT ACCORDINGLY
 
     // Elevator Encoder

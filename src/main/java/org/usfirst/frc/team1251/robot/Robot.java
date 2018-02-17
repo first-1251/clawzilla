@@ -1,7 +1,9 @@
 package org.usfirst.frc.team1251.robot;
 
+import edu.wpi.first.wpilibj.AnalogTrigger;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -9,10 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.CollectCrate;
 import org.usfirst.frc.team1251.robot.commands.MoveElevator;
+import org.usfirst.frc.team1251.robot.commands.TestGamepad;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
+import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 
@@ -25,8 +29,8 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  */
 public class Robot extends IterativeRobot {
 
-    public static final Armevator ARMEVATOR = new Armevator();
     public static final ArmPosition armPosition = new ArmPosition();
+    public static final Armevator ARMEVATOR = new Armevator();
     public static final CrateDetector crateDetector =  new CrateDetector();
     public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
     public static final Clawlector CLAWLECTOR = new Clawlector();
@@ -50,10 +54,16 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         initGamepadTriggers();
+        //initGamepadTest();
     }
     private void initGamepadTriggers()
     {
         oi.lbListener.whileHeld(new CollectCrate());
+    }
+    private void initGamepadTest()
+    {
+        Trigger trigger = new Always();
+        trigger.whileActive(new TestGamepad());
     }
 
 
