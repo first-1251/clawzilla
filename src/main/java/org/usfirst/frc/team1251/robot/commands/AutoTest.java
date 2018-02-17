@@ -21,7 +21,8 @@ public class AutoTest extends TimedCommand{
 
     @Override
     protected void execute() {
-        driveTrain.set(driveTrain.convertToEncoder(1));
+        //100 wheel rotations
+        driveTrain.set(100 * DriveTrain.WHEEL_TO_ENCODER);
     }
 
     @Override
