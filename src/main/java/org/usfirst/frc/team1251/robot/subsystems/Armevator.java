@@ -3,6 +3,7 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.Arm;
 import org.usfirst.frc.team1251.robot.Elevator;
+import org.usfirst.frc.team1251.robot.commands.MoveArm;
 
 public class Armevator extends Subsystem{
 
@@ -20,7 +21,7 @@ public class Armevator extends Subsystem{
 
     @Override
     protected void initDefaultCommand() {
-
+        setDefaultCommand(new MoveArm());
     }
 
 
