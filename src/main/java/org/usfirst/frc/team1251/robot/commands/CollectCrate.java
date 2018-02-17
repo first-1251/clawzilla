@@ -11,15 +11,15 @@ public class CollectCrate extends Command {
 
     private final GamePad gamePad;
     private final CrateDetector crateDetector;
-    private final Collector collector;
+    private final Clawlector clawlector;
 
 
     public CollectCrate()
     {
         this.gamePad = Robot.oi.driverPad;
         this.crateDetector = Robot.crateDetector;
-        this.collector = Robot.COLLECTOR;
-        //this.requires(this.collector);
+        this.clawlector = Robot.CLAWLECTOR;
+        this.requires(this.clawlector);
     }
 
     protected void execute() {
@@ -27,38 +27,38 @@ public class CollectCrate extends Command {
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.CRATE_COLLECTED)
         {
             System.out.println("Crate Collected");
-            this.collector.stop();
+            this.clawlector.getCollector().stop();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_LEFT)
         {
             System.out.println("Skewed Left");
-            this.collector.pullInLeft();
+            this.clawlector.getCollector().pullInLeft();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.DIAGONAL)
         {
             System.out.println("Diagonal");
-            this.collector.pullInLeft();
+            this.clawlector.getCollector().pullInLeft();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_RIGHT)
         {
             System.out.println("Skewed Right");
-            this.collector.pullInRight();
+            this.clawlector.getCollector().pullInRight();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.NONE)
         {
             System.out.println("None");
-            this.collector.pullIn();
+            this.clawlector.getCollector().pullIn();
             return;
         }
 
     }
     protected void end()
     {
-        this.collector.stop();
+        this.clawlector.getCollector().stop();
     }
 
     @Override
