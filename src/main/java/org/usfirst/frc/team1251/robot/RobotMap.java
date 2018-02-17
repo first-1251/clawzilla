@@ -35,6 +35,7 @@ public class RobotMap
     //Arm ports
     public static final int armMotor = 5;
     public static final int armLimitSwitch = 0;
+
     public static final int armPotentiometer = 0;
 
     //Claw ports

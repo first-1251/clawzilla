@@ -3,10 +3,12 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.RobotMap;
+import org.usfirst.frc.team1251.robot.commands.MoveArm;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
 /**
@@ -18,7 +20,7 @@ public class Arm extends Subsystem {
     //Declare variables
     private DigitalInput armLimitSwitch;
 
-    private VictorSPX armMotor;
+    private Victor armMotor;
 
     private ArmPosition armPosition;
 
@@ -27,8 +29,9 @@ public class Arm extends Subsystem {
         //Button
         armLimitSwitch = new DigitalInput(RobotMap.armLimitSwitch);
 
+
         //Arm pivot motor
-        armMotor = new VictorSPX(RobotMap.armMotor);
+        armMotor = new Victor(RobotMap.armMotor);
 
         this.armPosition = Robot.armPosition;
 
@@ -36,34 +39,51 @@ public class Arm extends Subsystem {
     }
 
     //This just needs to be here
+    //sets default command for arm
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        this.setDefaultCommand(new MoveArm());
+
     }
+
+
 
 
     //Arm tilts up
     //Arm should pivot up. If button pressed, motor must stop immediately
     public void pivotUp(double speed){
+       // armMotor.set(speed);
 
+        System.out.println(this.armPosition);
         if (this.armPosition.isArmUp()){
-            armMotor.set(ControlMode.PercentOutput, 0);
+            armMotor.set(0);
         } else {
-            armMotor.set(ControlMode.PercentOutput, speed);
+            armMotor.set(speed);
     }
 
            }
 
+
+
+
     //Arm tilts down
     //Arm should pivot down, no button pressed
     public void pivotDown(double speed){
-        armMotor.set(ControlMode.PercentOutput, speed);
+       // armMotor.set(speed);
 
         if (this.armPosition.isArmDown()){
-            armMotor.set(ControlMode.PercentOutput, 0);
+            armMotor.set(0);
         } else {
-            armMotor.set(ControlMode.PercentOutput, speed);
+            armMotor.set(speed);
         }
+
     }
+
+
+    public void stopPivot() {
+        armMotor.set(0);
+
+    }
+
+
 
 }
