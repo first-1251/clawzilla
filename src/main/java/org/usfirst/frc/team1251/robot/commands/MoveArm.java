@@ -3,19 +3,20 @@ package org.usfirst.frc.team1251.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.Arm;
+import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
 
 public class MoveArm extends Command {
 
     private final GamePad gamePad;
-    private final Arm arm;
+    private final Armevator armevator;
 
 
     public MoveArm() {
         this.gamePad = Robot.oi.driverPad;
-        this.arm = Robot.arm;
-        this.requires(this.arm);
+        this.armevator = Robot.ARMEVATOR;
+        this.requires(this.armevator);
 
     }
 
@@ -27,26 +28,26 @@ public class MoveArm extends Command {
     @Override
     protected void execute() {
         double stickValue = this.gamePad.ls().getVertical();
-        this.arm.pivotUp(0);
+        this.armevator.getArm().pivotUp(0);
 
         if (stickValue > 0){
             System.out.println("moving up");
-            this.arm.pivotUp(stickValue);
+            this.armevator.getArm().pivotUp(stickValue);
 
         } else if (stickValue < 0){
             System.out.println("moving down");
-            this.arm.pivotDown(stickValue);
+            this.armevator.getArm().pivotDown(stickValue);
 
         } else if (stickValue == 0){
             System.out.println("not moving");
-            this.arm.stopPivot();
+            this.armevator.getArm().stopPivot();
         }
 
     }
 
     @Override
     protected void end() {
-       this.arm.stopPivot();
+       this.armevator.getArm().stopPivot();
 
     }
 

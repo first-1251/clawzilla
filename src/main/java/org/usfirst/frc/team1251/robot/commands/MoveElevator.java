@@ -6,30 +6,31 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.OI;
 import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.Elevator;
+import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 
 /**
  * Created by nick2 on 1/18/18
  */
 public class MoveElevator extends Command {
 
-    private final Elevator elevator;
     private final Joystick joystick;
+    private final Armevator armevator;
 
     // Declares Subsystem dependencies
     public MoveElevator() {
-        this.requires(Robot.elevator);
-        this.elevator = Robot.elevator;
+        this.requires(Robot.ARMEVATOR);
+        this.armevator = Robot.ARMEVATOR;
         this.joystick = OI.stick;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if(joystick.getRawAxis(1) > 0) {
-            this.elevator.goUp(joystick.getRawAxis(1));
+            this.armevator.getElevator().goUp(joystick.getRawAxis(1));
         } else if(joystick.getRawAxis(1) < 0) {
-            this.elevator.goDown(joystick.getRawAxis(1));
+            this.armevator.getElevator().goDown(joystick.getRawAxis(1));
         } else {
-            this.elevator.stopPlease();
+            this.armevator.getElevator().stopPlease();
         }
     }
 
@@ -42,7 +43,5 @@ public class MoveElevator extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        // this.elevator.stopPlease();
-        // Must figure out whether we use joystick or button
     }
 }
