@@ -33,17 +33,17 @@ public class RobotMap
 
 
     //Arm ports
-    public static final int armMotor = 0;
+    public static final int armMotor = 5;
     public static final int armLimitSwitch = 0;
     public static final int armPotentiometer = 0;
 
     //Claw ports
-    public static final int clawSolenoidLeft = 0;
-    public static final int clawSolenoidRight = 1;
+    public static final int clawSolenoidLeft = 7;
+    public static final int clawSolenoidRight = 6;
 
     // Elevator Motors - MUST CORRECT PORT VALUES
     // Elevator Motors
-    public static final int ELEVATOR_VICTOR = 1;
+    public static final int ELEVATOR_VICTOR = 10;
     //TODO: UPDATE VICTOR PORT ACCORDINGLY
 
     // Elevator Limit Switch
@@ -75,11 +75,6 @@ public class RobotMap
     public static final int DRIVE_GEAR_SHIFT_PORT1 = 0;
     public static final int DRIVE_GEAR_SHIFT_PORT2 = 1;
 
-    public static final int LEFT_ENCODER_PORT1 = 0;
-    public static final int LEFT_ENCODER_PORT2 = 1;
-
-    public static final int RIGHT_ENCODER_PORT1 = 2;
-    public static final int RIGHT_ENCODER_PORT2 = 3;
 
     public static final double DRIVE_TICK_VELOCITY_TO_SHIFT = 15;
 }

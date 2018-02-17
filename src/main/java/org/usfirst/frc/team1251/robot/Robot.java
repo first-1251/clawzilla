@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team1251.robot.commands.CollectCrate;
 import org.usfirst.frc.team1251.robot.commands.MoveElevator;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
+import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
@@ -23,10 +25,11 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  */
 public class Robot extends IterativeRobot {
 
-    public static final Elevator elevator = new Elevator();
+    //public static final Elevator elevator = new Elevator();
     public static final Arm ARM_CLAW = new Arm();
     public static final CrateDetector crateDetector =  new CrateDetector();
     public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
+    public static final Clawlector CLAWLECTOR = new Clawlector();
     public static OI oi;
 
     //public static final DriveTrain driveTrain = new DriveTrain();
@@ -44,8 +47,14 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", new MoveElevator());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-
+        initGamepadTriggers();
     }
+    private void initGamepadTriggers()
+    {
+        oi.lbListener.whileHeld(new CollectCrate());
+    }
+
+
 
     /**
      * This function is called once each time the robot enters Disabled mode.
