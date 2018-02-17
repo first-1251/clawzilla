@@ -14,6 +14,7 @@ import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
+import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 
 /**
@@ -26,11 +27,13 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 public class Robot extends IterativeRobot {
 
     //public static final Elevator elevator = new Elevator();
-    public static final Arm ARM_CLAW = new Arm();
+    public static final ArmPosition armPosition = new ArmPosition();
+    public static final Arm arm = new Arm();
     public static final CrateDetector crateDetector =  new CrateDetector();
     public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
     public static final Clawlector CLAWLECTOR = new Clawlector();
     public static OI oi;
+
 
     //public static final DriveTrain driveTrain = new DriveTrain();
 
