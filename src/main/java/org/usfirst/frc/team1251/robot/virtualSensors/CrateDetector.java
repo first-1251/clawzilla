@@ -61,7 +61,7 @@ public class CrateDetector
     }
     private boolean isLeftMiddle() //Left and Middle is pressed
     {
-        return isLeftPressed() && isMiddlePressed() && !isLeftPressed();
+        return isLeftPressed() && isMiddlePressed() && !isRightPressed();
     }
     private boolean isRightMiddle() //Right and Middle is pressed
     {

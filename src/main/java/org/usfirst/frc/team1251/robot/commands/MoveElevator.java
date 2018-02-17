@@ -12,13 +12,13 @@ import org.usfirst.frc.team1251.robot.subsystems.Elevator;
  */
 public class MoveElevator extends Command {
 
-    private final Elevator elevator;
+    //private final Elevator elevator;
     private final Joystick joystick;
 
     // Declares Subsystem dependencies
     public MoveElevator() {
-        this.requires(Robot.elevator);
-        this.elevator = Robot.elevator;
+        //this.requires(Robot.elevator);
+        //this.elevator = Robot.elevator;
         this.joystick = OI.stick;
     }
 
@@ -40,7 +40,7 @@ public class MoveElevator extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        this.elevator.stopPlease();
+        //this.elevator.stopPlease();
         // Must figure out whether we use joystick or button
     }
 }

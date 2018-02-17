@@ -24,31 +24,39 @@ public class CollectCrate extends Command {
         //todo when press enable command
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.CRATE_COLLECTED)
         {
+            System.out.println("Crate Collected");
             this.clawLector.stop();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_LEFT)
         {
+            System.out.println("Skewed Left");
             this.clawLector.pullInLeft();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.DIAGONAL)
         {
+            System.out.println("Diagonal");
             this.clawLector.pullInLeft();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_RIGHT)
         {
+            System.out.println("Skewed Right");
             this.clawLector.pullInRight();
             return;
         }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.NONE)
         {
+            System.out.println("None");
             this.clawLector.pullIn();
             return;
         }
 
-
+    }
+    protected void end()
+    {
+        this.clawLector.stop();
     }
 
     @Override
