@@ -30,15 +30,15 @@ public class MoveArm extends Command {
         this.armevator.getArm().pivotUp(0);
 
         if (stickValue > 0){
-            System.out.println("moving up");
+            //System.out.println("moving up");
             this.armevator.getArm().pivotUp(stickValue);
 
         } else if (stickValue < 0){
-            System.out.println("moving down");
+            //System.out.println("moving down");
             this.armevator.getArm().pivotDown(stickValue);
 
         } else if (stickValue == 0){
-            System.out.println("not moving");
+            //System.out.println("not moving");
             this.armevator.getArm().stopPivot();
         }
 
