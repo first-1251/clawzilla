@@ -17,6 +17,12 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  */
 public class Clawlector extends Subsystem {
 
+    private static final int MOTOR_LEFT_FORWARD = 1; //Gas Gas Gas
+    private static final int MOTOR_RIGHT_FORWARD = 1;
+    private static final int MOTOR_LEFT_BACKWARD = -1;
+    private static final int MOTOR_RIGHT_BACKWARD = -1;
+    private static final int MOTOR_STOP = 0;
+
     private Solenoid clawSolenoidLeft, clawSolenoidRight;
 
     //The left bag motor, when looking from the rear perspective.
@@ -56,28 +62,28 @@ public class Clawlector extends Subsystem {
 
     }
 
+    //Below includes Motor commands for collector victor's
     public void stop()
     {
-        rightMotor.set(0);
-        leftMotor.set(0);
+        rightMotor.set(MOTOR_STOP);
+        leftMotor.set(MOTOR_STOP);
         return;
     }
     public void pullInLeft()
     {
-        rightMotor.set(-1);
-        leftMotor.set(1);
+        rightMotor.set(MOTOR_RIGHT_BACKWARD);
+        leftMotor.set(MOTOR_LEFT_FORWARD);
         return;
     }
     public void pullIn()
     {
-        rightMotor.set(1);
-        leftMotor.set(1);
-        return;
+        rightMotor.set(MOTOR_RIGHT_FORWARD);
+        leftMotor.set(MOTOR_LEFT_FORWARD);
     }
     public void pullInRight()
     {
-        rightMotor.set(-1);
-        leftMotor.set(-1);
+        rightMotor.set(MOTOR_RIGHT_BACKWARD);
+        leftMotor.set(MOTOR_LEFT_BACKWARD);
         return;
     }
 }

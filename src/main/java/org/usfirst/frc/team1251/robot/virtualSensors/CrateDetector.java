@@ -16,7 +16,7 @@ public class CrateDetector
     private DigitalInput middleSwitch;
 
     //One of the 3 switches used to align the crate. On right side when looking from the rear perspective.
-    private DigitalInput rightSwtich;
+    private DigitalInput rightSwitch;
 
 
     public enum CrateState {
@@ -75,7 +75,7 @@ public class CrateDetector
     private boolean isRightPressed() {
         // TODO: Use real switch instead of controller button.
         return Robot.oi.gamePad.b().isPressed();
-//        return rightSwtich.get();
+//        return rightSwitch.get();
     }
 
     private boolean isLeftPressed() {
