@@ -14,7 +14,7 @@ public class CollectCrate extends Command {
 
     public CollectCrate()
     {
-        this.gamePad = Robot.oi.gamePad;
+        this.gamePad = Robot.oi.driverPad;
         this.crateDetector = Robot.crateDetector;
         this.clawLector = Robot.CLAWLECTOR;
         this.requires(this.clawLector);

@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1251.robot.virtualSensors;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import org.usfirst.frc.team1251.robot.Robot;
 
 public class ArmPosition {
@@ -20,7 +18,7 @@ public class ArmPosition {
 
 
     public boolean isArmUp(){
-        return Robot.oi.gamePad.y().isPressed();
+        return Robot.oi.driverPad.y().isPressed();
 
 
 
@@ -38,7 +36,7 @@ public class ArmPosition {
     }
 
     public boolean isArmDown(){
-        return Robot.oi.gamePad.a().isPressed();
+        return Robot.oi.driverPad.a().isPressed();
 
         /*
         double potDegrees = armPotentiometer.get();
