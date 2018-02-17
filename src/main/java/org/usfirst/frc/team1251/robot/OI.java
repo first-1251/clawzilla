@@ -14,7 +14,8 @@ public class OI {
     // TODO: stop using this.
     public static final Joystick stick = new Joystick(0);
 
-    public final GamePad gamePad;
+    public final GamePad driverPad;
+    public final GamePad operatorPad;
     public final Button xListener;
     public final Button yListener;
     public final Button aListener;
@@ -28,21 +29,22 @@ public class OI {
     public final Button startListener;
     public final Button selectListener;
 
-    public OI(GamePad gamePad) {
-        this.gamePad = gamePad;
+    public OI(GamePad driverPad, GamePad operatorPad) {
+        this.driverPad = driverPad;
+        this.operatorPad = operatorPad;
 
-        this.xListener = new GamePadButtonTrigger(gamePad.x());
-        this.yListener = new GamePadButtonTrigger(gamePad.y());
-        this.aListener = new GamePadButtonTrigger(gamePad.a());
-        this.bListener = new GamePadButtonTrigger(gamePad.b());
-        this.ltListener = new GamePadButtonTrigger(gamePad.lt());
-        this.rtListener = new GamePadButtonTrigger(gamePad.rt());
-        this.lbListener = new GamePadButtonTrigger(gamePad.lb());
-        this.rbListener = new GamePadButtonTrigger(gamePad.rb());
-        this.rsClickListener = new GamePadButtonTrigger(gamePad.rsClick());
-        this.lsClickListener = new GamePadButtonTrigger(gamePad.lsClick());
-        this.startListener = new GamePadButtonTrigger(gamePad.start());
-        this.selectListener = new GamePadButtonTrigger(gamePad.select());
+        this.xListener = new GamePadButtonTrigger(driverPad.x());
+        this.yListener = new GamePadButtonTrigger(driverPad.y());
+        this.aListener = new GamePadButtonTrigger(driverPad.a());
+        this.bListener = new GamePadButtonTrigger(driverPad.b());
+        this.ltListener = new GamePadButtonTrigger(driverPad.lt());
+        this.rtListener = new GamePadButtonTrigger(driverPad.rt());
+        this.lbListener = new GamePadButtonTrigger(driverPad.lb());
+        this.rbListener = new GamePadButtonTrigger(driverPad.rb());
+        this.rsClickListener = new GamePadButtonTrigger(driverPad.rsClick());
+        this.lsClickListener = new GamePadButtonTrigger(driverPad.lsClick());
+        this.startListener = new GamePadButtonTrigger(driverPad.start());
+        this.selectListener = new GamePadButtonTrigger(driverPad.select());
     }
 
     //// CREATING BUTTONS

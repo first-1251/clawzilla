@@ -12,7 +12,6 @@ import org.usfirst.frc.team1251.robot.commands.MoveElevator;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1251.robot.subsystems.Elevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
@@ -45,7 +44,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        oi = new OI(new ModernGamePad(new Joystick(0)));
+        oi = new OI(new ModernGamePad(new Joystick(0)), new ModernGamePad(new Joystick(1)));
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new MoveElevator());
 //        chooser.addObject("My Auto", new MyAutoCommand());

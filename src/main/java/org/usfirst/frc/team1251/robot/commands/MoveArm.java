@@ -13,7 +13,7 @@ public class MoveArm extends Command {
 
 
     public MoveArm() {
-        this.gamePad = Robot.oi.gamePad;
+        this.gamePad = Robot.oi.driverPad;
         this.arm = Robot.arm;
         this.requires(this.arm);
 

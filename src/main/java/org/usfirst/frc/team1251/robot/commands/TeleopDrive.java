@@ -26,7 +26,7 @@ public class TeleopDrive extends Command{
     private double[] rightSmoothing;
 
     public TeleopDrive() {
-        this.driveStick = Robot.oi.gamePad;
+        this.driveStick = Robot.oi.driverPad;
         this.driveTrain = Robot.DRIVE_TRAIN;
 
         requires(Robot.DRIVE_TRAIN);
