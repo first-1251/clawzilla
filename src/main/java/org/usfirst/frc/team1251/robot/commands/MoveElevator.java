@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team1251.robot.OI;
 import org.usfirst.frc.team1251.robot.Robot;
-import org.usfirst.frc.team1251.robot.subsystems.Elevator;
+import org.usfirst.frc.team1251.robot.Elevator;
 
 /**
  * Created by nick2 on 1/18/18

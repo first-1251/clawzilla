@@ -2,7 +2,7 @@ package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.Robot;
-import org.usfirst.frc.team1251.robot.subsystems.Arm;
+import org.usfirst.frc.team1251.robot.Arm;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
 
