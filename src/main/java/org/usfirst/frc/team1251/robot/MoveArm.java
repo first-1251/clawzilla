@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1251.robot.commands;
+package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
