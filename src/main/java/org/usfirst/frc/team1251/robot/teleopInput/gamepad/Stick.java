@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.teleopInput.gamepad;
 
 
+import com.sun.org.apache.regexp.internal.RE;
 import edu.wpi.first.wpilibj.GenericHID;
 
 /**
@@ -31,7 +32,8 @@ public class Stick {
      *         upward position.
      */
     public double getVertical() {
-        return rawDevice.getRawAxis(this.verticalAxisID) * -1 ;
+        return this.getVertical(.05);
+
     }
 
     /**
@@ -62,7 +64,7 @@ public class Stick {
      *     upward position.
      */
     public double getVertical(double deadZone) {
-        return this.applyDeadZone(deadZone, this.getVertical());
+        return this.applyDeadZone(deadZone, rawDevice.getRawAxis(this.verticalAxisID) * -1);
     }
 
     /**
@@ -72,7 +74,8 @@ public class Stick {
      *     rightward position.
      */
     public double getHorizontal() {
-        return rawDevice.getRawAxis(this.horizontalAxisID);
+        return this.getHorizontal(.05);
+
     }
 
     /**
@@ -87,7 +90,7 @@ public class Stick {
      *     rightward position.
      */
     public double getHorizontal(double deadZone) {
-        return this.applyDeadZone(deadZone, this.getHorizontal());
+        return this.applyDeadZone(deadZone, rawDevice.getRawAxis(this.horizontalAxisID));
     }
 
     /**

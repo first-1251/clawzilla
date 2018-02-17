@@ -67,12 +67,37 @@ public class TestGamepad extends Command
         }
         if (this.gamePad.lt().isPressed())
         {
-            System.out.println("LT is Pressed");
+            System.out.println("LT is Pressed " + this.gamePad.lt().getValue());
+            System.out.println("LT Deadzone .75 " + this.gamePad.lt().getValue(.75) );
         }
         if (this.gamePad.rt().isPressed())
         {
-            System.out.println("RT is Pressed");
+            System.out.println("RT is Pressed " + this.gamePad.rt().getValue());
+            System.out.println("RT Deadzone .75 " + this.gamePad.rt().getValue(.75));
         }
+        /**
+        if (this.gamePad.ls().getVertical() < 0.0 || this.gamePad.ls().getHorizontal() > 0.0)
+        {
+            System.out.println("LS Vertical Value " + this.gamePad.ls().getVertical());
+            System.out.println("LS Vertical Deadzone .25 " + this.gamePad.ls().getVertical(.25));
+        }
+
+        if (this.gamePad.ls().getHorizontal() != 0)
+        {
+            System.out.println("LS Vertical Value " + this.gamePad.ls().getVertical());
+            System.out.println("LS Vertical Deadzone .25 " + this.gamePad.ls().getVertical(.25));
+        }
+        if (this.gamePad.rs().getVertical() != 0)
+        {
+            System.out.println("RS Vertical Value " + this.gamePad.rs().getHorizontal());
+            System.out.println("RS Vertical Deadzone .25 " + this.gamePad.ls().getHorizontal(.25));
+        }
+        if (this.gamePad.rs().getHorizontal() != 0)
+        {
+            System.out.println("RS Horizontal Value " + this.gamePad.rs().getHorizontal());
+            System.out.println("RS Horizontal Deadzone .25 " + this.gamePad.rs().getHorizontal(.25));
+         }
+         **/
 
     }
 
