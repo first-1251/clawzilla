@@ -5,8 +5,7 @@ import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
 
-public class MoveArm extends Command {
-
+public class MoveArm {
     private final GamePad gamePad;
     private final Armevator armevator;
 
@@ -18,12 +17,12 @@ public class MoveArm extends Command {
 
     }
 
-    @Override
+
     protected boolean isFinished() {
         return false;
     }
 
-    @Override
+
     protected void execute() {
         double stickValue = this.gamePad.ls().getVertical();
         this.armevator.getArm().pivotUp(0);
@@ -43,7 +42,7 @@ public class MoveArm extends Command {
 
     }
 
-    @Override
+
     protected void end() {
        this.armevator.getArm().stopPivot();
 
