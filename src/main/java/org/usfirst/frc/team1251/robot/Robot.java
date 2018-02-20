@@ -7,8 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.usfirst.frc.team1251.robot.commands.CollectCrate;
-import org.usfirst.frc.team1251.robot.commands.TestGamepad;
+import org.usfirst.frc.team1251.robot.commands.*;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
@@ -16,6 +15,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,12 +25,6 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-    public static final ArmPosition armPosition = new ArmPosition();
-    public static final Armevator ARMEVATOR = new Armevator();
-    public static final CrateDetector crateDetector =  new CrateDetector();
-    public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
-    public static final Clawlector CLAWLECTOR = new Clawlector();
 
     /**
      * @deprecated Use driverInput property instead (todo: add `driverInput` property)
@@ -52,17 +46,29 @@ public class Robot extends IterativeRobot {
         oi = new OI(new ModernGamePad(new Joystick(0)), new ModernGamePad(new Joystick(1)));
 
         // Create virtual sensors (used by mechanisms, subsystems and commands)
+        ArmPosition armPosition = new ArmPosition();
+        ElevatorPosition elevatorPosition = new ElevatorPosition();
+        CrateDetector crateDetector = new CrateDetector();
 
         // Create mechanisms (used by subsystems)
+        Arm arm = new Arm(armPosition);
+        Elevator elevator = new Elevator(elevatorPosition);
+        Collector collector = new Collector();
+        Claw claw = new Claw();
 
         // Create subsystems (used by commands)
+        Armevator armevator = new Armevator(elevator, arm, moveArm);
+        Clawlector clawlector = new Clawlector(claw, collector);
+        DriveTrain driveTrain = new DriveTrain(teleopDrive);
 
         // Create commands
+        CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
+        MoveArm moveArm = new MoveArm(oi.operatorPad, armevator);
+        MoveElevator moveElevator = new MoveElevator(armevator, OI.stick);
+        TeleopDrive teleopDrive = new TeleopDrive(oi.driverPad, driveTrain);
 
 
-
-
-        initGamepadTriggers();
+        initGamepadTriggers(collectCrate);
         //initGamepadTest();
 
 
@@ -72,9 +78,9 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         // SmartDashboard.putData("Auto mode", chooser);
     }
-    private void initGamepadTriggers()
+    private void initGamepadTriggers(CollectCrate collectCrate)
     {
-        oi.lbListener.whileHeld(new CollectCrate());
+        oi.lbListener.whileHeld(collectCrate);
     }
     private void initGamepadTest()
     {
