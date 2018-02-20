@@ -7,9 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.CollectCrate;
-import org.usfirst.frc.team1251.robot.commands.MoveElevator;
 import org.usfirst.frc.team1251.robot.commands.TestGamepad;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
@@ -52,12 +50,27 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
         oi = new OI(new ModernGamePad(new Joystick(0)), new ModernGamePad(new Joystick(1)));
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new MoveElevator());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+
+        // Create virtual sensors (used by mechanisms, subsystems and commands)
+
+        // Create mechanisms (used by subsystems)
+
+        // Create subsystems (used by commands)
+
+        // Create commands
+
+
+
+
         initGamepadTriggers();
         //initGamepadTest();
+
+
+
+        // chooser = new SendableChooser();
+        // chooser.addDefault("Default Auto", new MoveElevator());
+//        chooser.addObject("My Auto", new MyAutoCommand());
+        // SmartDashboard.putData("Auto mode", chooser);
     }
     private void initGamepadTriggers()
     {
