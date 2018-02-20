@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1251.robot;
 
-import edu.wpi.first.wpilibj.AnalogTrigger;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Trigger;
@@ -34,6 +33,10 @@ public class Robot extends IterativeRobot {
     public static final CrateDetector crateDetector =  new CrateDetector();
     public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
     public static final Clawlector CLAWLECTOR = new Clawlector();
+
+    /**
+     * @deprecated Use driverInput property instead (todo: add `driverInput` property)
+     */
     public static OI oi;
 
 
