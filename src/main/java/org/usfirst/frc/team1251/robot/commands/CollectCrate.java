@@ -1,24 +1,19 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team1251.robot.Collector;
-import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
-import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 
 public class CollectCrate extends Command {
 
-    private final GamePad gamePad;
     private final CrateDetector crateDetector;
     private final Clawlector clawlector;
 
 
-    public CollectCrate()
+    public CollectCrate(CrateDetector crateDetector, Clawlector clawlector)
     {
-        this.gamePad = Robot.oi.driverPad;
-        this.crateDetector = Robot.crateDetector;
-        this.clawlector = Robot.CLAWLECTOR;
+        this.crateDetector = crateDetector;
+        this.clawlector = clawlector;
         this.requires(this.clawlector);
     }
 

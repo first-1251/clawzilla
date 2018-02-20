@@ -27,6 +27,7 @@ public class DriveTrain extends Subsystem {
 
     // Encoder ratio constants
     public static final double WHEEL_TO_ENCODER = 4.0 * 125.0; //gear ratio 4 to 1, 125 encoders ticks per wheel turn
+    private final TeleopDrive defaultCommand;
 
     private TalonSRX leftMasterMotor;
     private VictorSPX leftSlaveMotor1;
@@ -48,7 +49,8 @@ public class DriveTrain extends Subsystem {
 
     private ControlMode mode;
 
-    public DriveTrain() {
+    public DriveTrain(TeleopDrive defaultCommand) {
+        this.defaultCommand = defaultCommand;
         //setup solenoid
         gearShifter = new DoubleSolenoid(RobotMap.DRIVE_GEAR_SHIFT_PORT1, RobotMap.DRIVE_GEAR_SHIFT_PORT2);
 
@@ -92,7 +94,7 @@ public class DriveTrain extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new TeleopDrive());
+        setDefaultCommand(this.defaultCommand);
     }
 
     public void enablePIDMode() {

@@ -1,10 +1,8 @@
 package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team1251.robot.RobotMap;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 /**
  * Created by nick2 on 1/18/18
@@ -13,14 +11,15 @@ public class Elevator {
 
     // Motor(s) for elevators (move it up and down)
     private Victor elevatorMotor1;
-    // Encoder for elevator
-    private Encoder elevatorEncoder;
+
     // Limit Switches that prevent the elevator from overextending
+    // TODO: MOVE this to `ElevatorPosition` -- read as part of `Elevator.isAtBottom()`
     private DigitalInput elevatorLimitSwitch;
 
-    public Elevator(){
-        //TODO: FIX ENCODER INITIALIZATION
-        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER-1, RobotMap.ELEVATOR_ENCODER);
+    private ElevatorPosition elevatorPosition;
+
+    public Elevator(ElevatorPosition elevatorPosition) {
+        this.elevatorPosition = elevatorPosition;
         elevatorMotor1 = new Victor(RobotMap.ELEVATOR_VICTOR);
         elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
     }

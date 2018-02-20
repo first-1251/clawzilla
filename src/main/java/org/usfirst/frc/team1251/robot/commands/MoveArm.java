@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
@@ -12,9 +11,9 @@ public class MoveArm extends Command {
     private final Armevator armevator;
 
 
-    public MoveArm() {
-        this.gamePad = Robot.oi.driverPad;
-        this.armevator = Robot.ARMEVATOR;
+    public MoveArm(GamePad gamePad, Armevator armevator) {
+        this.gamePad = gamePad;
+        this.armevator = armevator;
         this.requires(this.armevator);
 
     }

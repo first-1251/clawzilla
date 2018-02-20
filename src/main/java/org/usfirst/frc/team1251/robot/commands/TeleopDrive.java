@@ -3,7 +3,6 @@ package org.usfirst.frc.team1251.robot.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
@@ -18,18 +17,17 @@ public class TeleopDrive extends Command{
     private double time = 0.0;
 
     private GamePad driveStick;
-    private GamePad operatorStick;
 
     private DriveTrain driveTrain;
 
     private double[] leftSmoothing;
     private double[] rightSmoothing;
 
-    public TeleopDrive() {
-        this.driveStick = Robot.oi.driverPad;
-        this.driveTrain = Robot.DRIVE_TRAIN;
+    public TeleopDrive(GamePad gamePad, DriveTrain driveTrain) {
+        this.driveStick = gamePad;
+        this.driveTrain = driveTrain;
 
-        requires(Robot.DRIVE_TRAIN);
+        requires(this.driveTrain);
 
         leftSmoothing = new double[JOYSTICK_SMOOTHING_SAMPLES];
         rightSmoothing = new double[JOYSTICK_SMOOTHING_SAMPLES];

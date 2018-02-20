@@ -2,7 +2,6 @@ package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 
 public class Collector {
 
@@ -11,7 +10,6 @@ public class Collector {
     private static final int MOTOR_LEFT_BACKWARD = -1;
     private static final int MOTOR_RIGHT_BACKWARD = -1;
     private static final int MOTOR_STOP = 0; //Drift Button
-    private CrateDetector crateDetector;
 
     //The left bag motor, when looking from the rear perspective.
     private SpeedController leftMotor;
@@ -20,15 +18,8 @@ public class Collector {
     private SpeedController rightMotor;
 
     public Collector() {
-        this.crateDetector = Robot.crateDetector;
         this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_VICTOR);
         this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_VICTOR);
-    }
-
-    //This just needs to be here
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 
     //Below includes Motor commands for collector victor's
