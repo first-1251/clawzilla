@@ -1,7 +1,8 @@
-package org.usfirst.frc.team1251.robot;
+package org.usfirst.frc.team1251.robot.mechanisms;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
+import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class Collector {
 

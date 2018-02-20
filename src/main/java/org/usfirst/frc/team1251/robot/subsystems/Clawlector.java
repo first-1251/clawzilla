@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1251.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team1251.robot.Claw;
-import org.usfirst.frc.team1251.robot.Collector;
+import org.usfirst.frc.team1251.robot.mechanisms.Claw;
+import org.usfirst.frc.team1251.robot.mechanisms.Collector;
 
 /**
  * Is it a Claw? Is it a Collector? No! It's a Clawlector!
