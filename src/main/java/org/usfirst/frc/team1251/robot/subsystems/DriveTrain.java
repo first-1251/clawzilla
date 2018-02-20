@@ -5,10 +5,11 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.MotorFactory;
 import org.usfirst.frc.team1251.robot.RobotMap;
-import org.usfirst.frc.team1251.robot.commands.TeleopDrive;
+import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
 
 // Talon SRX software manual:
 // https://docs.google.com/viewerng/viewer?url=https://link.vex.com/vexpro/pdf/217-8080-Talon-SRX-Software-Reference-Manual
@@ -27,7 +28,7 @@ public class DriveTrain extends Subsystem {
 
     // Encoder ratio constants
     public static final double WHEEL_TO_ENCODER = 4.0 * 125.0; //gear ratio 4 to 1, 125 encoders ticks per wheel turn
-    private final TeleopDrive defaultCommand;
+    private final DeferredCmdSupplier<Command> defaultCommand;
 
     private TalonSRX leftMasterMotor;
     private VictorSPX leftSlaveMotor1;
@@ -49,7 +50,7 @@ public class DriveTrain extends Subsystem {
 
     private ControlMode mode;
 
-    public DriveTrain(TeleopDrive defaultCommand) {
+    public DriveTrain(DeferredCmdSupplier<Command> defaultCommand) {
         this.defaultCommand = defaultCommand;
         //setup solenoid
         gearShifter = new DoubleSolenoid(RobotMap.DRIVE_GEAR_SHIFT_PORT1, RobotMap.DRIVE_GEAR_SHIFT_PORT2);
@@ -94,7 +95,7 @@ public class DriveTrain extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(this.defaultCommand);
+        setDefaultCommand(this.defaultCommand.get());
     }
 
     public void enablePIDMode() {

@@ -57,9 +57,14 @@ public class Robot extends IterativeRobot {
         Claw claw = new Claw();
 
         // Create subsystems (used by commands)
-        Armevator armevator = new Armevator(elevator, arm, moveArm);
+        // Use `DeferredCmdSupplier` to handle the chicken/egg problem with default commands
+        DeferredCmdSupplier<Command> armevatorDefaultCmd = new DeferredCmdSupplier<>();
+        Armevator armevator = new Armevator(elevator, arm, armevatorDefaultCmd);
+
+        DeferredCmdSupplier<Command> driveTrainDefaultCmd = new DeferredCmdSupplier<>();
+        DriveTrain driveTrain = new DriveTrain(driveTrainDefaultCmd);
+
         Clawlector clawlector = new Clawlector(claw, collector);
-        DriveTrain driveTrain = new DriveTrain(teleopDrive);
 
         // Create commands
         CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
@@ -67,6 +72,9 @@ public class Robot extends IterativeRobot {
         MoveElevator moveElevator = new MoveElevator(armevator, OI.stick);
         TeleopDrive teleopDrive = new TeleopDrive(oi.driverPad, driveTrain);
 
+        // Assign default commands
+        armevatorDefaultCmd.set(moveArm);
+        driveTrainDefaultCmd.set(teleopDrive);
 
         initGamepadTriggers(collectCrate);
         //initGamepadTest();
