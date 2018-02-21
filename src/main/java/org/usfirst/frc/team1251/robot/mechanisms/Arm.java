@@ -1,14 +1,7 @@
-package org.usfirst.frc.team1251.robot;
+package org.usfirst.frc.team1251.robot.mechanisms;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import org.usfirst.frc.team1251.robot.Robot;
+import edu.wpi.first.wpilibj.Victor;
 import org.usfirst.frc.team1251.robot.RobotMap;
-import org.usfirst.frc.team1251.robot.commands.MoveArm;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
 /**
@@ -17,25 +10,16 @@ import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
  */
 public class Arm {
 
-    //Declare variables
-    private DigitalInput armLimitSwitch;
-
     private Victor armMotor;
 
     private ArmPosition armPosition;
 
-    public Arm() {
-
-        //Button
-        armLimitSwitch = new DigitalInput(RobotMap.armLimitSwitch);
-
+    public Arm(ArmPosition armPosition) {
 
         //Arm pivot motor
         armMotor = new Victor(RobotMap.armMotor);
 
-        this.armPosition = Robot.armPosition;
-
-
+        this.armPosition = armPosition;
     }
 
 

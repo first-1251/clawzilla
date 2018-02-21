@@ -7,17 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team1251.robot.commands.CollectCrate;
-import org.usfirst.frc.team1251.robot.commands.MoveElevator;
-import org.usfirst.frc.team1251.robot.commands.TestGamepad;
+import org.usfirst.frc.team1251.robot.commands.*;
+import org.usfirst.frc.team1251.robot.mechanisms.Arm;
+import org.usfirst.frc.team1251.robot.mechanisms.Claw;
+import org.usfirst.frc.team1251.robot.mechanisms.Collector;
+import org.usfirst.frc.team1251.robot.mechanisms.Elevator;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1251.robot.teleopInput.driverInput.DriverInput;
+import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,12 +31,6 @@ import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-    public static final ArmPosition armPosition = new ArmPosition();
-    public static final Armevator ARMEVATOR = new Armevator();
-    public static final CrateDetector crateDetector =  new CrateDetector();
-    public static final DriveTrain DRIVE_TRAIN = new DriveTrain();
-    public static final Clawlector CLAWLECTOR = new Clawlector();
 
     /**
      * @deprecated Use driverInput property instead (todo: add `driverInput` property)
@@ -51,18 +49,62 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        oi = new OI(new ModernGamePad(new Joystick(0)), new ModernGamePad(new Joystick(1)));
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new MoveElevator());
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
-        initGamepadTriggers();
+
+        // Set up driver input
+        GamePad driverGamePad =  new ModernGamePad(new Joystick(0));
+        GamePad crateGamePad =  new ModernGamePad(new Joystick(1));
+
+        DriverInput driverInput = new DriverInput(driverGamePad, crateGamePad);
+
+        // TODO: Remove after all references are cleaned up.
+        oi = new OI(driverGamePad, crateGamePad);
+
+
+        // Create virtual sensors (used by mechanisms, subsystems and commands)
+        ArmPosition armPosition = new ArmPosition();
+        ElevatorPosition elevatorPosition = new ElevatorPosition();
+        CrateDetector crateDetector = new CrateDetector();
+
+        // Create mechanisms (used by subsystems)
+        Arm arm = new Arm(armPosition);
+        Elevator elevator = new Elevator(elevatorPosition);
+        Collector collector = new Collector();
+        Claw claw = new Claw();
+
+        // Create subsystems (used by commands)
+        // Use `DeferredCmdSupplier` to handle the chicken/egg problem with default commands
+        DeferredCmdSupplier<Command> armevatorDefaultCmdSupplier = new DeferredCmdSupplier<>();
+        Armevator armevator = new Armevator(elevator, arm, armevatorDefaultCmdSupplier);
+
+        DeferredCmdSupplier<Command> driveTrainDefaultCmdSupplier = new DeferredCmdSupplier<>();
+        DriveTrain driveTrain = new DriveTrain(driveTrainDefaultCmdSupplier);
+
+        Clawlector clawlector = new Clawlector(claw, collector);
+
+        // Create commands
+        CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
+        MoveArm moveArm = new MoveArm(oi.operatorPad, armevator);
+        MoveElevator moveElevator = new MoveElevator(armevator, OI.stick);
+        TeleopDrive teleopDrive = new TeleopDrive(oi.driverPad, driveTrain);
+
+        // Assign default commands
+        armevatorDefaultCmdSupplier.set(moveArm);
+        driveTrainDefaultCmdSupplier.set(teleopDrive);
+
+        // assign driver-initiated command triggers.
+        driverInput.attachCommandTriggers(collectCrate);
+
+
+        // Uncomment to test a controller on port 5
         //initGamepadTest();
+
+        // TODO: Do we need a chooser?
+        // chooser = new SendableChooser();
+        // chooser.addDefault("Default Auto", new MoveElevator());
+//        chooser.addObject("My Auto", new MyAutoCommand());
+        // SmartDashboard.putData("Auto mode", chooser);
     }
-    private void initGamepadTriggers()
-    {
-        oi.lbListener.whileHeld(new CollectCrate());
-    }
+
     private void initGamepadTest()
     {
         Trigger trigger = new Always();

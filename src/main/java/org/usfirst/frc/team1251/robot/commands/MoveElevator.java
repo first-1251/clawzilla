@@ -2,10 +2,6 @@ package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-
-import org.usfirst.frc.team1251.robot.OI;
-import org.usfirst.frc.team1251.robot.Robot;
-import org.usfirst.frc.team1251.robot.Elevator;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 
 /**
@@ -17,10 +13,10 @@ public class MoveElevator extends Command {
     private final Armevator armevator;
 
     // Declares Subsystem dependencies
-    public MoveElevator() {
-        this.requires(Robot.ARMEVATOR);
-        this.armevator = Robot.ARMEVATOR;
-        this.joystick = OI.stick;
+    public MoveElevator(Armevator armevator, Joystick joystick) {
+        this.requires(armevator);
+        this.armevator = armevator;
+        this.joystick = joystick;
     }
 
     // Called repeatedly when this Command is scheduled to run
