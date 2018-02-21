@@ -13,6 +13,8 @@ import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
  * the rest of the robot does care about the details of how driver input is interpreted.
  */
 public class DriverInput {
+    private static final double ELEVATOR_DEAD_ZONE = 0.1;
+    private static final double ARM_DEAD_ZONE = 0.1;
 
     /**
      * The number of input samples to use for smoothing out wheel speed input.
@@ -83,8 +85,12 @@ public class DriverInput {
      *     value approaches 1.
      */
     public double getArmUpSpeed() {
-        // TODO: Translate crateGamePad left stick vertical into arm speed.
-        return 0;
+        double armStick = crateGamePad.ls().getVertical(ARM_DEAD_ZONE);
+        if (armStick > 0){
+            return armStick;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -94,21 +100,28 @@ public class DriverInput {
      *     value approaches 1.
      */
     public double getArmDownSpeed() {
-        // TODO: Translate crateGamePad left stick vertical into arm speed.
-        return 0;
+        double armStick = crateGamePad.ls().getVertical(ARM_DEAD_ZONE);
+        if (armStick < 0){
+            return Math.abs(armStick);
+        } else {
+            return 0;
+        }
     }
 
     /**
      * Get the driver-requested upward elevator speed.
      *
-     * @return A value between 0 and 1 representing the speed at which to move the elevator where the speed increases
-     *     as the value approaches 1.
+     * @return A value between 0 and 1 representing the speed at which to move the elevator where the speed increases as the value approaches 1.
+     *
      */
     public double getElevatorUpSpeed() {
-        // TODO: Translate crateGamePad right stick vertical into elevator speed.
-        return 0;
+        double elevatorStick = crateGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
+        if (elevatorStick > 0){
+            return elevatorStick;
+        } else {
+            return 0;
+        }
     }
-
 
     /**
      * Get the driver-requested downward elevator speed.
@@ -117,8 +130,12 @@ public class DriverInput {
      *     as the value approaches 1.
      */
     public double getElevatorDownSpeed() {
-        // TODO: Translate crateGamePad right stick vertical into elevator speed.
-        return 0;
+        double elevatorStick = crateGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
+        if (elevatorStick < 0){
+            return Math.abs(elevatorStick);
+        } else {
+            return 0;
+        }
     }
 
     /**
