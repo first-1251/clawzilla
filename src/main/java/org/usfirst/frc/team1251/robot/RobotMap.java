@@ -62,6 +62,11 @@ public class RobotMap
     public static final int COLLECTOR_LEFT_VICTOR = 2;
     public static final int COLLECTOR_RIGHT_VICTOR = 3;
 
+    //Collector Limit Switch
+    public static final int COLLECTOR_LEFT_SWITCH = 0;
+    public static final int COLLECTOR_MIDDLE_SWITCH = 1;
+    public static final int COLLECTOR_RIGHT_SWITCH = 2;
+
     //Drivetrain port values / Device IDs
     public static final int LEFT_MASTER_MOTOR_ID = 0;
     public static final int LEFT_SLAVE_MOTOR1_ID = 1;

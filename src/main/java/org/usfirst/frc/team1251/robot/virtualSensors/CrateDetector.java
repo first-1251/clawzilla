@@ -2,6 +2,7 @@ package org.usfirst.frc.team1251.robot.virtualSensors;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc.team1251.robot.Robot;
+import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class CrateDetector
 {
@@ -23,6 +24,12 @@ public class CrateDetector
         SKEWED_LEFT, DIAGONAL, SKEWED_RIGHT, CRATE_COLLECTED, NONE
     }
 
+    public CrateDetector()
+    {
+        leftSwitch = new DigitalInput(RobotMap.COLLECTOR_LEFT_SWITCH);
+        middleSwitch = new DigitalInput(RobotMap.COLLECTOR_MIDDLE_SWITCH);
+        rightSwitch = new DigitalInput(RobotMap.COLLECTOR_RIGHT_SWITCH);
+    }
     public CrateState getCrateState()
     {
         if (isLeftOnly()) {
@@ -72,22 +79,23 @@ public class CrateDetector
         return isRightPressed() && isMiddlePressed() && isLeftPressed();
     }
 
+
     private boolean isRightPressed() {
         // TODO: Use real switch instead of controller button.
-        return Robot.oi.driverPad.b().isPressed();
-//        return rightSwitch.get();
+        //return Robot.oi.driverPad.b().isPressed();
+        return rightSwitch.get();
     }
 
     private boolean isLeftPressed() {
         // TODO: Use real switch instead of controller button.
-        return Robot.oi.driverPad.x().isPressed();
-//        return leftSwitch.get();
+        //return Robot.oi.driverPad.x().isPressed();
+        return leftSwitch.get();
     }
 
     private boolean isMiddlePressed() {
         // TODO: Use real switch instead of controller button.
-        return Robot.oi.driverPad.y().isPressed();
-//        return middleSwitch.get();
+        //return Robot.oi.driverPad.y().isPressed();
+        return middleSwitch.get();
     }
 
 
