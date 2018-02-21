@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot {
 
         // Create commands
         CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
-        MoveArmevator moveArmevator = new MoveArmevator(oi.operatorPad, armevator);
+        MoveArmevator moveArmevator = new MoveArmevator(driverInput, armevator);
         TeleopDrive teleopDrive = new TeleopDrive(oi.driverPad, driveTrain);
 
         // Assign default commands

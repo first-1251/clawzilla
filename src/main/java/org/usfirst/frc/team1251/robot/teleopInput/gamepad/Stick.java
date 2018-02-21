@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1251.robot.teleopInput.gamepad;
 
-
-import com.sun.org.apache.regexp.internal.RE;
 import edu.wpi.first.wpilibj.GenericHID;
 
 /**
