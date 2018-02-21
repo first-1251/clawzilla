@@ -81,20 +81,14 @@ public class CrateDetector
 
 
     private boolean isRightPressed() {
-        // TODO: Use real switch instead of controller button.
-        //return Robot.oi.driverPad.b().isPressed();
         return rightSwitch.get();
     }
 
     private boolean isLeftPressed() {
-        // TODO: Use real switch instead of controller button.
-        //return Robot.oi.driverPad.x().isPressed();
         return leftSwitch.get();
     }
 
     private boolean isMiddlePressed() {
-        // TODO: Use real switch instead of controller button.
-        //return Robot.oi.driverPad.y().isPressed();
         return middleSwitch.get();
     }
 
