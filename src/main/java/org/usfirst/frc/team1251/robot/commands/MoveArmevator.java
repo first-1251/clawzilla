@@ -2,14 +2,15 @@ package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
+import org.usfirst.frc.team1251.robot.teleopInput.driverInput.DriverInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
 public class MoveArmevator extends Command {
-    private GamePad gamePad;
+    private DriverInput driverInput;
     private final Armevator armevator;
 
-    public MoveArmevator(GamePad gamePad, Armevator armevator) {
-        this.gamePad = gamePad;
+    public MoveArmevator(DriverInput driverInput, Armevator armevator) {
+        this.driverInput = driverInput;
         this.armevator = armevator;
         requires(this.armevator);
     }
@@ -21,31 +22,27 @@ public class MoveArmevator extends Command {
 
     @Override
     protected void execute() {
-        double elevatorStick = this.gamePad.rs().getVertical();
-        if(elevatorStick > 0) {
-            this.armevator.getElevator().goUp(elevatorStick);
-        } else if(elevatorStick < 0) {
-            this.armevator.getElevator().goDown(elevatorStick);
+        double armUpSpeed = this.driverInput.getArmUpSpeed();
+        double armDownSpeed = this.driverInput.getArmDownSpeed();
+
+        if (armUpSpeed > 0) {
+            this.armevator.getArm().pivotUp(armUpSpeed);
+        } else if (armDownSpeed > 0) {
+            this.armevator.getArm().pivotDown(armDownSpeed);
         } else {
-            this.armevator.getElevator().stopPlease();
-        }
-
-
-        double armStick = this.gamePad.ls().getVertical();
-
-        if (armStick > 0){
-            //System.out.println("moving up");
-            this.armevator.getArm().pivotUp(armStick);
-
-        } else if (armStick < 0){
-            //System.out.println("moving down");
-            this.armevator.getArm().pivotDown(armStick);
-
-        } else if (armStick == 0){
-            //System.out.println("not moving");
             this.armevator.getArm().stopPivot();
         }
 
+        double elevatorUpSpeed = this.driverInput.getElevatorUpSpeed();
+        double elevatorDownSpeed = this.driverInput.getElevatorDownSpeed();
+
+        if (elevatorUpSpeed > 0) {
+            this.armevator.getElevator().goUp(elevatorUpSpeed);
+        } else if (elevatorDownSpeed > 0) {
+            this.armevator.getElevator().goDown(elevatorDownSpeed);
+        } else {
+            this.armevator.getElevator().stopPlease();
+        }
     }
 
     @Override
