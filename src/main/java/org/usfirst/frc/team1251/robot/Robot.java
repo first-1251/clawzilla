@@ -15,6 +15,8 @@ import org.usfirst.frc.team1251.robot.mechanisms.Elevator;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1251.robot.teleopInput.driverInput.DriverInput;
+import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
@@ -47,7 +49,16 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        oi = new OI(new ModernGamePad(new Joystick(0)), new ModernGamePad(new Joystick(1)));
+
+        // Set up driver input
+        GamePad driverGamePad =  new ModernGamePad(new Joystick(0));
+        GamePad crateGamePad =  new ModernGamePad(new Joystick(1));
+
+        DriverInput driverInput = new DriverInput(driverGamePad, crateGamePad);
+
+        // TODO: Remove after all references are cleaned up.
+        oi = new OI(driverGamePad, crateGamePad);
+
 
         // Create virtual sensors (used by mechanisms, subsystems and commands)
         ArmPosition armPosition = new ArmPosition();
@@ -62,11 +73,11 @@ public class Robot extends IterativeRobot {
 
         // Create subsystems (used by commands)
         // Use `DeferredCmdSupplier` to handle the chicken/egg problem with default commands
-        DeferredCmdSupplier<Command> armevatorDefaultCmd = new DeferredCmdSupplier<>();
-        Armevator armevator = new Armevator(elevator, arm, armevatorDefaultCmd);
+        DeferredCmdSupplier<Command> armevatorDefaultCmdSupplier = new DeferredCmdSupplier<>();
+        Armevator armevator = new Armevator(elevator, arm, armevatorDefaultCmdSupplier);
 
-        DeferredCmdSupplier<Command> driveTrainDefaultCmd = new DeferredCmdSupplier<>();
-        DriveTrain driveTrain = new DriveTrain(driveTrainDefaultCmd);
+        DeferredCmdSupplier<Command> driveTrainDefaultCmdSupplier = new DeferredCmdSupplier<>();
+        DriveTrain driveTrain = new DriveTrain(driveTrainDefaultCmdSupplier);
 
         Clawlector clawlector = new Clawlector(claw, collector);
 
@@ -77,23 +88,23 @@ public class Robot extends IterativeRobot {
         TeleopDrive teleopDrive = new TeleopDrive(oi.driverPad, driveTrain);
 
         // Assign default commands
-        armevatorDefaultCmd.set(moveArm);
-        driveTrainDefaultCmd.set(teleopDrive);
+        armevatorDefaultCmdSupplier.set(moveArm);
+        driveTrainDefaultCmdSupplier.set(teleopDrive);
 
-        initGamepadTriggers(collectCrate);
+        // assign driver-initiated command triggers.
+        driverInput.attachCommandTriggers(collectCrate);
+
+
+        // Uncomment to test a controller on port 5
         //initGamepadTest();
 
-
-
+        // TODO: Do we need a chooser?
         // chooser = new SendableChooser();
         // chooser.addDefault("Default Auto", new MoveElevator());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         // SmartDashboard.putData("Auto mode", chooser);
     }
-    private void initGamepadTriggers(CollectCrate collectCrate)
-    {
-        oi.lbListener.whileHeld(collectCrate);
-    }
+
     private void initGamepadTest()
     {
         Trigger trigger = new Always();
