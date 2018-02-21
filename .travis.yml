@@ -4,5 +4,5 @@ before_install:
  - chmod +x gradlew
  install: true
 script: 
- - "g./radlew build"
+ - "./gradlew build"
 jdk: oraclejdk8
