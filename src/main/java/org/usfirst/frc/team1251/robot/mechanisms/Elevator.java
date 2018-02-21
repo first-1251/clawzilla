@@ -22,7 +22,7 @@ public class Elevator {
     public Elevator(ElevatorPosition elevatorPosition) {
         this.elevatorPosition = elevatorPosition;
         elevatorMotor1 = new Victor(RobotMap.ELEVATOR_VICTOR);
-        elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
+        //elevatorLimitSwitch = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH);
     }
 
     // goUp() and goDown() methods will use a speed variable until control type is determined
@@ -43,9 +43,7 @@ public class Elevator {
 
     // Prevents the elevator from overreaching by checking limit switch state
     public void stopPlease(){
-        if (elevatorLimitSwitch.get()){
-            elevatorMotor1.set(0);
-        }
+        elevatorMotor1.set(0);
     }
 }
 

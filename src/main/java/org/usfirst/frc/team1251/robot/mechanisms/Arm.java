@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1251.robot.mechanisms;
 
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.*;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
