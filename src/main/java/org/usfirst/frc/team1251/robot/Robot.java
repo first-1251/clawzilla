@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1251.robot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Trigger;
@@ -29,6 +30,7 @@ public class Robot extends IterativeRobot {
      * @deprecated Use driverInput property instead (todo: add `driverInput` property)
      */
     public static OI oi;
+    private ADXRS450_Gyro gyro;
 
 
 
@@ -51,6 +53,7 @@ public class Robot extends IterativeRobot {
 
         // TODO: Remove after all references are cleaned up.
         oi = new OI(driverGamePad, crateGamePad);
+        gyro = new ADXRS450_Gyro();
 
 
         // Create virtual sensors (used by mechanisms, subsystems and commands)
@@ -165,6 +168,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        //System.out.println(gyro.getAngle());
     }
 
     /**

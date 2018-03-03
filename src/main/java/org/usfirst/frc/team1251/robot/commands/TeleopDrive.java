@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
@@ -8,7 +9,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
 public class TeleopDrive extends Command {
 
-    private static final int JOYSTICK_SMOOTHING_SAMPLES = 5;
+    private static final int JOYSTICK_SMOOTHING_SAMPLES = 10;
 
     private static final double SHIFTING_TIME = 1.0; // seconds
     private static final double SHIFTING_SPEED = 150.0; // encoder ticks / second
@@ -22,10 +23,13 @@ public class TeleopDrive extends Command {
 
     private double[] leftSmoothing;
     private double[] rightSmoothing;
+    PowerDistributionPanel pdp;
 
     public TeleopDrive(GamePad gamePad, DriveTrain driveTrain) {
         this.driveStick = gamePad;
         this.driveTrain = driveTrain;
+
+        pdp = new PowerDistributionPanel();
 
         requires(this.driveTrain);
 
@@ -41,6 +45,7 @@ public class TeleopDrive extends Command {
 
     @Override
     protected void execute() {
+
         // smooth inputs
         double leftSmoothed = calculateLeftSmoothed(driveStick.ls().getVertical());
         double rightSmoothed = calculateRightSmoothed(driveStick.rs().getVertical());
@@ -54,6 +59,17 @@ public class TeleopDrive extends Command {
 
         // do shifting stuff
         driveShifting();
+
+        System.out.println(pdp.getCurrent(0) + "|" + pdp.getCurrent(1) + "|"
+                + pdp.getCurrent(2) + "|" + pdp.getCurrent(3) + "|" + pdp.getCurrent(15) + "|"
+                + pdp.getCurrent(14) + "|" + pdp.getCurrent(13) + "|" + pdp.getCurrent(12) + "|"
+                + pdp.getTotalCurrent() + "|" + pdp.getCurrent(0) + pdp.getCurrent(1)
+                + pdp.getCurrent(2) + pdp.getCurrent(3)
+                + pdp.getCurrent(15) + pdp.getCurrent(14)
+                + pdp.getCurrent(13) + pdp.getCurrent(12));
+
+        //System.out.println(driveTrain.getLeftDistance());
+        //System.out.println(driveTrain.getRightDistance());
     }
 
     /**

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1251.robot;
 
-import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -17,7 +16,7 @@ public class MotorFactory {
         public double MAX_OUTPUT_VOLTAGE = 9;
         public double NOMINAL_VOLTAGE = 0;
         public double PEAK_VOLTAGE = 9;
-        public NeutralMode ENABLE_BRAKE = NeutralMode.Brake;
+        public NeutralMode ENABLE_BRAKE = NeutralMode.Coast;
         public boolean ENABLE_CURRENT_LIMIT = false;
         public boolean ENABLE_SOFT_LIMIT = false;
         public boolean ENABLE_LIMIT_SWITCH = false;
@@ -91,6 +90,41 @@ public class MotorFactory {
         return talonSRX;
     }
 
+    public static TalonSRX initLeftDriveMotors() {
+        TalonSRX master = createTalon(RobotMap.LEFT_MASTER_MOTOR_ID, kDefaultConfiguration);
+        master.setInverted(true); // backwards
+
+        VictorSPX leftMotor1 = createVictor(RobotMap.LEFT_SLAVE_MOTOR1_ID, kSlaveConfiguration);
+        VictorSPX leftMotor2 = createVictor(RobotMap.LEFT_SLAVE_MOTOR2_ID, kSlaveConfiguration);
+        VictorSPX leftMotor3 = createVictor(RobotMap.LEFT_SLAVE_MOTOR3_ID, kSlaveConfiguration);
+
+        leftMotor1.setInverted(true);
+        leftMotor2.setInverted(true);
+        leftMotor3.setInverted(true);
+
+        leftMotor1.follow(master);
+        leftMotor2.follow(master);
+        leftMotor3.follow(master);
+
+
+
+        return master;
+    }
+
+    public static TalonSRX initRightDriveMotors() {
+        TalonSRX master = createTalon(RobotMap.RIGHT_MASTER_MOTOR_ID, kDefaultConfiguration);
+
+        VictorSPX rightMotor1 = createVictor(RobotMap.RIGHT_SLAVE_MOTOR1_ID, kSlaveConfiguration);
+        VictorSPX rightMotor2 = createVictor(RobotMap.RIGHT_SLAVE_MOTOR2_ID, kSlaveConfiguration);
+        VictorSPX rightMotor3 = createVictor(RobotMap.RIGHT_SLAVE_MOTOR3_ID, kSlaveConfiguration);
+
+        rightMotor1.follow(master);
+        rightMotor2.follow(master);
+        rightMotor3.follow(master);
+
+        return master;
+    }
+
     public static VictorSPX createVictor(int id, Configuration config) {
         VictorSPX victorSPX = new VictorSPX(id);
         victorSPX.set(ControlMode.Current, 0);
@@ -113,7 +147,7 @@ public class MotorFactory {
         //victorSPX.configContinuousCurrentLimit(config.CURRENT_LIMIT, 0);
 
         victorSPX.configForwardSoftLimitThreshold(config.FORWARD_SOFT_LIMIT, 0);
-        victorSPX.setInverted(config.INVERTED);
+//        victorSPX.setInverted(config.INVERTED);
         victorSPX.selectProfileSlot(0, 0);
         victorSPX.configReverseSoftLimitThreshold(config.REVERSE_SOFT_LIMIT, 0);
         victorSPX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);

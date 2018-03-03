@@ -68,15 +68,15 @@ public class RobotMap
     public static final int COLLECTOR_RIGHT_SWITCH = 2;
 
     //Drivetrain port values / Device IDs
-    public static final int LEFT_MASTER_MOTOR_ID = 15;
-    public static final int LEFT_SLAVE_MOTOR1_ID = 14;
-    public static final int LEFT_SLAVE_MOTOR2_ID = 13;
-    public static final int LEFT_SLAVE_MOTOR3_ID = 12;
+    public static final int LEFT_MASTER_MOTOR_ID = 0;
+    public static final int LEFT_SLAVE_MOTOR1_ID = 1;
+    public static final int LEFT_SLAVE_MOTOR2_ID = 2;
+    public static final int LEFT_SLAVE_MOTOR3_ID = 3;
 
-    public static final int RIGHT_MASTER_MOTOR_ID = 0;
-    public static final int RIGHT_SLAVE_MOTOR1_ID = 1;
-    public static final int RIGHT_SLAVE_MOTOR2_ID = 2;
-    public static final int RIGHT_SLAVE_MOTOR3_ID = 3;
+    public static final int RIGHT_MASTER_MOTOR_ID = 15;
+    public static final int RIGHT_SLAVE_MOTOR1_ID = 14;
+    public static final int RIGHT_SLAVE_MOTOR2_ID = 13;
+    public static final int RIGHT_SLAVE_MOTOR3_ID = 12;
 
     public static final int DRIVE_GEAR_SHIFT_PORT1 = 0;
     public static final int DRIVE_GEAR_SHIFT_PORT2 = 1;

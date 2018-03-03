@@ -3,7 +3,6 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,14 +30,8 @@ public class DriveTrain extends Subsystem {
     private final DeferredCmdSupplier<Command> defaultCommand;
 
     private TalonSRX leftMasterMotor;
-    private VictorSPX leftSlaveMotor1;
-    private VictorSPX leftSlaveMotor2;
-    private VictorSPX leftSlaveMotor3;
 
     private TalonSRX rightMasterMotor;
-    private VictorSPX rightSlaveMotor1;
-    private VictorSPX rightSlaveMotor2;
-    private VictorSPX rightSlaveMotor3;
 
     private DoubleSolenoid gearShifter;
 
@@ -56,30 +49,14 @@ public class DriveTrain extends Subsystem {
         gearShifter = new DoubleSolenoid(RobotMap.DRIVE_GEAR_SHIFT_PORT1, RobotMap.DRIVE_GEAR_SHIFT_PORT2);
 
         //create left motors
-        leftMasterMotor = MotorFactory.createTalon(RobotMap.LEFT_MASTER_MOTOR_ID, MotorFactory.kDefaultConfiguration);
-        leftSlaveMotor1 = new VictorSPX(RobotMap.LEFT_SLAVE_MOTOR1_ID);
-        leftSlaveMotor2 = new VictorSPX(RobotMap.LEFT_SLAVE_MOTOR2_ID);
-        leftSlaveMotor3 = new VictorSPX(RobotMap.LEFT_SLAVE_MOTOR3_ID);
-
-        //follow the leader
-        leftSlaveMotor1.follow(leftMasterMotor);
-        leftSlaveMotor2.follow(leftMasterMotor);
-        leftSlaveMotor3.follow(leftMasterMotor);
+        leftMasterMotor = MotorFactory.initLeftDriveMotors();
 
         //create right motors
-        rightMasterMotor = MotorFactory.createTalon(RobotMap.RIGHT_MASTER_MOTOR_ID, MotorFactory.kDefaultConfiguration);
-        rightSlaveMotor1 = new VictorSPX(RobotMap.RIGHT_SLAVE_MOTOR1_ID);
-        rightSlaveMotor2 = new VictorSPX(RobotMap.RIGHT_SLAVE_MOTOR2_ID);
-        rightSlaveMotor3 = new VictorSPX(RobotMap.RIGHT_SLAVE_MOTOR3_ID);
-
-        //make the slaves follow their master
-        rightSlaveMotor1.follow(rightMasterMotor);
-        rightSlaveMotor2.follow(rightMasterMotor);
-        rightSlaveMotor3.follow(rightMasterMotor);
+        rightMasterMotor = MotorFactory.initRightDriveMotors();
 
         //Setup encoders
-        leftMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0 , 0);
-        rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0 , 0);
+        leftMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0, 0);
+        rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0, 0);
 
         //Setup PIDF
         leftMasterMotor.config_kP(0, K_P, 0);
@@ -114,6 +91,10 @@ public class DriveTrain extends Subsystem {
         return this.mode;
     }
 
+    public void limitVoltage(double voltage) {
+        rightMasterMotor.configVoltageCompSaturation(voltage, 0);
+        leftMasterMotor.configVoltageCompSaturation(voltage, 0);
+    }
     public void set(double value) {
         leftMasterMotor.set(mode, value);
         rightMasterMotor.set(mode, value);
