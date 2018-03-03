@@ -31,23 +31,6 @@ public class Stick {
      */
     public double getVertical() {
         return this.getVertical(.05);
-
-    }
-
-    /**
-     * Provides the current vertical position of the stick with the option to invert it.
-     * @param invert if true, then operated like a flight stick, where down on the stick is an
-     * opposite value
-     * @return A value between -1 and 1 where < 0 represents a downward position and +1 represents an
-     *         upward position if invert is false otherwise the values will be multiplied by -1.
-     */
-    public double getVertical(boolean invert)
-    {
-        if (invert) {
-            return rawDevice.getRawAxis(this.verticalAxisID);
-        } else {
-            return this.getVertical();
-        }
     }
 
     /**
@@ -108,17 +91,13 @@ public class Stick {
             return 0;
         }
 
-        // deadZone extends in all directions, so use its absolute value.
-        deadZone = Math.abs(deadZone);
+        // deadZone extends in all directions, so use its absolute value. Do not let it exceed 1.
+        deadZone = Math.min(Math.abs(deadZone), 1);
 
-        // Check to see if the axis value is negative
-        if (axisValue < 0) {
-            // Add the deadZone to adjust towards zero, but don't let it exceed 0.
-            return Math.min(axisValue + deadZone, 0);
-        }
-
-        // Not zero and not negative... It is safe to assume that the axis value is positive.
-        // Subtract the deadZone from the axis value to adjust towards zero, but don't let it fall below 0.
-        return Math.max(axisValue - deadZone, 0);
+        // Only return the axis value exceeds the dead-zone.  To make the comparison easier, use absolute of
+        // the axis value. Use an .001 epsilon comparison because comparing floats is terrible.
+        return ((Math.abs(axisValue) - deadZone) >= .001) ?
+                axisValue : // Overcame the dead zone. Return the value.
+                0;  // Didn't overcome the dead zone. Zero out the axis value.
     }
 }
