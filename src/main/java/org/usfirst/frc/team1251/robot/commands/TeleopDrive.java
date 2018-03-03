@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
-public class TeleopDrive extends Command{
+public class TeleopDrive extends Command {
 
     private static final int JOYSTICK_SMOOTHING_SAMPLES = 5;
 
@@ -42,8 +42,8 @@ public class TeleopDrive extends Command{
     @Override
     protected void execute() {
         // smooth inputs
-        double leftSmoothed = calculateLeftSmoothed(driveStick.ls().getHorizontal());
-        double rightSmoothed = calculateRightSmoothed(driveStick.rs().getHorizontal());
+        double leftSmoothed = calculateLeftSmoothed(driveStick.ls().getVertical());
+        double rightSmoothed = calculateRightSmoothed(driveStick.rs().getVertical());
 
         // cube smoothed inputs
         leftSmoothed *= leftSmoothed * leftSmoothed;
