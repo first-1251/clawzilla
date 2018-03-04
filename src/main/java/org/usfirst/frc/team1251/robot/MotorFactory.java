@@ -94,14 +94,14 @@ public class MotorFactory {
     }
 
     public static TalonSRX initLeftDriveMotors() {
-        TalonSRX master = createTalon(RobotMap.LEFT_MASTER_MOTOR_ID, kDefaultConfiguration);
+        TalonSRX master = createTalon(RobotMap.DRIVE_LEFT_LEAD_MOTOR, kDefaultConfiguration);
         master.setInverted(true); // backwards
 
         //master.configVoltageCompSaturation(kDefaultConfiguration.MAX_OUTPUT_VOLTAGE * SPEED_COMPENSATION_MULTIPLER, 0);
 
-        VictorSPX leftMotor1 = createVictor(RobotMap.LEFT_SLAVE_MOTOR1_ID, kSlaveConfiguration);
-        VictorSPX leftMotor2 = createVictor(RobotMap.LEFT_SLAVE_MOTOR2_ID, kSlaveConfiguration);
-        VictorSPX leftMotor3 = createVictor(RobotMap.LEFT_SLAVE_MOTOR3_ID, kSlaveConfiguration);
+        VictorSPX leftMotor1 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_1, kSlaveConfiguration);
+        VictorSPX leftMotor2 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_2, kSlaveConfiguration);
+        VictorSPX leftMotor3 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_3, kSlaveConfiguration);
 
         leftMotor1.setInverted(true);
         leftMotor2.setInverted(true);
@@ -117,11 +117,11 @@ public class MotorFactory {
     }
 
     public static TalonSRX initRightDriveMotors() {
-        TalonSRX master = createTalon(RobotMap.RIGHT_MASTER_MOTOR_ID, kDefaultConfiguration);
+        TalonSRX master = createTalon(RobotMap.DRIVE_RIGHT_LEAD_MOTOR, kDefaultConfiguration);
 
-        VictorSPX rightMotor1 = createVictor(RobotMap.RIGHT_SLAVE_MOTOR1_ID, kSlaveConfiguration);
-        VictorSPX rightMotor2 = createVictor(RobotMap.RIGHT_SLAVE_MOTOR2_ID, kSlaveConfiguration);
-        VictorSPX rightMotor3 = createVictor(RobotMap.RIGHT_SLAVE_MOTOR3_ID, kSlaveConfiguration);
+        VictorSPX rightMotor1 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_1, kSlaveConfiguration);
+        VictorSPX rightMotor2 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_2, kSlaveConfiguration);
+        VictorSPX rightMotor3 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_3, kSlaveConfiguration);
 
         rightMotor1.follow(master);
         rightMotor2.follow(master);

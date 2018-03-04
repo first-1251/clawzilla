@@ -19,8 +19,8 @@ public class Collector {
     private SpeedController rightMotor;
 
     public Collector() {
-        this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_VICTOR);
-        this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_VICTOR);
+        this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_MOTOR);
+        this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_MOTOR);
     }
 
     //Below includes Motor commands for collector victor's
@@ -28,13 +28,11 @@ public class Collector {
     {
         rightMotor.set(MOTOR_STOP);
         leftMotor.set(MOTOR_STOP);
-        return;
     }
     public void pullInLeft()
     {
         rightMotor.set(MOTOR_RIGHT_BACKWARD);
         leftMotor.set(MOTOR_LEFT_FORWARD);
-        return;
     }
     public void pullIn()
     {
@@ -45,7 +43,6 @@ public class Collector {
     {
         rightMotor.set(MOTOR_RIGHT_BACKWARD);
         leftMotor.set(MOTOR_LEFT_BACKWARD);
-        return;
     }
 
 

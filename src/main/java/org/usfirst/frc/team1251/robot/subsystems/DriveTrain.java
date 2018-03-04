@@ -56,7 +56,7 @@ public class DriveTrain extends Subsystem {
     public DriveTrain(DeferredCmdSupplier<Command> defaultCommand) {
         this.defaultCommand = defaultCommand;
         //setup solenoid
-        gearShifter = new DoubleSolenoid(RobotMap.DRIVE_GEAR_SHIFT_PORT1, RobotMap.DRIVE_GEAR_SHIFT_PORT2);
+        gearShifter = new DoubleSolenoid(RobotMap.DRIVE_SHIFTER_FORWARD, RobotMap.DRIVE_SHIFTER_REVERSE);
 
         //create left motors
         leftMasterMotor = MotorFactory.initLeftDriveMotors();

@@ -6,75 +6,101 @@ package org.usfirst.frc.team1251.robot;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ *
+ *
+ *        MOTOR POSITIONS
+ *
+ *          ---   ---         F
+ *         | L | | 1 |        R
+ *          ---   ---         O
+ *     ---            ---     N
+ *    | 2 |          | 3 |    T
+ *     ---            ---
+ *
+ *`
  */
-public class RobotMap {
-    // collector Class
+public class RobotMap
+{
+    private static class PwmDevices {
+        static final int MOTOR_COLLECTOR_LEFT  = 2;
+        static final int MOTOR_COLLECTOR_RIGHT = 3;
+        static final int MOTOR_ARM = 4;
+        static final int MOTOR_ELEVATOR_1 = 5;
+        static final int MOTOR_ELEVATOR_2 = 6;
+    }
+
+    private static class DioDevices {
+        static final int SWITCH_COLLECTOR_LEFT = 0;
+        static final int SWITCH_COLLECTOR_MIDDLE = 1;
+        static final int SWITCH_COLLECTOR_RIGHT = 2;
+
+        static final int SWITCH_ARM_TOP = 3;
+        static final int SWITCH_ARM_BOTTOM = 4;
+    }
+
+    private static class PcmDevices {
+        static final int SOLENOID_FORWARD_DRIVE_SHIFTER = 0;
+        static final int SOLENOID_REVERSE_DRIVE_SHIFTER = 7;
+
+        static final int SOLENOID_FORWARD_CLAW = 1;
+        static final int SOLENOID_REVERSE_CLAW = 6;
+
+        static final int SOLENOID_FORWARD_ELEVATOR_SHIFTER = 2;
+        static final int SOLENOID_REVERSE_ELEVATOR_SHIFTER = 5;
+    }
+
+    private static class CanDevices {
+
+        static final int MOTOR_LEFT_LEADER = 0;
+        static final int MOTOR_LEFT_FOLLOWER_1 = 3;
+        static final int MOTOR_LEFT_FOLLOWER_2 = 1;
+        static final int MOTOR_LEFT_FOLLOWER_3 = 2;
+
+        static final int MOTOR_RIGHT_LEADER = 15;
+        static final int MOTOR_RIGHT_FOLLOWER_1 = 13;
+        static final int MOTOR_RIGHT_FOLLOWER_2 = 14;
+        static final int MOTOR_RIGHT_FOLLOWER_3 = 12;
+    }
+
+    private static class AnalogDevices {
+        static final int ENCODER_ELEVATOR_CHANNEL_A = 0;
+        static final int ENCODER_ELEVATOR_CHANNEL_B = 1;
+    }
 
 
-    // For example to map the left and right motors, you could define the
-    // following variables to use with your drive-train subsystem.
-    // public static int leftMotor = 1;
-    // public static int rightMotor = 2;
+    // PUBLIC access to ids.
 
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static int rangefinderPort = 1;
-    // public static int rangefinderModule = 1;
+    public static final int ARM_MOTOR = PwmDevices.MOTOR_ARM;
+    public static final int ARM_UPPER_LIMIT_SWITCH = DioDevices.SWITCH_ARM_TOP;
+    public static final int ARM_LOWER_LIMIT_SWITCH = DioDevices.SWITCH_ARM_BOTTOM;
 
+    public static final int ELEVATOR_MOTOR_1 = PwmDevices.MOTOR_ELEVATOR_1;
+    public static final int ELEVATOR_MOTOR_2 = PwmDevices.MOTOR_ELEVATOR_2;
+    public static final int ELEVATOR_ENCODER_CHANNEL_A = AnalogDevices.ENCODER_ELEVATOR_CHANNEL_A;
+    public static final int ELEVATOR_ENCODER_CHANNEL_B = AnalogDevices.ENCODER_ELEVATOR_CHANNEL_B;
+    public static final int ELEVATOR_SHIFTER_FORWARD = PcmDevices.SOLENOID_FORWARD_ELEVATOR_SHIFTER;
+    public static final int ELEVATOR_SHIFTER_REVERSE = PcmDevices.SOLENOID_REVERSE_ELEVATOR_SHIFTER;
 
-    //Ports
-    //MUST CHANGE THE PORT #S TO PROPER PORTS ON ROBOT
+    public static final int CLAW_SOLENOID_FORWARD = PcmDevices.SOLENOID_FORWARD_CLAW;
+    public static final int CLAW_SOLENOID_REVERSE = PcmDevices.SOLENOID_FORWARD_CLAW;
 
+    public static final int COLLECTOR_LEFT_MOTOR = PwmDevices.MOTOR_COLLECTOR_LEFT;
+    public static final int COLLECTOR_RIGHT_MOTOR = PwmDevices.MOTOR_COLLECTOR_RIGHT;
+    public static final int COLLECTOR_LEFT_SWITCH = DioDevices.SWITCH_COLLECTOR_LEFT;
+    public static final int COLLECTOR_MIDDLE_SWITCH = DioDevices.SWITCH_COLLECTOR_MIDDLE;
+    public static final int COLLECTOR_RIGHT_SWITCH = DioDevices.SWITCH_COLLECTOR_RIGHT;
 
-    //Arm ports
-    public static final int armMotor = 5;
-    public static final int armLimitSwitch = 3;
+    public static final int DRIVE_LEFT_LEAD_MOTOR = CanDevices.MOTOR_LEFT_LEADER;
+    public static final int DRIVE_LEFT_FOLLOW_MOTOR_1 = CanDevices.MOTOR_LEFT_FOLLOWER_1;
+    public static final int DRIVE_LEFT_FOLLOW_MOTOR_2 = CanDevices.MOTOR_LEFT_FOLLOWER_2;
+    public static final int DRIVE_LEFT_FOLLOW_MOTOR_3 = CanDevices.MOTOR_LEFT_FOLLOWER_3;
+    public static final int DRIVE_RIGHT_LEAD_MOTOR = CanDevices.MOTOR_RIGHT_LEADER;
+    public static final int DRIVE_RIGHT_FOLLOW_MOTOR_1 = CanDevices.MOTOR_RIGHT_FOLLOWER_1;
+    public static final int DRIVE_RIGHT_FOLLOW_MOTOR_2 = CanDevices.MOTOR_RIGHT_FOLLOWER_2;
+    public static final int DRIVE_RIGHT_FOLLOW_MOTOR_3 = CanDevices.MOTOR_RIGHT_FOLLOWER_3;
 
-    public static final int armPotentiometer = 0;
-
-    //Claw ports
-    public static final int clawSolenoidLeft = 7;
-    public static final int clawSolenoidRight = 6;
-
-    // Elevator Motors - MUST CORRECT PORT VALUES
-    // Elevator Motors
-    public static final int ELEVATOR_VICTOR = 10;
-    //TODO: UPDATE VICTOR PORT ACCORDINGLY
-
-    // Elevator Limit Switch
-    public static final int ELEVATOR_LIMIT_SWITCH = 2;
-    //TODO: UPDATE LS PORT ACCORDINGLY
-
-    // Elevator Encoder
-    public static final int ELEVATOR_ENCODER = 1;
-    //TODO: UPDATE ENCODER PORT ACCORDINGLY
-
-    // DIO ports for Encoder?
-    //TODO: ADD DIO PORTS
-
-    //Collector Victors
-    public static final int COLLECTOR_LEFT_VICTOR = 2;
-    public static final int COLLECTOR_RIGHT_VICTOR = 3;
-
-    //Collector Limit Switch
-    public static final int COLLECTOR_LEFT_SWITCH = 0;
-    public static final int COLLECTOR_MIDDLE_SWITCH = 1;
-    public static final int COLLECTOR_RIGHT_SWITCH = 2;
-
-    //Drivetrain port values / Device IDs
-    public static final int LEFT_MASTER_MOTOR_ID = 0;
-    public static final int LEFT_SLAVE_MOTOR1_ID = 1;
-    public static final int LEFT_SLAVE_MOTOR2_ID = 2;
-    public static final int LEFT_SLAVE_MOTOR3_ID = 3;
-
-    public static final int RIGHT_MASTER_MOTOR_ID = 15;
-    public static final int RIGHT_SLAVE_MOTOR1_ID = 14;
-    public static final int RIGHT_SLAVE_MOTOR2_ID = 13;
-    public static final int RIGHT_SLAVE_MOTOR3_ID = 12;
-
-    public static final int DRIVE_GEAR_SHIFT_PORT1 = 0;
-    public static final int DRIVE_GEAR_SHIFT_PORT2 = 7;
-
+    public static final int DRIVE_SHIFTER_FORWARD = PcmDevices.SOLENOID_FORWARD_DRIVE_SHIFTER;
+    public static final int DRIVE_SHIFTER_REVERSE = PcmDevices.SOLENOID_REVERSE_DRIVE_SHIFTER;
 
     public static final double DRIVE_TICK_VELOCITY_TO_SHIFT = 15;
 }
