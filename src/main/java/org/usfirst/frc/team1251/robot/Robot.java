@@ -3,14 +3,14 @@ package org.usfirst.frc.team1251.robot;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
-import org.usfirst.frc.team1251.robot.commands.TeleopDrive;
-import org.usfirst.frc.team1251.robot.commands.TestGamepad;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team1251.robot.commands.*;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.DriverInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
@@ -30,8 +30,8 @@ public class Robot extends IterativeRobot {
      * @deprecated Use driverInput property instead (todo: add `driverInput` property)
      */
     public static OI oi;
-    private ADXRS450_Gyro gyro;
-
+    //private PowerDistributionPanel pdp;
+    private DriveTrain driveTrain;
 
 
     //public static final DriveTrain driveTrain = new DriveTrain();
@@ -46,15 +46,16 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 
         // Set up driver input
-        GamePad driverGamePad =  new ModernGamePad(new Joystick(0));
-        GamePad crateGamePad =  new ModernGamePad(new Joystick(1));
+        GamePad driverGamePad = new ModernGamePad(new Joystick(0));
+        GamePad crateGamePad = new ModernGamePad(new Joystick(1));
 
         DriverInput driverInput = new DriverInput(driverGamePad, crateGamePad);
 
         // TODO: Remove after all references are cleaned up.
         oi = new OI(driverGamePad, crateGamePad);
-        gyro = new ADXRS450_Gyro();
+        //pdp = new PowerDistributionPanel();
 
+        SmartDashboard.putBoolean("Reset Encoders", false);
 
         // Create virtual sensors (used by mechanisms, subsystems and commands)
         //ArmPosition armPosition = new ArmPosition();
@@ -74,6 +75,7 @@ public class Robot extends IterativeRobot {
 
         DeferredCmdSupplier<Command> driveTrainDefaultCmdSupplier = new DeferredCmdSupplier<>();
         DriveTrain driveTrain = new DriveTrain(driveTrainDefaultCmdSupplier);
+        driveTrain.resetEncoders();
 
         //Clawlector clawlector = new Clawlector(claw, collector);
 
@@ -98,14 +100,14 @@ public class Robot extends IterativeRobot {
         // chooser.addDefault("Default Auto", new MoveElevator());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         // SmartDashboard.putData("Auto mode", chooser);
+
+        //this.driveTrain = driveTrain;
     }
 
-    private void initGamepadTest()
-    {
+    private void initGamepadTest() {
         Trigger trigger = new Always();
         trigger.whileActive(new TestGamepad());
     }
-
 
 
     /**
@@ -113,7 +115,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset any subsystem information you want to clear when
      * the robot is disabled.
      */
-    public void disabledInit(){
+    public void disabledInit() {
 
     }
 
@@ -126,26 +128,15 @@ public class Robot extends IterativeRobot {
      * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
      * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
      * below the Gyro
-     *
+     * <p>
      * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
 
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new MoveElevator();
-			break;
-		} */
-
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        //driveTrain.resetEncoders();
+        //SwitchAuto switchAuto = new SwitchAuto(driveTrain);
+        //switchAuto.start();
     }
 
     /**

@@ -3,9 +3,11 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.MotorFactory;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
@@ -16,10 +18,15 @@ import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
 public class DriveTrain extends Subsystem {
 
     //PID Values for Drivetrain
-    private final int K_P = 0;
-    private final int K_I = 0;
-    private final int K_D = 0;
-    private final int K_F = 0;
+    // low gear
+    //private final double K_P_LEFT = 0.38;
+    //private final double K_P_RIGHT = 0.3975;
+    // high gear
+    private final double K_P_LEFT = 0.1105;
+    private final double K_P_RIGHT = 0.0775;
+    private final double K_I = 0;
+    private final double K_D = 0.6;
+    private final double K_F = 0;
     private final int K_INTERCEPT = 0;
 
     public static final DoubleSolenoid.Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
@@ -32,6 +39,8 @@ public class DriveTrain extends Subsystem {
     private TalonSRX leftMasterMotor;
 
     private TalonSRX rightMasterMotor;
+
+    private ADXRS450_Gyro gyro;
 
     private DoubleSolenoid gearShifter;
 
@@ -59,15 +68,31 @@ public class DriveTrain extends Subsystem {
         rightMasterMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0, 0);
 
         //Setup PIDF
-        leftMasterMotor.config_kP(0, K_P, 0);
+        leftMasterMotor.config_kP(0, K_P_LEFT, 0);
         leftMasterMotor.config_kI(0, K_I, 0);
         leftMasterMotor.config_kD(0, K_D, 0);
         leftMasterMotor.config_kF(0, K_F, 0);
 
-        rightMasterMotor.config_kP(0, K_P, 0);
+        rightMasterMotor.config_kP(0, K_P_RIGHT, 0);
         rightMasterMotor.config_kI(0, K_I, 0);
         rightMasterMotor.config_kD(0, K_D, 0);
         rightMasterMotor.config_kF(0, K_F, 0);
+
+        gyro = new ADXRS450_Gyro();
+
+        SmartDashboard.putBoolean("Reset Encoders", false);
+    }
+
+    @Override
+    public void periodic() {
+        updateSensorData();
+        SmartDashboard.putNumber("Left Encoder", leftDistance);
+        SmartDashboard.putNumber("Right Encoder", rightDistance);
+        SmartDashboard.putNumber("Gyro", gyro.getAngle());
+
+        if (SmartDashboard.getBoolean("Reset Encoders", false)) {
+            resetEncoders();
+        }
     }
 
     @Override
@@ -135,5 +160,34 @@ public class DriveTrain extends Subsystem {
 
     public void setGearShifter(DoubleSolenoid.Value shifting) {
         gearShifter.set(shifting);
+    }
+
+    public void resetEncoders() {
+        System.out.println("E:" + leftMasterMotor.setSelectedSensorPosition(0, 0, 5).value);
+        rightMasterMotor.setSelectedSensorPosition(0, 0, 5);
+    }
+
+    public boolean isPidComplete(double allowableError) {
+
+        updateSensorData();
+        if (leftDistance != 0) {
+            System.out.println("Enc:" + leftDistance);
+        }
+        int left = Math.abs(leftMasterMotor.getClosedLoopError(0));
+        int right = Math.abs(rightMasterMotor.getClosedLoopError(0));
+
+        //if (((left + right) / 2.0) < allowableError) {
+            System.out.println(left);
+            System.out.println(right);
+        //}
+
+
+        //System.out.println((left + right) / 2.0);
+        //return false;
+        return ((left + right) / 2.0) < allowableError;
+    }
+
+    public double getAngle() {
+        return gyro.getAngle();
     }
 }

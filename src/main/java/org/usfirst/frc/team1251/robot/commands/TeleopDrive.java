@@ -9,10 +9,10 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
 public class TeleopDrive extends Command {
 
-    private static final int JOYSTICK_SMOOTHING_SAMPLES = 10;
+    private static final int JOYSTICK_SMOOTHING_SAMPLES = 4;
 
-    private static final double SHIFTING_TIME = 1.0; // seconds
-    private static final double SHIFTING_SPEED = 150.0; // encoder ticks / second
+    private static final double SHIFTING_TIME = 2.0; // seconds
+    private static final double SHIFTING_SPEED = 150.0 * 4 * 1; // encoder ticks / second
 
     private boolean timerStarted = false;
     private double time = 0.0;
@@ -29,8 +29,6 @@ public class TeleopDrive extends Command {
         this.driveStick = gamePad;
         this.driveTrain = driveTrain;
 
-        pdp = new PowerDistributionPanel();
-
         requires(this.driveTrain);
 
         leftSmoothing = new double[JOYSTICK_SMOOTHING_SAMPLES];
@@ -46,6 +44,13 @@ public class TeleopDrive extends Command {
     @Override
     protected void execute() {
 
+        //if (driveStick.a().isPressed()) {
+            //driveTrain.setGearShifter(DriveTrain.LOW_GEAR);
+        //}
+
+        //if (driveStick.b().isPressed()) {
+            //driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
+        //}
         // smooth inputs
         double leftSmoothed = calculateLeftSmoothed(driveStick.ls().getVertical());
         double rightSmoothed = calculateRightSmoothed(driveStick.rs().getVertical());
@@ -60,16 +65,16 @@ public class TeleopDrive extends Command {
         // do shifting stuff
         driveShifting();
 
-        System.out.println(pdp.getCurrent(0) + "|" + pdp.getCurrent(1) + "|"
-                + pdp.getCurrent(2) + "|" + pdp.getCurrent(3) + "|" + pdp.getCurrent(15) + "|"
-                + pdp.getCurrent(14) + "|" + pdp.getCurrent(13) + "|" + pdp.getCurrent(12) + "|"
-                + pdp.getTotalCurrent() + "|" + pdp.getCurrent(0) + pdp.getCurrent(1)
-                + pdp.getCurrent(2) + pdp.getCurrent(3)
-                + pdp.getCurrent(15) + pdp.getCurrent(14)
-                + pdp.getCurrent(13) + pdp.getCurrent(12));
+        //System.out.println(pdp.getCurrent(0) + "|" + pdp.getCurrent(1) + "|"
+               // + pdp.getCurrent(2) + "|" + pdp.getCurrent(3) + "|" + pdp.getCurrent(15) + "|"
+               // + pdp.getCurrent(14) + "|" + pdp.getCurrent(13) + "|" + pdp.getCurrent(12) + "|"
+               // + pdp.getTotalCurrent() + "|" + pdp.getCurrent(0) + pdp.getCurrent(1)
+               // + pdp.getCurrent(2) + pdp.getCurrent(3)
+               // + pdp.getCurrent(15) + pdp.getCurrent(14)
+               // + pdp.getCurrent(13) + pdp.getCurrent(12));
 
-        //System.out.println(driveTrain.getLeftDistance());
-        //System.out.println(driveTrain.getRightDistance());
+        //System.out.println(driveTrain.getLeftVelocity() + "|" + driveTrain.getRightVelocity());
+        //System.out.println();
     }
 
     /**
@@ -109,6 +114,7 @@ public class TeleopDrive extends Command {
     private void driveShifting() {
         driveTrain.updateSensorData();
         double averageSpeed = (driveTrain.getLeftVelocity() + driveTrain.getRightVelocity()) / 2.0;
+        averageSpeed = Math.abs(averageSpeed);
         if (driveTrain.getShiftState() == DriveTrain.LOW_GEAR) {
             considerLowGear(averageSpeed);
         } else {

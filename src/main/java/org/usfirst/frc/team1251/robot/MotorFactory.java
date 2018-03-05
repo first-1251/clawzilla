@@ -29,18 +29,18 @@ public class MotorFactory {
         public boolean SAFETY_ENABLED = false;
 
         public int CONTROL_FRAME_PERIOD_MS = 5;
-        public int MOTION_CONTROL_FRAME_PERIOD_MS = 100;
+        public int MOTION_CONTROL_FRAME_PERIOD_MS = 5;
         public int GENERAL_STATUS_FRAME_RATE_MS = 5;
-        public int FEEDBACK_STATUS_FRAME_RATE_MS = 100;
-        public int QUAD_ENCODER_STATUS_FRAME_RATE_MS = 100;
-        public int ANALOG_TEMP_VBAT_STATUS_FRAME_RATE_MS = 100;
-        public int PULSE_WIDTH_STATUS_FRAME_RATE_MS = 100;
+        public int FEEDBACK_STATUS_FRAME_RATE_MS = 5;
+        public int QUAD_ENCODER_STATUS_FRAME_RATE_MS = 5;
+        public int ANALOG_TEMP_VBAT_STATUS_FRAME_RATE_MS = 5;
+        public int PULSE_WIDTH_STATUS_FRAME_RATE_MS = 5;
 
         public VelocityMeasPeriod VELOCITY_MEASUREMENT_PERIOD = VelocityMeasPeriod.Period_100Ms;
         public int VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW = 64;
 
-        public double VOLTAGE_COMPENSATION_RAMP_RATE = 0;
-        public double VOLTAGE_RAMP_RATE = 0;
+        //public double VOLTAGE_COMPENSATION_RAMP_RATE = 0;
+        public double RAMP_TIME = 0.5;
     }
 
     public static final Configuration kDefaultConfiguration = new Configuration();
@@ -77,8 +77,7 @@ public class MotorFactory {
         talonSRX.configReverseSoftLimitThreshold(config.REVERSE_SOFT_LIMIT, 0);
         talonSRX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
         talonSRX.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
-        talonSRX.configClosedloopRamp(config.VOLTAGE_COMPENSATION_RAMP_RATE, 0);
-        talonSRX.configOpenloopRamp(config.VOLTAGE_RAMP_RATE, 0);
+        talonSRX.configOpenloopRamp(config.RAMP_TIME, 0);
 
         talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
         talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);
@@ -152,8 +151,7 @@ public class MotorFactory {
         victorSPX.configReverseSoftLimitThreshold(config.REVERSE_SOFT_LIMIT, 0);
         victorSPX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
         victorSPX.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
-        victorSPX.configClosedloopRamp(config.VOLTAGE_COMPENSATION_RAMP_RATE, 0);
-        victorSPX.configOpenloopRamp(config.VOLTAGE_RAMP_RATE, 0);
+        victorSPX.configOpenloopRamp(config.RAMP_TIME, 0);
 
         victorSPX.setStatusFramePeriod(StatusFrame.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
         victorSPX.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);

@@ -7,14 +7,8 @@ package org.usfirst.frc.team1251.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap
-{
-
-
-    //collector Class
-
-
-
+public class RobotMap {
+    // collector Class
 
 
     // For example to map the left and right motors, you could define the
@@ -79,7 +73,7 @@ public class RobotMap
     public static final int RIGHT_SLAVE_MOTOR3_ID = 12;
 
     public static final int DRIVE_GEAR_SHIFT_PORT1 = 0;
-    public static final int DRIVE_GEAR_SHIFT_PORT2 = 1;
+    public static final int DRIVE_GEAR_SHIFT_PORT2 = 7;
 
 
     public static final double DRIVE_TICK_VELOCITY_TO_SHIFT = 15;
