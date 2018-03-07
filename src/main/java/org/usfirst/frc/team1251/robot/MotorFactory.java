@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.MotorSafety;
  */
 public class MotorFactory {
 
+    //private static final double SPEED_COMPENSATION_MULTIPLER = 0.66;
     public static class Configuration {
         public boolean LIMIT_SWITCH_NORMALLY_OPEN = true;
+        public boolean ENABLE_VOLTAGE_LIMIT = true;
         public double MAX_OUTPUT_VOLTAGE = 9;
         public double NOMINAL_VOLTAGE = 0;
         public double PEAK_VOLTAGE = 9;
@@ -64,6 +66,7 @@ public class MotorFactory {
         talonSRX.clearMotionProfileHasUnderrun(0);
         talonSRX.clearMotionProfileTrajectories();
         talonSRX.clearStickyFaults(0);
+        talonSRX.enableVoltageCompensation(config.ENABLE_VOLTAGE_LIMIT);
         talonSRX.configVoltageCompSaturation(config.MAX_OUTPUT_VOLTAGE, 0);
         talonSRX.setNeutralMode(config.ENABLE_BRAKE);
         talonSRX.enableCurrentLimit(config.ENABLE_CURRENT_LIMIT);
@@ -78,6 +81,7 @@ public class MotorFactory {
         talonSRX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
         talonSRX.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
         talonSRX.configOpenloopRamp(config.RAMP_TIME, 0);
+        talonSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
         talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);
@@ -92,6 +96,8 @@ public class MotorFactory {
     public static TalonSRX initLeftDriveMotors() {
         TalonSRX master = createTalon(RobotMap.LEFT_MASTER_MOTOR_ID, kDefaultConfiguration);
         master.setInverted(true); // backwards
+
+        //master.configVoltageCompSaturation(kDefaultConfiguration.MAX_OUTPUT_VOLTAGE * SPEED_COMPENSATION_MULTIPLER, 0);
 
         VictorSPX leftMotor1 = createVictor(RobotMap.LEFT_SLAVE_MOTOR1_ID, kSlaveConfiguration);
         VictorSPX leftMotor2 = createVictor(RobotMap.LEFT_SLAVE_MOTOR2_ID, kSlaveConfiguration);

@@ -6,7 +6,7 @@ import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
 public class SwitchAuto  extends CommandGroup{
 
     public SwitchAuto(DriveTrain driveTrain) {
-        addSequential(new AutoForwards(driveTrain, 60));
-        addSequential(new AutoTurn(driveTrain, -90));
+        addSequential(new AutoTurn(driveTrain, -30));
+        //addSequential(new AutoForwards(driveTrain, 60));
     }
 }

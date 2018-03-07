@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         // SmartDashboard.putData("Auto mode", chooser);
 
-        //this.driveTrain = driveTrain;
+        this.driveTrain = driveTrain;
     }
 
     private void initGamepadTest() {
@@ -134,9 +134,9 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousInit() {
 
-        //driveTrain.resetEncoders();
-        //SwitchAuto switchAuto = new SwitchAuto(driveTrain);
-        //switchAuto.start();
+        driveTrain.resetEncoders();
+        SwitchAuto switchAuto = new SwitchAuto(driveTrain);
+        switchAuto.start();
     }
 
     /**

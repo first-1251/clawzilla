@@ -23,10 +23,11 @@ public class DriveTrain extends Subsystem {
     //private final double K_P_RIGHT = 0.3975;
     // high gear
     private final double K_P_LEFT = 0.1105;
-    private final double K_P_RIGHT = 0.0775;
+    private final double K_P_RIGHT = 0.1005;
     private final double K_I = 0;
-    private final double K_D = 0.6;
+    private final double K_D = 0.5;
     private final double K_F = 0;
+    //private final double K_F_RIGHT = -.011;
     private final int K_INTERCEPT = 0;
 
     public static final DoubleSolenoid.Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
@@ -73,7 +74,7 @@ public class DriveTrain extends Subsystem {
         leftMasterMotor.config_kD(0, K_D, 0);
         leftMasterMotor.config_kF(0, K_F, 0);
 
-        rightMasterMotor.config_kP(0, K_P_RIGHT, 0);
+        rightMasterMotor.config_kP(0, K_P_LEFT, 0);
         rightMasterMotor.config_kI(0, K_I, 0);
         rightMasterMotor.config_kD(0, K_D, 0);
         rightMasterMotor.config_kF(0, K_F, 0);
@@ -173,14 +174,18 @@ public class DriveTrain extends Subsystem {
         if (leftDistance != 0) {
             System.out.println("Enc:" + leftDistance);
         }
-        int left = Math.abs(leftMasterMotor.getClosedLoopError(0));
-        int right = Math.abs(rightMasterMotor.getClosedLoopError(0));
+        int left = leftDistance - leftMasterMotor.getClosedLoopTarget(0);
+        int right = rightDistance - rightMasterMotor.getClosedLoopTarget(0);
 
         //if (((left + right) / 2.0) < allowableError) {
             System.out.println(left);
             System.out.println(right);
+        System.out.println("LT: " + leftMasterMotor.getClosedLoopTarget(0));
+        System.out.println("RT: " + rightMasterMotor.getClosedLoopTarget(0));
         //}
 
+        left = Math.abs(left);
+        right = Math.abs(right);
 
         //System.out.println((left + right) / 2.0);
         //return false;

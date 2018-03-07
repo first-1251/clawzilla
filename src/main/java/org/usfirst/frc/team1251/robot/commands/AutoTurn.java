@@ -23,7 +23,7 @@ public class AutoTurn extends Command {
 
     @Override
     protected void execute() {
-        if (Math.abs(Math.abs(driveTrain.getAngle()) - Math.abs(desiredAngle)) > 30) {
+        if (Math.abs(Math.abs(driveTrain.getAngle()) - Math.abs(desiredAngle)) > (1.0/3.0 * Math.abs(desiredAngle))) {
             driveTrain.set(-.5, 0.5);
         } else {
             driveTrain.set(0, 0);
