@@ -6,7 +6,6 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
 public class MotorTester extends CommandGroup {
 
-
     private GamePad gamePad;
 
     public MotorTester(GamePad gamePad) {
