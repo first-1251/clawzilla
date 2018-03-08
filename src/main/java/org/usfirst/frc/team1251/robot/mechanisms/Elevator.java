@@ -45,6 +45,8 @@ public class Elevator {
         speed = Math.max(speed, 0);
         speed = Math.min(speed, 1);
 
+        speed = 0;
+
         elevatorMotor1.set(speed);
         elevatorMotor2.set(speed);
     }
@@ -59,6 +61,8 @@ public class Elevator {
         speed = Math.max(speed, 0);
         speed = Math.min(speed, 0.05);
         speed *= -1;
+
+        speed = 0;
 
         elevatorMotor1.set(speed);
         elevatorMotor2.set(speed);
