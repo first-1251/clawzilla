@@ -7,28 +7,28 @@ package org.usfirst.frc.team1251.robot.teleopInput.gamepad;
  * Examples:
  *
  *  // See if the 'A' button is pressed.
- *  OI.gamePad.A.isPressed();
+ *  OI.driverPad.A.isPressed();
  *
  *  // See if both 'A' and 'B' are pressed.
- *  OI.gamePad.A.isPressed() && OI.gamePad.B.isPressed()
+ *  OI.driverPad.A.isPressed() && OI.driverPad.B.isPressed()
  *
  *  // See if the left trigger is pressed.
- *  OI.gamePad.LT.isPressed();
+ *  OI.driverPad.LT.isPressed();
  *
  *  // See if the left trigger is pressed more than 15%
- *  OI.gamePad.LT.isPressed(0.15); // 14% returns false, 15% returns false, 16% returns true
+ *  OI.driverPad.LT.isPressed(0.15); // 14% returns false, 15% returns false, 16% returns true
  *
  *  // See how far the left trigger is being pressed
- *  OI.gamePad.LT.getValue();
+ *  OI.driverPad.LT.getValue();
  *
  *  // See how far the left trigger is being pressed, ignoring the first 12%
- *  OI.gamePad.LT.getValue(0.12); // 11% returns 0, 12% returns 0, 13% returns 0.13
+ *  OI.driverPad.LT.getValue(0.12); // 11% returns 0, 12% returns 0, 13% returns 0.13
  *
  *  // Read the horizontal position of the left stick.
- *  OI.gamePad.leftStick.getHorizontal();
+ *  OI.driverPad.leftStick.getHorizontal();
  *
  *  // Read the vertical position of the left stick, ignoring everything within the range of -0.10 and 0.10, inclusively.
- *  OI.gamePad.leftStick.getVertical(0.10); // -0.11 returns -0.11, -0.10 returns 0, 0.10 returns 0, 0.11 returns 0.11
+ *  OI.driverPad.leftStick.getVertical(0.10); // -0.11 returns -0.11, -0.10 returns 0, 0.10 returns 0, 0.11 returns 0.11
  *
  */
 abstract public class GamePad {

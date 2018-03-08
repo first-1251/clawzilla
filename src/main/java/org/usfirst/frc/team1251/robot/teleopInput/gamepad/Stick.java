@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1251.robot.teleopInput.gamepad;
 
-
 import edu.wpi.first.wpilibj.GenericHID;
 
 /**
@@ -31,7 +30,7 @@ public class Stick {
      *         upward position.
      */
     public double getVertical() {
-        return rawDevice.getRawAxis(this.verticalAxisID);
+        return this.getVertical(.05);
     }
 
     /**
@@ -46,7 +45,7 @@ public class Stick {
      *     upward position.
      */
     public double getVertical(double deadZone) {
-        return this.applyDeadZone(deadZone, this.getVertical());
+        return this.applyDeadZone(deadZone, rawDevice.getRawAxis(this.verticalAxisID) * -1);
     }
 
     /**
@@ -56,7 +55,8 @@ public class Stick {
      *     rightward position.
      */
     public double getHorizontal() {
-        return rawDevice.getRawAxis(this.horizontalAxisID);
+        return this.getHorizontal(.05);
+
     }
 
     /**
@@ -71,37 +71,31 @@ public class Stick {
      *     rightward position.
      */
     public double getHorizontal(double deadZone) {
-        return this.applyDeadZone(deadZone, this.getHorizontal());
+        return this.applyDeadZone(deadZone, rawDevice.getRawAxis(this.horizontalAxisID));
     }
 
     /**
-     * A helper which will apply a deadZone against a given axis value.
+     * A helper which will apply a deadZone against a given axis value. Any value within the dead zone (positive or
+     * negative) will be ignored. Any value which extends beyond the dead zone will be stretched back out into a
+     * value between 0 and 1.
      *
      * @param deadZone The deadZone to apply. Dead zones apply in all directions, so the absolute value of this
      *                 parameter will be used.
      * @param axisValue The axis value to apply the deadZone to.
      *
-     * @return The adjusted axis value. The original value is always adjusted towards 0 but will never be adjusted
-     *         beyond 0. If the original value is positive, the return value will be positive or zero; similarly, if
-     *         the original value is negative, the return value will be negative or zero.
+     * @return The adjusted axis value.
      */
     private double applyDeadZone(double deadZone, double axisValue) {
-        // Simplest case first... if axis is at zero, then the deadZone is a non-factor.
-        if (axisValue == 0) {
-            return 0;
+
+        // Lifted logic from `DifferentialDrive.applyDeadBand()`
+        if (Math.abs(axisValue) > deadZone) {
+            if (axisValue > 0.0) {
+                return (axisValue - deadZone) / (1.0 - deadZone);
+            } else {
+                return (axisValue + deadZone) / (1.0 - deadZone);
+            }
+        } else {
+            return 0.0;
         }
-
-        // deadZone extends in all directions, so use its absolute value.
-        deadZone = Math.abs(deadZone);
-
-        // Check to see if the axis value is negative
-        if (axisValue < 0) {
-            // Add the deadZone to adjust towards zero, but don't let it exceed 0.
-            return Math.min(axisValue + deadZone, 0);
-        }
-
-        // Not zero and not negative... It is safe to assume that the axis value is positive.
-        // Subtract the deadZone from the axis value to adjust towards zero, but don't let it fall below 0.
-        return Math.max(axisValue - deadZone, 0);
     }
 }

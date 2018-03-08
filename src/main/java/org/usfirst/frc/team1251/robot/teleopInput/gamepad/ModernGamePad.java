@@ -10,22 +10,22 @@ public class ModernGamePad extends GamePad {
 
         this.rawDevice = rawDevice;
 
-        this.a = new DigitalButton(0, rawDevice);
-        this.b = new DigitalButton(1, rawDevice);
-        this.x = new DigitalButton(2, rawDevice);
-        this.y = new DigitalButton(3, rawDevice);
-        this.lb = new DigitalButton(4, rawDevice);
-        this.rb = new DigitalButton(5, rawDevice);
-        this.select = new DigitalButton(6, rawDevice);
-        this.start = new DigitalButton(7, rawDevice);
-        this.rsClick = new DigitalButton(8, rawDevice);
+        this.a = new DigitalButton(1, rawDevice);
+        this.b = new DigitalButton(2, rawDevice);
+        this.x = new DigitalButton(3, rawDevice);
+        this.y = new DigitalButton(4, rawDevice);
+        this.lb = new DigitalButton(5, rawDevice);
+        this.rb = new DigitalButton(6, rawDevice);
+        this.select = new DigitalButton(7, rawDevice);
+        this.start = new DigitalButton(8, rawDevice);
+        this.rsClick = new DigitalButton(10, rawDevice);
         this.lsClick = new DigitalButton(9, rawDevice);
 
         this.lt = new AnalogTriggerButton(2, rawDevice);
         this.rt = new AnalogTriggerButton(3,rawDevice);
 
         this.ls = new Stick(0, 1, rawDevice);
-        this.rs = new Stick(2, 3, rawDevice);
+        this.rs = new Stick(4, 5, rawDevice);
     }
 
     @Override

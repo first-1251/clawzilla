@@ -10,7 +10,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePadButton;
  * Example:
  *
  *  class Robot ... {
- *      private final Button X = new GamePadButtonTrigger(gamePad.X());
+ *      private final Button X = new GamePadButtonTrigger(driverPad.X());
  *      ...
  *
  *  }
