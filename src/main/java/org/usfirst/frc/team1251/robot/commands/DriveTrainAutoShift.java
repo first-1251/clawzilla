@@ -17,7 +17,7 @@ public class DriveTrainAutoShift extends Command {
     private boolean timerStarted;
     private double time = 0.0;
 
-    DriveTrainAutoShift(DriveFeedback driveFeedback, DriveTrainShifter shifter) {
+    public DriveTrainAutoShift(DriveFeedback driveFeedback, DriveTrainShifter shifter) {
         this.shifter = shifter;
         this.driveFeedback = driveFeedback;
     }

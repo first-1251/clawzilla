@@ -16,6 +16,7 @@ import org.usfirst.frc.team1251.robot.mechanisms.Elevator;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1251.robot.subsystems.DriveTrainShifter;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
@@ -43,6 +44,9 @@ public class Robot extends IterativeRobot {
     private Command autonomousCommand;
     private SendableChooser chooser;
     private DriveFeedback driveFeedback;
+    private TeleopDrive teleopDriveCmd;
+    private DriveTrainAutoShift driveTrainAutoShift;
+    private DriveTrainShifter driveTrainShifter;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -75,9 +79,13 @@ public class Robot extends IterativeRobot {
         DeferredCmdSupplier<Command> armevatorDefaultCmdSupplier = new DeferredCmdSupplier<>();
         Armevator armevator = new Armevator(elevator, arm, armevatorDefaultCmdSupplier);
 
-        DeferredCmdSupplier<Command> driveTrainDefaultCmdSupplier = new DeferredCmdSupplier<>();
-        DriveTrain driveTrain = new DriveTrain(driveTrainDefaultCmdSupplier);
+        // We will never provide a default command to be used during initialization for the DriveTrain or the
+        // DriveTrainShifter -- we will set it manually when tele-op initializes. Feed in an empty command supplier.
+        DriveTrain driveTrain = new DriveTrain(new DeferredCmdSupplier<>());
 
+        // We will never provide a default command to be used during initialization for the DriveTrainShifter -- we will
+        // set it manually when tele-op initializes. Feed in an empty command supplier.
+        DriveTrainShifter driveTrainShifter = new DriveTrainShifter(new DeferredCmdSupplier<>());
 
         Clawlector clawlector = new Clawlector(claw, collector);
 
@@ -85,10 +93,10 @@ public class Robot extends IterativeRobot {
         CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
         MoveArmevator moveArmevator = new MoveArmevator(humanInput, armevator);
         TeleopDrive teleopDrive = new TeleopDrive(humanInput, driveTrain, driveFeedback);
+        DriveTrainAutoShift driveTrainAutoShift = new DriveTrainAutoShift(driveFeedback, driveTrainShifter);
 
         // Assign default commands
         armevatorDefaultCmdSupplier.set(moveArmevator);
-        driveTrainDefaultCmdSupplier.set(teleopDrive);
 
         // assign driver-initiated command triggers.
         humanInput.attachCommandTriggers(collectCrate);
@@ -103,8 +111,14 @@ public class Robot extends IterativeRobot {
 //        chooser.addObject("My Auto", new MyAutoCommand());
         // SmartDashboard.putData("Auto mode", chooser);
 
-        this.driveTrain = driveTrain;
         this.driveFeedback = driveFeedback;
+
+        this.driveTrain = driveTrain;
+        this.driveTrainShifter = driveTrainShifter;
+
+        this.teleopDriveCmd = teleopDrive;
+        this.driveTrainAutoShift = driveTrainAutoShift;
+
     }
 
     private void initGamepadTest() {
@@ -136,6 +150,8 @@ public class Robot extends IterativeRobot {
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
     public void autonomousInit() {
+        this.driveTrain.setDefaultCommand(null);
+        this.driveTrainShifter.setDefaultCommand(null);
         SwitchAuto switchAuto = new SwitchAuto(driveTrain, driveFeedback);
         switchAuto.start();
     }
@@ -153,6 +169,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
+        this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
     }
 
     /**
@@ -160,7 +178,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //System.out.println(gyro.getAngle());
     }
 
     /**
