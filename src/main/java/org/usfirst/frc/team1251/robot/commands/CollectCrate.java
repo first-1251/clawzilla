@@ -31,12 +31,6 @@ public class CollectCrate extends Command {
             this.clawlector.getCollector().pullInLeft();
             return;
         }
-        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.DIAGONAL)
-        {
-            System.out.println("Diagonal");
-            this.clawlector.getCollector().pullInLeft();
-            return;
-        }
         if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_RIGHT)
         {
             System.out.println("Skewed Right");
@@ -47,7 +41,6 @@ public class CollectCrate extends Command {
         {
             System.out.println("None");
             this.clawlector.getCollector().pullIn();
-            return;
         }
 
     }

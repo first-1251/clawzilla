@@ -87,7 +87,6 @@ public class RobotMap
     public static final int COLLECTOR_LEFT_MOTOR = PwmDevices.MOTOR_COLLECTOR_LEFT;
     public static final int COLLECTOR_RIGHT_MOTOR = PwmDevices.MOTOR_COLLECTOR_RIGHT;
     public static final int COLLECTOR_LEFT_SWITCH = DioDevices.SWITCH_COLLECTOR_LEFT;
-    public static final int COLLECTOR_MIDDLE_SWITCH = DioDevices.SWITCH_COLLECTOR_MIDDLE;
     public static final int COLLECTOR_RIGHT_SWITCH = DioDevices.SWITCH_COLLECTOR_RIGHT;
 
     public static final int DRIVE_LEFT_LEAD_MOTOR = CanDevices.MOTOR_LEFT_LEADER;

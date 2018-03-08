@@ -13,21 +13,17 @@ public class CrateDetector
     //One of the 3 switches used to align the crate. On left side when looking from the rear perspective.
     private DigitalInput leftSwitch;
 
-    //One of the 3 switches used to align the crate. In the middle.
-    private DigitalInput middleSwitch;
-
     //One of the 3 switches used to align the crate. On right side when looking from the rear perspective.
     private DigitalInput rightSwitch;
 
 
     public enum CrateState {
-        SKEWED_LEFT, DIAGONAL, SKEWED_RIGHT, CRATE_COLLECTED, NONE
+        SKEWED_LEFT, SKEWED_RIGHT, CRATE_COLLECTED, NONE
     }
 
     public CrateDetector()
     {
         leftSwitch = new DigitalInput(RobotMap.COLLECTOR_LEFT_SWITCH);
-        middleSwitch = new DigitalInput(RobotMap.COLLECTOR_MIDDLE_SWITCH);
         rightSwitch = new DigitalInput(RobotMap.COLLECTOR_RIGHT_SWITCH);
     }
     public CrateState getCrateState()
@@ -35,16 +31,7 @@ public class CrateDetector
         if (isLeftOnly()) {
             return CrateState.SKEWED_LEFT;
         }
-        if (isLeftMiddle()) {
-            return CrateState.SKEWED_LEFT;
-        }
         if (isRightOnly()) {
-            return CrateState.SKEWED_RIGHT;
-        }
-        if (isMiddleOnly()) {
-            return CrateState.DIAGONAL;
-        }
-        if (isRightMiddle()) {
             return CrateState.SKEWED_RIGHT;
         }
         if (isAllPressed()) {
@@ -56,29 +43,16 @@ public class CrateDetector
 
     private boolean isLeftOnly() //Only left button is pressed
     {
-        return isLeftPressed() && !isMiddlePressed() && !isRightPressed();
-    }
-    private boolean isMiddleOnly() //Only middle button is pressed
-    {
-        return isMiddlePressed() && !isLeftPressed() && !isRightPressed();
+        return isLeftPressed() && !isRightPressed();
     }
     private boolean isRightOnly() //Only right button is pressed
     {
-        return isRightPressed() && !isMiddlePressed() && !isLeftPressed();
+        return isRightPressed() && !isLeftPressed();
     }
-    private boolean isLeftMiddle() //Left and Middle is pressed
+    private boolean isAllPressed() //Right and Left are pressed
     {
-        return isLeftPressed() && isMiddlePressed() && !isRightPressed();
+        return isRightPressed() && isLeftPressed();
     }
-    private boolean isRightMiddle() //Right and Middle is pressed
-    {
-        return isRightPressed() && isMiddlePressed() && !isLeftPressed();
-    }
-    private boolean isAllPressed() //Right and Middle is pressed
-    {
-        return isRightPressed() && isMiddlePressed() && isLeftPressed();
-    }
-
 
     private boolean isRightPressed() {
         return rightSwitch.get();
@@ -86,10 +60,6 @@ public class CrateDetector
 
     private boolean isLeftPressed() {
         return leftSwitch.get();
-    }
-
-    private boolean isMiddlePressed() {
-        return middleSwitch.get();
     }
 
 
