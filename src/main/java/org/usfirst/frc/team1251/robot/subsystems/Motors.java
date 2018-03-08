@@ -37,6 +37,6 @@ public class Motors extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        setDefaultCommand(new MotorTester(new ModernGamePad(new Joystick(0))));
+        //setDefaultCommand(new MotorTester(new ModernGamePad(new Joystick(0))));
     }
 }

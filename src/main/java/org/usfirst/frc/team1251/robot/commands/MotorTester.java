@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.Robot;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 
@@ -14,7 +15,7 @@ public class MotorTester extends CommandGroup {
         requires(Robot.MOTORS);
 
         setupCanCommands();
-        setupPwmCommands();
+       // setupPwmCommands();
     }
 
     private void setupCanCommands() {
@@ -29,5 +30,11 @@ public class MotorTester extends CommandGroup {
             addSequential(new MoveMotor(Robot.MOTORS.speedControllers[i], gamePad));
             addSequential(new DoNothing(gamePad));
         }
+    }
+
+    @Override
+    protected void execute() {
+        SmartDashboard.putNumber("RIGHT: ", Robot.MOTORS.speedControllersCan[0].getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("LEFT: ", Robot.MOTORS.speedControllersCan[1].getSelectedSensorPosition(0));
     }
 }

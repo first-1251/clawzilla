@@ -1,9 +1,12 @@
 package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import org.usfirst.frc.team1251.robot.commands.MotorTester;
 import org.usfirst.frc.team1251.robot.subsystems.Motors;
+import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,6 +21,8 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+
+    public MotorTester tester;
     public static final Motors MOTORS = new Motors();
     public void robotInit() {
 
@@ -47,7 +52,8 @@ public class Robot extends IterativeRobot {
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
     public void autonomousInit() {
-
+        tester = new MotorTester(new ModernGamePad(new Joystick(0)));
+        tester.start();
     }
 
     /**
@@ -58,7 +64,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-
+        if (tester != null) {
+            tester.cancel();
+        }
     }
 
     /**

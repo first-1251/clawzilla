@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1251.robot.teleopInput.driverInput;
 
-import org.usfirst.frc.team1251.robot.commands.CollectCrate;
+//import org.usfirst.frc.team1251.robot.commands.CollectCrate;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
 
@@ -76,7 +76,7 @@ public class HumanInput {
      *
      * @param collectCrate The crate-collection Command.
      */
-    public void attachCommandTriggers(CollectCrate collectCrate) {
+    public void attachCommandTriggers() {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -84,7 +84,7 @@ public class HumanInput {
         commandTriggersAttached = true;
 
         // Bind buttons.
-        collectCrateTrigger.whileHeld(collectCrate);
+        //collectCrateTrigger.whileHeld(collectCrate);
     }
 
     /**
