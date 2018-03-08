@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1251.robot.mechanisms;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.Victor;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
@@ -14,12 +14,13 @@ public class Arm {
 
     private ArmPosition armPosition;
 
-    private static final int POLARITY = 1;
+    private static final boolean isInverted = false;
 
     public Arm(ArmPosition armPosition) {
 
         //Arm pivot motor
         armMotor = new Victor(RobotMap.ARM_MOTOR);
+        armMotor.setInverted(isInverted);
 
         this.armPosition = armPosition;
     }
@@ -47,7 +48,7 @@ public class Arm {
         speed = Math.min(speed, 1);
         speed = Math.max(speed, 0);
 
-        armMotor.set(speed * POLARITY);
+        armMotor.set(speed);
     }
 
 
@@ -64,12 +65,11 @@ public class Arm {
         speed = Math.min(speed, 1);
         speed = Math.max(speed, 0);
 
-        armMotor.set(speed * -POLARITY);
+        armMotor.set(speed * -1);
     }
 
     public void stopPivot() {
         armMotor.set(0);
     }
-
 
 }
