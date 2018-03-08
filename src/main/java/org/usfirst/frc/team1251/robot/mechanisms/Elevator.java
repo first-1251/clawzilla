@@ -52,17 +52,12 @@ public class Elevator {
     /**
      * This method moves the elevator downward at the speed given
      *
-     * @param speed A value bounded by 0 and 1 that isn't outside those values
+     * @param speed A value bounded by 0 and 0.05 that isn't outside those values
      */
     public void goDown(double speed) {
-        if (elevatorPosition.isAtMinHeight()) {
-            elevatorMotor1.set(0);
-            elevatorMotor2.set(0);
-        }
-
-        // bounds speed to between 0 and 1
+        // bounds speed to between 0 and 0.05
         speed = Math.max(speed, 0);
-        speed = Math.min(speed, 1);
+        speed = Math.min(speed, 0.05);
         speed *= -1;
 
         elevatorMotor1.set(speed);
