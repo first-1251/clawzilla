@@ -24,27 +24,25 @@ public class Collector {
     }
 
     //Below includes Motor commands for collector victor's
-    public void stop()
-    {
+    public void stop() {
         rightMotor.set(MOTOR_STOP);
         leftMotor.set(MOTOR_STOP);
     }
-    public void pullInLeft()
-    {
+
+    public void pullInLeft() {
         rightMotor.set(MOTOR_RIGHT_BACKWARD);
         leftMotor.set(MOTOR_LEFT_FORWARD);
     }
-    public void pullIn()
-    {
+
+    public void pullIn() {
         rightMotor.set(MOTOR_RIGHT_FORWARD);
         leftMotor.set(MOTOR_LEFT_FORWARD);
     }
-    public void pullInRight()
-    {
+
+    public void pullInRight() {
         rightMotor.set(MOTOR_RIGHT_BACKWARD);
         leftMotor.set(MOTOR_LEFT_BACKWARD);
     }
-
 
 
 }
