@@ -13,10 +13,7 @@ import org.usfirst.frc.team1251.robot.mechanisms.Arm;
 import org.usfirst.frc.team1251.robot.mechanisms.Claw;
 import org.usfirst.frc.team1251.robot.mechanisms.Collector;
 import org.usfirst.frc.team1251.robot.mechanisms.Elevator;
-import org.usfirst.frc.team1251.robot.subsystems.Armevator;
-import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrainShifter;
+import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
@@ -94,12 +91,14 @@ public class Robot extends IterativeRobot {
         MoveArmevator moveArmevator = new MoveArmevator(humanInput, armevator);
         TeleopDrive teleopDrive = new TeleopDrive(humanInput, driveTrain, driveFeedback);
         DriveTrainAutoShift driveTrainAutoShift = new DriveTrainAutoShift(driveFeedback, driveTrainShifter);
+        ShiftDriveTrain shiftDriveTrainUp = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.HIGH);
+        ShiftDriveTrain shiftDriveTrainDown = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.LOW);
 
         // Assign default commands
         armevatorDefaultCmdSupplier.set(moveArmevator);
 
         // assign driver-initiated command triggers.
-        humanInput.attachCommandTriggers(collectCrate);
+        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown);
 
 
         // Uncomment to test a controller on port 5

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.teleopInput.driverInput;
 
 import org.usfirst.frc.team1251.robot.commands.CollectCrate;
+import org.usfirst.frc.team1251.robot.commands.ShiftDriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
 
@@ -15,6 +16,8 @@ import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
 public class HumanInput {
     private static final double ELEVATOR_DEAD_ZONE = 0.1;
     private static final double ARM_DEAD_ZONE = 0.1;
+    private final GamePadButtonTrigger shiftDriveTrainUpTrigger;
+    private final GamePadButtonTrigger shiftDriveTrainDownTrigger;
 
     private boolean commandTriggersAttached = false;
 
@@ -67,6 +70,8 @@ public class HumanInput {
 
         // Use the right-bumper to trigger create collection.
         this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
+        this.shiftDriveTrainUpTrigger = new GamePadButtonTrigger(this.driverGamePad.rt());
+        this.shiftDriveTrainDownTrigger = new GamePadButtonTrigger(this.driverGamePad.lt());
     }
 
     /**
@@ -76,7 +81,9 @@ public class HumanInput {
      *
      * @param collectCrate The crate-collection Command.
      */
-    public void attachCommandTriggers(CollectCrate collectCrate) {
+    public void attachCommandTriggers(CollectCrate collectCrate,
+                                      ShiftDriveTrain shiftDriveTrainUp,
+                                      ShiftDriveTrain shiftDriveTrainDown) {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -85,6 +92,8 @@ public class HumanInput {
 
         // Bind buttons.
         collectCrateTrigger.whileHeld(collectCrate);
+        shiftDriveTrainUpTrigger.whileHeld(shiftDriveTrainUp);
+        shiftDriveTrainDownTrigger.whileHeld(shiftDriveTrainDown);
     }
 
     /**
