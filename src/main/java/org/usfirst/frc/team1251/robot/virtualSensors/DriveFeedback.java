@@ -3,6 +3,7 @@ package org.usfirst.frc.team1251.robot.virtualSensors;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.MotorFactory;
 
 public class DriveFeedback {
@@ -30,14 +31,14 @@ public class DriveFeedback {
     private Gyro gyro;
 
     /**
-     * The total distance traveled of the left side of drive train.
+     * The current sensor position of the left side of drive train.
      */
-    private int leftDistance;
+    private int leftPosition;
 
     /**
-     * The total distance traveled of the right side of drive train.
+     * The current sensor position of the right side of drive train.
      */
-    private int rightDistance;
+    private int rightPosition;
 
     /**
      * The current velocity of the left drive train.
@@ -73,8 +74,13 @@ public class DriveFeedback {
      * Ideally, this should be called exactly once per tick to get a representation of
      */
     public void updateSensorData() {
-        this.leftDistance = leftMasterMotor.getSelectedSensorPosition(0);
-        this.rightDistance = rightMasterMotor.getSelectedSensorPosition(0);
+
+        SmartDashboard.putNumber("Left Encoder", leftPosition);
+        SmartDashboard.putNumber("Right Encoder", rightPosition);
+        SmartDashboard.putNumber("Gyro", gyro.getAngle());
+
+        this.leftPosition = leftMasterMotor.getSelectedSensorPosition(0);
+        this.rightPosition = rightMasterMotor.getSelectedSensorPosition(0);
 
         this.leftVelocity = leftMasterMotor.getSelectedSensorVelocity(0);
         this.rightVelocity = rightMasterMotor.getSelectedSensorVelocity(0);
@@ -99,11 +105,16 @@ public class DriveFeedback {
         return leftVelocity;
     }
 
-    public int getRightDistance() {
-        return rightDistance;
+    public int getRightPosition() {
+        return rightPosition;
     }
 
-    public int getLeftDistance() {
-        return leftDistance;
+    public int getLeftPosition() {
+        return leftPosition;
+    }
+
+    public void reset() {
+        leftMasterMotor.setSelectedSensorPosition(0, 0, 5);
+        rightMasterMotor.setSelectedSensorPosition(0, 0, 5);
     }
 }

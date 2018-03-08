@@ -22,6 +22,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
+import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 /**
@@ -41,6 +42,7 @@ public class Robot extends IterativeRobot {
 
     private Command autonomousCommand;
     private SendableChooser chooser;
+    private DriveFeedback driveFeedback;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -60,6 +62,7 @@ public class Robot extends IterativeRobot {
         ArmPosition armPosition = new ArmPosition();
         ElevatorPosition elevatorPosition = new ElevatorPosition();
         CrateDetector crateDetector = new CrateDetector();
+        DriveFeedback driveFeedback = new DriveFeedback();
 
         // Create mechanisms (used by subsystems)
         Arm arm = new Arm(armPosition);
@@ -74,14 +77,14 @@ public class Robot extends IterativeRobot {
 
         DeferredCmdSupplier<Command> driveTrainDefaultCmdSupplier = new DeferredCmdSupplier<>();
         DriveTrain driveTrain = new DriveTrain(driveTrainDefaultCmdSupplier);
-        driveTrain.resetEncoders();
+
 
         Clawlector clawlector = new Clawlector(claw, collector);
 
         // Create commands
         CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
         MoveArmevator moveArmevator = new MoveArmevator(humanInput, armevator);
-        TeleopDrive teleopDrive = new TeleopDrive(humanInput, driveTrain);
+        TeleopDrive teleopDrive = new TeleopDrive(humanInput, driveTrain, driveFeedback);
 
         // Assign default commands
         armevatorDefaultCmdSupplier.set(moveArmevator);
@@ -101,6 +104,7 @@ public class Robot extends IterativeRobot {
         // SmartDashboard.putData("Auto mode", chooser);
 
         this.driveTrain = driveTrain;
+        this.driveFeedback = driveFeedback;
     }
 
     private void initGamepadTest() {
@@ -132,9 +136,7 @@ public class Robot extends IterativeRobot {
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
     public void autonomousInit() {
-
-        driveTrain.resetEncoders();
-        SwitchAuto switchAuto = new SwitchAuto(driveTrain);
+        SwitchAuto switchAuto = new SwitchAuto(driveTrain, driveFeedback);
         switchAuto.start();
     }
 
