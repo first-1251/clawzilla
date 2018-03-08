@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class ElevatorPosition {
     private Encoder elevatorEncoder;
-    private final double CIRCUMFERENCE = 0.75 * Math.PI; // Diameter is 0.75 I N C H E S
-    private final static double MAX_HEIGHT = 72; // INCHES
+    private final double CIRCUMFERENCE = 0.75 * Math.PI; // Diameter is 0.75"
+    private final static double MAX_HEIGHT = 72; // in inches
 
     // Constructor
     public ElevatorPosition(){

@@ -40,13 +40,13 @@ public class MoveArmevator extends Command {
         } else if (elevatorDownSpeed > 0) {
             this.armevator.getElevator().goDown(elevatorDownSpeed);
         } else {
-            this.armevator.getElevator().stopPlease();
+            this.armevator.getElevator().stop();
         }
     }
 
     @Override
     public void end() {
-        this.armevator.getElevator().stopPlease();
+        this.armevator.getElevator().stop();
         this.armevator.getArm().stopPivot();
     }
 
