@@ -16,17 +16,18 @@ public class HumanInput {
     private static final double ELEVATOR_DEAD_ZONE = 0.1;
     private static final double ARM_DEAD_ZONE = 0.1;
 
+    private boolean commandTriggersAttached = false;
+
     /**
      * The number of input samples to use for smoothing out wheel speed input.
      */
-    private final static int WHEEL_SPEED_SMOOTHING_SAMPLES = 5;
+    private final static int WHEEL_SPEED_SMOOTHING_SAMPLES = 4;
 
     /**
      * The game pad which is used to move the robot around the field.
      *
-     * TODO: Make private once TeleopDrive uses input from this class instead of direct gamepad reads.
      */
-    public final GamePad driverGamePad;
+    private final GamePad driverGamePad;
 
     /**
      * The game pad which is used to interact with the crates (e.g. "power cubes").
@@ -76,7 +77,13 @@ public class HumanInput {
      * @param collectCrate The crate-collection Command.
      */
     public void attachCommandTriggers(CollectCrate collectCrate) {
-        // TODO: Prevent duplicate bindings
+        // Prevent duplicate bindings.
+        if (commandTriggersAttached) {
+            return;
+        }
+        commandTriggersAttached = true;
+
+        // Bind buttons.
         collectCrateTrigger.whileHeld(collectCrate);
     }
 

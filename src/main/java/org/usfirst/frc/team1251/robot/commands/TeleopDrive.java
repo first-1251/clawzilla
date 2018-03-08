@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
+import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 
 public class TeleopDrive extends Command {
 
@@ -19,15 +19,15 @@ public class TeleopDrive extends Command {
     private boolean timerStarted = false;
     private double time = 0.0;
 
-    private GamePad driveStick;
+    private HumanInput humanInput;
 
     private DriveTrain driveTrain;
 
     private double[] leftSmoothing;
     private double[] rightSmoothing;
 
-    public TeleopDrive(GamePad gamePad, DriveTrain driveTrain) {
-        this.driveStick = gamePad;
+    public TeleopDrive(HumanInput humanInput, DriveTrain driveTrain) {
+        this.humanInput = humanInput;
         this.driveTrain = driveTrain;
 
         requires(this.driveTrain);
@@ -40,7 +40,6 @@ public class TeleopDrive extends Command {
     protected void initialize() {
         // enable percentage output
         driveTrain.enableRegularMode();
-        driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
     }
 
     @Override
@@ -55,48 +54,18 @@ public class TeleopDrive extends Command {
         if (driveTrain.getRightVelocity() > rightHigh) {
             rightHigh = driveTrain.getRightVelocity();
         }
-        //if (driveStick.a().isPressed()) {
-            //driveTrain.setGearShifter(DriveTrain.LOW_GEAR);
-        //}
 
-        //if (driveStick.b().isPressed()) {
-            //driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
-        //}
-        // smooth inputs
-        double leftSmoothed = calculateLeftSmoothed(driveStick.ls().getVertical());
-        double rightSmoothed = calculateRightSmoothed(driveStick.rs().getVertical());
-
-        // cube smoothed inputs
-        leftSmoothed *= leftSmoothed * leftSmoothed;
-        rightSmoothed *= rightSmoothed * rightSmoothed;
-
-        if (driveStick.b().isPressed()) {
-            leftSmoothed = 1.0;
-        }
-
-        if (driveStick.a().isPressed()) {
-            rightSmoothed = 1.0;
-        }
+        // Cube the human input to make movement at the extremes more dramatic.
+        double leftCubed = calculateLeftSmoothed(humanInput.getLeftWheelSpeed());
+        double rightCubed = calculateRightSmoothed(humanInput.getRightWheelSpeed());
+        leftCubed *= leftCubed * leftCubed;
+        rightCubed *= rightCubed * rightCubed;
 
         // set motors
-        driveTrain.set(leftSmoothed, rightSmoothed);
+        driveTrain.set(leftCubed, rightCubed);
 
         // do shifting stuff
-        // driveShifting();
-
-        //System.out.println(pdp.getCurrent(0) + "|" + pdp.getCurrent(1) + "|"
-               // + pdp.getCurrent(2) + "|" + pdp.getCurrent(3) + "|" + pdp.getCurrent(15) + "|"
-               // + pdp.getCurrent(14) + "|" + pdp.getCurrent(13) + "|" + pdp.getCurrent(12) + "|"
-               // + pdp.getTotalCurrent() + "|" + pdp.getCurrent(0) + pdp.getCurrent(1)
-               // + pdp.getCurrent(2) + pdp.getCurrent(3)
-               // + pdp.getCurrent(15) + pdp.getCurrent(14)
-               // + pdp.getCurrent(13) + pdp.getCurrent(12));
-
-        //System.out.println(driveTrain.getLeftVelocity() + "|" + driveTrain.getRightVelocity());
-        //System.out.println();
-
-        System.out.println(leftHigh);
-        System.out.println(rightHigh);
+        driveShifting();
     }
 
     /**
