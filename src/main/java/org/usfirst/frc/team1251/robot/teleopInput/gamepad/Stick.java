@@ -75,29 +75,27 @@ public class Stick {
     }
 
     /**
-     * A helper which will apply a deadZone against a given axis value.
+     * A helper which will apply a deadZone against a given axis value. Any value within the dead zone (positive or
+     * negative) will be ignored. Any value which extends beyond the dead zone will be stretched back out into a
+     * value between 0 and 1.
      *
      * @param deadZone The deadZone to apply. Dead zones apply in all directions, so the absolute value of this
      *                 parameter will be used.
      * @param axisValue The axis value to apply the deadZone to.
      *
-     * @return The adjusted axis value. The original value is always adjusted towards 0 but will never be adjusted
-     *         beyond 0. If the original value is positive, the return value will be positive or zero; similarly, if
-     *         the original value is negative, the return value will be negative or zero.
+     * @return The adjusted axis value.
      */
     private double applyDeadZone(double deadZone, double axisValue) {
-        // Simplest case first... if axis is at zero, then the deadZone is a non-factor.
-        if (axisValue == 0) {
-            return 0;
+
+        // Lifted logic from `DifferentialDrive.applyDeadBand()`
+        if (Math.abs(axisValue) > deadZone) {
+            if (axisValue > 0.0) {
+                return (axisValue - deadZone) / (1.0 - deadZone);
+            } else {
+                return (axisValue + deadZone) / (1.0 - deadZone);
+            }
+        } else {
+            return 0.0;
         }
-
-        // deadZone extends in all directions, so use its absolute value. Do not let it exceed 1.
-        deadZone = Math.min(Math.abs(deadZone), 1);
-
-        // Only return the axis value exceeds the dead-zone.  To make the comparison easier, use absolute of
-        // the axis value. Use an .001 epsilon comparison because comparing floats is terrible.
-        return ((Math.abs(axisValue) - deadZone) >= .001) ?
-                axisValue : // Overcame the dead zone. Return the value.
-                0;  // Didn't overcome the dead zone. Zero out the axis value.
     }
 }
