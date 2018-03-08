@@ -12,7 +12,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
  * scheme since it is not scattered throughout the code base. This also uses "information hiding" to make sure that
  * the rest of the robot does care about the details of how driver input is interpreted.
  */
-public class DriverInput {
+public class HumanInput {
     private static final double ELEVATOR_DEAD_ZONE = 0.1;
     private static final double ARM_DEAD_ZONE = 0.1;
 
@@ -23,13 +23,15 @@ public class DriverInput {
 
     /**
      * The game pad which is used to move the robot around the field.
+     *
+     * TODO: Make private once TeleopDrive uses input from this class instead of direct gamepad reads.
      */
-    private final GamePad movementGamePad;
+    public final GamePad driverGamePad;
 
     /**
      * The game pad which is used to interact with the crates (e.g. "power cubes").
      */
-    private final GamePad crateGamePad;
+    private final GamePad operatorGamePad;
 
     /**
      * A utility for smoothing out the stick values used for setting the left wheel speed.
@@ -48,22 +50,22 @@ public class DriverInput {
 
     /**
      *
-     * @param movementGamePad The GamePad which is used to move the robot around the field.
-     * @param crateGamePad The GamePad which is used to interact with creates (e.g. "power cubes")
+     * @param driverGamePad The GamePad which is used to move the robot around the field.
+     * @param operatorGamePad The GamePad which is used to interact with creates (e.g. "power cubes")
      */
-    public DriverInput(GamePad movementGamePad, GamePad crateGamePad) {
-        this.movementGamePad = movementGamePad;
-        this.crateGamePad = crateGamePad;
+    public HumanInput(GamePad driverGamePad, GamePad operatorGamePad) {
+        this.driverGamePad = driverGamePad;
+        this.operatorGamePad = operatorGamePad;
 
         // For the wheel speeds, we want to smooth out the stick values over the lat 5 samples.
         // The left and right sticks on the movement game pad are used for the left and right wheel speeds, respectively.
         this.leftWheelSmoothing = new StickSmoothing(
-                this.movementGamePad.ls(), StickSmoothing.StickAxis.VERTICAL, WHEEL_SPEED_SMOOTHING_SAMPLES);
+                this.driverGamePad.ls(), StickSmoothing.StickAxis.VERTICAL, WHEEL_SPEED_SMOOTHING_SAMPLES);
         this.rightWheelSmoothing = new StickSmoothing(
-                this.movementGamePad.rs(),StickSmoothing.StickAxis.VERTICAL, WHEEL_SPEED_SMOOTHING_SAMPLES);
+                this.driverGamePad.rs(),StickSmoothing.StickAxis.VERTICAL, WHEEL_SPEED_SMOOTHING_SAMPLES);
 
         // Use the right-bumper to trigger create collection.
-        this.collectCrateTrigger = new GamePadButtonTrigger(this.crateGamePad.lb());
+        this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
     }
 
     /**
@@ -85,7 +87,7 @@ public class DriverInput {
      *     value approaches 1.
      */
     public double getArmUpSpeed() {
-        double armStick = crateGamePad.ls().getVertical(ARM_DEAD_ZONE);
+        double armStick = operatorGamePad.ls().getVertical(ARM_DEAD_ZONE);
         if (armStick > 0){
             return armStick;
         } else {
@@ -100,7 +102,7 @@ public class DriverInput {
      *     value approaches 1.
      */
     public double getArmDownSpeed() {
-        double armStick = crateGamePad.ls().getVertical(ARM_DEAD_ZONE);
+        double armStick = operatorGamePad.ls().getVertical(ARM_DEAD_ZONE);
         if (armStick < 0){
             return Math.abs(armStick);
         } else {
@@ -115,7 +117,7 @@ public class DriverInput {
      *
      */
     public double getElevatorUpSpeed() {
-        double elevatorStick = crateGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
+        double elevatorStick = operatorGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
         if (elevatorStick > 0){
             return elevatorStick;
         } else {
@@ -130,7 +132,7 @@ public class DriverInput {
      *     as the value approaches 1.
      */
     public double getElevatorDownSpeed() {
-        double elevatorStick = crateGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
+        double elevatorStick = operatorGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
         if (elevatorStick < 0){
             return Math.abs(elevatorStick);
         } else {

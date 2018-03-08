@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
@@ -26,7 +25,6 @@ public class TeleopDrive extends Command {
 
     private double[] leftSmoothing;
     private double[] rightSmoothing;
-    PowerDistributionPanel pdp;
 
     public TeleopDrive(GamePad gamePad, DriveTrain driveTrain) {
         this.driveStick = gamePad;
@@ -84,7 +82,7 @@ public class TeleopDrive extends Command {
         driveTrain.set(leftSmoothed, rightSmoothed);
 
         // do shifting stuff
-        //driveShifting();
+        // driveShifting();
 
         //System.out.println(pdp.getCurrent(0) + "|" + pdp.getCurrent(1) + "|"
                // + pdp.getCurrent(2) + "|" + pdp.getCurrent(3) + "|" + pdp.getCurrent(15) + "|"
