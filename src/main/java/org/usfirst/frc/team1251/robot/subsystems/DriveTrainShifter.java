@@ -12,4 +12,6 @@ public class DriveTrainShifter extends DoubleSolenoidGearShifter {
         this.isInverted = false;
         this.solenoid = new DoubleSolenoid(RobotMap.DRIVE_SHIFTER_FORWARD, RobotMap.DRIVE_SHIFTER_REVERSE);
     }
+
+
 }

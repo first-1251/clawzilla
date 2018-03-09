@@ -151,7 +151,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        SwitchAuto switchAuto = new SwitchAuto(driveTrain, driveFeedback);
+        SwitchAuto switchAuto = new SwitchAuto(driveTrain, driveFeedback, this.driveTrainShifter);
         switchAuto.start();
     }
 

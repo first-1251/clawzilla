@@ -27,20 +27,21 @@ abstract public class DoubleSolenoidGearShifter extends Subsystem {
     }
 
     public void setGear(Gear goal) {
-        // If the goal matches the current gear, do nothing.
-        if (this.currentGear == goal) {
-            return;
-        }
-
-        // Examine the goal
-        if (goal == Gear.HIGH) {
-            this.solenoid.set(this.isInverted ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
-        } else {
-            // If not high, then low. That's the only other option.
-            this.solenoid.set(this.isInverted ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
-        }
-
-        this.currentGear = goal;
+        return;
+//        // If the goal matches the current gear, do nothing.
+//        if (this.currentGear == goal) {
+//            return;
+//        }
+//
+//        // Examine the goal
+//        if (goal == Gear.HIGH) {
+//            this.solenoid.set(this.isInverted ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
+//        } else {
+//            // If not high, then low. That's the only other option.
+//            this.solenoid.set(this.isInverted ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
+//        }
+//
+//        this.currentGear = goal;
     }
 
     public Gear getGear() {

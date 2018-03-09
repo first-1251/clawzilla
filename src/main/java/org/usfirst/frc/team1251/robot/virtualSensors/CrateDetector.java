@@ -23,8 +23,8 @@ public class CrateDetector
 
     public CrateDetector()
     {
-        leftSwitch = new DigitalInput(RobotMap.COLLECTOR_LEFT_SWITCH);
-        rightSwitch = new DigitalInput(RobotMap.COLLECTOR_RIGHT_SWITCH);
+//        leftSwitch = new DigitalInput(RobotMap.COLLECTOR_LEFT_SWITCH);
+//        rightSwitch = new DigitalInput(RobotMap.COLLECTOR_RIGHT_SWITCH);
     }
     public CrateState getCrateState()
     {
@@ -55,11 +55,11 @@ public class CrateDetector
     }
 
     private boolean isRightPressed() {
-        return rightSwitch.get();
+        return false;// rightSwitch.get();
     }
 
     private boolean isLeftPressed() {
-        return leftSwitch.get();
+        return false; //leftSwitch.get();
     }
 
 

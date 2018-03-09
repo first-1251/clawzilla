@@ -50,15 +50,15 @@ public class RobotMap
 
     private static class CanDevices {
 
-        static final int MOTOR_LEFT_LEADER = 0;
-        static final int MOTOR_LEFT_FOLLOWER_1 = 3;
-        static final int MOTOR_LEFT_FOLLOWER_2 = 1;
-        static final int MOTOR_LEFT_FOLLOWER_3 = 2;
+        static final int MOTOR_LEFT_LEADER = 15;
+        static final int MOTOR_LEFT_FOLLOWER_1 = 14;
+        static final int MOTOR_LEFT_FOLLOWER_2 = 13;
+        static final int MOTOR_LEFT_FOLLOWER_3 = 12;
 
-        static final int MOTOR_RIGHT_LEADER = 15;
-        static final int MOTOR_RIGHT_FOLLOWER_1 = 13;
-        static final int MOTOR_RIGHT_FOLLOWER_2 = 14;
-        static final int MOTOR_RIGHT_FOLLOWER_3 = 12;
+        static final int MOTOR_RIGHT_LEADER = 0;
+        static final int MOTOR_RIGHT_FOLLOWER_1 = 1;
+        static final int MOTOR_RIGHT_FOLLOWER_2 = 2;
+        static final int MOTOR_RIGHT_FOLLOWER_3 = 3;
     }
 
     private static class AnalogDevices {
