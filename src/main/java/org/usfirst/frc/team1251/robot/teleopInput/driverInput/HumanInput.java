@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1251.robot.teleopInput.driverInput;
 
-import org.usfirst.frc.team1251.robot.commands.CollectCrate;
-import org.usfirst.frc.team1251.robot.commands.Eject;
-import org.usfirst.frc.team1251.robot.commands.ShiftDriveTrain;
+import org.usfirst.frc.team1251.robot.commands.*;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
 
@@ -20,6 +18,7 @@ public class HumanInput {
     private final GamePadButtonTrigger shiftDriveTrainUpTrigger;
     private final GamePadButtonTrigger shiftDriveTrainDownTrigger;
     private final GamePadButtonTrigger ejectCrateTrigger;
+    private final GamePadButtonTrigger openClawTrigger;
 
     private boolean commandTriggersAttached = false;
 
@@ -73,6 +72,7 @@ public class HumanInput {
         // Use the right-bumper to trigger create collection.
         this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
         this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
+        this.openClawTrigger = new GamePadButtonTrigger(this.operatorGamePad.rt());
 
         this.shiftDriveTrainUpTrigger = new GamePadButtonTrigger(this.driverGamePad.rt());
         this.shiftDriveTrainDownTrigger = new GamePadButtonTrigger(this.driverGamePad.lt());
@@ -88,7 +88,8 @@ public class HumanInput {
     public void attachCommandTriggers(CollectCrate collectCrate,
                                       ShiftDriveTrain shiftDriveTrainUp,
                                       ShiftDriveTrain shiftDriveTrainDown,
-                                      Eject eject) {
+                                      Eject eject,
+                                      OpenClaw openClaw) {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -101,6 +102,8 @@ public class HumanInput {
 
         shiftDriveTrainUpTrigger.whileHeld(shiftDriveTrainUp);
         shiftDriveTrainDownTrigger.whileHeld(shiftDriveTrainDown);
+
+        openClawTrigger.whileHeld(openClaw);
 
     }
 

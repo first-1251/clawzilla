@@ -44,6 +44,8 @@ public class Robot extends IterativeRobot {
     private TeleopDrive teleopDriveCmd;
     private DriveTrainAutoShift driveTrainAutoShift;
     private DriveTrainShifter driveTrainShifter;
+    private OpenClaw openClaw;
+    private CloseClaw closeClaw;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -85,6 +87,8 @@ public class Robot extends IterativeRobot {
         DriveTrainShifter driveTrainShifter = new DriveTrainShifter(new DeferredCmdSupplier<>());
 
         Clawlector clawlector = new Clawlector(claw, collector);
+        this.closeClaw = new CloseClaw(clawlector);
+        clawlector.setDefaultCommand(closeClaw);
 
         // Create commands
         CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
@@ -98,7 +102,8 @@ public class Robot extends IterativeRobot {
         armevatorDefaultCmdSupplier.set(moveArmevator);
 
         // assign driver-initiated command triggers.
-        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, new Eject(clawlector));
+        this.openClaw = new OpenClaw(clawlector);
+        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, new Eject(clawlector), this.openClaw);
 
 
         // Uncomment to test a controller on port 5
