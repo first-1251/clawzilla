@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.teleopInput.driverInput;
 
 import org.usfirst.frc.team1251.robot.commands.CollectCrate;
+import org.usfirst.frc.team1251.robot.commands.EjectCube;
 import org.usfirst.frc.team1251.robot.commands.ShiftDriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
@@ -18,6 +19,7 @@ public class HumanInput {
     private static final double ARM_DEAD_ZONE = 0.1;
     private final GamePadButtonTrigger shiftDriveTrainUpTrigger;
     private final GamePadButtonTrigger shiftDriveTrainDownTrigger;
+    private final GamePadButtonTrigger ejectCrateTrigger;
 
     private boolean commandTriggersAttached = false;
 
@@ -70,6 +72,8 @@ public class HumanInput {
 
         // Use the right-bumper to trigger create collection.
         this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
+        this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
+
         this.shiftDriveTrainUpTrigger = new GamePadButtonTrigger(this.driverGamePad.rt());
         this.shiftDriveTrainDownTrigger = new GamePadButtonTrigger(this.driverGamePad.lt());
     }
@@ -83,7 +87,8 @@ public class HumanInput {
      */
     public void attachCommandTriggers(CollectCrate collectCrate,
                                       ShiftDriveTrain shiftDriveTrainUp,
-                                      ShiftDriveTrain shiftDriveTrainDown) {
+                                      ShiftDriveTrain shiftDriveTrainDown,
+                                      EjectCube ejectCube) {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -92,8 +97,11 @@ public class HumanInput {
 
         // Bind buttons.
         collectCrateTrigger.whileHeld(collectCrate);
+        ejectCrateTrigger.whenPressed(ejectCube);
+
         shiftDriveTrainUpTrigger.whileHeld(shiftDriveTrainUp);
         shiftDriveTrainDownTrigger.whileHeld(shiftDriveTrainDown);
+
     }
 
     /**
