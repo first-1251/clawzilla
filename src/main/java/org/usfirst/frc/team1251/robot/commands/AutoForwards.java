@@ -31,13 +31,16 @@ public class AutoForwards extends Command {
     private int targetRightPosition;
     private boolean done = false;
 
+    // Number of inches to adjust the target distance.
+    private double targetTweak = 6;
+
     public AutoForwards(DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter shifter, double inches) {
         this.driveFeedback = driveFeedback;
         this.driveTrain = driveTrain;
         this.shifter = shifter;
         requires(driveTrain);
 
-        targetTicks = inches * TICKS_PER_INCH;
+        targetTicks = (inches + targetTweak) * TICKS_PER_INCH;
     }
 
     @Override

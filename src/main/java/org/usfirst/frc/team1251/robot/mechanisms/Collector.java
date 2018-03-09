@@ -12,6 +12,10 @@ public class Collector {
     private static final int MOTOR_RIGHT_BACKWARD = -1;
     private static final int MOTOR_STOP = 0; //Drift Button
 
+
+    // SAFETY!
+    private static final double EJECTION_MAX_SPEED = .5;
+
     //The left bag motor, when looking from the rear perspective.
     private SpeedController leftMotor;
 
@@ -42,6 +46,13 @@ public class Collector {
     public void pullInRight() {
         rightMotor.set(MOTOR_RIGHT_BACKWARD);
         leftMotor.set(MOTOR_LEFT_BACKWARD);
+    }
+
+    public void eject(double speed) {
+        speed = Math.max(speed, 0);
+        speed = Math.min(speed, EJECTION_MAX_SPEED);
+        rightMotor.set(-speed);
+        leftMotor.set(-speed);
     }
 
 

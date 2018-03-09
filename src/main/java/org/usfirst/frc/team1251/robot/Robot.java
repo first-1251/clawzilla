@@ -151,8 +151,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        SwitchAuto switchAuto = new SwitchAuto(driveTrain, driveFeedback, this.driveTrainShifter);
-        switchAuto.start();
+        CrossLineAuto crossLineAuto = new CrossLineAuto(driveTrain, driveFeedback, this.driveTrainShifter);
+        crossLineAuto.start();
     }
 
     /**
