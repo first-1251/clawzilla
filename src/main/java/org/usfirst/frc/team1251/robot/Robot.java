@@ -98,7 +98,7 @@ public class Robot extends IterativeRobot {
         armevatorDefaultCmdSupplier.set(moveArmevator);
 
         // assign driver-initiated command triggers.
-        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown);
+        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, new EjectCube(clawlector));
 
 
         // Uncomment to test a controller on port 5

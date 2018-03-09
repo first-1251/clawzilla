@@ -45,7 +45,7 @@ public class Elevator {
         speed = Math.max(speed, 0);
         speed = Math.min(speed, 1);
 
-        speed = 0;
+        //speed = 0;
 
         elevatorMotor1.set(speed);
         elevatorMotor2.set(speed);
@@ -57,12 +57,12 @@ public class Elevator {
      * @param speed A value bounded by 0 and 0.05 that isn't outside those values
      */
     public void goDown(double speed) {
-        // bounds speed to between 0 and 0.05
+        // bounds speed to between 0 and 0.5
         speed = Math.max(speed, 0);
         speed = Math.min(speed, 0.05);
         speed *= -1;
 
-        speed = 0;
+        //speed = 0;
 
         elevatorMotor1.set(speed);
         elevatorMotor2.set(speed);

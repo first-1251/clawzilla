@@ -6,9 +6,9 @@ import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class Collector {
 
-    private static final int MOTOR_LEFT_FORWARD = 1; //Gas Gas Gas
+    private static final int MOTOR_LEFT_FORWARD = -1; //Gas Gas Gas
     private static final int MOTOR_RIGHT_FORWARD = 1; //Gotta step on the gas
-    private static final int MOTOR_LEFT_BACKWARD = -1;
+    private static final int MOTOR_LEFT_BACKWARD = 1;
     private static final int MOTOR_RIGHT_BACKWARD = -1;
     private static final int MOTOR_STOP = 0; //Drift Button
 
@@ -25,6 +25,9 @@ public class Collector {
     public Collector() {
         this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_MOTOR);
         this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_MOTOR);
+
+        this.leftMotor.setInverted(true);
+        this.rightMotor.setInverted(true);
     }
 
     //Below includes Motor commands for collector victor's
@@ -52,7 +55,7 @@ public class Collector {
         speed = Math.max(speed, 0);
         speed = Math.min(speed, EJECTION_MAX_SPEED);
         rightMotor.set(-speed);
-        leftMotor.set(-speed);
+        leftMotor.set(0);
     }
 
 

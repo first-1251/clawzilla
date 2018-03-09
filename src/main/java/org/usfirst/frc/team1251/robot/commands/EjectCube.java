@@ -20,4 +20,9 @@ public class EjectCube extends TimedCommand {
     protected void execute() {
         this.clawlector.getCollector().eject(EJECT_SPEED);
     }
+
+    @Override
+    protected void end() {
+        this.clawlector.getCollector().stop();
+    }
 }

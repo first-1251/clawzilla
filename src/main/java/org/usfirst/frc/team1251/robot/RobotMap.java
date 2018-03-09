@@ -22,11 +22,11 @@ package org.usfirst.frc.team1251.robot;
 public class RobotMap
 {
     private static class PwmDevices {
-        static final int MOTOR_COLLECTOR_LEFT  = 2;
-        static final int MOTOR_COLLECTOR_RIGHT = 3;
+        static final int MOTOR_COLLECTOR_LEFT  = 8;
+        static final int MOTOR_COLLECTOR_RIGHT = 7;
         static final int MOTOR_ARM = 4;
-        static final int MOTOR_ELEVATOR_1 = 5;
-        static final int MOTOR_ELEVATOR_2 = 6;
+        static final int MOTOR_ELEVATOR_1 = 1;
+        static final int MOTOR_ELEVATOR_2 = 2;
     }
 
     private static class DioDevices {
