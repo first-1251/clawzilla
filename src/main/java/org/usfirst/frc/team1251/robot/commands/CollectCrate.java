@@ -18,30 +18,31 @@ public class CollectCrate extends Command {
     }
 
     protected void execute() {
-        //todo when press enable command
-        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.CRATE_COLLECTED)
-        {
-            System.out.println("Crate Collected");
-            this.clawlector.getCollector().stop();
-            return;
-        }
-        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_LEFT)
-        {
-            System.out.println("Skewed Left");
-            this.clawlector.getCollector().pullInLeft();
-            return;
-        }
-        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_RIGHT)
-        {
-            System.out.println("Skewed Right");
-            this.clawlector.getCollector().pullInRight();
-            return;
-        }
-        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.NONE)
-        {
-            System.out.println("None");
-            this.clawlector.getCollector().pullIn();
-        }
+        // For now, always just pull the crate in.
+        this.clawlector.getCollector().pullIn();
+
+
+
+//        //todo when press enable command
+//        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.CRATE_COLLECTED)
+//        {
+//            this.clawlector.getCollector().stop();
+//            return;
+//        }
+//        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_LEFT)
+//        {
+//            this.clawlector.getCollector().pullInLeft();
+//            return;
+//        }
+//        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.SKEWED_RIGHT)
+//        {
+//            this.clawlector.getCollector().pullInRight();
+//            return;
+//        }
+//        if (this.crateDetector.getCrateState() == CrateDetector.CrateState.NONE)
+//        {
+//            this.clawlector.getCollector().pullIn();
+//        }
 
     }
     protected void end()
