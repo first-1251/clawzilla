@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.MotorFactory;
-import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
 
 // Talon SRX software manual:
@@ -38,8 +37,6 @@ public class DriveTrain extends Subsystem {
 
     public DriveTrain(DeferredCmdSupplier<Command> defaultCommand) {
         this.defaultCommand = defaultCommand;
-        //setup solenoid
-        gearShifter = new DoubleSolenoid(RobotMap.DRIVE_SHIFTER_FORWARD, RobotMap.DRIVE_SHIFTER_REVERSE);
 
         //create left motors
         leftMasterMotor = MotorFactory.initLeftDriveMotors();

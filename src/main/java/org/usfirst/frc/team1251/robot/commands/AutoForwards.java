@@ -2,42 +2,53 @@ package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1251.robot.subsystems.DriveTrainShifter;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class AutoForwards extends Command {
 
     private DriveTrain driveTrain;
+    private final DriveTrainShifter shifter;
 
     private final double GEAR_RATIO = 3.21428571428;
     private final double ALLOWABLE_ERROR = 250.0; // in encoder ticks, 1/10 of an encoder turn, 1/30 of a wheel turn
     private final double WHEEL_DIAMETER = 4.25;
+
+    private final double TICKS_PER_TURN = 500 * GEAR_RATIO; // total apples
+    private final double WHEEL_CIRCUMFERENCE = (WHEEL_DIAMETER * Math.PI); // Inches per turn | # of buckets
+    private final double TICKS_PER_INCH = TICKS_PER_TURN / WHEEL_CIRCUMFERENCE;
+
+
+
     private final double INCHES_TO_WHEEL_TURNS = 1.0 / (WHEEL_DIAMETER * Math.PI);
     private final double WHEELS_TURNS_TO_ENCODER_TICKS = 500 * GEAR_RATIO;  // 1 wheel
 
-    private double totalDistance;
+
+    private double targetTicks;
     private DriveFeedback driveFeedback;
 
     private int targetLeftPosition;
     private int targetRightPosition;
     private boolean done = false;
 
-    public AutoForwards(DriveFeedback driveFeedback, DriveTrain driveTrain, double inches) {
+    public AutoForwards(DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter shifter, double inches) {
         this.driveFeedback = driveFeedback;
         this.driveTrain = driveTrain;
+        this.shifter = shifter;
         requires(driveTrain);
 
-        totalDistance = inches * INCHES_TO_WHEEL_TURNS;
+        targetTicks = inches * TICKS_PER_INCH;
     }
 
     @Override
     protected void initialize() {
         // Always run in high gear.
-        driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
+        shifter.setGear(DriveTrainShifter.Gear.HIGH);
 
         // Calculate the new target position and capture them as integers.
         driveFeedback.updateSensorData();
-        Double targetLeftPosition = totalDistance * WHEELS_TURNS_TO_ENCODER_TICKS + driveFeedback.getLeftPosition();
-        Double targetRightPosition = totalDistance * WHEELS_TURNS_TO_ENCODER_TICKS + driveFeedback.getRightPosition();
+        Double targetLeftPosition = targetTicks + driveFeedback.getLeftPosition();
+        Double targetRightPosition = targetTicks + driveFeedback.getRightPosition();
         this.targetLeftPosition = targetLeftPosition.intValue();
         this.targetRightPosition = targetRightPosition.intValue();
 

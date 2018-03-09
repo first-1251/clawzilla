@@ -12,6 +12,7 @@ public class ShiftDriveTrain extends Command {
         this.shifter = shifter;
         this.goal = goal;
         this.setInterruptible(false);
+        requires(this.shifter);
     }
 
     @Override

@@ -17,6 +17,7 @@ public class AutoTurn extends Command {
         this.driveFeedback = driveFeedback;
         this.driveTrain = driveTrain;
         this.angleDelta = angleDelta;
+        requires(this.driveTrain);
     }
 
     @Override

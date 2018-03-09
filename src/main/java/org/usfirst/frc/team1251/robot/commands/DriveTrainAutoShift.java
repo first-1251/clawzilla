@@ -20,6 +20,7 @@ public class DriveTrainAutoShift extends Command {
     public DriveTrainAutoShift(DriveFeedback driveFeedback, DriveTrainShifter shifter) {
         this.shifter = shifter;
         this.driveFeedback = driveFeedback;
+        requires(this.shifter);
     }
 
     @Override

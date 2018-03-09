@@ -31,7 +31,6 @@ public class RobotMap
 
     private static class DioDevices {
         static final int SWITCH_COLLECTOR_LEFT = 0;
-        static final int SWITCH_COLLECTOR_MIDDLE = 1;
         static final int SWITCH_COLLECTOR_RIGHT = 2;
 
         static final int SWITCH_ARM_TOP = 3;
@@ -82,7 +81,7 @@ public class RobotMap
     public static final int ELEVATOR_SHIFTER_REVERSE = PcmDevices.SOLENOID_REVERSE_ELEVATOR_SHIFTER;
 
     public static final int CLAW_SOLENOID_FORWARD = PcmDevices.SOLENOID_FORWARD_CLAW;
-    public static final int CLAW_SOLENOID_REVERSE = PcmDevices.SOLENOID_FORWARD_CLAW;
+    public static final int CLAW_SOLENOID_REVERSE = PcmDevices.SOLENOID_REVERSE_CLAW;
 
     public static final int COLLECTOR_LEFT_MOTOR = PwmDevices.MOTOR_COLLECTOR_LEFT;
     public static final int COLLECTOR_RIGHT_MOTOR = PwmDevices.MOTOR_COLLECTOR_RIGHT;
