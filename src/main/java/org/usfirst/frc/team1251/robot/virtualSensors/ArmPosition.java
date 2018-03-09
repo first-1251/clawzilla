@@ -10,8 +10,8 @@ public class ArmPosition {
     private DigitalInput bottomSwitch;
 
     // a constant to check the input against, allowing us to change this constant IF the switches are inverted
-    private boolean TOP_PRESSED = true;
-    private boolean BOTTOM_PRESSED = true;
+    private boolean TOP_PRESSED = false;
+    private boolean BOTTOM_PRESSED = false;
 
     public ArmPosition() {
         topSwitch = new DigitalInput(RobotMap.ARM_UPPER_LIMIT_SWITCH);

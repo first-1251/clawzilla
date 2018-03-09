@@ -24,7 +24,7 @@ public class RobotMap
     private static class PwmDevices {
         static final int MOTOR_COLLECTOR_LEFT  = 8;
         static final int MOTOR_COLLECTOR_RIGHT = 7;
-        static final int MOTOR_ARM = 4;
+        static final int MOTOR_ARM = 9;
         static final int MOTOR_ELEVATOR_1 = 1;
         static final int MOTOR_ELEVATOR_2 = 2;
     }
@@ -33,8 +33,8 @@ public class RobotMap
         static final int SWITCH_COLLECTOR_LEFT = 0;
         static final int SWITCH_COLLECTOR_RIGHT = 2;
 
-        static final int SWITCH_ARM_TOP = 3;
-        static final int SWITCH_ARM_BOTTOM = 4;
+        static final int SWITCH_ARM_TOP = 4;
+        static final int SWITCH_ARM_BOTTOM = 3;
     }
 
     private static class PcmDevices {

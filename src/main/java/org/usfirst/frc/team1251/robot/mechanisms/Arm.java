@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.mechanisms;
 
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
@@ -45,7 +46,7 @@ public class Arm {
         }
 
         //Clamping value
-        speed = Math.min(speed, 1);
+        speed = Math.min(speed, 0.25);
         speed = Math.max(speed, 0);
 
         armMotor.set(speed);
@@ -62,10 +63,16 @@ public class Arm {
         }
 
         //Clamping value
-        speed = Math.min(speed, 1);
+        speed = Math.min(speed, 0.8);
         speed = Math.max(speed, 0);
 
         armMotor.set(speed * -1);
+    }
+
+    public void showSwitches() {
+        SmartDashboard.putBoolean("TOP", armPosition.isArmUp());
+        SmartDashboard.putBoolean("BOTTOM", armPosition.isArmDown());
+
     }
 
     public void stopPivot() {

@@ -42,8 +42,8 @@ public class Collector {
     }
 
     public void pullIn() {
-        rightMotor.set(MOTOR_RIGHT_FORWARD);
-        leftMotor.set(MOTOR_LEFT_FORWARD);
+        rightMotor.set(-MOTOR_RIGHT_FORWARD);
+        leftMotor.set(-MOTOR_LEFT_FORWARD);
     }
 
     public void pullInRight() {
