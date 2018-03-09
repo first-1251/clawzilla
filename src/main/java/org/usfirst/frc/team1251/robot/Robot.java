@@ -169,7 +169,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
-        this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
+        //this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
     }
 
     /**

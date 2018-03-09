@@ -43,7 +43,7 @@ public class AutoForwards extends Command {
     @Override
     protected void initialize() {
         // Always run in high gear.
-        shifter.setGear(DriveTrainShifter.Gear.HIGH);
+        //shifter.setGear(DriveTrainShifter.Gear.HIGH);
 
         // Calculate the new target position and capture them as integers.
         driveFeedback.updateSensorData();

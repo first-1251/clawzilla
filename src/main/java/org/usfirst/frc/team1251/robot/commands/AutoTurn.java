@@ -22,7 +22,7 @@ public class AutoTurn extends Command {
 
     @Override
     protected void initialize() {
-        driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
+        //driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
         desiredAngle = angleDelta + driveFeedback.getAngle();
 
         // TODO-tweak: Adjust to flavor.
