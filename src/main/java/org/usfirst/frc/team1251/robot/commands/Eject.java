@@ -1,17 +1,15 @@
 package org.usfirst.frc.team1251.robot.commands;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 
 
-public class EjectCube extends TimedCommand {
+public class Eject extends Command {
 
-    private static final double EJECT_SPEED = .25;
-    private static final double EJECT_DURATION = .25;
+    private static final double EJECT_SPEED = .40;
     private final Clawlector clawlector;
 
-    public EjectCube(Clawlector clawlector) {
-        super(EJECT_DURATION);
+    public Eject(Clawlector clawlector) {
         this.clawlector = clawlector;
         this.requires(clawlector);
     }
@@ -24,5 +22,10 @@ public class EjectCube extends TimedCommand {
     @Override
     protected void end() {
         this.clawlector.getCollector().stop();
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return false;
     }
 }

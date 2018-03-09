@@ -16,6 +16,6 @@ public class AutoFavorableSwitch extends CommandGroup {
         addSequential(new AutoTurn(driveTrain, -90, driveFeedback)); // 90 degrees counter-clockwise
 
         // Put the cube on the switch.
-        addSequential(new EjectCube(clawlector));
+        addSequential(new TimedEject(clawlector));
     }
 }

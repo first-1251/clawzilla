@@ -54,8 +54,8 @@ public class Collector {
     public void eject(double speed) {
         speed = Math.max(speed, 0);
         speed = Math.min(speed, EJECTION_MAX_SPEED);
-        rightMotor.set(-speed);
-        leftMotor.set(0);
+        rightMotor.set(speed);
+        leftMotor.set(-speed);
     }
 
 

@@ -22,7 +22,7 @@ public class AutoUnfavorableSwitch extends CommandGroup {
         addSequential(new AutoTurn(driveTrain, -90, driveFeedback)); // 90 degrees counter-clockwise
 
         // Put the block in the switch
-        addSequential(new EjectCube(clawlector));
+        addSequential(new TimedEject(clawlector));
 
     }
 }

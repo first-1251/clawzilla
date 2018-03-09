@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1251.robot.teleopInput.driverInput;
 
 import org.usfirst.frc.team1251.robot.commands.CollectCrate;
-import org.usfirst.frc.team1251.robot.commands.EjectCube;
+import org.usfirst.frc.team1251.robot.commands.Eject;
 import org.usfirst.frc.team1251.robot.commands.ShiftDriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
@@ -88,7 +88,7 @@ public class HumanInput {
     public void attachCommandTriggers(CollectCrate collectCrate,
                                       ShiftDriveTrain shiftDriveTrainUp,
                                       ShiftDriveTrain shiftDriveTrainDown,
-                                      EjectCube ejectCube) {
+                                      Eject eject) {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -97,7 +97,7 @@ public class HumanInput {
 
         // Bind buttons.
         collectCrateTrigger.whileHeld(collectCrate);
-        ejectCrateTrigger.whenPressed(ejectCube);
+        ejectCrateTrigger.whileHeld(eject);
 
         shiftDriveTrainUpTrigger.whileHeld(shiftDriveTrainUp);
         shiftDriveTrainDownTrigger.whileHeld(shiftDriveTrainDown);
