@@ -114,7 +114,7 @@ public class HumanInput {
      *     value approaches 1.
      */
     public double getArmUpSpeed() {
-        double armStick = operatorGamePad.ls().getVertical(ARM_DEAD_ZONE);
+        double armStick = operatorGamePad.rs().getVertical(ARM_DEAD_ZONE);
         if (armStick > 0){
             return armStick;
         } else {
@@ -129,7 +129,7 @@ public class HumanInput {
      *     value approaches 1.
      */
     public double getArmDownSpeed() {
-        double armStick = operatorGamePad.ls().getVertical(ARM_DEAD_ZONE);
+        double armStick = operatorGamePad.rs().getVertical(ARM_DEAD_ZONE);
         if (armStick < 0){
             return Math.abs(armStick);
         } else {
@@ -144,7 +144,7 @@ public class HumanInput {
      *
      */
     public double getElevatorUpSpeed() {
-        double elevatorStick = operatorGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
+        double elevatorStick = operatorGamePad.ls().getVertical(ELEVATOR_DEAD_ZONE);
         if (elevatorStick > 0){
             return elevatorStick;
         } else {
@@ -159,7 +159,7 @@ public class HumanInput {
      *     as the value approaches 1.
      */
     public double getElevatorDownSpeed() {
-        double elevatorStick = operatorGamePad.rs().getVertical(ELEVATOR_DEAD_ZONE);
+        double elevatorStick = operatorGamePad.ls().getVertical(ELEVATOR_DEAD_ZONE);
         if (elevatorStick < 0){
             return Math.abs(elevatorStick);
         } else {

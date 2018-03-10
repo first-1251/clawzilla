@@ -14,7 +14,7 @@ public class Collector {
 
 
     // SAFETY!
-    private static final double EJECTION_MAX_SPEED = .5;
+    private static final double EJECTION_MAX_SPEED = 1.0;
 
     //The left bag motor, when looking from the rear perspective.
     private SpeedController leftMotor;

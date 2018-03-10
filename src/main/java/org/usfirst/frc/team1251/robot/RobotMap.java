@@ -41,11 +41,11 @@ public class RobotMap
         static final int SOLENOID_FORWARD_DRIVE_SHIFTER = 0;
         static final int SOLENOID_REVERSE_DRIVE_SHIFTER = 7;
 
-        static final int SOLENOID_FORWARD_CLAW = 1;
-        static final int SOLENOID_REVERSE_CLAW = 6;
+        static final int SOLENOID_FORWARD_CLAW = 2;
+        static final int SOLENOID_REVERSE_CLAW = 5;
 
-        static final int SOLENOID_FORWARD_ELEVATOR_SHIFTER = 2;
-        static final int SOLENOID_REVERSE_ELEVATOR_SHIFTER = 5;
+        static final int SOLENOID_FORWARD_ELEVATOR_SHIFTER = 1;
+        static final int SOLENOID_REVERSE_ELEVATOR_SHIFTER = 6;
     }
 
     private static class CanDevices {

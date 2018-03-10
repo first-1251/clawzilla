@@ -6,7 +6,7 @@ import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
 
 public class Eject extends Command {
 
-    private static final double EJECT_SPEED = .40;
+    private static final double EJECT_SPEED = 1.0;
     private final Clawlector clawlector;
 
     public Eject(Clawlector clawlector) {

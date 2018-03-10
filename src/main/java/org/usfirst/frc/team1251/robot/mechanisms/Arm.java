@@ -15,7 +15,7 @@ public class Arm {
 
     private ArmPosition armPosition;
 
-    private static final boolean isInverted = false;
+    private static final boolean isInverted = true;
 
     public Arm(ArmPosition armPosition) {
 
@@ -43,10 +43,11 @@ public class Arm {
         // Stop moving if the arm is already fully up.
         if (this.armPosition.isArmUp()) {
             stopPivot();
+            return;
         }
 
         //Clamping value
-        speed = Math.min(speed, 0.25);
+        speed = Math.min(speed, 0.8);
         speed = Math.max(speed, 0);
 
         armMotor.set(speed);
@@ -60,10 +61,11 @@ public class Arm {
         // Stop moving if the arm is already fully down.
         if (this.armPosition.isArmDown()) {
             stopPivot();
+            return;
         }
 
         //Clamping value
-        speed = Math.min(speed, 0.8);
+        speed = Math.min(speed, 0.25);
         speed = Math.max(speed, 0);
 
         armMotor.set(speed * -1);
