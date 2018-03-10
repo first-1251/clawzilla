@@ -18,6 +18,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
+import org.usfirst.frc.team1251.robot.triggers.ArmDownJustNowTrigger;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
@@ -97,6 +98,13 @@ public class Robot extends IterativeRobot {
         DriveTrainAutoShift driveTrainAutoShift = new DriveTrainAutoShift(driveFeedback, driveTrainShifter);
         ShiftDriveTrain shiftDriveTrainUp = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.HIGH);
         ShiftDriveTrain shiftDriveTrainDown = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.LOW);
+
+        // Create a command to slow arm decent and attach it to a trigger which indicates that the arm is down as
+        // far as it is supposed to go.
+        SlowArmDecent slowArmDecent = new SlowArmDecent(armevator);
+        ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
+        armDownJustNowTrigger.whenActive(slowArmDecent);
+
 
         // Assign default commands
         armevatorDefaultCmdSupplier.set(moveArmevator);
