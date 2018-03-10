@@ -111,7 +111,7 @@ public class Robot extends IterativeRobot {
 
         // assign driver-initiated command triggers.
         this.openClaw = new OpenClaw(clawlector);
-        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, new Eject(clawlector), this.openClaw);
+        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, new Eject(clawlector, humanInput), this.openClaw);
 
 
         // Uncomment to test a controller on port 5

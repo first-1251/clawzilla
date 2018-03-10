@@ -36,7 +36,7 @@ public class HumanInput {
     /**
      * The game pad which is used to interact with the crates (e.g. "power cubes").
      */
-    private final GamePad operatorGamePad;
+    public final GamePad operatorGamePad;
 
     /**
      * A utility for smoothing out the stick values used for setting the left wheel speed.
