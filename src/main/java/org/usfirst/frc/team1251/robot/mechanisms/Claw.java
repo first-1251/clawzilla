@@ -1,29 +1,24 @@
 package org.usfirst.frc.team1251.robot.mechanisms;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class Claw {
 
-    private Solenoid clawSolenoidLeft, clawSolenoidRight;
+    private DoubleSolenoid clawSolenoid;
 
     public Claw(){
-        clawSolenoidLeft = new Solenoid(RobotMap.clawSolenoidLeft);
-        clawSolenoidRight = new Solenoid(RobotMap.clawSolenoidRight);
-
+        clawSolenoid = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD, RobotMap.CLAW_SOLENOID_REVERSE);
     }
 
     //Pistons set to default state and opens
     public void openClaw (){
-        clawSolenoidLeft.set(false);
-        clawSolenoidRight.set(false);
+        clawSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     //Pistons extend to close claw
     public void closeClaw () {
-        clawSolenoidLeft.set(true);
-        clawSolenoidRight.set(true);
-
+        clawSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
 

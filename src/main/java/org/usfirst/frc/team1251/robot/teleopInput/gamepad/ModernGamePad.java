@@ -25,7 +25,7 @@ public class ModernGamePad extends GamePad {
         this.rt = new AnalogTriggerButton(3,rawDevice);
 
         this.ls = new Stick(0, 1, rawDevice);
-        this.rs = new Stick(2, 3, rawDevice);
+        this.rs = new Stick(4, 5, rawDevice);
     }
 
     @Override

@@ -1,57 +1,29 @@
 package org.usfirst.frc.team1251.robot.virtualSensors;
 
-import org.usfirst.frc.team1251.robot.Robot;
+import edu.wpi.first.wpilibj.DigitalInput;
+import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class ArmPosition {
-   // private Potentiometer armPotentiometer;
-    private static final int ARM_UP_DEGREES = 120;
-    private static final int ARM_DOWN_DEGREES = 70;
 
-    public ArmPosition(){
+    // limit switches
+    private DigitalInput topSwitch;
+    private DigitalInput bottomSwitch;
 
-        //Arm potentiometer
-        //Calculates range of motion for arm
-      //  armPotentiometer = new AnalogPotentiometer(0,360,30);
+    // a constant to check the input against, allowing us to change this constant IF the switches are inverted
+    private boolean TOP_PRESSED = false;
+    private boolean BOTTOM_PRESSED = false;
 
-
+    public ArmPosition() {
+        topSwitch = new DigitalInput(RobotMap.ARM_UPPER_LIMIT_SWITCH);
+        bottomSwitch = new DigitalInput(RobotMap.ARM_LOWER_LIMIT_SWITCH);
     }
 
-
-    public boolean isArmUp(){
-        return Robot.oi.driverPad.y().isPressed();
-
-
-
-       /* double potDegrees = armPotentiometer.get();
-        if (potDegrees >= ARM_UP_DEGREES ){
-            System.out.println("Arm up");
-            return true;
-
-        } else {
-            return false;
-
-        }
-*/
-
+    public boolean isArmUp() {
+        return topSwitch.get() == TOP_PRESSED;
     }
 
-    public boolean isArmDown(){
-        return Robot.oi.driverPad.a().isPressed();
-
-        /*
-        double potDegrees = armPotentiometer.get();
-        if (potDegrees <= ARM_DOWN_DEGREES){
-            System.out.println("Arm down");
-            return true;
-
-        } else {
-            return false;
-
-        }*/
-
+    public boolean isArmDown() {
+        return bottomSwitch.get() == BOTTOM_PRESSED;
     }
-
-
-
 
 }

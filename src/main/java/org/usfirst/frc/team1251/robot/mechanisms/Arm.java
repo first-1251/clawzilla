@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.mechanisms;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
@@ -14,16 +15,15 @@ public class Arm {
 
     private ArmPosition armPosition;
 
-    private static final int POLARITY = 1;
+    private static final boolean isInverted = true;
 
     public Arm(ArmPosition armPosition) {
 
         //Arm pivot motor
-        armMotor = new Victor(RobotMap.armMotor);
+        armMotor = new Victor(RobotMap.ARM_MOTOR);
+        armMotor.setInverted(isInverted);
 
         this.armPosition = armPosition;
-
-
     }
 
 
@@ -38,47 +38,47 @@ public class Arm {
      *              If # > 1, will be treated as 1
      */
 
-    public void pivotUp(double speed){
+    public void pivotUp(double speed) {
+
+        // Stop moving if the arm is already fully up.
+        if (this.armPosition.isArmUp()) {
+            stopPivot();
+            return;
+        }
 
         //Clamping value
-        speed = Math.min(speed, 1);
+        speed = Math.min(speed, 0.8);
         speed = Math.max(speed, 0);
 
-        speed = speed * POLARITY;
-
-        //System.out.println(this.armPosition);
-        if (this.armPosition.isArmUp()){
-            armMotor.set(0);
-        } else {
-            armMotor.set(speed);
+        armMotor.set(speed);
     }
-
-           }
 
 
     //Arm tilts down
     //Arm should pivot down, no button pressed
-    public void pivotDown(double speed){
+    public void pivotDown(double speed) {
+
+        // Stop moving if the arm is already fully down.
+        if (this.armPosition.isArmDown()) {
+            stopPivot();
+            return;
+        }
 
         //Clamping value
-       speed = Math.min(speed, 1);
-       speed = Math.max(speed, 0);
+        speed = Math.min(speed, 0.25);
+        speed = Math.max(speed, 0);
 
-       //Speed multiplied by -1 so motor goes in reverse
-       speed = speed * -POLARITY;
+        armMotor.set(speed * -1);
+    }
 
-        if (this.armPosition.isArmDown()){
-            armMotor.set(0);
-        } else {
-            armMotor.set(speed);
-        }
+    public void showSwitches() {
+        SmartDashboard.putBoolean("TOP", armPosition.isArmUp());
+        SmartDashboard.putBoolean("BOTTOM", armPosition.isArmDown());
 
     }
 
     public void stopPivot() {
         armMotor.set(0);
-
     }
-
 
 }

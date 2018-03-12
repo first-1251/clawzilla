@@ -2,15 +2,14 @@ package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.Armevator;
-import org.usfirst.frc.team1251.robot.teleopInput.driverInput.DriverInput;
-import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
+import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 
 public class MoveArmevator extends Command {
-    private DriverInput driverInput;
+    private HumanInput humanInput;
     private final Armevator armevator;
 
-    public MoveArmevator(DriverInput driverInput, Armevator armevator) {
-        this.driverInput = driverInput;
+    public MoveArmevator(HumanInput humanInput, Armevator armevator) {
+        this.humanInput = humanInput;
         this.armevator = armevator;
         requires(this.armevator);
     }
@@ -22,8 +21,8 @@ public class MoveArmevator extends Command {
 
     @Override
     protected void execute() {
-        double armUpSpeed = this.driverInput.getArmUpSpeed();
-        double armDownSpeed = this.driverInput.getArmDownSpeed();
+        double armUpSpeed = this.humanInput.getArmUpSpeed();
+        double armDownSpeed = this.humanInput.getArmDownSpeed();
 
         if (armUpSpeed > 0) {
             this.armevator.getArm().pivotUp(armUpSpeed);
@@ -33,21 +32,21 @@ public class MoveArmevator extends Command {
             this.armevator.getArm().stopPivot();
         }
 
-        double elevatorUpSpeed = this.driverInput.getElevatorUpSpeed();
-        double elevatorDownSpeed = this.driverInput.getElevatorDownSpeed();
+        double elevatorUpSpeed = this.humanInput.getElevatorUpSpeed();
+        double elevatorDownSpeed = this.humanInput.getElevatorDownSpeed();
 
         if (elevatorUpSpeed > 0) {
             this.armevator.getElevator().goUp(elevatorUpSpeed);
         } else if (elevatorDownSpeed > 0) {
             this.armevator.getElevator().goDown(elevatorDownSpeed);
         } else {
-            this.armevator.getElevator().stopPlease();
+            this.armevator.getElevator().stop();
         }
     }
 
     @Override
     public void end() {
-        this.armevator.getElevator().stopPlease();
+        this.armevator.getElevator().stop();
         this.armevator.getArm().stopPivot();
     }
 

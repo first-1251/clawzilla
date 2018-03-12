@@ -28,6 +28,11 @@ public class Armevator extends Subsystem{
     }
 
     @Override
+    public void periodic() {
+        arm.showSwitches();
+    }
+
+    @Override
     protected void initDefaultCommand() {
         setDefaultCommand(this.defaultCommand.get());
     }

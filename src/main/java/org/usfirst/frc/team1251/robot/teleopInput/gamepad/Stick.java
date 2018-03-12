@@ -31,23 +31,6 @@ public class Stick {
      */
     public double getVertical() {
         return this.getVertical(.05);
-
-    }
-
-    /**
-     * Provides the current vertical position of the stick with the option to invert it.
-     * @param invert if true, then operated like a flight stick, where down on the stick is an
-     * opposite value
-     * @return A value between -1 and 1 where < 0 represents a downward position and +1 represents an
-     *         upward position if invert is false otherwise the values will be multiplied by -1.
-     */
-    public double getVertical(boolean invert)
-    {
-        if (invert) {
-            return rawDevice.getRawAxis(this.verticalAxisID);
-        } else {
-            return this.getVertical();
-        }
     }
 
     /**
@@ -92,33 +75,27 @@ public class Stick {
     }
 
     /**
-     * A helper which will apply a deadZone against a given axis value.
+     * A helper which will apply a deadZone against a given axis value. Any value within the dead zone (positive or
+     * negative) will be ignored. Any value which extends beyond the dead zone will be stretched back out into a
+     * value between 0 and 1.
      *
      * @param deadZone The deadZone to apply. Dead zones apply in all directions, so the absolute value of this
      *                 parameter will be used.
      * @param axisValue The axis value to apply the deadZone to.
      *
-     * @return The adjusted axis value. The original value is always adjusted towards 0 but will never be adjusted
-     *         beyond 0. If the original value is positive, the return value will be positive or zero; similarly, if
-     *         the original value is negative, the return value will be negative or zero.
+     * @return The adjusted axis value.
      */
     private double applyDeadZone(double deadZone, double axisValue) {
-        // Simplest case first... if axis is at zero, then the deadZone is a non-factor.
-        if (axisValue == 0) {
-            return 0;
+
+        // Lifted logic from `DifferentialDrive.applyDeadBand()`
+        if (Math.abs(axisValue) > deadZone) {
+            if (axisValue > 0.0) {
+                return (axisValue - deadZone) / (1.0 - deadZone);
+            } else {
+                return (axisValue + deadZone) / (1.0 - deadZone);
+            }
+        } else {
+            return 0.0;
         }
-
-        // deadZone extends in all directions, so use its absolute value.
-        deadZone = Math.abs(deadZone);
-
-        // Check to see if the axis value is negative
-        if (axisValue < 0) {
-            // Add the deadZone to adjust towards zero, but don't let it exceed 0.
-            return Math.min(axisValue + deadZone, 0);
-        }
-
-        // Not zero and not negative... It is safe to assume that the axis value is positive.
-        // Subtract the deadZone from the axis value to adjust towards zero, but don't let it fall below 0.
-        return Math.max(axisValue - deadZone, 0);
     }
 }
