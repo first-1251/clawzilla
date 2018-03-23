@@ -32,7 +32,7 @@ public class AutoForwards extends Command {
     private boolean done = false;
 
     // Number of inches to adjust the target distance.
-    private double targetTweak = 6;
+    private double targetTweak = 0;
 
     public AutoForwards(DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter shifter, double inches) {
         this.driveFeedback = driveFeedback;
@@ -46,7 +46,7 @@ public class AutoForwards extends Command {
     @Override
     protected void initialize() {
         // Always run in high gear.
-        //shifter.setGear(DriveTrainShifter.Gear.HIGH);
+        shifter.setGear(DriveTrainShifter.Gear.HIGH);
 
         // Calculate the new target position and capture them as integers.
         driveFeedback.updateSensorData();

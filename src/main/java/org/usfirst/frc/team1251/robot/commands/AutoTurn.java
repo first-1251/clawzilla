@@ -23,10 +23,11 @@ public class AutoTurn extends Command {
     @Override
     protected void initialize() {
         //driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
+        driveFeedback.updateSensorData();
         desiredAngle = angleDelta + driveFeedback.getAngle();
 
         // TODO-tweak: Adjust to flavor.
-        this.finishedThreshold = 1.0/3.0 * Math.abs(desiredAngle);
+        this.finishedThreshold = 1.0/7.9 * Math.abs(desiredAngle);
         done = false;
     }
 
@@ -51,6 +52,7 @@ public class AutoTurn extends Command {
     }
 
     private boolean isFinishedTurning() {
-        return Math.abs(Math.abs(driveFeedback.getAngle()) - Math.abs(desiredAngle)) >= this.finishedThreshold;
+        driveFeedback.updateSensorData();
+        return Math.abs(Math.abs(driveFeedback.getAngle()) - Math.abs(desiredAngle)) < this.finishedThreshold;
     }
 }

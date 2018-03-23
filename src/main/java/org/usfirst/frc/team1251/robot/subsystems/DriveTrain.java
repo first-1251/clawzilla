@@ -16,9 +16,9 @@ import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
 public class DriveTrain extends Subsystem {
 
     //PID Values for Drivetrain
-    private final double K_P = 0.1105;
+    private final double K_P = 0.11;
     private final double K_I = 0;
-    private final double K_D = 0.5;
+    private final double K_D = 0.3;
     private final double K_F = 0;
 
     public static final DoubleSolenoid.Value LOW_GEAR = DoubleSolenoid.Value.kReverse;
