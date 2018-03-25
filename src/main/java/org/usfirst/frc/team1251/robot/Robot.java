@@ -86,6 +86,10 @@ public class Robot extends IterativeRobot {
         // set it manually when tele-op initializes. Feed in an empty command supplier.
         DriveTrainShifter driveTrainShifter = new DriveTrainShifter(new DeferredCmdSupplier<>());
 
+        // We will never provide a default command to be used during initialization for the ElevatorShifter -- we will
+        // set it manually when tele-op initializes. Feed in an empty command supplier.
+        ElevatorShifter elevatorShifter = new ElevatorShifter(new DeferredCmdSupplier<>());
+
         Clawlector clawlector = new Clawlector(claw, collector);
         this.closeClaw = new CloseClaw(clawlector);
         clawlector.setDefaultCommand(closeClaw);
@@ -98,6 +102,8 @@ public class Robot extends IterativeRobot {
         DriveTrainAutoShift driveTrainAutoShift = new DriveTrainAutoShift(driveFeedback, driveTrainShifter);
         ShiftDriveTrain shiftDriveTrainUp = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.HIGH);
         ShiftDriveTrain shiftDriveTrainDown = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.LOW);
+        ShiftElevator shiftElevatorUp = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.HIGH);
+        ShiftElevator shiftElevatorDown = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.LOW);
 
         // Create a command to slow arm decent and attach it to a trigger which indicates that the arm is down as
         // far as it is supposed to go.
@@ -109,7 +115,7 @@ public class Robot extends IterativeRobot {
 
         // assign driver-initiated command triggers.
         this.openClaw = new OpenClaw(clawlector);
-        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, new Eject(clawlector, humanInput), this.openClaw);
+        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, shiftElevatorUp, shiftElevatorDown, new Eject(clawlector, humanInput), this.openClaw);
 
         // Attach sensor-based command triggers
         ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
