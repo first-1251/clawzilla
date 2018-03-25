@@ -1,23 +1,29 @@
-package org.usfirst.frc.team1251.robot.mechanisms;
+package org.usfirst.frc.team1251.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.RobotMap;
+import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
 /**
  * Potentiometer(port #, degree range, offset)
  *
  */
-public class Arm {
+public class Arm extends Subsystem {
 
+    private final DeferredCmdSupplier<Command> defaultCommand;
     private Victor armMotor;
 
     private ArmPosition armPosition;
 
     private static final boolean isInverted = true;
 
-    public Arm(ArmPosition armPosition) {
+    public Arm(ArmPosition armPosition, DeferredCmdSupplier<Command> defaultCommand) {
+
+        this.defaultCommand = defaultCommand;
 
         //Arm pivot motor
         armMotor = new Victor(RobotMap.ARM_MOTOR);
@@ -81,4 +87,8 @@ public class Arm {
         armMotor.set(0);
     }
 
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(this.defaultCommand.get());
+    }
 }
