@@ -1,21 +1,21 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
+import org.usfirst.frc.team1251.robot.subsystems.Claw;
 
 public class OpenClaw extends Command {
 
-    private final Clawlector clawlector;
+    private final Claw claw;
 
-    public OpenClaw(Clawlector clawlector) {
+    public OpenClaw(Claw claw) {
 
-        this.clawlector = clawlector;
-        requires(clawlector);
+        this.claw = claw;
+        requires(claw);
     }
 
     @Override
     protected void execute() {
-        this.clawlector.getClaw().openClaw();
+        this.claw.getClaw().openClaw();
     }
 
     @Override

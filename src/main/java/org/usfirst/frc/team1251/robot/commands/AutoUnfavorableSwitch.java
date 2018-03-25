@@ -1,13 +1,11 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrainShifter;
+import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class AutoUnfavorableSwitch extends CommandGroup {
-    public AutoUnfavorableSwitch(Clawlector clawlector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
+    public AutoUnfavorableSwitch(Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
 
         // Drive far enough to pass the switch and clear the line of cubes
         addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 248)); // 20' 3"
@@ -22,7 +20,7 @@ public class AutoUnfavorableSwitch extends CommandGroup {
         addSequential(new AutoTurn(driveTrain, -90, driveFeedback)); // 90 degrees counter-clockwise
 
         // Put the block in the switch
-        addSequential(new TimedEject(clawlector));
+        addSequential(new TimedEject(collector));
 
     }
 }
