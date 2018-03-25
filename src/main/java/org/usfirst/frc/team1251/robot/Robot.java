@@ -86,7 +86,7 @@ public class Robot extends IterativeRobot {
         // set it manually when tele-op initializes. Feed in an empty command supplier.
         DriveTrainShifter driveTrainShifter = new DriveTrainShifter(new DeferredCmdSupplier<>());
 
-        // We will never provide a default command to be used during initialization for the DriveTrainShifter -- we will
+        // We will never provide a default command to be used during initialization for the ElevatorShifter -- we will
         // set it manually when tele-op initializes. Feed in an empty command supplier.
         ElevatorShifter elevatorShifter = new ElevatorShifter(new DeferredCmdSupplier<>());
 
