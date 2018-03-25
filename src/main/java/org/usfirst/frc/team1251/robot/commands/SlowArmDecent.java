@@ -1,27 +1,27 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
-import org.usfirst.frc.team1251.robot.subsystems.Armevator;
+import org.usfirst.frc.team1251.robot.subsystems.Arm;
 
 public class SlowArmDecent extends TimedCommand {
-    private final Armevator armevator;
+    private final Arm arm;
     private static final double DURATION = .5;
     private static final double SPEED = .1;
 
 
-    public SlowArmDecent(Armevator armevator) {
+    public SlowArmDecent(Arm arm) {
         super(DURATION);
-        this.armevator = armevator;
-        requires(armevator);
+        this.arm = arm;
+        requires(arm);
     }
 
     @Override
     protected void execute() {
-        this.armevator.getArm().pivotUp(SPEED);
+        this.arm.pivotUp(SPEED);
     }
 
     @Override
     protected void end() {
-        this.armevator.getArm().stopPivot();
+        this.arm.stopPivot();
     }
 }

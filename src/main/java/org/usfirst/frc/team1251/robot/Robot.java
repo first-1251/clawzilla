@@ -9,10 +9,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.*;
-import org.usfirst.frc.team1251.robot.mechanisms.Arm;
 import org.usfirst.frc.team1251.robot.mechanisms.Claw;
 import org.usfirst.frc.team1251.robot.mechanisms.Collector;
-import org.usfirst.frc.team1251.robot.mechanisms.Elevator;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
@@ -69,15 +67,16 @@ public class Robot extends IterativeRobot {
         DriveFeedback driveFeedback = new DriveFeedback();
 
         // Create mechanisms (used by subsystems)
-        Arm arm = new Arm(armPosition);
-        Elevator elevator = new Elevator(elevatorPosition);
         Collector collector = new Collector();
         Claw claw = new Claw();
 
         // Create subsystems (used by commands)
         // Use `DeferredCmdSupplier` to handle the chicken/egg problem with default commands
-        DeferredCmdSupplier<Command> armevatorDefaultCmdSupplier = new DeferredCmdSupplier<>();
-        Armevator armevator = new Armevator(elevator, arm, armevatorDefaultCmdSupplier);
+        DeferredCmdSupplier<Command> armDefaultCmdSupplier = new DeferredCmdSupplier<>();
+        Arm arm = new Arm(armPosition, armDefaultCmdSupplier);
+
+        DeferredCmdSupplier<Command> elevatorDefaultCmdSupplier = new DeferredCmdSupplier<>();
+        Elevator elevator = new Elevator(elevatorPosition, elevatorDefaultCmdSupplier);
 
         // We will never provide a default command to be used during initialization for the DriveTrain or the
         // DriveTrainShifter -- we will set it manually when tele-op initializes. Feed in an empty command supplier.
@@ -93,7 +92,8 @@ public class Robot extends IterativeRobot {
 
         // Create commands
         CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
-        MoveArmevator moveArmevator = new MoveArmevator(humanInput, armevator);
+        TeleopMoveArm moveArm = new TeleopMoveArm(humanInput, arm);
+        TeleopMoveElevator moveElevator = new TeleopMoveElevator(humanInput, elevator);
         TeleopDrive teleopDrive = new TeleopDrive(humanInput, driveTrain, driveFeedback);
         DriveTrainAutoShift driveTrainAutoShift = new DriveTrainAutoShift(driveFeedback, driveTrainShifter);
         ShiftDriveTrain shiftDriveTrainUp = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.HIGH);
@@ -101,18 +101,19 @@ public class Robot extends IterativeRobot {
 
         // Create a command to slow arm decent and attach it to a trigger which indicates that the arm is down as
         // far as it is supposed to go.
-        SlowArmDecent slowArmDecent = new SlowArmDecent(armevator);
-        ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
-        armDownJustNowTrigger.whenActive(slowArmDecent);
-
+        SlowArmDecent slowArmDecent = new SlowArmDecent(arm);
 
         // Assign default commands
-        armevatorDefaultCmdSupplier.set(moveArmevator);
+        armDefaultCmdSupplier.set(moveArm);
+        elevatorDefaultCmdSupplier.set(moveElevator);
 
         // assign driver-initiated command triggers.
         this.openClaw = new OpenClaw(clawlector);
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, new Eject(clawlector, humanInput), this.openClaw);
 
+        // Attach sensor-based command triggers
+        ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
+        armDownJustNowTrigger.whenActive(slowArmDecent);
 
         // Uncomment to test a controller on port 5
         //initGamepadTest();
