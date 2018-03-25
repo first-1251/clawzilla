@@ -42,7 +42,7 @@ public class MotorFactory {
         public int VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW = 64;
 
         //public double VOLTAGE_COMPENSATION_RAMP_RATE = 0;
-        public double RAMP_TIME = 0.5;
+        public double RAMP_TIME = 0.2;
     }
 
     public static final Configuration kDefaultConfiguration = new Configuration();

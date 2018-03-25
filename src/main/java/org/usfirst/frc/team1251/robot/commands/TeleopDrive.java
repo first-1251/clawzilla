@@ -31,14 +31,14 @@ public class TeleopDrive extends Command {
         // Update sensor data, just to force data to the driver station shuffleboard
         driveFeedback.updateSensorData();
 
-        // Cube the human input to make movement at the extremes more dramatic.
-        double leftCubed = humanInput.getLeftWheelSpeed();
-        double rightCubed = humanInput.getRightWheelSpeed();
-        leftCubed *= leftCubed * leftCubed;
-        rightCubed *= rightCubed * rightCubed;
+        // power to the 5th the human input to make movement at the extremes more dramatic.
+        double leftPow5 = humanInput.getLeftWheelSpeed();
+        double rightPow5 = humanInput.getRightWheelSpeed();
+        leftPow5 *= leftPow5 * leftPow5 * leftPow5 * leftPow5;
+        rightPow5 *= rightPow5 * rightPow5 * rightPow5 * rightPow5;
 
         // setSpeed motors
-        driveTrain.setSpeed(leftCubed, rightCubed);
+        driveTrain.setSpeed(leftPow5, rightPow5);
     }
 
     @Override

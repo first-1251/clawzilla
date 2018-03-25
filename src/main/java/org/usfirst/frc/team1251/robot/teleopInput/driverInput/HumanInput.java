@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1251.robot.teleopInput.driverInput;
 
-import org.usfirst.frc.team1251.robot.commands.*;
+import org.usfirst.frc.team1251.robot.commands.CollectCrate;
+import org.usfirst.frc.team1251.robot.commands.Eject;
+import org.usfirst.frc.team1251.robot.commands.OpenClaw;
+import org.usfirst.frc.team1251.robot.commands.ShiftDriveTrain;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
 
@@ -25,7 +28,7 @@ public class HumanInput {
     /**
      * The number of input samples to use for smoothing out wheel speed input.
      */
-    private final static int WHEEL_SPEED_SMOOTHING_SAMPLES = 4;
+    private final static int WHEEL_SPEED_SMOOTHING_SAMPLES = 1;
 
     /**
      * The game pad which is used to move the robot around the field.
