@@ -13,8 +13,6 @@ public class Collector extends Subsystem {
     private static final int MOTOR_RIGHT_BACKWARD = -1;
     private static final int MOTOR_STOP = 0; //Drift Button
 
-    private Collector collector;
-
 
     // SAFETY!
     private static final double EJECTION_MAX_SPEED = 1.0;
@@ -32,11 +30,6 @@ public class Collector extends Subsystem {
         this.leftMotor.setInverted(true);
         this.rightMotor.setInverted(true);
 
-        this.collector = collector;
-    }
-
-    public Collector getCollector() {
-        return collector;
     }
 
     @Override

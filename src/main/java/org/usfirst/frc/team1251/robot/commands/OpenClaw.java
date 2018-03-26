@@ -15,7 +15,7 @@ public class OpenClaw extends Command {
 
     @Override
     protected void execute() {
-        this.claw.getClaw().openClaw();
+        this.claw.openClaw();
     }
 
     @Override

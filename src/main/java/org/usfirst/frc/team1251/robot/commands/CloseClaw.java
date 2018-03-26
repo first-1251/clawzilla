@@ -15,7 +15,7 @@ public class CloseClaw extends Command {
 
     @Override
     protected void execute() {
-        this.claw.getClaw().closeClaw();
+        this.claw.closeClaw();
     }
 
     @Override

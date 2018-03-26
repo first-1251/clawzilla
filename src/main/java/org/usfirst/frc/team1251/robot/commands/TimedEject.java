@@ -18,11 +18,11 @@ public class TimedEject extends TimedCommand {
 
     @Override
     protected void execute() {
-        this.collector.getCollector().eject(EJECT_SPEED);
+        this.collector.eject(EJECT_SPEED);
     }
 
     @Override
     protected void end() {
-        this.collector.getCollector().stop();
+        this.collector.stop();
     }
 }

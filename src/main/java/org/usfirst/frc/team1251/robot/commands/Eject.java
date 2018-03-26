@@ -29,19 +29,19 @@ public class Eject extends Command {
 
     private void _manageClaw() {
         if (humanInput.operatorGamePad.rt().isPressed()) {
-            this.claw.getClaw().openClaw();
+            this.claw.openClaw();
         }
     }
 
     @Override
     protected void execute() {
         this._manageClaw();
-        this.collector.getCollector().eject(EJECT_SPEED);
+        this.collector.eject(EJECT_SPEED);
     }
 
     @Override
     protected void end() {
-        this.collector.getCollector().stop();
+        this.collector.stop();
     }
 
     @Override

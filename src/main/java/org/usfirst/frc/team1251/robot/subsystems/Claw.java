@@ -7,11 +7,9 @@ import org.usfirst.frc.team1251.robot.RobotMap;
 public class Claw extends Subsystem{
 
     private DoubleSolenoid clawSolenoid;
-    private Claw claw;
 
     public Claw(){
         clawSolenoid = new DoubleSolenoid(RobotMap.CLAW_SOLENOID_FORWARD, RobotMap.CLAW_SOLENOID_REVERSE);
-        this.claw = claw;
     }
 
     @Override
@@ -28,10 +26,5 @@ public class Claw extends Subsystem{
     public void closeClaw () {
         clawSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
-
-    public Claw getClaw() {
-        return claw;
-    }
-
 
 }
