@@ -1,20 +1,24 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team1251.robot.subsystems.Clawlector;
+import org.usfirst.frc.team1251.robot.subsystems.Claw;
+import org.usfirst.frc.team1251.robot.subsystems.Collector;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 
 
 public class Eject extends Command {
 
     private static final double EJECT_SPEED = 1.0;
-    private final Clawlector clawlector;
+    private final Claw claw;
+    private final Collector collector;
     private final HumanInput humanInput;
 
-    public Eject(Clawlector clawlector, HumanInput humanInput) {
-        this.clawlector = clawlector;
+    public Eject(Claw claw, Collector collector, HumanInput humanInput) {
+        this.claw = claw;
+        this.collector = collector;
         this.humanInput = humanInput;
-        this.requires(clawlector);
+        this.requires(claw);
+        this.requires(collector);
         this.setInterruptible(false);
     }
 
@@ -25,19 +29,19 @@ public class Eject extends Command {
 
     private void _manageClaw() {
         if (humanInput.operatorGamePad.rt().isPressed()) {
-            this.clawlector.getClaw().openClaw();
+            this.claw.openClaw();
         }
     }
 
     @Override
     protected void execute() {
         this._manageClaw();
-        this.clawlector.getCollector().eject(EJECT_SPEED);
+        this.collector.eject(EJECT_SPEED);
     }
 
     @Override
     protected void end() {
-        this.clawlector.getCollector().stop();
+        this.collector.stop();
     }
 
     @Override

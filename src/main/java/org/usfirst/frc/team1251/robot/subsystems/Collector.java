@@ -1,10 +1,11 @@
-package org.usfirst.frc.team1251.robot.mechanisms;
+package org.usfirst.frc.team1251.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
-public class Collector {
+public class Collector extends Subsystem {
 
     private static final int MOTOR_LEFT_FORWARD = -1; //Gas Gas Gas
     private static final int MOTOR_RIGHT_FORWARD = 1; //Gotta step on the gas
@@ -28,6 +29,12 @@ public class Collector {
 
         this.leftMotor.setInverted(true);
         this.rightMotor.setInverted(true);
+
+    }
+
+    @Override
+    protected void initDefaultCommand() {
+
     }
 
     //Below includes Motor commands for collector victor's

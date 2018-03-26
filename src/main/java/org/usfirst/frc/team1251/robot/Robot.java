@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.*;
-import org.usfirst.frc.team1251.robot.mechanisms.Claw;
-import org.usfirst.frc.team1251.robot.mechanisms.Collector;
+import org.usfirst.frc.team1251.robot.subsystems.Claw;
+import org.usfirst.frc.team1251.robot.subsystems.Collector;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
@@ -90,12 +90,11 @@ public class Robot extends IterativeRobot {
         // set it manually when tele-op initializes. Feed in an empty command supplier.
         ElevatorShifter elevatorShifter = new ElevatorShifter(new DeferredCmdSupplier<>());
 
-        Clawlector clawlector = new Clawlector(claw, collector);
-        this.closeClaw = new CloseClaw(clawlector);
-        clawlector.setDefaultCommand(closeClaw);
+        this.closeClaw = new CloseClaw(claw);
+        claw.setDefaultCommand(closeClaw);
 
         // Create commands
-        CollectCrate collectCrate = new CollectCrate(crateDetector, clawlector);
+        CollectCrate collectCrate = new CollectCrate(crateDetector, collector);
         TeleopMoveArm moveArm = new TeleopMoveArm(humanInput, arm);
         TeleopMoveElevator moveElevator = new TeleopMoveElevator(humanInput, elevator);
         TeleopDrive teleopDrive = new TeleopDrive(humanInput, driveTrain, driveFeedback);
@@ -114,8 +113,8 @@ public class Robot extends IterativeRobot {
         elevatorDefaultCmdSupplier.set(moveElevator);
 
         // assign driver-initiated command triggers.
-        this.openClaw = new OpenClaw(clawlector);
-        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, shiftElevatorUp, shiftElevatorDown, new Eject(clawlector, humanInput), this.openClaw);
+        this.openClaw = new OpenClaw(claw);
+        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, shiftElevatorUp, shiftElevatorDown, new Eject(claw, collector, humanInput), this.openClaw);
 
         // Attach sensor-based command triggers
         ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
