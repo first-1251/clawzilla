@@ -43,8 +43,6 @@ public class Robot extends IterativeRobot {
     private TeleopDrive teleopDriveCmd;
     private DriveTrainAutoShift driveTrainAutoShift;
     private DriveTrainShifter driveTrainShifter;
-    private OpenClaw openClaw;
-    private CloseClaw closeClaw;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -66,10 +64,6 @@ public class Robot extends IterativeRobot {
         CrateDetector crateDetector = new CrateDetector();
         DriveFeedback driveFeedback = new DriveFeedback();
 
-        // Create mechanisms (used by subsystems)
-        Collector collector = new Collector();
-        Claw claw = new Claw();
-
         // Create subsystems (used by commands)
         // Use `DeferredCmdSupplier` to handle the chicken/egg problem with default commands
         DeferredCmdSupplier<Command> armDefaultCmdSupplier = new DeferredCmdSupplier<>();
@@ -77,6 +71,11 @@ public class Robot extends IterativeRobot {
 
         DeferredCmdSupplier<Command> elevatorDefaultCmdSupplier = new DeferredCmdSupplier<>();
         Elevator elevator = new Elevator(elevatorPosition, elevatorDefaultCmdSupplier);
+
+        Collector collector = new Collector();
+
+        DeferredCmdSupplier<Command> clawDefaultCmdSupplier = new DeferredCmdSupplier<>();
+        Claw claw = new Claw(clawDefaultCmdSupplier);
 
         // We will never provide a default command to be used during initialization for the DriveTrain or the
         // DriveTrainShifter -- we will set it manually when tele-op initializes. Feed in an empty command supplier.
@@ -90,10 +89,9 @@ public class Robot extends IterativeRobot {
         // set it manually when tele-op initializes. Feed in an empty command supplier.
         ElevatorShifter elevatorShifter = new ElevatorShifter(new DeferredCmdSupplier<>());
 
-        this.closeClaw = new CloseClaw(claw);
-        claw.setDefaultCommand(closeClaw);
-
         // Create commands
+        CloseClaw closeClaw = new CloseClaw(claw);
+        OpenClaw openClaw  = new OpenClaw(claw);
         CollectCrate collectCrate = new CollectCrate(crateDetector, collector);
         TeleopMoveArm moveArm = new TeleopMoveArm(humanInput, arm);
         TeleopMoveElevator moveElevator = new TeleopMoveElevator(humanInput, elevator);
@@ -103,6 +101,8 @@ public class Robot extends IterativeRobot {
         ShiftDriveTrain shiftDriveTrainDown = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.LOW);
         ShiftElevator shiftElevatorUp = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.HIGH);
         ShiftElevator shiftElevatorDown = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.LOW);
+        Eject cubeEject = new Eject(collector);
+
 
         // Create a command to slow arm decent and attach it to a trigger which indicates that the arm is down as
         // far as it is supposed to go.
@@ -111,10 +111,11 @@ public class Robot extends IterativeRobot {
         // Assign default commands
         armDefaultCmdSupplier.set(moveArm);
         elevatorDefaultCmdSupplier.set(moveElevator);
+        clawDefaultCmdSupplier.set(closeClaw);
 
         // assign driver-initiated command triggers.
-        this.openClaw = new OpenClaw(claw);
-        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown, shiftElevatorUp, shiftElevatorDown, new Eject(claw, collector, humanInput), this.openClaw);
+        humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,
+                shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw);
 
         // Attach sensor-based command triggers
         ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
