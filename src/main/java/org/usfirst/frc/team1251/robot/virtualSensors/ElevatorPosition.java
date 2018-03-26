@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.virtualSensors;
 
 import edu.wpi.first.wpilibj.Encoder;
+import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class ElevatorPosition {
     private Encoder elevatorEncoder;
@@ -9,7 +10,7 @@ public class ElevatorPosition {
 
     // Constructor
     public ElevatorPosition(){
-        elevatorEncoder = new Encoder(1, 0);
+        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B);
         elevatorEncoder.reset();
     }
 

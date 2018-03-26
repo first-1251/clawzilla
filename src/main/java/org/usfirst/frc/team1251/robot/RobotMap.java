@@ -35,6 +35,9 @@ public class RobotMap
 
         static final int SWITCH_ARM_TOP = 4;
         static final int SWITCH_ARM_BOTTOM = 3;
+
+        static final int ENCODER_ELEVATOR_CHANNEL_A = 5;
+        static final int ENCODER_ELEVATOR_CHANNEL_B = 6;
     }
 
     private static class PcmDevices {
@@ -62,8 +65,7 @@ public class RobotMap
     }
 
     private static class AnalogDevices {
-        static final int ENCODER_ELEVATOR_CHANNEL_A = 0;
-        static final int ENCODER_ELEVATOR_CHANNEL_B = 1;
+
     }
 
 
@@ -75,8 +77,8 @@ public class RobotMap
 
     public static final int ELEVATOR_MOTOR_1 = PwmDevices.MOTOR_ELEVATOR_1;
     public static final int ELEVATOR_MOTOR_2 = PwmDevices.MOTOR_ELEVATOR_2;
-    public static final int ELEVATOR_ENCODER_CHANNEL_A = AnalogDevices.ENCODER_ELEVATOR_CHANNEL_A;
-    public static final int ELEVATOR_ENCODER_CHANNEL_B = AnalogDevices.ENCODER_ELEVATOR_CHANNEL_B;
+    public static final int ELEVATOR_ENCODER_CHANNEL_A = DioDevices.ENCODER_ELEVATOR_CHANNEL_A;
+    public static final int ELEVATOR_ENCODER_CHANNEL_B = DioDevices.ENCODER_ELEVATOR_CHANNEL_B;
     public static final int ELEVATOR_SHIFTER_FORWARD = PcmDevices.SOLENOID_FORWARD_ELEVATOR_SHIFTER;
     public static final int ELEVATOR_SHIFTER_REVERSE = PcmDevices.SOLENOID_REVERSE_ELEVATOR_SHIFTER;
 
