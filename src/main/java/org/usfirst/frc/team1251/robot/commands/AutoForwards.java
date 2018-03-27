@@ -47,7 +47,7 @@ public class AutoForwards extends Command {
     protected void initialize() {
         // Always run in high gear.
         //TODO: THIS IS _NOT_ HIGH GEAR ON THE COMP BOT
-        shifter.setGear(DriveTrainShifter.Gear.LOW);
+        shifter.setGear(DriveTrainShifter.Gear.HIGH);
 
         // Calculate the new target position and capture them as integers.
         driveFeedback.updateSensorData();
