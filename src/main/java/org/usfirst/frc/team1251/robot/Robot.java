@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.*;
-import org.usfirst.frc.team1251.robot.subsystems.Claw;
-import org.usfirst.frc.team1251.robot.subsystems.Collector;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
@@ -33,7 +31,8 @@ public class Robot extends IterativeRobot {
 
     //private PowerDistributionPanel pdp;
     private DriveTrain driveTrain;
-    private Clawlector clawlector;
+    private Claw claw;
+    private Collector collector;
 
 
     //public static final DriveTrain driveTrain = new DriveTrain();
@@ -139,7 +138,8 @@ public class Robot extends IterativeRobot {
         this.teleopDriveCmd = teleopDrive;
         this.driveTrainAutoShift = driveTrainAutoShift;
 
-        this.clawlector = clawlector;
+        this.claw = claw;
+        this.collector = collector;
     }
 
     private void initGamepadTest() {
@@ -173,7 +173,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        AutoUnfavorableSwitch testAuto = new AutoUnfavorableSwitch(clawlector, driveTrain, driveFeedback, this.driveTrainShifter);
+        AutoUnfavorableSwitch testAuto = new AutoUnfavorableSwitch(claw, collector, driveTrain, driveFeedback, this.driveTrainShifter);
         testAuto.start();
     }
 
