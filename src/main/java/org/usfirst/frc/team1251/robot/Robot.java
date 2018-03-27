@@ -113,6 +113,7 @@ public class Robot extends IterativeRobot {
         elevatorDefaultCmdSupplier.set(moveElevator);
         clawDefaultCmdSupplier.set(closeClaw);
 
+
         // assign driver-initiated command triggers.
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,
                 shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw);
@@ -191,7 +192,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
-        //this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
+        this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
     }
 
     /**
