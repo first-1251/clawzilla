@@ -1,24 +1,32 @@
 package org.usfirst.frc.team1251.robot.virtualSensors;
 
+import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class ElevatorPosition {
     private Encoder elevatorEncoder;
-    private final double CIRCUMFERENCE = 0.75 * Math.PI; // Diameter is 0.75"
+    private final double GEAR_RATIO = 3.21428571428;
+    private final double TICKS_PER_TURN = 500 * GEAR_RATIO; // total apples
+    private final double GEAR_CIRCUMFERENCE = Math.PI; // Inches per turn | # of buckets
+    private final double TICKS_PER_INCH = TICKS_PER_TURN / GEAR_CIRCUMFERENCE;
+
     private final static double MAX_HEIGHT = 72; // in inches
 
     // Constructor
     public ElevatorPosition(){
-        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B);
+        elevatorEncoder = new Encoder(RobotMap.ELEVATOR_ENCODER_CHANNEL_A, RobotMap.ELEVATOR_ENCODER_CHANNEL_B, false, CounterBase.EncodingType.k4X);
         elevatorEncoder.reset();
+    }
+
+    public int getTicks() {
+        return elevatorEncoder.get();
     }
 
     // Gets height in inches through conversion of Encoder Ticks to inches [(E / 360) * C]
     public double getHeight(){
         double encoderTicks = (double) elevatorEncoder.get();
-        double distance = (encoderTicks / 360) * CIRCUMFERENCE;
-        return distance;
+        return encoderTicks / TICKS_PER_INCH;
     }
 
     public boolean isAtMaxHeight() {

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1251.robot.virtualSensors;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import org.usfirst.frc.team1251.robot.RobotMap;
 
 public class CrateDetector
 {
@@ -22,7 +21,7 @@ public class CrateDetector
 
     public CrateDetector()
     {
-        //leftSwitch = new DigitalInput(RobotMap.COLLECTOR_LEFT_SWITCH);
+        //leftSwitch = new DigitalInput(RobotMap.COLLECTOR_SWITCH);
         //rightSwitch = new DigitalInput(RobotMap.COLLECTOR_RIGHT_SWITCH);
     }
     public CrateState getCrateState()

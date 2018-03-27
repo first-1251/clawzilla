@@ -8,10 +8,15 @@ public class AutoFavorableSwitch extends CommandGroup {
     public AutoFavorableSwitch(Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
 
         // Travel far enough to be at middle of switch plate
-        addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 168)); // 14'
+        addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 168 - 24)); // 14'
 
         // Turn to face the switch plate
-        addSequential(new AutoTurn(driveTrain, -90, driveFeedback)); // 90 degrees counter-clockwise
+        addSequential(new AutoTurn(driveTrain, 90, driveFeedback)); // 90 degrees counter-clockwise
+
+        addSequential(new DoNothingDriveTrain(0.3, driveTrain));
+
+        // Go closer to put the cube on the switch
+        addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 24 - 16));
 
         // Put the cube on the switch.
         addSequential(new TimedEject(collector));

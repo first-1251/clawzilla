@@ -11,7 +11,7 @@ public class AutoForwards extends Command {
     private final DriveTrainShifter shifter;
 
     private final double GEAR_RATIO = 3.21428571428;
-    private final double ALLOWABLE_ERROR = 250.0; // in encoder ticks, 1/10 of an encoder turn, 1/30 of a wheel turn
+    private final double ALLOWABLE_ERROR = 300.0; // in encoder ticks, 1/10 of an encoder turn, 1/30 of a wheel turn
     private final double WHEEL_DIAMETER = 4.25;
 
     private final double TICKS_PER_TURN = 500 * GEAR_RATIO; // total apples
@@ -46,7 +46,8 @@ public class AutoForwards extends Command {
     @Override
     protected void initialize() {
         // Always run in high gear.
-        shifter.setGear(DriveTrainShifter.Gear.HIGH);
+        //TODO: THIS IS _NOT_ HIGH GEAR ON THE COMP BOT
+        shifter.setGear(DriveTrainShifter.Gear.LOW);
 
         // Calculate the new target position and capture them as integers.
         driveFeedback.updateSensorData();

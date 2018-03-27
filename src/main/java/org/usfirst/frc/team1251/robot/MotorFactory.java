@@ -18,7 +18,7 @@ public class MotorFactory {
         public double MAX_OUTPUT_VOLTAGE = 9;
         public double NOMINAL_VOLTAGE = 0;
         public double PEAK_VOLTAGE = 9;
-        public NeutralMode ENABLE_BRAKE = NeutralMode.Coast;
+        public NeutralMode ENABLE_BRAKE = NeutralMode.Brake;
         public boolean ENABLE_CURRENT_LIMIT = false;
         public boolean ENABLE_SOFT_LIMIT = false;
         public boolean ENABLE_LIMIT_SWITCH = false;
@@ -43,6 +43,8 @@ public class MotorFactory {
 
         //public double VOLTAGE_COMPENSATION_RAMP_RATE = 0;
         public double RAMP_TIME = 0.2;
+
+        public double PID_RAMP_TIME = 0;
     }
 
     public static final Configuration kDefaultConfiguration = new Configuration();
@@ -81,8 +83,8 @@ public class MotorFactory {
         talonSRX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
         talonSRX.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
         talonSRX.configOpenloopRamp(config.RAMP_TIME, 0);
+        talonSRX.configClosedloopRamp(config.PID_RAMP_TIME, 0);
         talonSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-
         talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
         talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);
         talonSRX.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, config.QUAD_ENCODER_STATUS_FRAME_RATE_MS, 0);
@@ -119,6 +121,7 @@ public class MotorFactory {
     public static TalonSRX initRightDriveMotors() {
         TalonSRX master = createTalon(RobotMap.DRIVE_RIGHT_LEAD_MOTOR, kDefaultConfiguration);
 
+        master.configClosedloopRamp(0.25, 0);
         VictorSPX rightMotor1 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_1, kSlaveConfiguration);
         VictorSPX rightMotor2 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_2, kSlaveConfiguration);
         VictorSPX rightMotor3 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_3, kSlaveConfiguration);
@@ -158,6 +161,7 @@ public class MotorFactory {
         victorSPX.configVelocityMeasurementPeriod(config.VELOCITY_MEASUREMENT_PERIOD, 0);
         victorSPX.configVelocityMeasurementWindow(config.VELOCITY_MEASUREMENT_ROLLING_AVERAGE_WINDOW, 0);
         victorSPX.configOpenloopRamp(config.RAMP_TIME, 0);
+        victorSPX.configClosedloopRamp(config.PID_RAMP_TIME, 0);
 
         victorSPX.setStatusFramePeriod(StatusFrame.Status_1_General, config.GENERAL_STATUS_FRAME_RATE_MS, 0);
         victorSPX.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, config.FEEDBACK_STATUS_FRAME_RATE_MS, 0);

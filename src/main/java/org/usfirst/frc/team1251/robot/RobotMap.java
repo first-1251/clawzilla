@@ -30,14 +30,13 @@ public class RobotMap
     }
 
     private static class DioDevices {
-        static final int SWITCH_COLLECTOR_LEFT = 0;
-        static final int SWITCH_COLLECTOR_RIGHT = 2;
+        static final int SWITCH_COLLECTOR = 0;
 
-        static final int SWITCH_ARM_TOP = 4;
-        static final int SWITCH_ARM_BOTTOM = 3;
+        static final int SWITCH_ARM_TOP = 1;
+        static final int SWITCH_ARM_BOTTOM = 2;
 
-        static final int ENCODER_ELEVATOR_CHANNEL_A = 5;
-        static final int ENCODER_ELEVATOR_CHANNEL_B = 6;
+        static final int ENCODER_ELEVATOR_CHANNEL_A = 3;
+        static final int ENCODER_ELEVATOR_CHANNEL_B = 4;
     }
 
     private static class PcmDevices {
@@ -87,8 +86,7 @@ public class RobotMap
 
     public static final int COLLECTOR_LEFT_MOTOR = PwmDevices.MOTOR_COLLECTOR_LEFT;
     public static final int COLLECTOR_RIGHT_MOTOR = PwmDevices.MOTOR_COLLECTOR_RIGHT;
-    public static final int COLLECTOR_LEFT_SWITCH = DioDevices.SWITCH_COLLECTOR_LEFT;
-    public static final int COLLECTOR_RIGHT_SWITCH = DioDevices.SWITCH_COLLECTOR_RIGHT;
+    public static final int COLLECTOR_SWITCH = DioDevices.SWITCH_COLLECTOR;
 
     public static final int DRIVE_LEFT_LEAD_MOTOR = CanDevices.MOTOR_LEFT_LEADER;
     public static final int DRIVE_LEFT_FOLLOW_MOTOR_1 = CanDevices.MOTOR_LEFT_FOLLOWER_1;

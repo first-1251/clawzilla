@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
 
     //private PowerDistributionPanel pdp;
     private DriveTrain driveTrain;
+    private Clawlector clawlector;
 
 
     //public static final DriveTrain driveTrain = new DriveTrain();
@@ -79,7 +80,7 @@ public class Robot extends IterativeRobot {
 
         // We will never provide a default command to be used during initialization for the DriveTrain or the
         // DriveTrainShifter -- we will set it manually when tele-op initializes. Feed in an empty command supplier.
-        DriveTrain driveTrain = new DriveTrain(new DeferredCmdSupplier<>());
+        DriveTrain driveTrain = new DriveTrain(new DeferredCmdSupplier<>(), driveFeedback);
 
         // We will never provide a default command to be used during initialization for the DriveTrainShifter -- we will
         // set it manually when tele-op initializes. Feed in an empty command supplier.
@@ -138,6 +139,7 @@ public class Robot extends IterativeRobot {
         this.teleopDriveCmd = teleopDrive;
         this.driveTrainAutoShift = driveTrainAutoShift;
 
+        this.clawlector = clawlector;
     }
 
     private void initGamepadTest() {
@@ -171,8 +173,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        CrossLineAuto crossLineAuto = new CrossLineAuto(driveTrain, driveFeedback, this.driveTrainShifter);
-        crossLineAuto.start();
+        AutoUnfavorableSwitch testAuto = new AutoUnfavorableSwitch(clawlector, driveTrain, driveFeedback, this.driveTrainShifter);
+        testAuto.start();
     }
 
     /**

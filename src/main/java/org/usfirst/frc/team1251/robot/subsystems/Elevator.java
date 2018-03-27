@@ -3,6 +3,7 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.commands.DeferredCmdSupplier;
 import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
@@ -34,6 +35,11 @@ public class Elevator extends Subsystem {
         elevatorMotor2.setInverted(isMotor2Inverted);
     }
 
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Elevator Encoder", elevatorPosition.getTicks());
+        SmartDashboard.putNumber("Elevator Height", elevatorPosition.getHeight());
+    }
 
     /**
      * This method moves the elevator up at the speed given unless we are at the maximum
@@ -72,6 +78,17 @@ public class Elevator extends Subsystem {
         elevatorMotor1.set(speed);
         elevatorMotor2.set(speed);
     }
+
+    /**
+     * This method moves the elevator up or down, is used by the PID.
+     *
+     * @param speed
+     */
+    public void move(double speed) {
+        elevatorMotor1.set(speed);
+        elevatorMotor2.set(speed);
+    }
+
 
     /**
      * This method stops the elevator
