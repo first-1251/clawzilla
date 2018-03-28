@@ -1,24 +1,46 @@
 package org.usfirst.frc.team1251.robot.virtualSensors;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
+import org.usfirst.frc.team1251.robot.RobotMap;
 
-public class CrateDetector
-{
+public class CrateDetector {
     //Honorary Name: collector Crate Detector
 
-    //collector Button Limits
+    //Collector Limit Switch
+    private DigitalInput collectorSwitch;
 
-    //the switch used to align the crate.
-    private DigitalInput crateSwitch;
+    //Values
+    private Timer buttonTimer = new Timer();
+    private boolean isTimerRunning = false;
 
     public CrateDetector() {
-        //crateSwitch = new DigitalInput(RobotMap.COLLECTOR_SWITCH);
+        collectorSwitch = new DigitalInput(RobotMap.COLLECTOR_SWITCH);
     }
 
-    public boolean get() {
-        return true;
-        //return crateSwitch.get();
+    public boolean isCrateCollected()
+    {
+        if (collectorSwitch.get())
+        {
+            if (isTimerRunning)
+            {
+                return buttonTimer.get() >= 1;
+
+            } else {
+                buttonTimer.start();
+                isTimerRunning = true;
+                return false;
+            }
+
+        } else {
+
+            if (isTimerRunning) {
+                buttonTimer.stop();
+                buttonTimer.reset();
+                isTimerRunning = false;
+            }
+            return false;
+
+        }
     }
-
-
 }

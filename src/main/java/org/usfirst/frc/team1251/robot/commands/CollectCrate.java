@@ -17,9 +17,11 @@ public class CollectCrate extends Command {
         this.requires(this.collector);
     }
 
+
     protected void execute() {
         // For now, always just pull the crate in.
         this.collector.pullIn();
+
     }
 
     protected void end()
