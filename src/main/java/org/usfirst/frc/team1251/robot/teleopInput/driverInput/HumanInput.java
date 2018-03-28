@@ -19,7 +19,7 @@ public class HumanInput {
     private final GamePadButtonTrigger shiftDriveTrainDownTrigger;
     private final GamePadButtonTrigger shiftElevatorUpTrigger;
     private final GamePadButtonTrigger shiftElevatorDownTrigger;
-    private final GamePadButtonTrigger ejectCrateTrigger;
+    private final GamePadButtonTrigger collectCrateTrigger;
     private final GamePadButtonTrigger openClawTrigger;
 
     private boolean commandTriggersAttached = false;
@@ -53,7 +53,7 @@ public class HumanInput {
     /**
      * A game pad trigger which is used to activate the crate-collection command.
      */
-    private final GamePadButtonTrigger collectCrateTrigger;
+    private final GamePadButtonTrigger ejectCrateTrigger;
 
     /**
      *
@@ -72,8 +72,8 @@ public class HumanInput {
                 this.driverGamePad.rs(),StickSmoothing.StickAxis.VERTICAL, WHEEL_SPEED_SMOOTHING_SAMPLES);
 
         // Use the right-bumper to trigger create collection.
-        this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
-        this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
+        this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
+        this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
         this.openClawTrigger = new GamePadButtonTrigger(this.operatorGamePad.rt());
 
         this.shiftDriveTrainUpTrigger = new GamePadButtonTrigger(this.driverGamePad.rt());
@@ -104,8 +104,8 @@ public class HumanInput {
         commandTriggersAttached = true;
 
         // Bind buttons.
-        ejectCrateTrigger.whileHeld(collectCrate);
-        collectCrateTrigger.whileHeld(eject);
+        collectCrateTrigger.whileHeld(collectCrate);
+        ejectCrateTrigger.whileHeld(eject);
 
         shiftDriveTrainUpTrigger.whileHeld(shiftDriveTrainUp);
         shiftDriveTrainDownTrigger.whileHeld(shiftDriveTrainDown);
