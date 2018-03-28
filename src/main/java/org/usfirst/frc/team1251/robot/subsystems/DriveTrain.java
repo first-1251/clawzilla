@@ -2,7 +2,6 @@ package org.usfirst.frc.team1251.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,7 +19,7 @@ public class DriveTrain extends Subsystem {
     //PID Values for Drivetrain
     private final double K_P_LEFT = 0.25;
     private final double K_P_RIGHT = 0.25;
-    private final double K_I = 0;//-0.001;
+    private final double K_I = 0;
     private final double K_D = 100;
     private final double K_F = 0;
 
@@ -92,9 +91,6 @@ public class DriveTrain extends Subsystem {
     }
 
     public void setSpeed(double left, double right) {
-        leftMasterMotor.setNeutralMode(NeutralMode.Coast);
-        rightMasterMotor.setNeutralMode(NeutralMode.Coast);
-
         leftMasterMotor.set(ControlMode.PercentOutput, left);
         rightMasterMotor.set(ControlMode.PercentOutput, right);
     }

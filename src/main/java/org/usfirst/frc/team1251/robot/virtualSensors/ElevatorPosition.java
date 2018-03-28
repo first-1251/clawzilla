@@ -29,6 +29,8 @@ public class ElevatorPosition {
     }
 
     // Gets height in inches through conversion of Encoder Ticks to inches [(E / 360) * C]
+    // Currently there is something wrong with the math.
+    // TODO: Fix elevator math
     public double getHeight(){
         double encoderTicks = (double) elevatorEncoder.get();
         return encoderTicks / TICKS_PER_INCH;

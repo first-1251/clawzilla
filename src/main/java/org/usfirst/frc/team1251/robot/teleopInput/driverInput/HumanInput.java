@@ -105,9 +105,7 @@ public class HumanInput {
 
         // Bind buttons.
         ejectCrateTrigger.whileHeld(collectCrate);
-        //collectCrateTrigger.cancelWhenActive(eject);
         collectCrateTrigger.whileHeld(eject);
-        //collectCrateTrigger.cancelWhenActive(collectCrate);
 
         shiftDriveTrainUpTrigger.whileHeld(shiftDriveTrainUp);
         shiftDriveTrainDownTrigger.whileHeld(shiftDriveTrainDown);

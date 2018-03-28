@@ -44,6 +44,7 @@ public class PositionElevator extends PIDCommand {
 
     @Override
     protected boolean isFinished() {
-        return this.getPIDController().onTarget();
+        // get interrupted by the driver, instead of letting the elevator fall once it reaches the desired height.
+        return false;
     }
 }
