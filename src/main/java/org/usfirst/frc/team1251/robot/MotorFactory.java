@@ -18,7 +18,7 @@ public class MotorFactory {
         public double MAX_OUTPUT_VOLTAGE = 9;
         public double NOMINAL_VOLTAGE = 0;
         public double PEAK_VOLTAGE = 9;
-        public NeutralMode ENABLE_BRAKE = NeutralMode.Brake;
+        public NeutralMode ENABLE_BRAKE = NeutralMode.Coast;
         public boolean ENABLE_CURRENT_LIMIT = false;
         public boolean ENABLE_SOFT_LIMIT = false;
         public boolean ENABLE_LIMIT_SWITCH = false;

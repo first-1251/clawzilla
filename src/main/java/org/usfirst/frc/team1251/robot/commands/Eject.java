@@ -6,7 +6,7 @@ import org.usfirst.frc.team1251.robot.subsystems.Collector;
 
 public class Eject extends Command {
 
-    private static final double EJECT_SPEED = 1.0;
+    private static final double EJECT_SPEED = 0.5;
     private final Collector collector;
 
     public Eject(Collector collector) {

@@ -71,7 +71,7 @@ public class Arm extends Subsystem {
         }
 
         //Clamping value
-        speed = Math.min(speed, 0.25);
+        speed = Math.min(speed, 0.5);
         speed = Math.max(speed, 0);
 
         armMotor.set(speed * -1);

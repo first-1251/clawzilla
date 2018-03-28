@@ -33,7 +33,7 @@ public class HumanInput {
      * The game pad which is used to move the robot around the field.
      *
      */
-    private final GamePad driverGamePad;
+    public final GamePad driverGamePad;
 
     /**
      * The game pad which is used to interact with the crates (e.g. "power cubes").
@@ -104,8 +104,10 @@ public class HumanInput {
         commandTriggersAttached = true;
 
         // Bind buttons.
-        collectCrateTrigger.whileHeld(collectCrate);
-        ejectCrateTrigger.whileHeld(eject);
+        ejectCrateTrigger.whileHeld(collectCrate);
+        //collectCrateTrigger.cancelWhenActive(eject);
+        collectCrateTrigger.whileHeld(eject);
+        //collectCrateTrigger.cancelWhenActive(collectCrate);
 
         shiftDriveTrainUpTrigger.whileHeld(shiftDriveTrainUp);
         shiftDriveTrainDownTrigger.whileHeld(shiftDriveTrainDown);
