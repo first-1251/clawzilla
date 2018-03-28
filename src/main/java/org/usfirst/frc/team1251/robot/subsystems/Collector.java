@@ -48,7 +48,7 @@ public class Collector extends Subsystem {
 
     public void pullIn() {
 
-        if (crateDetector.get()) {
+        if (!crateDetector.isCrateCollected()) {
             rightMotor.set(-MOTOR_RIGHT_FORWARD);
             leftMotor.set(-MOTOR_LEFT_FORWARD);
         }
