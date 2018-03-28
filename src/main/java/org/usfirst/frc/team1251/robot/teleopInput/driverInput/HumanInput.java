@@ -19,7 +19,7 @@ public class HumanInput {
     private final GamePadButtonTrigger shiftDriveTrainDownTrigger;
     private final GamePadButtonTrigger shiftElevatorUpTrigger;
     private final GamePadButtonTrigger shiftElevatorDownTrigger;
-    private final GamePadButtonTrigger ejectCrateTrigger;
+    private final GamePadButtonTrigger collectCrateTrigger;
     private final GamePadButtonTrigger openClawTrigger;
 
     private boolean commandTriggersAttached = false;
@@ -33,7 +33,7 @@ public class HumanInput {
      * The game pad which is used to move the robot around the field.
      *
      */
-    private final GamePad driverGamePad;
+    public final GamePad driverGamePad;
 
     /**
      * The game pad which is used to interact with the crates (e.g. "power cubes").
@@ -53,7 +53,7 @@ public class HumanInput {
     /**
      * A game pad trigger which is used to activate the crate-collection command.
      */
-    private final GamePadButtonTrigger collectCrateTrigger;
+    private final GamePadButtonTrigger ejectCrateTrigger;
 
     /**
      *
@@ -72,8 +72,8 @@ public class HumanInput {
                 this.driverGamePad.rs(),StickSmoothing.StickAxis.VERTICAL, WHEEL_SPEED_SMOOTHING_SAMPLES);
 
         // Use the right-bumper to trigger create collection.
-        this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
-        this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
+        this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
+        this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
         this.openClawTrigger = new GamePadButtonTrigger(this.operatorGamePad.rt());
 
         this.shiftDriveTrainUpTrigger = new GamePadButtonTrigger(this.driverGamePad.rt());

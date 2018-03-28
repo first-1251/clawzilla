@@ -12,22 +12,20 @@ public class AutoTurn extends Command {
     private double angleDelta;
     private boolean done = false;
     private double finishedThreshold;
+    private double finishedThresholdRight;
 
-    public AutoTurn(DriveTrain driveTrain, double angleDelta, DriveFeedback driveFeedback) {
+    public AutoTurn(DriveTrain driveTrain, double desiredAngle, DriveFeedback driveFeedback) {
         this.driveFeedback = driveFeedback;
         this.driveTrain = driveTrain;
-        this.angleDelta = angleDelta;
+        this.desiredAngle = desiredAngle;
         requires(this.driveTrain);
     }
 
     @Override
     protected void initialize() {
-        //driveTrain.setGearShifter(DriveTrain.HIGH_GEAR);
-        driveFeedback.updateSensorData();
-        desiredAngle = angleDelta + driveFeedback.getAngle();
-
-        // TODO-tweak: Adjust to flavor.
-        this.finishedThreshold = 1.0/7.9 * Math.abs(desiredAngle);
+        // TODO-tweak: Adjust to flavor. // 8.0 for speed of 0.5  30.0 for speed 0.7
+        this.finishedThreshold = 30.0;
+        this.finishedThresholdRight = 25.0;
         done = false;
     }
 
@@ -35,7 +33,11 @@ public class AutoTurn extends Command {
     protected void execute() {
         done = isFinishedTurning();
         if (!done) {
-            driveTrain.setSpeed(-.5, 0.5);
+            if (desiredAngle < 0) {
+                driveTrain.setSpeed(-0.7, 0.7);
+            } else {
+                driveTrain.setSpeed(0.7, -0.7);
+            }
         } else {
             driveTrain.setSpeed(0, 0);
         }
@@ -53,6 +55,10 @@ public class AutoTurn extends Command {
 
     private boolean isFinishedTurning() {
         driveFeedback.updateSensorData();
-        return Math.abs(Math.abs(driveFeedback.getAngle()) - Math.abs(desiredAngle)) < this.finishedThreshold;
+        if (desiredAngle < 0) {
+            return Math.abs(Math.abs(driveFeedback.getAngle()) - Math.abs(desiredAngle)) < this.finishedThreshold;
+        } else {
+            return Math.abs(Math.abs(driveFeedback.getAngle()) - Math.abs(desiredAngle)) < this.finishedThresholdRight;
+        }
     }
 }

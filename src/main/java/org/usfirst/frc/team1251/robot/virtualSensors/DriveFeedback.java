@@ -2,6 +2,7 @@ package org.usfirst.frc.team1251.robot.virtualSensors;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.MotorFactory;
@@ -77,7 +78,7 @@ public class DriveFeedback {
 
         SmartDashboard.putNumber("Left Encoder", leftPosition);
         SmartDashboard.putNumber("Right Encoder", rightPosition);
-        SmartDashboard.putNumber("Gyro", gyro.getAngle());
+        SmartDashboard.putData("Gyro", (Sendable) gyro); // this gyro also implements Sendable
 
         this.leftPosition = leftMasterMotor.getSelectedSensorPosition(0);
         this.rightPosition = rightMasterMotor.getSelectedSensorPosition(0);

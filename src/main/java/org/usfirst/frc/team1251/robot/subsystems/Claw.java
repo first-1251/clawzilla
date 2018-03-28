@@ -23,12 +23,12 @@ public class Claw extends Subsystem{
 
     //Pistons set to default state and opens
     public void openClaw (){
-        clawSolenoid.set(DoubleSolenoid.Value.kForward);
+        clawSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     //Pistons extend to close claw
     public void closeClaw () {
-        clawSolenoid.set(DoubleSolenoid.Value.kReverse);
+        clawSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
 }

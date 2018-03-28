@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team1251.robot.RobotMap;
+import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 
 public class Collector extends Subsystem {
 
@@ -23,12 +24,14 @@ public class Collector extends Subsystem {
     //The right bag motor, when looking from the rear perspective.
     private SpeedController rightMotor;
 
+    private CrateDetector crateDetector = new CrateDetector();
+
     public Collector() {
         this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_MOTOR);
         this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_MOTOR);
 
         this.leftMotor.setInverted(true);
-        this.rightMotor.setInverted(true);
+        this.rightMotor.setInverted(false);
 
     }
 
@@ -43,20 +46,15 @@ public class Collector extends Subsystem {
         leftMotor.set(MOTOR_STOP);
     }
 
-    public void pullInLeft() {
-        rightMotor.set(MOTOR_RIGHT_BACKWARD);
-        leftMotor.set(MOTOR_LEFT_FORWARD);
-    }
-
     public void pullIn() {
-        rightMotor.set(-MOTOR_RIGHT_FORWARD);
-        leftMotor.set(-MOTOR_LEFT_FORWARD);
+
+        if (crateDetector.get()) {
+            rightMotor.set(-MOTOR_RIGHT_FORWARD);
+            leftMotor.set(-MOTOR_LEFT_FORWARD);
+        }
+
     }
 
-    public void pullInRight() {
-        rightMotor.set(MOTOR_RIGHT_BACKWARD);
-        leftMotor.set(MOTOR_LEFT_BACKWARD);
-    }
 
     public void eject(double speed) {
         speed = Math.max(speed, 0);

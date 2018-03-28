@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.commands.*;
-import org.usfirst.frc.team1251.robot.subsystems.Claw;
-import org.usfirst.frc.team1251.robot.subsystems.Collector;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
@@ -33,6 +31,8 @@ public class Robot extends IterativeRobot {
 
     //private PowerDistributionPanel pdp;
     private DriveTrain driveTrain;
+    private Claw claw;
+    private Collector collector;
 
 
     //public static final DriveTrain driveTrain = new DriveTrain();
@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
 
         // We will never provide a default command to be used during initialization for the DriveTrain or the
         // DriveTrainShifter -- we will set it manually when tele-op initializes. Feed in an empty command supplier.
-        DriveTrain driveTrain = new DriveTrain(new DeferredCmdSupplier<>());
+        DriveTrain driveTrain = new DriveTrain(new DeferredCmdSupplier<>(), driveFeedback);
 
         // We will never provide a default command to be used during initialization for the DriveTrainShifter -- we will
         // set it manually when tele-op initializes. Feed in an empty command supplier.
@@ -113,6 +113,7 @@ public class Robot extends IterativeRobot {
         elevatorDefaultCmdSupplier.set(moveElevator);
         clawDefaultCmdSupplier.set(closeClaw);
 
+
         // assign driver-initiated command triggers.
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,
                 shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw);
@@ -138,6 +139,8 @@ public class Robot extends IterativeRobot {
         this.teleopDriveCmd = teleopDrive;
         this.driveTrainAutoShift = driveTrainAutoShift;
 
+        this.claw = claw;
+        this.collector = collector;
     }
 
     private void initGamepadTest() {
@@ -171,8 +174,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        CrossLineAuto crossLineAuto = new CrossLineAuto(driveTrain, driveFeedback, this.driveTrainShifter);
-        crossLineAuto.start();
+        AutoUnfavorableSwitch testAuto = new AutoUnfavorableSwitch(claw, collector, driveTrain, driveFeedback, this.driveTrainShifter);
+        testAuto.start();
     }
 
     /**
@@ -189,7 +192,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
-        //this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
+        this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
     }
 
     /**
