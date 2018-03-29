@@ -26,4 +26,7 @@ public class ArmPosition {
         return bottomSwitch.get() == BOTTOM_PRESSED;
     }
 
+    public boolean atLeast90() { return true; }
+
+    public boolean lessThan90() { return true; }
 }
