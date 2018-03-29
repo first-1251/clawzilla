@@ -1,33 +1,66 @@
 package org.usfirst.frc.team1251.robot.commands.AutoPathPermutations;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team1251.robot.commands.*;
+import org.usfirst.frc.team1251.robot.subsystems.*;
+import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
+import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class LSwitchAwayScaleAway extends CommandGroup {
-    // Go forward 215.71 inches
+    public LSwitchAwayScaleAway(Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter){
 
-    // Face the 90 degree heading
+        // Go forward 215.71 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 215.71));
 
-    // Move forward 175.00 inches
+        // Face the 90 degree heading
+        addSequential(new AutoTurn(driveTrain, 90, driveFeedback));
 
-    // Face the 180 degree heading
+        // Move forward 175.00 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 175.00));
 
-    // Move forward 9.44 inches
+        // Face the 180 degree heading
+        addSequential(new AutoTurn(driveTrain, 180, driveFeedback));
 
-    // Bring arm down to 90 degrees
+        // Move forward 9.44 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 9.44));
 
-    // Eject the cube into switch
+        // Bring arm down to 90 degrees
+        addSequential(new AutoArmTo90(arm, armPosition));
 
-    // Face the 150 degree heading
+        // Eject the cube into switch
+        addSequential(new TimedEject(collector));
 
-    // Bring arm down to minimum to pick up el cube
+        // Bring arm down to minimum to pick up the cube
+        addSequential(new AutoArmDownToMinimum(arm, armPosition));
 
-    // Intake cube
+        // Face the 150 degree heading
+        addSequential(new AutoTurn(driveTrain, 150, driveFeedback));
 
-    // Bring arm back up to 90
+        // Grab cube
+        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
 
-    // Face the 90 degree heading
+        // Bring arm back up to 90
+        addSequential(new AutoArmTo90(arm, armPosition));
 
-    // Go forward 30 inches
+        // Face the 90 degree heading
+        addSequential(new AutoTurn(driveTrain, 90, driveFeedback));
 
+        // Go forward 30 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 30.00));
+
+        // Face the 0 degree heading
+        addSequential(new AutoTurn(driveTrain, 0, driveFeedback));
+
+        // Move forward 60
+        //TODO: Determine the exact length of this travel distance (not shown in diagram; must guesstimate)
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 60.00));
+
+        // Raise arm
+        addSequential(new AutoArmUpToTop(arm, armPosition));
+
+        // Eject Cube
+        addSequential(new TimedEject(collector));
+
+    }
 
 }
