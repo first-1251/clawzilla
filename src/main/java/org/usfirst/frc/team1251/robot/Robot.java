@@ -14,6 +14,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
+import org.usfirst.frc.team1251.robot.teleopInput.triggers.CrateCollectedTrigger;
 import org.usfirst.frc.team1251.robot.triggers.ArmDownJustNowTrigger;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
@@ -108,6 +109,9 @@ public class Robot extends IterativeRobot {
         // far as it is supposed to go.
         SlowArmDecent slowArmDecent = new SlowArmDecent(arm);
 
+        // Create a command to vibrate the controller if the cube is collected.
+        CubeCollectedRumble cubeCollectedRumble = new CubeCollectedRumble(humanInput);
+
         // Assign default commands
         armDefaultCmdSupplier.set(moveArm);
         elevatorDefaultCmdSupplier.set(moveElevator);
@@ -121,6 +125,8 @@ public class Robot extends IterativeRobot {
         // Attach sensor-based command triggers
         ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
         armDownJustNowTrigger.whenActive(slowArmDecent);
+        CrateCollectedTrigger crateCollectedTrigger = new CrateCollectedTrigger(crateDetector);
+        crateCollectedTrigger.whenActive(cubeCollectedRumble);
 
         // Uncomment to test a controller on port 5
         //initGamepadTest();

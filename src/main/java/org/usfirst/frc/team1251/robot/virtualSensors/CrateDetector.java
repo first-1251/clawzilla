@@ -12,7 +12,10 @@ public class CrateDetector {
 
     //Values
     private Timer buttonTimer = new Timer();
+    private Timer releaseTimer = new Timer();
+    //private boolean isReleaseTimerRunning = false;
     private boolean isTimerRunning = false;
+
 
     public CrateDetector() {
         collectorSwitch = new DigitalInput(RobotMap.COLLECTOR_SWITCH);
@@ -24,11 +27,32 @@ public class CrateDetector {
         {
             if (isTimerRunning)
             {
-                return buttonTimer.get() >= 1;
+                if (buttonTimer.get() >= 0.05)
+                {
+
+
+                    releaseTimer.start();
+
+                    if (releaseTimer.get() >= 1)
+                    {
+                        releaseTimer.stop();
+                        releaseTimer.reset();
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                    //return true;
+
+
+                } else {
+                    return false;
+                }
 
             } else {
                 buttonTimer.start();
                 isTimerRunning = true;
+                //isReleaseTimerRunning = true;
                 return false;
             }
 
