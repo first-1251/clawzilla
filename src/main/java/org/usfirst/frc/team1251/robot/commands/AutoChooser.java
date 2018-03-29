@@ -11,11 +11,6 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class AutoChooser extends CommandGroup {
 
-    private Claw claw;
-    private Collector collector;
-    private DriveTrain driveTrain;
-    private DriveFeedback driveFeedback;
-    private DriveTrainShifter shifter;
     private SendableChooser<RobotStart> sideChooser;
     private SendableChooser<CommandGroup> autoOverrideChooser;
 
@@ -38,11 +33,6 @@ public class AutoChooser extends CommandGroup {
     }
 
     public AutoChooser(Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
-        this.claw = claw;
-        this.collector = collector;
-        this.driveTrain = driveTrain;
-        this.driveFeedback = driveFeedback;
-        this.shifter = shifter;
 
         sideChooser = new SendableChooser<>();
         autoOverrideChooser = new SendableChooser<>();
