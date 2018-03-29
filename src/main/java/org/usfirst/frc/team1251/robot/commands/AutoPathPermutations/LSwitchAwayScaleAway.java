@@ -34,32 +34,32 @@ public class LSwitchAwayScaleAway extends CommandGroup {
 //        addSequential(new AutoArmDownToMinimum(arm, armPosition));
 
         // Face the 150 degree heading
-        addSequential(new AutoTurn(driveTrain, 150, driveFeedback));
-
-        // Grab cube
-//        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
-
-        // Bring arm back up to 90
-//        addSequential(new AutoArmTo90(arm, armPosition));
-
-        // Face the 90 degree heading
-        addSequential(new AutoTurn(driveTrain, 90, driveFeedback));
-
-        // Go forward 30 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 30.00));
-
-        // Face the 0 degree heading
-        addSequential(new AutoTurn(driveTrain, 0, driveFeedback));
-
-        // Move forward 60
-        //TODO: Determine the exact length of this travel distance (not shown in diagram; must guesstimate)
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 60.00));
-
-        // Raise arm
-//        addSequential(new AutoArmUpToTop(arm, armPosition));
-
-        // Eject Cube
-//        addSequential(new TimedEject(collector));
+//        addSequential(new AutoTurn(driveTrain, 150, driveFeedback));
+//
+//        // Grab cube
+////        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
+//
+//        // Bring arm back up to 90
+////        addSequential(new AutoArmTo90(arm, armPosition));
+//
+//        // Face the 90 degree heading
+//        addSequential(new AutoTurn(driveTrain, 90, driveFeedback));
+//
+//        // Go forward 30 inches
+//        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 30.00));
+//
+//        // Face the 0 degree heading
+//        addSequential(new AutoTurn(driveTrain, 0, driveFeedback));
+//
+//        // Move forward 60
+//        //TODO: Determine the exact length of this travel distance (not shown in diagram; must guesstimate)
+//        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 60.00));
+//
+//        // Raise arm
+////        addSequential(new AutoArmUpToTop(arm, armPosition));
+//
+//        // Eject Cube
+////        addSequential(new TimedEject(collector));
 
     }
 

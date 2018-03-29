@@ -30,25 +30,25 @@ public class LSwitchHomeScaleAway extends CommandGroup {
 
         // Face the 180 degree heading
         addSequential(new AutoTurn(driveTrain, 180, driveFeedback));
-
-        // Move backwards 65.25 inches
-        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, -65.25));
-
-        // Face the 132.4 degree heading
-        addSequential(new AutoTurn(driveTrain, 132.4, driveFeedback));
-
-        // Move forward 17.00 inches
-        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 17.00));
-
-        // Pick up cube
-//        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
-
-        // Bring arm back up to 90
-//        addSequential(new AutoArmTo90(arm, armPosition));
-
-        // Move forward and eject
-        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 3));
-//        addParallel(new TimedEject(collector));
+//
+//        // Move backwards 65.25 inches
+//        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, -65.25));
+//
+//        // Face the 132.4 degree heading
+//        addSequential(new AutoTurn(driveTrain, 132.4, driveFeedback));
+//
+//        // Move forward 17.00 inches
+//        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 17.00));
+//
+//        // Pick up cube
+////        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
+//
+//        // Bring arm back up to 90
+////        addSequential(new AutoArmTo90(arm, armPosition));
+//
+//        // Move forward and eject
+//        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 3));
+////        addParallel(new TimedEject(collector));
 
     }
 
