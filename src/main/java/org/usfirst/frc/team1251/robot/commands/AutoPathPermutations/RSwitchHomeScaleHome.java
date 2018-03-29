@@ -5,17 +5,18 @@ import org.usfirst.frc.team1251.robot.commands.*;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 public class RSwitchHomeScaleHome extends CommandGroup {
-    public RSwitchHomeScaleHome (Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter) {
+    public RSwitchHomeScaleHome (Arm arm, ArmPosition armPosition,Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter, Elevator elevator, ElevatorPosition elevatorPosition) {
         // Go forward 147.36 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 147.36));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 147.36));
 
         // Face the 270 degree heading
         addSequential(new AutoTurn(driveTrain, 270, driveFeedback));
 
         // Move forward 17.29 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 17.29));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 17.29));
 
         // Bring arm down to 90 degrees
         addSequential(new AutoArmTo90(arm, armPosition));
@@ -30,25 +31,25 @@ public class RSwitchHomeScaleHome extends CommandGroup {
         addSequential(new AutoTurn(driveTrain, 180, driveFeedback));
 
         // Move backwards 65.25 inches
-        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, -65.25));
+        addSequential(new AutoForwards(driveFeedback,driveTrain,shifter, -65.25));
 
         // Face the 227.6 degree heading
         addSequential(new AutoTurn(driveTrain, 227.6, driveFeedback));
 
         // Move forward 17.00 inches
-        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 17.00));
+        addSequential(new AutoForwards(driveFeedback,driveTrain,shifter, 17.00));
 
         // Pick up cube
-        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
+        addSequential(new AutoGrabCube(claw, collector, driveTrain, shifter, driveFeedback));
 
         // Move back 26 inches
-        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, -26.00));
+        addSequential(new AutoForwards(driveFeedback,driveTrain,shifter, -26.00));
 
         // Turn to face the 340.6 degree heading
         addSequential(new AutoTurn(driveTrain, 340.6, driveFeedback));
 
         // Move forward 42.67 and bring arm back up to 90
-        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 42.67));
+        addSequential(new AutoForwards(driveFeedback,driveTrain,shifter, 42.67));
         addParallel(new AutoArmTo90(arm, armPosition));
 
         // Raise elevator

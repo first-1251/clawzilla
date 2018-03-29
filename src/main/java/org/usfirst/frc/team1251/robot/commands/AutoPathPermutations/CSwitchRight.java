@@ -1,21 +1,38 @@
 package org.usfirst.frc.team1251.robot.commands.AutoPathPermutations;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team1251.robot.commands.*;
+import org.usfirst.frc.team1251.robot.subsystems.*;
+import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
+import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 public class CSwitchRight extends CommandGroup {
-    // Move forward 24 inches
+    public CSwitchRight(Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter, Elevator elevator, ElevatorPosition elevatorPosition) {
 
-    // Face the 137 degree heading
+        // Move forward 24 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 24));
 
-    // Move forward 70.69 inches
+        // Face the 137 degree heading
+        addSequential(new AutoTurn(driveTrain, 137, driveFeedback));
 
-    // Face the 0 degree heading
+        // Move forward 70.69 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 70.69));
 
-    // Move forward 24.00 inches
+        // Face the 0 degree heading
+        addSequential(new AutoTurn(driveTrain, 0, driveFeedback));
 
-    // Raise elevator?
+        // Move forward 24.00 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 24));
 
-    // Bring arm down to 90 degrees
+        // Raise elevator?
 
-    // Eject cube
+
+        // Bring arm down to 90 degrees
+        addSequential(new AutoArmTo90(arm, armPosition));
+
+        // Eject cube
+        addSequential(new TimedEject(collector));
+
+    }
 }

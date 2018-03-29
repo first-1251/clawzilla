@@ -4,11 +4,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import openrio.powerup.MatchData;
 import org.usfirst.frc.team1251.robot.commands.AutoPathPermutations.*;
-import org.usfirst.frc.team1251.robot.subsystems.Claw;
-import org.usfirst.frc.team1251.robot.subsystems.Collector;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrainShifter;
+import org.usfirst.frc.team1251.robot.subsystems.*;
+import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 public class AutoChooser extends CommandGroup {
 
@@ -16,6 +15,9 @@ public class AutoChooser extends CommandGroup {
     private SendableChooser<CommandGroup> autoOverrideChooser;
 
     private DoNothingDefaultAuto defaultAuto;
+
+    private CSwitchLeft cSwitchLeft;
+    private CSwitchRight cSwitchRight;
 
     private LSwitchAwayScaleAway lSwitchAwayScaleAway;
     private LSwitchAwayScaleHome lSwitchAwayScaleHome;
@@ -33,7 +35,7 @@ public class AutoChooser extends CommandGroup {
         LEFT, CENTER, RIGHT;
     }
 
-    public AutoChooser(Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
+    public AutoChooser(Arm arm, ArmPosition armPosition,Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter, Elevator elevator, ElevatorPosition elevatorPosition) {
 
         sideChooser = new SendableChooser<>();
         autoOverrideChooser = new SendableChooser<>();
@@ -42,15 +44,18 @@ public class AutoChooser extends CommandGroup {
 
         this.crossLineAuto = new CrossLineAuto(driveTrain, driveFeedback, shifter);
 
+        this.cSwitchLeft = new CSwitchLeft();
+        this.cSwitchRight = new CSwitchRight(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter, elevator, elevatorPosition);
+
         this.lSwitchAwayScaleAway = new LSwitchAwayScaleAway();
         this.lSwitchAwayScaleHome = new LSwitchAwayScaleHome();
         this.lSwitchHomeScaleAway = new LSwitchHomeScaleAway();
         this.lSwitchHomeScaleHome = new LSwitchHomeScaleHome();
 
-        this.rSwitchAwayScaleAway = new RSwitchAwayScaleAway();
-        this.rSwitchAwayScaleHome = new RSwitchAwayScaleHome();
-        this.rSwitchHomeScaleAway = new RSwitchHomeScaleAway();
-        this.rSwitchHomeScaleHome = new RSwitchHomeScaleHome();
+        this.rSwitchAwayScaleAway = new RSwitchAwayScaleAway(arm, armPosition, claw, collector, driveTrain, driveFeedback, shifter, elevator, elevatorPosition);
+        this.rSwitchAwayScaleHome = new RSwitchAwayScaleHome(arm, armPosition, claw, collector, driveTrain, driveFeedback, shifter, elevator, elevatorPosition);
+        this.rSwitchHomeScaleAway = new RSwitchHomeScaleAway(arm, armPosition, claw, collector, driveTrain, driveFeedback, shifter, elevator, elevatorPosition);
+        this.rSwitchHomeScaleHome = new RSwitchHomeScaleHome(arm, armPosition, claw, collector, driveTrain, driveFeedback, shifter, elevator, elevatorPosition);
 
         sideChooser.addObject("Starting Left", RobotStart.LEFT);
         sideChooser.addObject("Starting Center", RobotStart.CENTER);
