@@ -39,6 +39,7 @@ public class Elevator extends Subsystem {
     public void periodic() {
         SmartDashboard.putNumber("Elevator Encoder", elevatorPosition.getTicks());
         SmartDashboard.putNumber("Elevator Height", elevatorPosition.getHeight());
+        SmartDashboard.putBoolean("Elevator Bottom", elevatorPosition.isAtMinHeight());
     }
 
     /**

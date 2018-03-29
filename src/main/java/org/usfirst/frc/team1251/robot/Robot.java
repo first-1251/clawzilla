@@ -37,6 +37,9 @@ public class Robot extends IterativeRobot {
 
     //public static final DriveTrain driveTrain = new DriveTrain();
 
+
+    private AutoChooser autoChooser;
+
     private Command autonomousCommand;
     private SendableChooser chooser;
     private DriveFeedback driveFeedback;
@@ -141,6 +144,8 @@ public class Robot extends IterativeRobot {
 
         this.claw = claw;
         this.collector = collector;
+
+        autoChooser = new AutoChooser(arm, armPosition, claw, collector, driveTrain, driveFeedback, driveTrainShifter);
     }
 
     private void initGamepadTest() {
@@ -172,10 +177,13 @@ public class Robot extends IterativeRobot {
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
     public void autonomousInit() {
+        System.out.println("Auto Init");
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        AutoUnfavorableSwitch testAuto = new AutoUnfavorableSwitch(claw, collector, driveTrain, driveFeedback, this.driveTrainShifter);
-        testAuto.start();
+        //TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter);
+        //testAuto.start();
+
+        autoChooser.initialize();
     }
 
     /**

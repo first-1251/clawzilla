@@ -15,7 +15,7 @@ public class ElevatorPosition {
 
     private final static double MAX_HEIGHT = 72; // in inches
 
-    private final static boolean NORMALLY_OFF = true;
+    private final static boolean NORMALLY_OFF = false;
 
     // Constructor
     public ElevatorPosition(){

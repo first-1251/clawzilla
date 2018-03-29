@@ -7,6 +7,16 @@ import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class LSwitchHomeScaleHome extends CommandGroup {
+
+    public LSwitchHomeScaleHome() {
+
+    }
+
+    @Override
+    protected void initialize() {
+        System.out.println("This is LSwitchHomeScaleHome");
+    }
+
     // Go forward 147.36 inches
 
     // Face the 90 degree heading

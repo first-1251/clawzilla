@@ -11,7 +11,7 @@ public class AutoTurn extends Command {
     private double desiredAngle;
     private boolean done = false;
 
-    private final double CLOCKWISE_THRESHOLD_FACTOR = 0.278;
+    private final double CLOCKWISE_THRESHOLD_FACTOR = 0.255;
     private final double COUNTER_CLOCKWISE_THRESHOLD_FACTOR = 0.334;
 
     private Direction direction;
@@ -35,10 +35,10 @@ public class AutoTurn extends Command {
 
         if (distanceToTarget < 0) {
             direction = Direction.COUNTER_CLOCKWISE;
-            finishedThreshold = -distanceToTarget * COUNTER_CLOCKWISE_THRESHOLD_FACTOR;
+            finishedThreshold = Math.max(-distanceToTarget * COUNTER_CLOCKWISE_THRESHOLD_FACTOR, 30.0);
         } else {
             direction = Direction.CLOCKWISE;
-            finishedThreshold = distanceToTarget * CLOCKWISE_THRESHOLD_FACTOR;
+            finishedThreshold = Math.min(distanceToTarget * CLOCKWISE_THRESHOLD_FACTOR, 30.0);
         }
 
         done = false;

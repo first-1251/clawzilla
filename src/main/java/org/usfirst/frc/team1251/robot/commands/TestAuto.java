@@ -7,6 +7,8 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class TestAuto extends CommandGroup {
     public TestAuto(DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter driveTrainShifter) {
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 168 - 24));
+        addSequential(new AutoTurn(driveTrain, 180, driveFeedback));
+        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
+        addSequential(new AutoTurn(driveTrain, 90, driveFeedback));
     }
 }

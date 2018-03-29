@@ -3,6 +3,16 @@ package org.usfirst.frc.team1251.robot.commands.AutoPathPermutations;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CSwitchRight extends CommandGroup {
+
+    public CSwitchRight() {
+
+    }
+
+    @Override
+    protected void initialize() {
+        System.out.println("This is CSwitchRight");
+    }
+
     // Move forward 24 inches
 
     // Face the 137 degree heading
