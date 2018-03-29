@@ -83,6 +83,12 @@ public class Arm extends Subsystem {
 
     }
 
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Potentiometer", armPosition.getPotentiometer());
+    }
+
     public void stopPivot() {
         armMotor.set(0);
     }
