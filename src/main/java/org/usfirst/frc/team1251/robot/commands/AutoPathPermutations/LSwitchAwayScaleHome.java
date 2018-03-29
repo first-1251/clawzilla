@@ -12,13 +12,17 @@ public class LSwitchAwayScaleHome extends CommandGroup {
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 215.71));
 
         // Face the 90 degree heading
-        addSequential(new AutoTurn(driveTrain, 90, driveFeedback));
+        addSequential(new AutoTurn(driveTrain, 90, driveFeedback, driveTrainShifter));
+
+        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
 
         // Move forward 175.00 inches
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 175.00));
 
         // Face the 180 degree heading
-        addSequential(new AutoTurn(driveTrain, 180, driveFeedback));
+        addSequential(new AutoTurn(driveTrain, 180, driveFeedback, driveTrainShifter));
+
+        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
 
         // Move forward 9.44 inches
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 9.44));

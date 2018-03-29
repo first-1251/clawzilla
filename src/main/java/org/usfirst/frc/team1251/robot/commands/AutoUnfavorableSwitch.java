@@ -15,14 +15,14 @@ public class AutoUnfavorableSwitch extends CommandGroup {
         addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 248 - 49)); // 20' 3" 248
 
         // Turn to approach the opposing switch.
-        addSequential(new AutoTurn(driveTrain, -90, driveFeedback)); // 90 degrees counter-clockwise
+        addSequential(new AutoTurn(driveTrain, -90, driveFeedback, shifter)); // 90 degrees counter-clockwise
 
         addSequential(new DoNothingDriveTrain(0.3, driveTrain));
         // Travel along back side of switch (between switch and scale)to the middle of the opposing switch.
         addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 159 - 64)); // 13' 3"
 
         // Turn to face the switch.
-        addSequential(new AutoTurn(driveTrain, -180, driveFeedback)); // 90 degrees counter-clockwise
+        addSequential(new AutoTurn(driveTrain, -180, driveFeedback, shifter)); // 90 degrees counter-clockwise
 
         addSequential(new DoNothingDriveTrain(0.3, driveTrain));
         addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 14));

@@ -74,7 +74,7 @@ public class Elevator extends Subsystem {
         speed = Math.min(speed, 0.8);
         speed *= -1;
 
-        if (!elevatorPosition.isAtMinHeight()) {
+        if (elevatorPosition.isAtMinHeight()) {
             speed = 0;
         }
         elevatorMotor1.set(speed);
