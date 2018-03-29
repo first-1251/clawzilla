@@ -28,14 +28,14 @@ public class LSwitchHomeScaleHome extends CommandGroup {
         // Move forward 17.29 inches
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 17.29));
 
-        // Bring arm down to 90 degrees
-        addSequential(new AutoArmTo90(arm, armPosition));
-
-        // Eject the cube into switch
-        addSequential(new TimedEject(collector));
-
-        // Bring arm down to minimum to pick up the cube
-        addSequential(new AutoArmDownToMinimum(arm, armPosition));
+//        // Bring arm down to 90 degrees
+//        addSequential(new AutoArmTo90(arm, armPosition));
+//
+//        // Eject the cube into switch
+//        addSequential(new TimedEject(collector));
+//
+//        // Bring arm down to minimum to pick up the cube
+//        addSequential(new AutoArmDownToMinimum(arm, armPosition));
 
         // Face the 180 degree heading
         addSequential(new AutoTurn(driveTrain, 180, driveFeedback));
@@ -49,8 +49,8 @@ public class LSwitchHomeScaleHome extends CommandGroup {
         // Move forward 17.00 inches
         addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 17.00));
 
-        // Pick up cube
-        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
+//        // Pick up cube
+//        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
 
         // Move back 26 inches
         addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, -26.00));
@@ -60,7 +60,8 @@ public class LSwitchHomeScaleHome extends CommandGroup {
 
         // Move forward 42.67 and bring arm back up to 90
         addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, 42.67));
-        addParallel(new AutoArmTo90(arm, armPosition));
+
+//        addParallel(new AutoArmTo90(arm, armPosition));
 
         // Raise elevator
 

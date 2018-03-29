@@ -24,22 +24,22 @@ public class LSwitchAwayScaleHome extends CommandGroup {
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 9.44));
 
         // Bring arm down to 90 degrees
-        addSequential(new AutoArmTo90(arm, armPosition));
+//        addSequential(new AutoArmTo90(arm, armPosition));
 
         // Eject the cube into switch
-        addSequential(new TimedEject(collector));
+//        addSequential(new TimedEject(collector));
 
         // Bring arm down to minimum to pick up the cube
-        addSequential(new AutoArmDownToMinimum(arm, armPosition));
+//        addSequential(new AutoArmDownToMinimum(arm, armPosition));
 
         // Face the 150 degree heading
         addSequential(new AutoTurn(driveTrain, 150, driveFeedback));
 
         // Grab cube
-        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
+//        addSequential(new AutoGrabCube(claw, collector, driveTrain, driveTrainShifter, driveFeedback));
 
         // Bring arm back up to 90
-        addSequential(new AutoArmTo90(arm, armPosition));
+//        addSequential(new AutoArmTo90(arm, armPosition));
 
         // Face the 90 degree heading
         addSequential(new AutoTurn(driveTrain, 90, driveFeedback));
