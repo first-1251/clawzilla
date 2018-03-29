@@ -66,7 +66,7 @@ public class RobotMap
     }
 
     private static class AnalogDevices {
-
+        static final int POTENTIOMETER_ARM = 3;
     }
 
 
@@ -75,6 +75,7 @@ public class RobotMap
     public static final int ARM_MOTOR = PwmDevices.MOTOR_ARM;
     public static final int ARM_UPPER_LIMIT_SWITCH = DioDevices.SWITCH_ARM_TOP;
     public static final int ARM_LOWER_LIMIT_SWITCH = DioDevices.SWITCH_ARM_BOTTOM;
+    public static final int ARM_POTENTIOMETER = AnalogDevices.POTENTIOMETER_ARM;
 
     public static final int ELEVATOR_MOTOR_1 = PwmDevices.MOTOR_ELEVATOR_1;
     public static final int ELEVATOR_MOTOR_2 = PwmDevices.MOTOR_ELEVATOR_2;

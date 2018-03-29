@@ -9,7 +9,7 @@ public class AutoArmTo90 extends Command {
     private Arm arm;
     private ArmPosition armPosition;
 
-    private double speed = 1;
+    private double speed = 0.8;
     private double sustainSpeed = 0.15;
     private boolean isAtPosition;
 
@@ -18,9 +18,21 @@ public class AutoArmTo90 extends Command {
         this.armPosition = armPosition;
     }
 
+    @Override
+    protected void initialize() {
+        isAtPosition = false;
+    }
+
     protected void execute(){
-        arm.pivotUp(speed);
-        isAtPosition = true;
+        if (armPosition.lessThan90()) {
+            arm.pivotUp(speed);
+        } else if (armPosition.atLeast90()) {
+            arm.pivotDown(speed);
+        } else {
+            arm.pivotUp(sustainSpeed);
+            isAtPosition = true;
+        }
+
     }
 
     @Override
@@ -30,7 +42,7 @@ public class AutoArmTo90 extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return isAtPosition;
     }
 
 }
