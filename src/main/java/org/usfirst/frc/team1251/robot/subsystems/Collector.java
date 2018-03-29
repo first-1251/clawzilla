@@ -24,9 +24,10 @@ public class Collector extends Subsystem {
     //The right bag motor, when looking from the rear perspective.
     private SpeedController rightMotor;
 
-    private CrateDetector crateDetector = new CrateDetector();
+    private CrateDetector crateDetector;
 
-    public Collector() {
+    public Collector(CrateDetector crateDetector) {
+        this.crateDetector = crateDetector;
         this.leftMotor = new Victor(RobotMap.COLLECTOR_LEFT_MOTOR);
         this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_MOTOR);
 
@@ -51,6 +52,9 @@ public class Collector extends Subsystem {
         if (!crateDetector.isCrateCollected()) {
             rightMotor.set(-MOTOR_RIGHT_FORWARD);
             leftMotor.set(-MOTOR_LEFT_FORWARD);
+        } else {
+            rightMotor.set(0);
+            leftMotor.set(0);
         }
 
     }
