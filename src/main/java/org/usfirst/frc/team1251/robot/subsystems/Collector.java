@@ -3,6 +3,7 @@ package org.usfirst.frc.team1251.robot.subsystems;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1251.robot.RobotMap;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 
@@ -32,7 +33,7 @@ public class Collector extends Subsystem {
         this.rightMotor = new Victor(RobotMap.COLLECTOR_RIGHT_MOTOR);
 
         this.leftMotor.setInverted(true);
-        this.rightMotor.setInverted(false);
+        this.rightMotor.setInverted(true);
 
     }
 
@@ -50,8 +51,8 @@ public class Collector extends Subsystem {
     public void pullIn() {
 
         if (!crateDetector.isCrateCollected()) {
-            rightMotor.set(-MOTOR_RIGHT_FORWARD);
-            leftMotor.set(-MOTOR_LEFT_FORWARD);
+            rightMotor.set(-MOTOR_RIGHT_FORWARD * 0.9);
+            leftMotor.set(-MOTOR_LEFT_FORWARD * 0.9);
         } else {
             rightMotor.set(0);
             leftMotor.set(0);
@@ -67,5 +68,8 @@ public class Collector extends Subsystem {
         leftMotor.set(-speed);
     }
 
-
+    @Override
+    public void periodic() {
+        SmartDashboard.putBoolean("Collected? ", crateDetector.isCrateCollected());
+    }
 }

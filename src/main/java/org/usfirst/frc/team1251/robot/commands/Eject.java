@@ -7,7 +7,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.driverInput.HumanInput;
 
 public class Eject extends Command {
 
-    private static final double EJECT_SPEED = 0.5;
+    private static final double EJECT_SPEED = 0.75;
     private final Collector collector;
     private HumanInput input;
 

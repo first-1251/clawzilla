@@ -1,16 +1,17 @@
-package org.usfirst.frc.team1251.robot.commands;
+package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import openrio.powerup.MatchData;
 import org.usfirst.frc.team1251.robot.commands.AutoPathPermutations.*;
-import org.usfirst.frc.team1251.robot.subsystems.Claw;
-import org.usfirst.frc.team1251.robot.subsystems.Collector;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team1251.robot.subsystems.DriveTrainShifter;
+import org.usfirst.frc.team1251.robot.commands.CrossLineAuto;
+import org.usfirst.frc.team1251.robot.commands.DoNothingDefaultAuto;
+import org.usfirst.frc.team1251.robot.subsystems.*;
+import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
-public class AutoChooser extends CommandGroup {
+public class AutoChooser{
 
     private SendableChooser<RobotStart> sideChooser;
     private SendableChooser<CommandGroup> autoOverrideChooser;
@@ -33,19 +34,22 @@ public class AutoChooser extends CommandGroup {
         LEFT, CENTER, RIGHT;
     }
 
-    public AutoChooser(Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
+    public AutoChooser(Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
 
         sideChooser = new SendableChooser<>();
         autoOverrideChooser = new SendableChooser<>();
+
+        SmartDashboard.putData("Side", sideChooser);
+        SmartDashboard.putData("Override", autoOverrideChooser);
 
         this.defaultAuto = new DoNothingDefaultAuto();
 
         this.crossLineAuto = new CrossLineAuto(driveTrain, driveFeedback, shifter);
 
-        this.lSwitchAwayScaleAway = new LSwitchAwayScaleAway();
-        this.lSwitchAwayScaleHome = new LSwitchAwayScaleHome();
-        this.lSwitchHomeScaleAway = new LSwitchHomeScaleAway();
-        this.lSwitchHomeScaleHome = new LSwitchHomeScaleHome();
+        this.lSwitchAwayScaleAway = new LSwitchAwayScaleAway(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchAwayScaleHome = new LSwitchAwayScaleHome(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchHomeScaleAway = new LSwitchHomeScaleAway(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchHomeScaleHome = new LSwitchHomeScaleHome(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
 
         this.rSwitchAwayScaleAway = new RSwitchAwayScaleAway();
         this.rSwitchAwayScaleHome = new RSwitchAwayScaleHome();
@@ -71,46 +75,55 @@ public class AutoChooser extends CommandGroup {
         autoOverrideChooser.addObject("Right - Switch Away - Scale Home", rSwitchAwayScaleHome);
         autoOverrideChooser.addObject("Right - Switch Home - Scale Away", rSwitchHomeScaleAway);
         autoOverrideChooser.addObject("Right - Switch Home - Scale Home", rSwitchHomeScaleHome);
+
     }
 
-    @Override
-    protected void initialize() {
-        if (!autoOverrideChooser.getSelected().equals(defaultAuto)) {
-            MatchData.OwnedSide ourSwitch = MatchData.getOwnedSide(MatchData.GameFeature.SWITCH_NEAR);
-            MatchData.OwnedSide scale = MatchData.getOwnedSide(MatchData.GameFeature.SCALE);
+    public void initialize() {
+        if (autoOverrideChooser.getSelected().equals(defaultAuto)) {
+            MatchData.OwnedSide ourSwitch;
+            MatchData.OwnedSide scale;
+
+            do {
+                ourSwitch = MatchData.getOwnedSide(MatchData.GameFeature.SWITCH_NEAR);
+                scale = MatchData.getOwnedSide(MatchData.GameFeature.SCALE);
+
+                System.out.println("(1) We have scale " + scale.name());
+                System.out.println("(2) We have switch " + ourSwitch.name());
+            } while (scale == MatchData.OwnedSide.UNKNOWN || ourSwitch == MatchData.OwnedSide.UNKNOWN);
+
 
             if (sideChooser.getSelected() == RobotStart.RIGHT) {
                 if (ourSwitch == MatchData.OwnedSide.LEFT && scale == MatchData.OwnedSide.LEFT) {
-                    addSequential(rSwitchAwayScaleAway);
+                    rSwitchAwayScaleAway.start();
                 } else if (ourSwitch == MatchData.OwnedSide.LEFT && scale == MatchData.OwnedSide.RIGHT) {
-                    addSequential(rSwitchAwayScaleHome);
+                    rSwitchAwayScaleHome.start();
                 } else if (ourSwitch == MatchData.OwnedSide.RIGHT && scale == MatchData.OwnedSide.LEFT) {
-                    addSequential(rSwitchHomeScaleAway);
+                    rSwitchHomeScaleAway.start();
                 } else if (ourSwitch == MatchData.OwnedSide.RIGHT && scale == MatchData.OwnedSide.RIGHT) {
-                    addSequential(rSwitchHomeScaleHome);
+                    rSwitchHomeScaleHome.start();
                 } else {
                     System.out.println("Unknown switch/scale combination, just crossing line.");
-                    addSequential(crossLineAuto);
+                    crossLineAuto.start();
                 }
             } else if (sideChooser.getSelected() == RobotStart.LEFT) {
                 if (ourSwitch == MatchData.OwnedSide.RIGHT && scale == MatchData.OwnedSide.RIGHT) {
-                    addSequential(lSwitchAwayScaleAway);
+                    lSwitchAwayScaleAway.start();
                 } else if (ourSwitch == MatchData.OwnedSide.RIGHT && scale == MatchData.OwnedSide.LEFT) {
-                    addSequential(lSwitchAwayScaleHome);
+                    lSwitchAwayScaleHome.start();
                 } else if (ourSwitch == MatchData.OwnedSide.LEFT && scale == MatchData.OwnedSide.RIGHT) {
-                    addSequential(lSwitchHomeScaleAway);
+                    lSwitchHomeScaleAway.start();
                 } else if (ourSwitch == MatchData.OwnedSide.LEFT && scale == MatchData.OwnedSide.LEFT) {
-                    addSequential(lSwitchHomeScaleHome);
+                    lSwitchHomeScaleHome.start();
                 } else {
                     System.out.println("Unknown switch/scale combination, just crossing line.");
-                    addSequential(crossLineAuto);
+                    crossLineAuto.start();
                 }
             } else {
                 // center, don't have those autos yet
-                addSequential(crossLineAuto);
+                crossLineAuto.start();
             }
         } else {
-            addSequential(autoOverrideChooser.getSelected());
+            autoOverrideChooser.getSelected().start();
         }
     }
 }

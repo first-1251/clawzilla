@@ -78,8 +78,8 @@ public class Arm extends Subsystem {
     }
 
     public void showSwitches() {
-        SmartDashboard.putBoolean("TOP", armPosition.isArmUp());
-        SmartDashboard.putBoolean("BOTTOM", armPosition.isArmDown());
+        SmartDashboard.putBoolean("Arm Top", armPosition.isArmUp());
+        SmartDashboard.putBoolean("Arm Bottom", armPosition.isArmDown());
 
     }
 
@@ -87,6 +87,7 @@ public class Arm extends Subsystem {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Potentiometer", armPosition.getPotentiometer());
+        showSwitches();
     }
 
     public void stopPivot() {

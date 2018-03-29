@@ -3,6 +3,14 @@ package org.usfirst.frc.team1251.robot.commands.AutoPathPermutations;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RSwitchHomeScaleHome extends CommandGroup {
+
+    public RSwitchHomeScaleHome() {}
+
+    @Override
+    protected void initialize() {
+        System.out.println("This is RSwitchHomeScaleHome");
+    }
+
     // Go forward 147.36 inches
 
     // Face the 270 degree heading

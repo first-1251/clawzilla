@@ -22,7 +22,7 @@ public class ArmPosition {
         topSwitch = new DigitalInput(RobotMap.ARM_UPPER_LIMIT_SWITCH);
         bottomSwitch = new DigitalInput(RobotMap.ARM_LOWER_LIMIT_SWITCH);
 
-        potentiometer = new AnalogPotentiometer(RobotMap.ARM_POTENTIOMETER, 3600 / GEAR_RATIO, -6.45);
+        potentiometer = new AnalogPotentiometer(RobotMap.ARM_POTENTIOMETER, 3600 / GEAR_RATIO, -247.75);
     }
 
     public boolean isArmUp() {
