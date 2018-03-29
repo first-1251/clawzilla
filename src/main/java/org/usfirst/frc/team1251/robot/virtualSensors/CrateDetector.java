@@ -24,7 +24,6 @@ public class CrateDetector {
         {
             if (isTimerRunning)
             {
-                System.out.println(buttonTimer.get());
                 return buttonTimer.get() >= 1;
 
             } else {
