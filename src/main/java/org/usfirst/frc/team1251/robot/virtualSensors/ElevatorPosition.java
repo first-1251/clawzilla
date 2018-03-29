@@ -28,7 +28,7 @@ public class ElevatorPosition {
         return elevatorEncoder.get();
     }
 
-    // Gets height in inches through conversion of Encoder Ticks to inches [(Encoder Ticks / 360) * Circumference]
+    // Gets height in inches through conversion of Encoder Ticks to inches
     // Currently there is something wrong with the math.
     // TODO: Fix elevator math
     public double getHeight(){

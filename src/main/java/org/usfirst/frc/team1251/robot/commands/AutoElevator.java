@@ -13,6 +13,8 @@ public class AutoElevator extends Command {
     // Desired height in inches
     private int height;
 
+    private int tolerance = 1;
+
     private double speed = 0.8;
     private double sustainSpeed = 0.10;
     private boolean isAtPosition;
@@ -30,9 +32,9 @@ public class AutoElevator extends Command {
     }
 
     protected void execute(){
-        if(elevatorPosition.getHeight() < height){
+        if(elevatorPosition.getHeight() < height - 1){
             elevator.goUp(speed);
-        } else if (elevatorPosition.getHeight() > height) {
+        } else if (elevatorPosition.getHeight() > height + 1) {
             elevator.goDown(speed);
         } else {
             elevator.goUp(sustainSpeed);
