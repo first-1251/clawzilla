@@ -11,7 +11,7 @@ public class AutoFavorableSwitch extends CommandGroup {
         addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 168 - 24)); // 14'
 
         // Turn to face the switch plate
-        addSequential(new AutoTurn(driveTrain, 90, driveFeedback)); // 90 degrees counter-clockwise
+        addSequential(new AutoTurn(driveTrain, 90, driveFeedback, shifter)); // 90 degrees counter-clockwise
 
         addSequential(new DoNothingDriveTrain(0.3, driveTrain));
 

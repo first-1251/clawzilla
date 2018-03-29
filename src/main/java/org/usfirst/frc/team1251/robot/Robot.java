@@ -2,6 +2,7 @@ package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,7 +30,7 @@ import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
  */
 public class Robot extends IterativeRobot {
 
-    //private PowerDistributionPanel pdp;
+    //private PowerDistributionPanel pdp = new PowerDistributionPanel();
     private DriveTrain driveTrain;
     private Claw claw;
     private Collector collector;
@@ -180,10 +181,11 @@ public class Robot extends IterativeRobot {
         System.out.println("Auto Init");
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        //TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter);
-        //testAuto.start();
+        TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter);
+        testAuto.start();
 
-        autoChooser.initialize();
+        MotorFactory.setBrakeMode(true);
+        //autoChooser.initialize();
     }
 
     /**
@@ -201,6 +203,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
         this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
+        MotorFactory.setBrakeMode(false);
     }
 
     /**

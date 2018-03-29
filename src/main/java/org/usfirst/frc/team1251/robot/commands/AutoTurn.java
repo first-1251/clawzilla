@@ -1,18 +1,21 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team1251.robot.subsystems.DoubleSolenoidGearShifter;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1251.robot.subsystems.DriveTrainShifter;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class AutoTurn extends Command {
 
     private final DriveFeedback driveFeedback;
     private DriveTrain driveTrain;
+    private DriveTrainShifter driveShifter;
     private double desiredAngle;
     private boolean done = false;
 
-    private final double CLOCKWISE_THRESHOLD_FACTOR = 0.255;
-    private final double COUNTER_CLOCKWISE_THRESHOLD_FACTOR = 0.334;
+    private final double CLOCKWISE_THRESHOLD_FACTOR = 0.29;
+    private final double COUNTER_CLOCKWISE_THRESHOLD_FACTOR = 0.29;
 
     private Direction direction;
     private double finishedThreshold;
@@ -21,24 +24,29 @@ public class AutoTurn extends Command {
         CLOCKWISE, COUNTER_CLOCKWISE
     }
 
-    public AutoTurn(DriveTrain driveTrain, double desiredAngle, DriveFeedback driveFeedback) {
+    public AutoTurn(DriveTrain driveTrain, double desiredAngle, DriveFeedback driveFeedback, DriveTrainShifter driveShifter) {
         this.driveFeedback = driveFeedback;
         this.driveTrain = driveTrain;
         this.desiredAngle = desiredAngle;
+        this.driveShifter = driveShifter;
         requires(this.driveTrain);
+        requires(driveShifter);
     }
 
     @Override
     protected void initialize() {
+
+        System.out.println("Turning: " + desiredAngle);
+        driveShifter.setGear(DoubleSolenoidGearShifter.Gear.LOW);
         // Figure out how far we have to go and what way to turn
         double distanceToTarget = distanceToTarget();
 
         if (distanceToTarget < 0) {
             direction = Direction.COUNTER_CLOCKWISE;
-            finishedThreshold = Math.max(-distanceToTarget * COUNTER_CLOCKWISE_THRESHOLD_FACTOR, 30.0);
+            finishedThreshold = Math.max(-distanceToTarget * COUNTER_CLOCKWISE_THRESHOLD_FACTOR, 35.0);
         } else {
             direction = Direction.CLOCKWISE;
-            finishedThreshold = Math.min(distanceToTarget * CLOCKWISE_THRESHOLD_FACTOR, 30.0);
+            finishedThreshold = Math.min(distanceToTarget * (Math.cbrt(distanceToTarget) / 24.0), 35.0);
         }
 
         done = false;
