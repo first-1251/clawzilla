@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
         ShiftDriveTrain shiftDriveTrainDown = new ShiftDriveTrain(driveTrainShifter, DriveTrainShifter.Gear.LOW);
         ShiftElevator shiftElevatorUp = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.HIGH);
         ShiftElevator shiftElevatorDown = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.LOW);
-        Eject cubeEject = new Eject(collector);
+        Eject cubeEject = new Eject(collector, humanInput);
 
 
         // Create a command to slow arm decent and attach it to a trigger which indicates that the arm is down as
