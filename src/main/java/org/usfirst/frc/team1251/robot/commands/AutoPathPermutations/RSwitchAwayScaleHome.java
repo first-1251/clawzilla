@@ -16,4 +16,21 @@ public class RSwitchAwayScaleHome extends CommandGroup {
     // Bring arm down to 90 degrees
 
     // Eject the cube into switch
+
+    // Bring arm down to minimum to pick up the cube
+
+    // Face the 210 degree heading
+
+    // Grab cube
+
+    // Bring arm back up to 90
+
+    // Face the 270 degree heading
+
+    // Go forward 30 inches
+
+    // Face the 0 degree heading
+
+    // Move forward 60
+
 }

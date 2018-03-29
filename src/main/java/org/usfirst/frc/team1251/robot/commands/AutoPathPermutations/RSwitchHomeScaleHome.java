@@ -12,4 +12,27 @@ public class RSwitchHomeScaleHome extends CommandGroup {
     // Bring arm down to 90 degrees
 
     // Eject the cube into switch
+
+    // Bring arm back up
+
+    // Face 0 degree heading
+
+    // Drive forward 68.35 inches
+
+    // Face 240 degree heading
+
+    // Bring arm down to minimum for cube
+
+    // Drive forward 12.43 inches
+
+    // Intake cube
+
+    // Arm down to 90 degrees
+
+    // Face 0 degree heading
+
+    // Raise elevator
+
+    // Eject cube into scale
+
 }

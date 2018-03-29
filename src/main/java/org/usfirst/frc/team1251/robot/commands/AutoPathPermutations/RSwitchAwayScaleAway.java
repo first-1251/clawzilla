@@ -7,7 +7,7 @@ public class RSwitchAwayScaleAway extends CommandGroup {
 
     // Face the 270 degree heading
 
-    // Move forward 128.00 inches
+    // Move forward 175.00 inches
 
     // Face the 180 degree heading
 
@@ -17,19 +17,25 @@ public class RSwitchAwayScaleAway extends CommandGroup {
 
     // Eject the cube into switch
 
-    // Face 212.54 degree heading
+    // Bring arm down to minimum to pick up the cube
 
-    // Bring arm down to minimum
+    // Face the 210 degree heading
 
-    // Intake
+    // Grab cube
 
-    // Bring arm up to 90 degrees
+    // Bring arm back up to 90
 
-    // Reverse 9.44 inches
+    // Face the 270 degree heading
 
-    // Face 330 degree heading
+    // Go forward 30 inches
 
-    //
+    // Face the 0 degree heading
+
+    // Move forward 60 inches
+
+    // Raise arm
+
+    // Eject cube
 
 
 }
