@@ -11,6 +11,15 @@ import edu.wpi.first.wpilibj.MotorSafety;
  */
 public class MotorFactory {
 
+    private static TalonSRX leftMaster;
+    private static VictorSPX leftMotor1;
+    private static VictorSPX leftMotor2;
+    private static VictorSPX leftMotor3;
+    private static TalonSRX rightMaster;
+    private static VictorSPX rightMotor1;
+    private static VictorSPX rightMotor2;
+    private static VictorSPX rightMotor3;
+
     //private static final double SPEED_COMPENSATION_MULTIPLER = 0.66;
     public static class Configuration {
         public boolean LIMIT_SWITCH_NORMALLY_OPEN = true;
@@ -96,41 +105,62 @@ public class MotorFactory {
     }
 
     public static TalonSRX initLeftDriveMotors() {
-        TalonSRX master = createTalon(RobotMap.DRIVE_LEFT_LEAD_MOTOR, kDefaultConfiguration);
-        master.setInverted(true); // backwards
+        if (leftMaster != null) {
+            return leftMaster;
+        }
+
+        leftMaster = createTalon(RobotMap.DRIVE_LEFT_LEAD_MOTOR, kDefaultConfiguration);
+        leftMaster.setInverted(true); // backwards
 
         //master.configVoltageCompSaturation(kDefaultConfiguration.MAX_OUTPUT_VOLTAGE * SPEED_COMPENSATION_MULTIPLER, 0);
 
-        VictorSPX leftMotor1 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_1, kSlaveConfiguration);
-        VictorSPX leftMotor2 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_2, kSlaveConfiguration);
-        VictorSPX leftMotor3 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_3, kSlaveConfiguration);
+        leftMotor1 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_1, kSlaveConfiguration);
+        leftMotor2 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_2, kSlaveConfiguration);
+        leftMotor3 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_3, kSlaveConfiguration);
 
         leftMotor1.setInverted(true);
         leftMotor2.setInverted(true);
         leftMotor3.setInverted(true);
 
-        leftMotor1.follow(master);
-        leftMotor2.follow(master);
-        leftMotor3.follow(master);
+        leftMotor1.follow(leftMaster);
+        leftMotor2.follow(leftMaster);
+        leftMotor3.follow(leftMaster);
 
 
 
-        return master;
+        return leftMaster;
+    }
+
+    public static void setBrakeMode(boolean state) {
+        NeutralMode neutralMode = state ? NeutralMode.Brake : NeutralMode.Coast;
+        leftMaster.setNeutralMode(neutralMode);
+        leftMotor1.setNeutralMode(neutralMode);
+        leftMotor2.setNeutralMode(neutralMode);
+        leftMotor3.setNeutralMode(neutralMode);
+
+        rightMaster.setNeutralMode(neutralMode);
+        rightMotor1.setNeutralMode(neutralMode);
+        rightMotor2.setNeutralMode(neutralMode);
+        rightMotor3.setNeutralMode(neutralMode);
     }
 
     public static TalonSRX initRightDriveMotors() {
-        TalonSRX master = createTalon(RobotMap.DRIVE_RIGHT_LEAD_MOTOR, kDefaultConfiguration);
+        if (rightMaster != null) {
+            return rightMaster;
+        }
 
-        master.configClosedloopRamp(0.25, 0);
-        VictorSPX rightMotor1 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_1, kSlaveConfiguration);
-        VictorSPX rightMotor2 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_2, kSlaveConfiguration);
-        VictorSPX rightMotor3 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_3, kSlaveConfiguration);
+        rightMaster = createTalon(RobotMap.DRIVE_RIGHT_LEAD_MOTOR, kDefaultConfiguration);
 
-        rightMotor1.follow(master);
-        rightMotor2.follow(master);
-        rightMotor3.follow(master);
+        rightMaster.configClosedloopRamp(0.25, 0);
+        rightMotor1 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_1, kSlaveConfiguration);
+        rightMotor2 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_2, kSlaveConfiguration);
+        rightMotor3 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_3, kSlaveConfiguration);
 
-        return master;
+        rightMotor1.follow(rightMaster);
+        rightMotor2.follow(rightMaster);
+        rightMotor3.follow(rightMaster);
+
+        return rightMaster;
     }
 
     public static VictorSPX createVictor(int id, Configuration config) {
