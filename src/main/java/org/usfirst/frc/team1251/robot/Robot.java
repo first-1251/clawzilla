@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
         DeferredCmdSupplier<Command> elevatorDefaultCmdSupplier = new DeferredCmdSupplier<>();
         Elevator elevator = new Elevator(elevatorPosition, elevatorDefaultCmdSupplier);
 
-        Collector collector = new Collector();
+        Collector collector = new Collector(crateDetector);
 
         DeferredCmdSupplier<Command> clawDefaultCmdSupplier = new DeferredCmdSupplier<>();
         Claw claw = new Claw(clawDefaultCmdSupplier);

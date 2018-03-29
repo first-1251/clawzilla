@@ -20,10 +20,11 @@ public class CrateDetector {
 
     public boolean isCrateCollected()
     {
-        if (collectorSwitch.get())
+        if (!collectorSwitch.get())
         {
             if (isTimerRunning)
             {
+                System.out.println(buttonTimer.get());
                 return buttonTimer.get() >= 1;
 
             } else {
