@@ -3,6 +3,7 @@ package org.usfirst.frc.team1251.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import openrio.powerup.MatchData;
+import org.usfirst.frc.team1251.robot.commands.AutoPathPermutations.*;
 import org.usfirst.frc.team1251.robot.subsystems.Claw;
 import org.usfirst.frc.team1251.robot.subsystems.Collector;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
