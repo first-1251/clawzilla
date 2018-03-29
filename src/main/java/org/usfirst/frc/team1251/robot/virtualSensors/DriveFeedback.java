@@ -94,8 +94,35 @@ public class DriveFeedback {
         return turnRate;
     }
 
+    /**
+     *
+     * @return The raw angle reported by the gyro.
+     */
     public double getAngle() {
         return angle;
+    }
+
+    /**
+     *        0
+     *
+     *        |
+     * 270  - + -  90
+     *        |
+     *
+     *       180
+     *
+     * @return The current heading of the robot in degrees where 0 (or 360) is its starting position and 90 is due
+     *    right of its starting position.
+     *
+     */
+    public double getHeading() {
+        double heading = angle;
+
+        // Use remainder operator to resolve multiple revolutions
+        heading = (heading % 360) + 0.0; // 0.0 to change -0.0 to 0.0
+
+        // Normalize negative headings by adding 360. (-270 becomes 90; -179 becomes 181; -1 becomes 359)
+        return heading < 0 ? heading + 360 : heading;
     }
 
     public int getRightVelocity() {

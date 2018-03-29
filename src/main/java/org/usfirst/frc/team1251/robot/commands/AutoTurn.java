@@ -9,10 +9,17 @@ public class AutoTurn extends Command {
     private final DriveFeedback driveFeedback;
     private DriveTrain driveTrain;
     private double desiredAngle;
-    private double angleDelta;
     private boolean done = false;
+
+    private final double CLOCKWISE_THRESHOLD_FACTOR = 0.278;
+    private final double COUNTER_CLOCKWISE_THRESHOLD_FACTOR = 0.334;
+
+    private Direction direction;
     private double finishedThreshold;
-    private double finishedThresholdRight;
+
+    enum Direction {
+        CLOCKWISE, COUNTER_CLOCKWISE
+    }
 
     public AutoTurn(DriveTrain driveTrain, double desiredAngle, DriveFeedback driveFeedback) {
         this.driveFeedback = driveFeedback;
@@ -23,9 +30,17 @@ public class AutoTurn extends Command {
 
     @Override
     protected void initialize() {
-        // TODO-tweak: Adjust to flavor. // 8.0 for speed of 0.5  30.0 for speed 0.7
-        this.finishedThreshold = 30.0;
-        this.finishedThresholdRight = 25.0;
+        // Figure out how far we have to go and what way to turn
+        double distanceToTarget = distanceToTarget();
+
+        if (distanceToTarget < 0) {
+            direction = Direction.COUNTER_CLOCKWISE;
+            finishedThreshold = -distanceToTarget * COUNTER_CLOCKWISE_THRESHOLD_FACTOR;
+        } else {
+            direction = Direction.CLOCKWISE;
+            finishedThreshold = distanceToTarget * CLOCKWISE_THRESHOLD_FACTOR;
+        }
+
         done = false;
     }
 
@@ -33,7 +48,7 @@ public class AutoTurn extends Command {
     protected void execute() {
         done = isFinishedTurning();
         if (!done) {
-            if (desiredAngle < 0) {
+            if (direction == Direction.COUNTER_CLOCKWISE) {
                 driveTrain.setSpeed(-0.7, 0.7);
             } else {
                 driveTrain.setSpeed(0.7, -0.7);
@@ -54,11 +69,22 @@ public class AutoTurn extends Command {
     }
 
     private boolean isFinishedTurning() {
+        return (Math.abs(distanceToTarget()) <= finishedThreshold);
+    }
+
+    private double distanceToTarget() {
         driveFeedback.updateSensorData();
-        if (desiredAngle < 0) {
-            return Math.abs(Math.abs(driveFeedback.getAngle()) - Math.abs(desiredAngle)) < this.finishedThreshold;
-        } else {
-            return Math.abs(Math.abs(driveFeedback.getAngle()) - Math.abs(desiredAngle)) < this.finishedThresholdRight;
+        double heading = driveFeedback.getHeading();
+        if (heading < desiredAngle) {
+            heading += 360;
+        }
+
+        double left = heading - desiredAngle;
+
+        if (left < 180)
+            return -left;
+        else {
+            return 360 - left;
         }
     }
 }
