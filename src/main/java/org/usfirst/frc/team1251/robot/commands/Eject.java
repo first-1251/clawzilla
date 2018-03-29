@@ -21,21 +21,15 @@ public class Eject extends Command {
     @Override
     protected void execute() {
         this.collector.eject(EJECT_SPEED);
-        input.operatorGamePad.rumbleLeft(0.75);
-        input.operatorGamePad.rumbleRight(0.75);
-
-        input.driverGamePad.rumbleLeft(0.75);
-        input.driverGamePad.rumbleRight(0.75);
+        input.rumbleOperator(0.75);
+        input.rumbleDriver(0.75);
     }
 
     @Override
     protected void end() {
         this.collector.stop();
-        input.operatorGamePad.rumbleLeft(0);
-        input.operatorGamePad.rumbleRight(0);
-
-        input.driverGamePad.rumbleLeft(0);
-        input.driverGamePad.rumbleRight(0);
+        input.rumbleOperator(0);
+        input.rumbleDriver(0);
 
     }
 
