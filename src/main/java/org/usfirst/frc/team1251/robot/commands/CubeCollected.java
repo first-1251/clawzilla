@@ -15,15 +15,14 @@ public class CubeCollected extends TimedCommand{
     @Override
     protected void execute() {
         super.execute();
-        input.operatorGamePad.rumbleLeft(0.5);
-        input.operatorGamePad.rumbleRight(0.5);
-
-        input.driverGamePad.rumbleLeft(0.5);
-        input.driverGamePad.rumbleRight(0.5);
+        input.rumbleOperator(0.5);
+        input.rumbleDriver(0.5);
     }
 
     @Override
     protected void end() {
         super.end();
+        input.rumbleOperator(0);
+        input.rumbleDriver(0);
     }
 }

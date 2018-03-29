@@ -200,4 +200,16 @@ public class HumanInput {
         // Return the smoothed out value.
         return this.rightWheelSmoothing.getSmoothedValue();
     }
+
+    public void rumbleOperator(double rumble)
+    {
+        this.operatorGamePad.rumbleLeft(rumble);
+        this.operatorGamePad.rumbleRight(rumble);
+    }
+    public void rumbleDriver(double rumble)
+    {
+        this.driverGamePad.rumbleLeft(rumble);
+        this.driverGamePad.rumbleRight(rumble);
+    }
+
 }
