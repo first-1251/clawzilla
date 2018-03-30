@@ -14,8 +14,8 @@ public class AutoTurn extends Command {
     private double desiredAngle;
     private boolean done = false;
 
-    private final double CLOCKWISE_THRESHOLD_FACTOR = 0.29;
-    private final double COUNTER_CLOCKWISE_THRESHOLD_FACTOR = 0.29;
+    private final double CLOCKWISE_THRESHOLD_FACTOR = 0.31;
+    private final double COUNTER_CLOCKWISE_THRESHOLD_FACTOR = 0.31;
 
     private Direction direction;
     private double finishedThreshold;

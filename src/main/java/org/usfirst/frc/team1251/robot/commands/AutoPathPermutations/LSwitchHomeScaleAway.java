@@ -5,21 +5,28 @@ import org.usfirst.frc.team1251.robot.commands.*;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 public class LSwitchHomeScaleAway extends CommandGroup {
 
-    public LSwitchHomeScaleAway(Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter){
+    public LSwitchHomeScaleAway(Elevator elevator, ElevatorPosition elevatorPosition, Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter){
 
         // Go forward 147.36 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 147.36));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 156));
 
         // Face the 90 degree heading
-        addSequential(new AutoTurn(driveTrain, 90, driveFeedback, driveTrainShifter));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 90));
 
         addSequential(new DoNothingDriveTrain(0.5, driveTrain));
 
         // Move forward 17.29 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 17.29));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 18));
+
+        addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
+
+        addSequential(new DropCube(claw, collector));
+
+        addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
 
         // Bring arm down to 90 degrees
 //        addSequential(new AutoArmTo90(arm, armPosition));

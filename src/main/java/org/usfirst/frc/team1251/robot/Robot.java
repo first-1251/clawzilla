@@ -182,7 +182,7 @@ public class Robot extends IterativeRobot {
      * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
      * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
      * below the Gyro
-     * <p>
+     * <p>1
      * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
@@ -190,8 +190,9 @@ public class Robot extends IterativeRobot {
         System.out.println("Auto Init");
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition);
-        // testAuto.start();
+        driveTrainShifter.setGear(DoubleSolenoidGearShifter.Gear.HIGH);
+        TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition, this.claw, this.collector);
+         //testAuto.start();
 
         MotorFactory.setBrakeMode(true);
         autoChooser.initialize();
@@ -211,7 +212,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
-        this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
+        //this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
         MotorFactory.setBrakeMode(false);
     }
 

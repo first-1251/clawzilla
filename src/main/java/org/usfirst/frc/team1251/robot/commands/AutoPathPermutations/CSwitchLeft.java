@@ -20,12 +20,12 @@ public class CSwitchLeft extends CommandGroup{
                        Claw claw, Collector collector) {
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 24));
 
-        addSequential(new AutoTurn(driveTrain, 270, driveFeedback, driveShifter));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 270));
         addSequential(new DoNothingDriveTrain(.5, driveTrain));
 
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 59.93));
 
-        addSequential(new AutoTurn(driveTrain, 0, driveFeedback, driveShifter));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 0));
         addSequential(new DoNothingDriveTrain(.5, driveTrain));
 
         // TODO: Candidate for overrun + timeout

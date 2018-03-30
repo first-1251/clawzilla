@@ -6,8 +6,8 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 public class PIDTurn extends PIDCommand {
 
-    private static final double P = 0.0;
-    private static final double I = 0.0;
+    private static final double P = 0.01;
+    private static final double I = 0.000015;
     private static final double D = 0.0;
 
 
@@ -38,6 +38,7 @@ public class PIDTurn extends PIDCommand {
     @Override
     protected void initialize() {
         double distanceToTarget = distanceToTarget();
+        this.getPIDController().setSetpoint(desiredAngle);
 
         if (distanceToTarget < 0) {
             direction = Direction.COUNTER_CLOCKWISE;

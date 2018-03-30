@@ -53,10 +53,10 @@ public class AutoChooser{
 
         this.crossLineAuto = new CrossLineAuto(driveTrain, driveFeedback, shifter);
 
-        this.lSwitchAwayScaleAway = new LSwitchAwayScaleAway(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
-        this.lSwitchAwayScaleHome = new LSwitchAwayScaleHome(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
-        this.lSwitchHomeScaleAway = new LSwitchHomeScaleAway(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
-        this.lSwitchHomeScaleHome = new LSwitchHomeScaleHome(arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchAwayScaleAway = new LSwitchAwayScaleAway(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchAwayScaleHome = new LSwitchAwayScaleHome(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchHomeScaleAway = new LSwitchHomeScaleAway(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchHomeScaleHome = new LSwitchHomeScaleHome(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
 
         this.rSwitchAwayScaleAway = new RSwitchAwayScaleAway();
         this.rSwitchAwayScaleHome = new RSwitchAwayScaleHome();
