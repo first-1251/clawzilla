@@ -10,6 +10,7 @@ import org.usfirst.frc.team1251.robot.commands.DoNothingDefaultAuto;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 public class AutoChooser{
 
@@ -28,13 +29,19 @@ public class AutoChooser{
     private RSwitchHomeScaleAway rSwitchHomeScaleAway;
     private RSwitchHomeScaleHome rSwitchHomeScaleHome;
 
+    private CSwitchLeft cSwitchLeft;
+    private CSwitchRight cSwitchRight;
+
     private CrossLineAuto crossLineAuto;
 
     public enum RobotStart {
         LEFT, CENTER, RIGHT;
     }
 
-    public AutoChooser(Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
+    public AutoChooser(Arm arm, ArmPosition armPosition,
+                       Elevator elevator, ElevatorPosition elevatorPosition,
+                       Claw claw, Collector collector,
+                       DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
 
         sideChooser = new SendableChooser<>();
         autoOverrideChooser = new SendableChooser<>();
@@ -55,6 +62,16 @@ public class AutoChooser{
         this.rSwitchAwayScaleHome = new RSwitchAwayScaleHome();
         this.rSwitchHomeScaleAway = new RSwitchHomeScaleAway();
         this.rSwitchHomeScaleHome = new RSwitchHomeScaleHome();
+
+        this.cSwitchLeft = new CSwitchLeft(driveFeedback, shifter, driveTrain,
+                arm, armPosition,
+                elevator, elevatorPosition,
+                claw, collector);
+
+        this.cSwitchRight = new CSwitchRight(driveFeedback, shifter, driveTrain,
+                arm, armPosition,
+                elevator, elevatorPosition,
+                claw, collector);
 
         sideChooser.addObject("Starting Left", RobotStart.LEFT);
         sideChooser.addObject("Starting Center", RobotStart.CENTER);
@@ -118,8 +135,19 @@ public class AutoChooser{
                     System.out.println("Unknown switch/scale combination, just crossing line.");
                     crossLineAuto.start();
                 }
+            } else if (sideChooser.getSelected() == RobotStart.CENTER) {
+                // Only switch side matters for center placement.
+                if (ourSwitch == MatchData.OwnedSide.RIGHT) {
+                    cSwitchRight.start();
+                } else if (ourSwitch == MatchData.OwnedSide.LEFT) {
+                    cSwitchLeft.start();
+                } else {
+                    System.out.println("Unknown switch position, just crossing the line");
+                    crossLineAuto.start();
+                }
+
             } else {
-                // center, don't have those autos yet
+                System.out.println("Unknown staring position, just crossing line.");
                 crossLineAuto.start();
             }
         } else {

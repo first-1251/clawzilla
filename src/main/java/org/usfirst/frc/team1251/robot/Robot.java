@@ -2,7 +2,6 @@ package org.usfirst.frc.team1251.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -146,7 +145,10 @@ public class Robot extends IterativeRobot {
         this.claw = claw;
         this.collector = collector;
 
-        autoChooser = new AutoChooser(arm, armPosition, claw, collector, driveTrain, driveFeedback, driveTrainShifter);
+        autoChooser = new AutoChooser(arm, armPosition,
+                elevator, elevatorPosition,
+                claw, collector,
+                driveTrain, driveFeedback, driveTrainShifter);
     }
 
     private void initGamepadTest() {
