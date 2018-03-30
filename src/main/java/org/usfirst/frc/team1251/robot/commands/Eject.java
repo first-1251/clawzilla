@@ -21,8 +21,8 @@ public class Eject extends Command {
     @Override
     protected void execute() {
         this.collector.eject(EJECT_SPEED);
-        input.rumbleOperator(0.75);
-        input.rumbleDriver(0.75);
+        input.rumbleOperator(1);
+        input.rumbleDriver(1);
     }
 
     @Override

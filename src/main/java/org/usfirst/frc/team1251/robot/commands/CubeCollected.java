@@ -15,8 +15,8 @@ public class CubeCollected extends TimedCommand{
     @Override
     protected void execute() {
         super.execute();
-        input.rumbleOperator(0.5);
-        input.rumbleDriver(0.5);
+        input.rumbleOperator(1);
+        input.rumbleDriver(1);
     }
 
     @Override
