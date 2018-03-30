@@ -46,6 +46,9 @@ public class Robot extends IterativeRobot {
     private TeleopDrive teleopDriveCmd;
     private DriveTrainAutoShift driveTrainAutoShift;
     private DriveTrainShifter driveTrainShifter;
+    private Arm arm;
+    private Elevator elevator;
+    private ArmPosition armPosition;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -145,6 +148,10 @@ public class Robot extends IterativeRobot {
         this.claw = claw;
         this.collector = collector;
 
+        this.arm = arm;
+        this.elevator = elevator;
+        this.armPosition = armPosition;
+
         autoChooser = new AutoChooser(arm, armPosition,
                 elevator, elevatorPosition,
                 claw, collector,
@@ -183,11 +190,11 @@ public class Robot extends IterativeRobot {
         System.out.println("Auto Init");
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
-        TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter);
-        testAuto.start();
+        TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition);
+        // testAuto.start();
 
         MotorFactory.setBrakeMode(true);
-        //autoChooser.initialize();
+        autoChooser.initialize();
     }
 
     /**
