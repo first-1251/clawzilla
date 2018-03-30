@@ -43,10 +43,10 @@ public class AutoTurn extends Command {
 
         if (distanceToTarget < 0) {
             direction = Direction.COUNTER_CLOCKWISE;
-            finishedThreshold = Math.max(-distanceToTarget * COUNTER_CLOCKWISE_THRESHOLD_FACTOR, 35.0);
+            finishedThreshold = Math.max(-distanceToTarget * COUNTER_CLOCKWISE_THRESHOLD_FACTOR, 30.0);
         } else {
             direction = Direction.CLOCKWISE;
-            finishedThreshold = Math.min(distanceToTarget * (Math.cbrt(distanceToTarget) / 24.0), 35.0);
+            finishedThreshold = Math.min(distanceToTarget * CLOCKWISE_THRESHOLD_FACTOR, 30.0);
         }
 
         done = false;
