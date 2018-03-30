@@ -17,6 +17,7 @@ public class ArmDownTo90AndHold extends Command {
     public ArmDownTo90AndHold(Arm arm, ArmPosition armPosition){
         this.arm = arm;
         this.armPosition = armPosition;
+        requires(arm);
     }
 
     @Override

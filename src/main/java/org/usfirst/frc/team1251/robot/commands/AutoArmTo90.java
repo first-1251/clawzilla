@@ -19,6 +19,7 @@ public class AutoArmTo90 extends Command {
     public AutoArmTo90(Arm arm, ArmPosition armPosition){
         this.arm = arm;
         this.armPosition = armPosition;
+        requires(arm);
     }
 
     @Override

@@ -14,6 +14,7 @@ public class ElevatorToBottom extends Command {
     public ElevatorToBottom(Elevator elevator, ElevatorPosition elevatorPosition) {
         this.elevator = elevator;
         this.elevatorPosition = elevatorPosition;
+        requires(elevator);
     }
 
     @Override

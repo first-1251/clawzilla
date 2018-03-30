@@ -16,6 +16,7 @@ public class DelayedTimedEject extends TimedCommand {
         super(delay + ejectTime);
         this.collector = collector;
         this.delay = delay;
+        requires(collector);
     }
 
     @Override
