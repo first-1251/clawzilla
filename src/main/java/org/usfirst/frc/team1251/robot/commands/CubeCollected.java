@@ -8,7 +8,7 @@ public class CubeCollected extends TimedCommand{
     private HumanInput input;
 
     public CubeCollected(HumanInput humanInput) {
-        super(0.5);
+        super(1);
         this.input = humanInput;
     }
 

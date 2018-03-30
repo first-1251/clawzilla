@@ -15,6 +15,8 @@ public class Collector extends Subsystem {
     private static final int MOTOR_RIGHT_BACKWARD = -1;
     private static final int MOTOR_STOP = 0; //Drift Button
 
+    private static final double THROTTLED_COLLECT_SPEED = .25;
+
 
     // SAFETY!
     private static final double EJECTION_MAX_SPEED = 1.0;
@@ -54,8 +56,9 @@ public class Collector extends Subsystem {
             rightMotor.set(-MOTOR_RIGHT_FORWARD * 0.9);
             leftMotor.set(-MOTOR_LEFT_FORWARD * 0.9);
         } else {
-            rightMotor.set(0);
-            leftMotor.set(0);
+            // Throttle intake when a crate is detected to protect the motors.
+            rightMotor.set(-MOTOR_RIGHT_FORWARD * THROTTLED_COLLECT_SPEED);
+            leftMotor.set(-MOTOR_LEFT_FORWARD * THROTTLED_COLLECT_SPEED);
         }
 
     }
