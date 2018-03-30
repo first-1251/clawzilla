@@ -4,14 +4,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
-public class AutoArmUpToTop extends Command {
+public class ArmToTop extends Command {
 
     private Arm arm;
     private ArmPosition armPosition;
 
     private double speed = 0.5;
+    private boolean done = false;
 
-    public AutoArmUpToTop(Arm arm, ArmPosition armPosition){
+    public ArmToTop(Arm arm, ArmPosition armPosition){
         this.arm = arm;
         this.armPosition = armPosition;
 
@@ -19,8 +20,14 @@ public class AutoArmUpToTop extends Command {
     }
 
     @Override
+    protected void initialize() {
+        done = false;
+    }
+
+    @Override
     protected void execute() {
-        if(!armPosition.isArmUp()){
+        done = armPosition.isArmUp();
+        if (!done) {
             arm.pivotUp(speed);
         } else {
             arm.stopPivot();
@@ -29,6 +36,6 @@ public class AutoArmUpToTop extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return done;
     }
 }
