@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc.team1251.robot.RobotMap;
 
+/**
+ * Arm position is measured in degrees from full-up (starting) position. The lower the arm, the higher the
+ * degree. This is counter-intuitive to humans but is how the sensors are hooked up.
+ */
 public class ArmPosition {
 
     // limit switches
@@ -36,7 +40,14 @@ public class ArmPosition {
     public double getPotentiometer() {
         return potentiometer.get();
     }
+
+    /**
+     * @deprecated - Seems inverted -- do not use without a closer look!
+     */
     public boolean atLeast90() { return potentiometer.get() < 87.0; }
 
+    /**
+     * @deprecated - Seems inverted -- do not use without a closer look!
+     */
     public boolean lessThan90() { return potentiometer.get() > 93.0; }
 }

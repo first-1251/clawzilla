@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 
+/**
+ * @deprecated Not really deprecated, but needs testing and maybe PID - see ArmTo90AndHold for auto movements
+ */
 public class AutoArmTo90 extends Command {
 
     private Arm arm;
