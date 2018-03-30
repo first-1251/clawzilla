@@ -192,10 +192,10 @@ public class Robot extends IterativeRobot {
         this.driveTrainShifter.setDefaultCommand(null);
         driveTrainShifter.setGear(DoubleSolenoidGearShifter.Gear.HIGH);
         TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition, this.claw, this.collector);
-         //testAuto.start();
+         testAuto.start();
 
         MotorFactory.setBrakeMode(true);
-        autoChooser.initialize();
+        //autoChooser.initialize();
     }
 
     /**

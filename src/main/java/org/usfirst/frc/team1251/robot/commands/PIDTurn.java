@@ -38,7 +38,7 @@ public class PIDTurn extends PIDCommand {
         this.driveTrain = driveTrain;
         this.driveFeedback = driveFeedback;
         this.setInputRange(0.0, 360.0);
-        this.getPIDController().setAbsoluteTolerance(1.0);
+        this.getPIDController().setAbsoluteTolerance(1.5);
         this.getPIDController().setContinuous();
     }
 
@@ -59,6 +59,11 @@ public class PIDTurn extends PIDCommand {
         } else {
             direction = Direction.CLOCKWISE;
         }
+    }
+
+    @Override
+    protected void end() {
+        System.out.println("PID TURNING COMPLETE");
     }
 
     @Override

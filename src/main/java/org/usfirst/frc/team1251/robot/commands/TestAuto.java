@@ -19,7 +19,9 @@ public class TestAuto extends CommandGroup {
         ///addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 175.00));
 
         // Face the 180 degree heading
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 135));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 90));
+        addSequential(new DoNothingDriveTrain(3.0, driveTrain));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 180));
 
         //addSequential(new DoNothingDriveTrain(1.5, driveTrain));
 
