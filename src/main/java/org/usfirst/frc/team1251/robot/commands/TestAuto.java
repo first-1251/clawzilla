@@ -4,10 +4,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 public class TestAuto extends CommandGroup {
     public TestAuto(DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter driveTrainShifter,
-                    Elevator elevator, Arm arm, ArmPosition armPosition, Claw claw, Collector collector) {
+                    Elevator elevator, Arm arm, ArmPosition armPosition, Claw claw, Collector collector, ElevatorPosition elevatorPosition) {
         //addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 215.71));
 
         // Face the 90 degree heading
@@ -19,10 +20,17 @@ public class TestAuto extends CommandGroup {
         ///addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 175.00));
 
         // Face the 180 degree heading
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 90));
-        addSequential(new DoNothingDriveTrain(3.0, driveTrain));
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 180));
+        //addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter));
 
+        //addSequential(new PIDTurn(driveTrain, driveFeedback, 90));
+        //addSequential(new DoNothingDriveTrain(1.0, driveTrain));
+        //addSequential(new PIDTurn(driveTrain, driveFeedback, 180));
+
+        addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
+
+        //addSequential(new DropCube(claw, collector));
+
+        addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
         //addSequential(new DoNothingDriveTrain(1.5, driveTrain));
 
         //addSequential(new AutoTurn(driveTrain, 90, driveFeedback, driveTrainShifter));

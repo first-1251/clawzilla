@@ -30,17 +30,15 @@ public class LSwitchHomeScaleHome extends CommandGroup {
 
     public LSwitchHomeScaleHome(Elevator elevator, ElevatorPosition elevatorPosition, Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter){
 
+        System.out.println("I ran!!");
         // Go forward 147.36 inches
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 156));
 
         // Face the 90 degree heading
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 90));
-
-        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 90), 1.0);
 
         // Move forward 17.29 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 18));
-
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 24), 1.0);
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 

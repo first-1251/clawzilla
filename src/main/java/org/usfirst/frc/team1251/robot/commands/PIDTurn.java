@@ -9,13 +9,13 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 public class PIDTurn extends PIDCommand {
 
     private static final double P = 0.01;
-    private static final double I = 0.000015;
+    private static final double I = 0.00002;
     private static final double D = 0.0;
 
     private final double timeAllowance;
     private final Timer timeAllowanceTimer = new Timer();
 
-    private final static double TIMED_OUT_THRESHOLD = 3;
+    private final static double TIMED_OUT_THRESHOLD = 5;
     private final static double TIME_ALLOWANCE = 2;
 
     enum Direction {
@@ -38,7 +38,7 @@ public class PIDTurn extends PIDCommand {
         this.driveTrain = driveTrain;
         this.driveFeedback = driveFeedback;
         this.setInputRange(0.0, 360.0);
-        this.getPIDController().setAbsoluteTolerance(1.5);
+        this.getPIDController().setAbsoluteTolerance(3.0);
         this.getPIDController().setContinuous();
     }
 
@@ -62,11 +62,6 @@ public class PIDTurn extends PIDCommand {
     }
 
     @Override
-    protected void end() {
-        System.out.println("PID TURNING COMPLETE");
-    }
-
-    @Override
     protected double returnPIDInput() {
         driveFeedback.updateSensorData();
         return driveFeedback.getHeading();
@@ -74,12 +69,7 @@ public class PIDTurn extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-
-        if (direction == Direction.COUNTER_CLOCKWISE) {
-            driveTrain.setSpeed(-output, output);
-        } else {
             driveTrain.setSpeed(output, -output);
-        }
     }
 
     private double distanceToTarget() {

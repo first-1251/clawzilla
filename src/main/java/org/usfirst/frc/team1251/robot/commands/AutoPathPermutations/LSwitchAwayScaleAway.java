@@ -14,20 +14,16 @@ public class LSwitchAwayScaleAway extends CommandGroup {
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 228));
 
                 // Face the 90 degree heading
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 90));
-
-        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 90), 1.0);
 
         // Move forward 175.00 inches
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 187.00));
 
         // Face the 180 degree heading
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 180));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 180), 1.0);
 
-        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
-
-        // Move forward 9.44 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 12));
+                // Move forward 9.44 inches
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 24), 1.5);
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 

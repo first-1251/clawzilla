@@ -93,6 +93,9 @@ public class AutoChooser{
         autoOverrideChooser.addObject("Right - Switch Home - Scale Away", rSwitchHomeScaleAway);
         autoOverrideChooser.addObject("Right - Switch Home - Scale Home", rSwitchHomeScaleHome);
 
+        autoOverrideChooser.addObject("Center - Switch Right", cSwitchRight);
+        autoOverrideChooser.addObject("Center - Switch Left", cSwitchLeft);
+
     }
 
     public void initialize() {

@@ -8,7 +8,7 @@ public class TimedElevatorUpAndHold extends TimedCommand {
     private Elevator elevator;
     private final double speed;
 
-    private static double SUSTAIN_SPEED = .1;
+    private static double SUSTAIN_SPEED = .15;
 
     public TimedElevatorUpAndHold(Elevator elevator, double duration, double speed) {
         super(duration);

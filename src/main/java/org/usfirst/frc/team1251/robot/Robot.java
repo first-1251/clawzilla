@@ -49,6 +49,7 @@ public class Robot extends IterativeRobot {
     private Arm arm;
     private Elevator elevator;
     private ArmPosition armPosition;
+    private ElevatorPosition elevatorPosition;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -151,6 +152,7 @@ public class Robot extends IterativeRobot {
         this.arm = arm;
         this.elevator = elevator;
         this.armPosition = armPosition;
+        this.elevatorPosition = elevatorPosition;
 
         autoChooser = new AutoChooser(arm, armPosition,
                 elevator, elevatorPosition,
@@ -191,11 +193,11 @@ public class Robot extends IterativeRobot {
         this.driveTrain.setDefaultCommand(null);
         this.driveTrainShifter.setDefaultCommand(null);
         driveTrainShifter.setGear(DoubleSolenoidGearShifter.Gear.HIGH);
-        TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition, this.claw, this.collector);
-         testAuto.start();
+        TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition, this.claw, this.collector, elevatorPosition);
+        //testAuto.start();
 
         MotorFactory.setBrakeMode(true);
-        //autoChooser.initialize();
+        autoChooser.initialize();
     }
 
     /**

@@ -22,16 +22,14 @@ public class CSwitchRight extends CommandGroup {
 
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 24));
 
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 90));
-        addSequential(new DoNothingDriveTrain(.5, driveTrain));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 90), 1.0);
 
         addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 48.21));
 
-        addSequential(new PIDTurn(driveTrain, driveFeedback, 0));
-        addSequential(new DoNothingDriveTrain(.5, driveTrain));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 0), 1.0);
 
         // TODO: Candidate for overrun + timeout
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 75.32));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 82.32));
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 

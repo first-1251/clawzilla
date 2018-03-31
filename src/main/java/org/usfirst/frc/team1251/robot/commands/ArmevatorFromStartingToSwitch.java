@@ -8,7 +8,7 @@ import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 public class ArmevatorFromStartingToSwitch extends CommandGroup {
 
     public ArmevatorFromStartingToSwitch(Elevator elevator, Arm arm, ArmPosition armPosition) {
-        addSequential(new TimedElevatorUpAndHold(elevator, .5, .8));
-        addSequential(new ArmDownTo90AndHold(arm, armPosition));
+        addParallel(new TimedElevatorUpAndHold(elevator, .3, .85));
+        addParallel(new ArmDownTo90AndHold(arm, armPosition));
     }
 }
