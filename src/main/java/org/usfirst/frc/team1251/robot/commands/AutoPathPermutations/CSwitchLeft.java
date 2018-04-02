@@ -18,15 +18,15 @@ public class CSwitchLeft extends CommandGroup{
                        Arm arm, ArmPosition armPosition,
                        Elevator elevator, ElevatorPosition elevatorPosition,
                        Claw claw, Collector collector) {
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 24));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 30));
 
         addSequential(new PIDTurn(driveTrain, driveFeedback, 270), 1.0);
 
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 59.93));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 67.93), 2.0);
 
         addSequential(new PIDTurn(driveTrain, driveFeedback, 0), 1.0);
         // TODO: Candidate for overrun + timeout
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 82.32));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveShifter, 82.32), 2.0);
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 

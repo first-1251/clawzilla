@@ -28,6 +28,7 @@ public class TestAuto extends CommandGroup {
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 
+        addSequential(new DoNothingDriveTrain(1.0, driveTrain));
         //addSequential(new DropCube(claw, collector));
 
         addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));

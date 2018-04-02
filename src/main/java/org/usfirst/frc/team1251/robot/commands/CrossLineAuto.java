@@ -8,6 +8,6 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 public class CrossLineAuto extends CommandGroup{
 
     public CrossLineAuto(DriveTrain driveTrain, DriveFeedback driveFeedback, DriveTrainShifter shifter) {
-        addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 132));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, shifter, 140));
     }
 }

@@ -11,7 +11,7 @@ public class LSwitchAwayScaleAway extends CommandGroup {
     public LSwitchAwayScaleAway(Elevator elevator, ElevatorPosition elevatorPosition, Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter){
 
         // Go forward 215.71 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 228));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 234));
 
                 // Face the 90 degree heading
         addSequential(new PIDTurn(driveTrain, driveFeedback, 90), 1.0);
@@ -23,7 +23,7 @@ public class LSwitchAwayScaleAway extends CommandGroup {
         addSequential(new PIDTurn(driveTrain, driveFeedback, 180), 1.0);
 
                 // Move forward 9.44 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 24), 1.5);
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 30), 1.5);
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 
