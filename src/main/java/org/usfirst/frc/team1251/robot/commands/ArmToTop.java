@@ -9,7 +9,7 @@ public class ArmToTop extends Command {
     private Arm arm;
     private ArmPosition armPosition;
 
-    private double speed = 0.5;
+    private double speed = 1.0;
     private boolean done = false;
 
     public ArmToTop(Arm arm, ArmPosition armPosition){

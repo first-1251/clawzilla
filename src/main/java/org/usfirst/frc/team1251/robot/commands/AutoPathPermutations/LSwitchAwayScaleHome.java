@@ -5,27 +5,30 @@ import org.usfirst.frc.team1251.robot.commands.*;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
+import org.usfirst.frc.team1251.robot.virtualSensors.ElevatorPosition;
 
 public class LSwitchAwayScaleHome extends CommandGroup {
-    public LSwitchAwayScaleHome(Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter){
+    public LSwitchAwayScaleHome(Elevator elevator, ElevatorPosition elevatorPosition, Arm arm, ArmPosition armPosition, Claw claw, Collector collector, DriveFeedback driveFeedback, DriveTrain driveTrain, DriveTrainShifter driveTrainShifter){
         // Go forward 215.71 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 215.71));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 234));
 
         // Face the 90 degree heading
-        addSequential(new AutoTurn(driveTrain, 90, driveFeedback, driveTrainShifter));
-
-        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 90), 1.0);
 
         // Move forward 175.00 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 175.00));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 187.00));
 
         // Face the 180 degree heading
-        addSequential(new AutoTurn(driveTrain, 180, driveFeedback, driveTrainShifter));
-
-        addSequential(new DoNothingDriveTrain(0.5, driveTrain));
+        addSequential(new PIDTurn(driveTrain, driveFeedback, 180), 1.0);
 
         // Move forward 9.44 inches
-        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 9.44));
+        addSequential(new AutoForwards(driveFeedback, driveTrain, driveTrainShifter, 30), 1.5);
+
+        addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
+
+        addSequential(new DropCube(claw, collector));
+
+        addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
 
         // Bring arm down to 90 degrees
 //        addSequential(new AutoArmTo90(arm, armPosition));

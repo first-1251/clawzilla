@@ -9,8 +9,8 @@ public class ArmDownTo90AndHold extends Command {
     private Arm arm;
     private ArmPosition armPosition;
 
-    private double topSpeed = 0.25; // Get things started.
-    private double lowSpeed = 0.1; // Gravity will help us move down.
+    private double topSpeed = 0.5; // Get things started.
+    private double lowSpeed = 0.5; // Gravity will help us move down.
     private double sustainSpeed = 0.20;
     private boolean isAtPosition;
 
