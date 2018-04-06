@@ -36,7 +36,7 @@ public class LSwitchHomeScaleAway extends CommandGroup {
 //        addSequential(new AutoArmDownToMinimum(arm, armPosition));
 
         // Face the 180 degree heading
-        addSequential(new AutoTurn(driveTrain, 180, driveFeedback, driveTrainShifter));
+        //addSequential(new AutoTurn(driveTrain, 180, driveFeedback, driveTrainShifter));
 //
 //        // Move backwards 65.25 inches
 //        addSequential(new AutoForwards(driveFeedback,driveTrain,driveTrainShifter, -65.25));
