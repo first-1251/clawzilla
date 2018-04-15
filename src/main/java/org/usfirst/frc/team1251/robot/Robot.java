@@ -158,6 +158,8 @@ public class Robot extends IterativeRobot {
                 elevator, elevatorPosition,
                 claw, collector,
                 driveTrain, driveFeedback, driveTrainShifter);
+
+        driveFeedback.reset();
     }
 
     private void initGamepadTest() {
@@ -194,10 +196,10 @@ public class Robot extends IterativeRobot {
         this.driveTrainShifter.setDefaultCommand(null);
         driveTrainShifter.setGear(DoubleSolenoidGearShifter.Gear.HIGH);
         TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition, this.claw, this.collector, elevatorPosition);
-        //testAuto.start();
+        testAuto.start();
 
-        MotorFactory.setBrakeMode(true);
-        autoChooser.initialize();
+        MotorFactory.setBrakeMode(false);
+        //autoChooser.initialize();
     }
 
     /**

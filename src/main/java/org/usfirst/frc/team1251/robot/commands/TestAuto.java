@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team1251.robot.commands.MotionProfiling.FollowPath;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
@@ -26,12 +27,14 @@ public class TestAuto extends CommandGroup {
         //addSequential(new DoNothingDriveTrain(1.0, driveTrain));
         //addSequential(new PIDTurn(driveTrain, driveFeedback, 180));
 
-        addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
+        //addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 
-        addSequential(new DoNothingDriveTrain(1.0, driveTrain));
+        //addSequential(new DoNothingDriveTrain(1.0, driveTrain));
         //addSequential(new DropCube(claw, collector));
 
-        addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
+        addSequential(new FollowPath(driveTrain, driveFeedback));
+
+        //addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
         //addSequential(new DoNothingDriveTrain(1.5, driveTrain));
 
         //addSequential(new AutoTurn(driveTrain, 90, driveFeedback, driveTrainShifter));
