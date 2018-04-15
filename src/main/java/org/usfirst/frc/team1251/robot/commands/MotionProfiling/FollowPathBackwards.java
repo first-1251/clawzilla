@@ -9,7 +9,7 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 import java.io.File;
 
-public class FollowPath extends Command {
+public class FollowPathBackwards extends Command {
 
     private DriveFeedback driveFeedback;
     private DriveTrain driveTrain;
@@ -19,24 +19,25 @@ public class FollowPath extends Command {
     private EncoderFollower rightFollower;
     private int index = 0;
 
-    public FollowPath(DriveTrain driveTrain, DriveFeedback driveFeedback) {
+    public FollowPathBackwards(DriveTrain driveTrain, DriveFeedback driveFeedback) {
         this.driveFeedback = driveFeedback;
         driveFeedback.reset();
         this.driveTrain = driveTrain;
         requires(driveTrain);
-        left = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAuto_left_detailed.csv"));
-        right = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAuto_right_detailed.csv"));
+        left = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAutoBackwards1_right_detailed.csv"));
+        right = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAutoBackwards1_left_detailed.csv"));
         leftFollower = new EncoderFollower(left);
-        leftFollower.configurePIDVA(1.2, 0.0, 0.15, 1.0/12.0, 1/15.0);
+        leftFollower.configurePIDVA(1.2, 0.0, 0.1, 1.0/12.0, 1/15.0);
         leftFollower.configureEncoder(0, (int) DriveFeedback.TICKS_PER_TURN, DriveFeedback.WHEEL_DIAMETER / 12.0);
         rightFollower = new EncoderFollower(right);
-        rightFollower.configurePIDVA(1.2, 0.0, 0.15, 1.0/12.0, 1/15.0);
+        rightFollower.configurePIDVA(1.2, 0.0, 0.1, 1.0/12.0, 1/15.0);
         rightFollower.configureEncoder(0, (int) DriveFeedback.TICKS_PER_TURN, DriveFeedback.WHEEL_DIAMETER / 12.0);
     }
 
     @Override
     protected void initialize() {
         super.initialize();
+        driveFeedback.reset();
         index = 0;
     }
 
@@ -54,7 +55,6 @@ public class FollowPath extends Command {
     protected void end() {
         super.end();
         driveTrain.setSpeed(0, 0);
-        driveFeedback.reset();
     }
 
     @Override
