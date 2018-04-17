@@ -9,7 +9,7 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 import java.io.File;
 
-public class FollowPathBackwards extends Command {
+public class FollowLeftPath2 extends Command {
 
     private DriveFeedback driveFeedback;
     private DriveTrain driveTrain;
@@ -19,26 +19,26 @@ public class FollowPathBackwards extends Command {
     private EncoderFollower rightFollower;
     private int index = 0;
 
-    public FollowPathBackwards(DriveTrain driveTrain, DriveFeedback driveFeedback) {
+    public FollowLeftPath2(DriveTrain driveTrain, DriveFeedback driveFeedback) {
         this.driveFeedback = driveFeedback;
         driveFeedback.reset();
         this.driveTrain = driveTrain;
         requires(driveTrain);
-        left = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAutoBackwards1_right_detailed.csv"));
-        right = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAutoBackwards1_left_detailed.csv"));
+        left = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeft2_left_detailed_backward.csv"));
+        right = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeft2_right_detailed_backward.csv"));
         leftFollower = new EncoderFollower(left);
-        leftFollower.configurePIDVA(1.2, 0.0, 0.1, 1.0/12.0, 1/15.0);
+        leftFollower.configurePIDVA(1.2, 0.0, 0.15, 1.0/12.0, 1/15.0);
         leftFollower.configureEncoder(0, (int) DriveFeedback.TICKS_PER_TURN, DriveFeedback.WHEEL_DIAMETER / 12.0);
         rightFollower = new EncoderFollower(right);
-        rightFollower.configurePIDVA(1.2, 0.0, 0.1, 1.0/12.0, 1/15.0);
+        rightFollower.configurePIDVA(1.2, 0.0, 0.15, 1.0/12.0, 1/15.0);
         rightFollower.configureEncoder(0, (int) DriveFeedback.TICKS_PER_TURN, DriveFeedback.WHEEL_DIAMETER / 12.0);
     }
 
     @Override
     protected void initialize() {
         super.initialize();
-        driveFeedback.reset();
         index = 0;
+        driveFeedback.reset();
     }
 
     @Override
@@ -55,6 +55,7 @@ public class FollowPathBackwards extends Command {
     protected void end() {
         super.end();
         driveTrain.setSpeed(0, 0);
+        driveFeedback.reset();
     }
 
     @Override

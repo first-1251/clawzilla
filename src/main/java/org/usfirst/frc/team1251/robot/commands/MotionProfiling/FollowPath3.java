@@ -9,7 +9,7 @@ import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
 
 import java.io.File;
 
-public class FollowPath extends Command {
+public class FollowPath3 extends Command {
 
     private DriveFeedback driveFeedback;
     private DriveTrain driveTrain;
@@ -19,18 +19,18 @@ public class FollowPath extends Command {
     private EncoderFollower rightFollower;
     private int index = 0;
 
-    public FollowPath(DriveTrain driveTrain, DriveFeedback driveFeedback) {
+    public FollowPath3(DriveTrain driveTrain, DriveFeedback driveFeedback) {
         this.driveFeedback = driveFeedback;
         driveFeedback.reset();
         this.driveTrain = driveTrain;
         requires(driveTrain);
-        left = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAuto_left_detailed.csv"));
-        right = Pathfinder.readFromCSV(new File("/home/lvuser/CenterLeftAuto_right_detailed.csv"));
+        left = Pathfinder.readFromCSV(new File("/home/lvuser/Center3_left_detailed.csv"));
+        right = Pathfinder.readFromCSV(new File("/home/lvuser/Center3_right_detailed.csv"));
         leftFollower = new EncoderFollower(left);
-        leftFollower.configurePIDVA(1.2, 0.0, 0.15, 1.0/12.0, 1/15.0);
+        leftFollower.configurePIDVA(1.2, 0.0, 0.1, 1.0/12.0, 1/15.0);
         leftFollower.configureEncoder(0, (int) DriveFeedback.TICKS_PER_TURN, DriveFeedback.WHEEL_DIAMETER / 12.0);
         rightFollower = new EncoderFollower(right);
-        rightFollower.configurePIDVA(1.2, 0.0, 0.15, 1.0/12.0, 1/15.0);
+        rightFollower.configurePIDVA(1.2, 0.0, 0.1, 1.0/12.0, 1/15.0);
         rightFollower.configureEncoder(0, (int) DriveFeedback.TICKS_PER_TURN, DriveFeedback.WHEEL_DIAMETER / 12.0);
     }
 
@@ -38,6 +38,7 @@ public class FollowPath extends Command {
     protected void initialize() {
         super.initialize();
         index = 0;
+        driveFeedback.reset();
     }
 
     @Override
