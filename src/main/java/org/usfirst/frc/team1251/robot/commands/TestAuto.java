@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1251.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team1251.robot.commands.MotionProfiling.FollowLeftPath1;
-import org.usfirst.frc.team1251.robot.commands.MotionProfiling.FollowLeftPath2;
-import org.usfirst.frc.team1251.robot.commands.MotionProfiling.FollowPath3;
+import org.usfirst.frc.team1251.robot.commands.MotionProfiling.CenterLeft1;
+import org.usfirst.frc.team1251.robot.commands.MotionProfiling.CenterLeft2;
+import org.usfirst.frc.team1251.robot.commands.MotionProfiling.CenterLeft3;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
@@ -34,9 +34,9 @@ public class TestAuto extends CommandGroup {
         //addSequential(new DoNothingDriveTrain(1.0, driveTrain));
         //addSequential(new DropCube(claw, collector));
 
-        addSequential(new FollowLeftPath1(driveTrain, driveFeedback));
-        addSequential(new FollowLeftPath2(driveTrain,driveFeedback));
-        addSequential(new FollowPath3(driveTrain, driveFeedback));
+        addSequential(new CenterLeft1(driveTrain, driveFeedback));
+        addSequential(new CenterLeft2(driveTrain,driveFeedback));
+        addSequential(new CenterLeft3(driveTrain, driveFeedback));
 
         //addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
         //addSequential(new DoNothingDriveTrain(1.5, driveTrain));
