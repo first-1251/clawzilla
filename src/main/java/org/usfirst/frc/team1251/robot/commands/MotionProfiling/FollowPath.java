@@ -14,11 +14,11 @@ public class FollowPath extends Command {
     private static final double WHEEL_DIAMETER = DriveFeedback.WHEEL_DIAMETER / 12;
     private static final int TICKS_PER_TURN = (int)DriveFeedback.TICKS_PER_TURN;
 
-    static final double KP = 1.2;
-    static final double KI = 0.0;
-    private static final double KD = 0.15;
-    static final double KV = 1.0 / 12.0;
-    static final double KA = 1 / 15.0;
+    protected static final double KP = 1.2;
+    protected static final double KI = 0.0;
+    protected static final double KD = 0.15;
+    protected static final double KV = 1.0 / 12.0;
+    protected static final double KA = 1 / 15.0;
 
     private final DriveTrain driveTrain;
     private final DriveFeedback driveFeedback;
@@ -26,7 +26,7 @@ public class FollowPath extends Command {
     private EncoderFollower leftFollower;
     private EncoderFollower rightFollower;
 
-    FollowPath(String fileBase, DriveTrain driveTrain, DriveFeedback driveFeedback) {
+    public FollowPath(String fileBase, DriveTrain driveTrain, DriveFeedback driveFeedback) {
 
         requires(driveTrain);
 
