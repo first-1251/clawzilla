@@ -20,6 +20,13 @@ deploy {
         artifact('frcJava', jaci.openrio.gradle.frc.FRCJavaArtifact) {
             targets << "roborio"
         }
+
+        fileCollectionArtifact('motionProfilePaths') {
+            files = fileTree('resources/paths') {
+                include '*_detailed.csv'
+            }
+            targets << "roborio"
+        }
     }
 }
 
