@@ -40,13 +40,13 @@ public class CLeftSwitchCollectSecondCube extends CommandGroup {
     private class ApproachCube extends FollowPath {
 
         ApproachCube(DriveTrain driveTrain, DriveFeedback driveFeedback) {
-            super("CLeftSwitch_Cube2_ApproachStack", driveTrain, driveFeedback);
+            super("CBothSwitch_Cube2_ApproachStack", driveTrain, driveFeedback);
         }
 
         @Override
         protected void configureFollowerPIDVA(EncoderFollower follower) {
             // Reduce dampening for this motion
-            follower.configurePIDVA(KP, KI, .1, KV, KA);
+            follower.configurePIDVA(KP, KI, 0, KV, KA);
         }
     }
 }
