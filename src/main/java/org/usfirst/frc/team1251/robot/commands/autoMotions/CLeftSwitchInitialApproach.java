@@ -23,7 +23,7 @@ public class CLeftSwitchInitialApproach extends CommandGroup {
 
     private class ToSwitch extends FollowPath {
         private ToSwitch(DriveTrain driveTrain, DriveFeedback driveFeedback) {
-            super("CenterLeft1", driveTrain, driveFeedback);
+            super("CLeftSwitch_Cube1_StartToSwitch", driveTrain, driveFeedback);
         }
     }
 }

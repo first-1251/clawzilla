@@ -33,14 +33,14 @@ public class CLeftSwitchCollectSecondCube extends CommandGroup {
     private class ReverseFromSwitch extends FollowPath {
 
         ReverseFromSwitch(DriveTrain driveTrain, DriveFeedback driveFeedback) {
-            super("CenterLeft2", driveTrain, driveFeedback);
+            super("CLeftSwitch_CubeAll_LeaveSwitch", driveTrain, driveFeedback);
         }
     }
 
     private class ApproachCube extends FollowPath {
 
         ApproachCube(DriveTrain driveTrain, DriveFeedback driveFeedback) {
-            super("CenterLeft3", driveTrain, driveFeedback);
+            super("CLeftSwitch_Cube2_ApproachStack", driveTrain, driveFeedback);
         }
 
         @Override
