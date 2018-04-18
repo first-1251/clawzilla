@@ -2,6 +2,7 @@ package org.usfirst.frc.team1251.robot.commands.autoMotions;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import jaci.pathfinder.followers.EncoderFollower;
+import org.usfirst.frc.team1251.robot.commands.ArmevatorFromGroundToSwitch;
 import org.usfirst.frc.team1251.robot.commands.MotionProfiling.FollowPath;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
@@ -20,7 +21,7 @@ public class CLeftSwitchSecondApproach extends CommandGroup {
         addSequential(new ClearStack(driveTrain, driveFeedback));
 
         // Position armevator for delivery
-        // TODO: Parallel
+        addParallel(new ArmevatorFromGroundToSwitch(elevator, arm, armPosition));
 
         // Make approach
         addSequential(new ApproachSwitch(driveTrain, driveFeedback));

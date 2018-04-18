@@ -8,8 +8,7 @@ public class ArmUpTo90AndHold extends Command{
     private Arm arm;
     private ArmPosition armPosition;
 
-    private double topSpeed = 0.5; // Get things started.
-    private double lowSpeed = 0.5; // Gravity will help us move down.
+    private double speed = 1;
     private double sustainSpeed = 0.20;
     private boolean isAtPosition;
 
@@ -34,10 +33,8 @@ public class ArmUpTo90AndHold extends Command{
             return;
         }
 
-        // If we've made it at least 30, slow the motor -- gravity will be helping at this point.
-        if (armPosition.getPotentiometer() > 90) {
-            arm.pivotUp(topSpeed);
-        }
+        // Not there yet, keep pivoting.
+        arm.pivotUp(speed);
     }
 
     @Override
