@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.commands.autoMotions;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team1251.robot.commands.ArmevatorFromStartingToSwitch;
 import org.usfirst.frc.team1251.robot.commands.MotionProfiling.FollowPath;
 import org.usfirst.frc.team1251.robot.subsystems.Arm;
 import org.usfirst.frc.team1251.robot.subsystems.DriveTrain;
@@ -16,7 +17,7 @@ public class CLeftSwitchInitialApproach extends CommandGroup {
                                       Elevator elevator) {
 
         // Immediately start positioning the arm. Allow other things to run at the same time.
-        // addParallel(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
+        addParallel(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 
         // Move to switch
         addParallel(new ToSwitch(driveTrain, driveFeedback));
