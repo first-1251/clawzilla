@@ -19,19 +19,28 @@ public class CLeftSwitchSecondApproach extends CommandGroup {
         // Clear the stack
         addSequential(new ClearStack(driveTrain, driveFeedback));
 
-        // Back up and adjust angle for approach;
-        // TODO: sequential
-
         // Position armevator for delivery
         // TODO: Parallel
 
         // Make approach
-        // TODO: Sequential
+        addSequential(new ApproachSwitch(driveTrain, driveFeedback));
     }
 
     private class ClearStack extends FollowPath {
         private ClearStack(DriveTrain driveTrain, DriveFeedback driveFeedback) {
             super("Back2ishFeet", driveTrain, driveFeedback);
+        }
+
+
+        @Override
+        protected void configureFollowerPIDVA(EncoderFollower follower) {
+            follower.configurePIDVA(KP, KI, KD, KV, KA);
+        }
+    }
+
+    private class ApproachSwitch extends FollowPath {
+        private ApproachSwitch (DriveTrain driveTrain, DriveFeedback driveFeedback) {
+            super("CLeftSwitch_Cube2_ApproachSwitch", driveTrain, driveFeedback);
         }
 
 

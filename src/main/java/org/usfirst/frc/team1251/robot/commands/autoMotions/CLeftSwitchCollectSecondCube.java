@@ -46,7 +46,7 @@ public class CLeftSwitchCollectSecondCube extends CommandGroup {
         @Override
         protected void configureFollowerPIDVA(EncoderFollower follower) {
             // Reduce dampening for this motion
-            follower.configurePIDVA(KP, KI, 0, KV, KA);
+            follower.configurePIDVA(KP, KI, KD, KV, KA);
         }
     }
 }
