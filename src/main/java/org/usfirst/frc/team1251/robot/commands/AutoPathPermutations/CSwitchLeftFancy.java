@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1251.robot.commands.AutoPathPermutations;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team1251.robot.commands.DropCube;
 import org.usfirst.frc.team1251.robot.commands.autoMotions.CLeftSwitchCollectSecondCube;
 import org.usfirst.frc.team1251.robot.commands.autoMotions.CLeftSwitchCollectThirdCube;
 import org.usfirst.frc.team1251.robot.commands.autoMotions.CLeftSwitchInitialApproach;
@@ -26,7 +27,7 @@ public class CSwitchLeftFancy extends CommandGroup{
         addSequential(new CLeftSwitchInitialApproach(driveFeedback, driveTrain, arm, armPosition, elevator));
 
         // Drop the cube
-//        addSequential(new DropCube(claw, collector));
+        addSequential(new DropCube(claw, collector));
 
         // Get the 2nd cube.
         addSequential(new CLeftSwitchCollectSecondCube(driveFeedback, driveTrain, arm, armPosition, elevator));
@@ -34,9 +35,9 @@ public class CSwitchLeftFancy extends CommandGroup{
         // Make 2nd approach
         addSequential(new CLeftSwitchSecondApproach(driveFeedback, driveTrain, arm, armPosition, elevator));
 
-        addSequential(new CLeftSwitchCollectThirdCube(driveFeedback, driveTrain, arm, armPosition, elevator));
+        addSequential(new DropCube(claw, collector));
 
-        // TODO: 3rd cube!
+        addSequential(new CLeftSwitchCollectThirdCube(driveFeedback, driveTrain, arm, armPosition, elevator));
 
     }
 
