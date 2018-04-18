@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
     private Elevator elevator;
     private ArmPosition armPosition;
     private ElevatorPosition elevatorPosition;
+    private CloseClaw closeClawCmd;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -81,6 +82,7 @@ public class Robot extends IterativeRobot {
 
         Collector collector = new Collector(crateDetector);
 
+        // Claw will get a default command on teleop init
         DeferredCmdSupplier<Command> clawDefaultCmdSupplier = new DeferredCmdSupplier<>();
         Claw claw = new Claw(clawDefaultCmdSupplier);
 
@@ -118,7 +120,6 @@ public class Robot extends IterativeRobot {
         // Assign default commands
         armDefaultCmdSupplier.set(moveArm);
         elevatorDefaultCmdSupplier.set(moveElevator);
-        clawDefaultCmdSupplier.set(closeClaw);
 
 
         // assign driver-initiated command triggers.
@@ -144,6 +145,7 @@ public class Robot extends IterativeRobot {
         this.driveTrainShifter = driveTrainShifter;
 
         this.teleopDriveCmd = teleopDrive;
+        this.closeClawCmd = closeClaw;
         this.driveTrainAutoShift = driveTrainAutoShift;
 
         this.claw = claw;
@@ -216,7 +218,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
-        //this.driveTrainShifter.setDefaultCommand(this.driveTrainAutoShift);
+        this.claw.setDefaultCommand(this.closeClawCmd);
         MotorFactory.setBrakeMode(false);
     }
 
