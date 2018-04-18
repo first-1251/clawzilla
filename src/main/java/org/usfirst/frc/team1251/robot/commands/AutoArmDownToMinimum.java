@@ -9,8 +9,7 @@ public class AutoArmDownToMinimum extends Command{
     private Arm arm;
     private ArmPosition armPosition;
 
-    private double speed = 0.5;
-
+    private double speed = 1.0;
     public AutoArmDownToMinimum(Arm arm, ArmPosition armPosition){
         this.arm = arm;
         this.armPosition = armPosition;
@@ -27,8 +26,12 @@ public class AutoArmDownToMinimum extends Command{
         }
     }
 
+    protected void end(){
+        arm.stopPivot();
+    }
+
     @Override
     protected boolean isFinished() {
-        return false;
+        return armPosition.isArmDown();
     }
 }
