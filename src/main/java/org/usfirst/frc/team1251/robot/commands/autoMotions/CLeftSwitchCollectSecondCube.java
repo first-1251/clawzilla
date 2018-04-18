@@ -21,7 +21,7 @@ public class CLeftSwitchCollectSecondCube extends CommandGroup {
 
         // After .5 second delay, start moving armevator into position for floor collection
         // TODO: Implement as parallel
-        addParallel(new ArmevatorToGroundCollect(elevator, elevatorPosition, arm, armPosition));
+        addParallel(new ArmevatorToGroundCollect(.5, elevator, elevatorPosition, arm, armPosition));
 
         // Move away from switch
         addSequential(new ReverseFromSwitch(driveTrain, driveFeedback));
