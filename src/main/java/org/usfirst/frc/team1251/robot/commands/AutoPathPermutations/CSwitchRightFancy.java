@@ -38,7 +38,7 @@ public class CSwitchRightFancy extends CommandGroup {
 
         addSequential(new DropCube(claw, collector));
 
-        addSequential(new CRightSwitchCollectThirdCube(driveFeedback, driveTrain, arm, armPosition, elevator));
+        addSequential(new CRightSwitchCollectThirdCube(driveFeedback, driveTrain, arm, armPosition, elevatorPosition, elevator));
     }
 
 }
