@@ -17,9 +17,9 @@ public class CRightSwitchCollectThirdCube extends CommandGroup {
                                         Arm arm, ArmPosition armPosition, ElevatorPosition elevatorPosition,
                                         Elevator elevator) {
 
-        // After .5 second delay, start moving armevator into position for floor collection
+        // After .25 second delay, start moving armevator into position for floor collection
 
-        addParallel(new ArmevatorToGroundCollect(.5, elevator, elevatorPosition, arm, armPosition));
+        addParallel(new ArmevatorToGroundCollect(.25, elevator, elevatorPosition, arm, armPosition));
         // Move away from switch
         addSequential(new ReverseFromSwitch(driveTrain, driveFeedback));
 
