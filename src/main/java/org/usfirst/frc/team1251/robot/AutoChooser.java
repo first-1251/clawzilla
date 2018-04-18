@@ -29,8 +29,8 @@ public class AutoChooser{
     private RSwitchHomeScaleAway rSwitchHomeScaleAway;
     private RSwitchHomeScaleHome rSwitchHomeScaleHome;
 
-    private CSwitchLeft cSwitchLeft;
-    private CSwitchRight cSwitchRight;
+    private CSwitchLeftFancy cSwitchLeft;
+    private CSwitchRightFancy cSwitchRight;
 
     private CrossLineAuto crossLineAuto;
 
@@ -63,12 +63,12 @@ public class AutoChooser{
         this.rSwitchHomeScaleAway = new RSwitchHomeScaleAway();
         this.rSwitchHomeScaleHome = new RSwitchHomeScaleHome();
 
-        this.cSwitchLeft = new CSwitchLeft(driveFeedback, shifter, driveTrain,
+        this.cSwitchLeft = new CSwitchLeftFancy(driveFeedback, shifter, driveTrain,
                 arm, armPosition,
                 elevator, elevatorPosition,
                 claw, collector);
 
-        this.cSwitchRight = new CSwitchRight(driveFeedback, shifter, driveTrain,
+        this.cSwitchRight = new CSwitchRightFancy(driveFeedback, shifter, driveTrain,
                 arm, armPosition,
                 elevator, elevatorPosition,
                 claw, collector);
