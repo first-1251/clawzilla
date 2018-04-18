@@ -9,6 +9,14 @@ import org.usfirst.frc.team1251.robot.MotorFactory;
 
 public class DriveFeedback {
 
+    public static final double WHEEL_DIAMETER = 4.25;
+    public static final double GEAR_RATIO = 3.21428571428;
+
+    public static final double TICKS_PER_TURN = 500 * GEAR_RATIO; // total apples
+    private final double WHEEL_CIRCUMFERENCE = (WHEEL_DIAMETER * Math.PI); // Inches per turn | # of buckets
+    private final double TICKS_PER_INCH = TICKS_PER_TURN / WHEEL_CIRCUMFERENCE;
+    private final double TICKS_PER_FOOT = TICKS_PER_INCH * 12;
+
 
     /**
      * The main motor controller for the left side of the drive train.
@@ -139,6 +147,15 @@ public class DriveFeedback {
 
     public int getLeftPosition() {
         return leftPosition;
+    }
+
+    // in feet
+    public double getRightDistance() {
+        return rightPosition / TICKS_PER_FOOT;
+    }
+
+    public double getLeftDistance() {
+        return leftPosition / TICKS_PER_FOOT;
     }
 
     public void reset() {

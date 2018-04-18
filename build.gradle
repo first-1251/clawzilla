@@ -20,6 +20,13 @@ deploy {
         artifact('frcJava', jaci.openrio.gradle.frc.FRCJavaArtifact) {
             targets << "roborio"
         }
+
+        fileCollectionArtifact('motionProfilePaths') {
+            files = fileTree('resources/paths') {
+                include '*_detailed.csv'
+            }
+            targets << "roborio"
+        }
     }
 }
 
@@ -30,6 +37,7 @@ dependencies {
     compile ctre()
     compile navx()
     compile openrio.powerup.matchData()
+    compile pathfinder()
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
