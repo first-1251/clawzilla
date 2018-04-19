@@ -21,6 +21,7 @@ public class HumanInput {
     private final GamePadButtonTrigger shiftElevatorDownTrigger;
     private final GamePadButtonTrigger collectCrateTrigger;
     private final GamePadButtonTrigger openClawTrigger;
+    private final GamePadButtonTrigger sustainElevatorTrigger;
 
     private boolean commandTriggersAttached = false;
 
@@ -81,6 +82,8 @@ public class HumanInput {
 
         this.shiftElevatorUpTrigger = new GamePadButtonTrigger(this.operatorGamePad.y());
         this.shiftElevatorDownTrigger = new GamePadButtonTrigger(this.operatorGamePad.b());
+
+        this.sustainElevatorTrigger = new GamePadButtonTrigger(this.operatorGamePad.lt());
     }
 
     /**
@@ -96,7 +99,8 @@ public class HumanInput {
                                       ShiftElevator shiftElevatorUp,
                                       ShiftElevator shiftElevatorDown,
                                       Eject eject,
-                                      OpenClaw openClaw) {
+                                      OpenClaw openClaw,
+                                      SustainElevator sustainElevator) {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -115,6 +119,7 @@ public class HumanInput {
 
         openClawTrigger.whileHeld(openClaw);
 
+        sustainElevatorTrigger.whileHeld(sustainElevator);
     }
 
     /**

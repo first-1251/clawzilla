@@ -16,6 +16,8 @@ public class Elevator extends Subsystem {
     // If the motors are inverted
     private static final boolean isMotor1Inverted = false;
     private static final boolean isMotor2Inverted = false;
+    private final double SUSTAIN = 0.13;
+
 
     // Motor(s) for elevators (move it up and down)
     private Victor elevatorMotor1;
@@ -41,6 +43,10 @@ public class Elevator extends Subsystem {
         SmartDashboard.putNumber("Elevator Height", elevatorPosition.getHeight());
         //System.out.println("HEIGHT: " + elevatorPosition.getTicks());
         SmartDashboard.putBoolean("Elevator Bottom", elevatorPosition.isAtMinHeight());
+
+        if (elevatorPosition.isAtMinHeight()) {
+            elevatorPosition.reset();
+        }
     }
 
     /**
@@ -50,14 +56,18 @@ public class Elevator extends Subsystem {
      */
     public void goUp(double speed) {
         if (elevatorPosition.isAtMaxHeight()) {
-            elevatorMotor1.set(0);
-            elevatorMotor2.set(0);
+            elevatorMotor1.set(SUSTAIN);
+            elevatorMotor2.set(SUSTAIN);
+            return;
         }
 
         // bounds speed to between 0 and 1
         speed = Math.max(speed, 0);
         speed = Math.min(speed, 1);
 
+        if (elevatorPosition.isNearMaxHeight()) {
+            speed = Math.min(speed, 0.4);
+        }
         //speed = 0;
 
         elevatorMotor1.set(speed);

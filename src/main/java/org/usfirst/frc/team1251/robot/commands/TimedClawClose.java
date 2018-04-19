@@ -11,6 +11,7 @@ public class TimedClawClose extends TimedCommand {
     public TimedClawClose(Claw claw) {
         super(0.1);
         this.claw = claw;
+
         requires(claw);
     }
 

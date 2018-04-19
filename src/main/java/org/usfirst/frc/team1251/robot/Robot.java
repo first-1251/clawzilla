@@ -111,6 +111,7 @@ public class Robot extends IterativeRobot {
         ShiftElevator shiftElevatorUp = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.HIGH);
         ShiftElevator shiftElevatorDown = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.LOW);
         Eject cubeEject = new Eject(collector, humanInput);
+        SustainElevator sustainElevator = new SustainElevator(elevator);
 
 
 
@@ -122,7 +123,7 @@ public class Robot extends IterativeRobot {
 
         // assign driver-initiated command triggers.
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,
-                shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw);
+                shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw, sustainElevator);
 
 
         // Uncomment to test a controller on port 5
