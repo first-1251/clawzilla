@@ -6,6 +6,7 @@ import org.usfirst.frc.team1251.robot.commands.ArmevatorToGroundCollect;
 import org.usfirst.frc.team1251.robot.commands.AutoOpenClawCollect;
 import org.usfirst.frc.team1251.robot.commands.CloseClaw;
 import org.usfirst.frc.team1251.robot.commands.MotionProfiling.FollowPath;
+import org.usfirst.frc.team1251.robot.commands.TimedClawClose;
 import org.usfirst.frc.team1251.robot.subsystems.*;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
@@ -31,7 +32,7 @@ public class CRightSwitchCollectSecondCube extends CommandGroup {
         // Move up to cube
         addSequential(new ApproachCube(driveTrain, driveFeedback));
 
-        addSequential(new CloseClaw(claw));
+        addSequential(new TimedClawClose(claw));
     }
 
     private class ReverseFromSwitch extends FollowPath {

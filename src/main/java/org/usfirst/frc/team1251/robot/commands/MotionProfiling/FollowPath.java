@@ -57,7 +57,6 @@ public class FollowPath extends Command {
 
     @Override
     protected void execute() {
-        System.out.println("RUNN");
         System.out.println(rightFollower.isFinished());
         super.execute();
         driveFeedback.updateSensorData();
@@ -75,6 +74,7 @@ public class FollowPath extends Command {
     @Override
     protected void end() {
         super.end();
+        System.out.println("WE done ");
         driveTrain.setSpeed(0, 0);
         driveFeedback.reset();
     }

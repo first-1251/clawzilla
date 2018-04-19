@@ -113,9 +113,7 @@ public class Robot extends IterativeRobot {
         Eject cubeEject = new Eject(collector, humanInput);
 
 
-        // Create a command to slow arm decent and attach it to a trigger which indicates that the arm is down as
-        // far as it is supposed to go.
-        SlowArmDecent slowArmDecent = new SlowArmDecent(arm);
+
 
         // Assign default commands
         armDefaultCmdSupplier.set(moveArm);
@@ -126,9 +124,6 @@ public class Robot extends IterativeRobot {
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,
                 shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw);
 
-        // Attach sensor-based command triggers
-        ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
-        armDownJustNowTrigger.whenActive(slowArmDecent);
 
         // Uncomment to test a controller on port 5
         //initGamepadTest();
@@ -198,10 +193,10 @@ public class Robot extends IterativeRobot {
         this.driveTrainShifter.setDefaultCommand(null);
         driveTrainShifter.setGear(DoubleSolenoidGearShifter.Gear.HIGH);
         TestAuto testAuto = new TestAuto(driveTrain, driveFeedback, this.driveTrainShifter, this.elevator, this.arm, this.armPosition, this.claw, this.collector, elevatorPosition);
-        testAuto.start();
+        //testAuto.start();
 
         MotorFactory.setBrakeMode(false);
-        //autoChooser.initialize();
+        autoChooser.initialize();
     }
 
     /**
@@ -220,6 +215,14 @@ public class Robot extends IterativeRobot {
         this.driveTrain.setDefaultCommand(this.teleopDriveCmd);
         this.claw.setDefaultCommand(this.closeClawCmd);
         MotorFactory.setBrakeMode(false);
+
+        // Create a command to slow arm decent and attach it to a trigger which indicates that the arm is down as
+        // far as it is supposed to go.
+        SlowArmDecent slowArmDecent = new SlowArmDecent(arm);
+
+        // Attach sensor-based command triggers
+        ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
+        armDownJustNowTrigger.whenActive(slowArmDecent);
     }
 
     /**
