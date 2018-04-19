@@ -12,5 +12,6 @@ public class ArmevatorToGroundCollect extends CommandGroup {
         addSequential(new TimedNothing(delay));
         addSequential(new ElevatorToBottom(elevator, elevatorPosition));
         addSequential(new AutoArmDownToMinimum(arm, armPosition));
+        addSequential(new SlowArmDecent(arm));
     }
 }
