@@ -52,4 +52,8 @@ public class ElevatorPosition {
     public boolean isNearMaxHeight(){
         return getTicks() >= (MAX_HEIGHT-NEAR_MAX_THRESHOLD);
     }
+
+    public boolean isNearBottom() {
+        return getTicks() <= 500;
+    }
 }

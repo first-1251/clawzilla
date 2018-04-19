@@ -88,6 +88,10 @@ public class Elevator extends Subsystem {
         if (elevatorPosition.isAtMinHeight()) {
             speed = 0;
         }
+
+        if (elevatorPosition.isNearBottom()) {
+            speed = Math.min(speed, 0.3);
+        }
         elevatorMotor1.set(speed);
         elevatorMotor2.set(speed);
     }
