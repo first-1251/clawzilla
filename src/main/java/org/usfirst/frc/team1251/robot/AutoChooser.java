@@ -19,10 +19,10 @@ public class AutoChooser{
 
     private DoNothingDefaultAuto defaultAuto;
 
-    private LSwitchAwayScaleAway lSwitchAwayScaleAway;
-    private LSwitchAwayScaleHome lSwitchAwayScaleHome;
-    private LSwitchHomeScaleAway lSwitchHomeScaleAway;
-    private LSwitchHomeScaleHome lSwitchHomeScaleHome;
+    private LSwitchAwayScaleAwayFancy lSwitchAwayScaleAway;
+    private LSwitchAwayScaleHomeFancy lSwitchAwayScaleHome;
+    private LSwitchHomeScaleAwayFancy lSwitchHomeScaleAway;
+    private LSwitchHomeScaleHomeFancy lSwitchHomeScaleHome;
 
     private RSwitchAwayScaleAway rSwitchAwayScaleAway;
     private RSwitchAwayScaleHome rSwitchAwayScaleHome;
@@ -53,10 +53,10 @@ public class AutoChooser{
 
         this.crossLineAuto = new CrossLineAuto(driveTrain, driveFeedback, shifter);
 
-        this.lSwitchAwayScaleAway = new LSwitchAwayScaleAway(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
-        this.lSwitchAwayScaleHome = new LSwitchAwayScaleHome(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
-        this.lSwitchHomeScaleAway = new LSwitchHomeScaleAway(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
-        this.lSwitchHomeScaleHome = new LSwitchHomeScaleHome(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchAwayScaleAway = new LSwitchAwayScaleAwayFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchAwayScaleHome = new LSwitchAwayScaleHomeFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchHomeScaleAway = new LSwitchHomeScaleAwayFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.lSwitchHomeScaleHome = new LSwitchHomeScaleHomeFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
 
         this.rSwitchAwayScaleAway = new RSwitchAwayScaleAway();
         this.rSwitchAwayScaleHome = new RSwitchAwayScaleHome();
