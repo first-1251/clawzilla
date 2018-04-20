@@ -24,7 +24,7 @@ public class MotorFactory {
     public static class Configuration {
         public boolean LIMIT_SWITCH_NORMALLY_OPEN = true;
         public boolean ENABLE_VOLTAGE_LIMIT = true;
-        public double MAX_OUTPUT_VOLTAGE = 9;
+        public double MAX_OUTPUT_VOLTAGE = 9.0;
         public double NOMINAL_VOLTAGE = 0;
         public double PEAK_VOLTAGE = 9;
         public NeutralMode ENABLE_BRAKE = NeutralMode.Coast;
@@ -112,7 +112,7 @@ public class MotorFactory {
         leftMaster = createTalon(RobotMap.DRIVE_LEFT_LEAD_MOTOR, kDefaultConfiguration);
         leftMaster.setInverted(true); // backwards
 
-        leftMaster.configVoltageCompSaturation(9.5, 0);
+        //leftMaster.configVoltageCompSaturation(9.5, 0);
         //master.configVoltageCompSaturation(kDefaultConfiguration.MAX_OUTPUT_VOLTAGE * SPEED_COMPENSATION_MULTIPLER, 0);
 
         leftMotor1 = createVictor(RobotMap.DRIVE_LEFT_FOLLOW_MOTOR_1, kSlaveConfiguration);
@@ -152,7 +152,7 @@ public class MotorFactory {
 
         rightMaster = createTalon(RobotMap.DRIVE_RIGHT_LEAD_MOTOR, kDefaultConfiguration);
 
-        rightMaster.configVoltageCompSaturation(9.0 , 0);
+        //rightMaster.configVoltageCompSaturation(9.0 , 0);
         rightMaster.configClosedloopRamp(0.25, 0);
         rightMotor1 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_1, kSlaveConfiguration);
         rightMotor2 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_2, kSlaveConfiguration);
