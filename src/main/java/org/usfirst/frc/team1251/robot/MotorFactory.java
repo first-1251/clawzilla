@@ -152,7 +152,7 @@ public class MotorFactory {
 
         rightMaster = createTalon(RobotMap.DRIVE_RIGHT_LEAD_MOTOR, kDefaultConfiguration);
 
-        rightMaster.configVoltageCompSaturation(8.5 , 0);
+        rightMaster.configVoltageCompSaturation(9.0 , 0);
         rightMaster.configClosedloopRamp(0.25, 0);
         rightMotor1 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_1, kSlaveConfiguration);
         rightMotor2 = createVictor(RobotMap.DRIVE_RIGHT_FOLLOW_MOTOR_2, kSlaveConfiguration);
