@@ -24,10 +24,10 @@ public class AutoChooser{
     private LSwitchHomeScaleAwayFancy lSwitchHomeScaleAway;
     private LSwitchHomeScaleHomeFancy lSwitchHomeScaleHome;
 
-    private RSwitchAwayScaleAway rSwitchAwayScaleAway;
-    private RSwitchAwayScaleHome rSwitchAwayScaleHome;
-    private RSwitchHomeScaleAway rSwitchHomeScaleAway;
-    private RSwitchHomeScaleHome rSwitchHomeScaleHome;
+    private RSwitchAwayScaleAwayFancy rSwitchAwayScaleAway;
+    private RSwitchAwayScaleHomeFancy rSwitchAwayScaleHome;
+    private RSwitchHomeScaleAwayFancy rSwitchHomeScaleAway;
+    private RSwitchHomeScaleHomeFancy rSwitchHomeScaleHome;
 
     private CSwitchLeftFancy cSwitchLeft;
     private CSwitchRightFancy cSwitchRight;
@@ -58,10 +58,10 @@ public class AutoChooser{
         this.lSwitchHomeScaleAway = new LSwitchHomeScaleAwayFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
         this.lSwitchHomeScaleHome = new LSwitchHomeScaleHomeFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
 
-        this.rSwitchAwayScaleAway = new RSwitchAwayScaleAway();
-        this.rSwitchAwayScaleHome = new RSwitchAwayScaleHome();
-        this.rSwitchHomeScaleAway = new RSwitchHomeScaleAway();
-        this.rSwitchHomeScaleHome = new RSwitchHomeScaleHome();
+        this.rSwitchAwayScaleAway = new RSwitchAwayScaleAwayFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.rSwitchAwayScaleHome = new RSwitchAwayScaleHomeFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
+        this.rSwitchHomeScaleAway = new RSwitchHomeScaleAwayFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter;
+        this.rSwitchHomeScaleHome = new RSwitchHomeScaleHomeFancy(elevator, elevatorPosition, arm, armPosition, claw, collector, driveFeedback, driveTrain, shifter);
 
         this.cSwitchLeft = new CSwitchLeftFancy(driveFeedback, shifter, driveTrain,
                 arm, armPosition,
