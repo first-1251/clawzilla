@@ -65,7 +65,7 @@ public class CrateDetector {
             if (isTimerRunning)
             {
                 // Timer is running... see if the button has been held long enough.
-                if (buttonTimer.get() >= .10) {
+                if (buttonTimer.get() >= .30) {
                     // Button has been held long enough. Mark the crate as recently collected and return true.
                     markAsRecentlyCollected();
                     return true;
