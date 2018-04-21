@@ -35,9 +35,9 @@ public class CSwitchLeftFancy extends CommandGroup{
         // Make 2nd approach
         addSequential(new CLeftSwitchSecondApproach(driveFeedback, driveTrain, arm, armPosition, elevator));
 
-        addSequential(new DropCube(claw, collector));
+        //addSequential(new DropCube(claw, collector));
 
-        addSequential(new CLeftSwitchCollectThirdCube(driveFeedback, driveTrain, arm, armPosition, elevator, elevatorPosition));
+        //addSequential(new CLeftSwitchCollectThirdCube(driveFeedback, driveTrain, arm, armPosition, elevator, elevatorPosition));
 
     }
 

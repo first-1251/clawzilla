@@ -15,7 +15,8 @@ public class Collector extends Subsystem {
     private static final int MOTOR_RIGHT_BACKWARD = -1;
     private static final int MOTOR_STOP = 0; //Drift Button
 
-    private static final double THROTTLED_COLLECT_SPEED = .40;
+    private static final double THROTTLED_COLLECT_SPEED = .55;
+
 
 
     // SAFETY!
