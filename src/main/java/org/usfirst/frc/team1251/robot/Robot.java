@@ -15,6 +15,7 @@ import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.ModernGamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.Always;
 import org.usfirst.frc.team1251.robot.triggers.ArmDownJustNowTrigger;
+import org.usfirst.frc.team1251.robot.triggers.CubeCollectedTrigger;
 import org.usfirst.frc.team1251.robot.virtualSensors.ArmPosition;
 import org.usfirst.frc.team1251.robot.virtualSensors.CrateDetector;
 import org.usfirst.frc.team1251.robot.virtualSensors.DriveFeedback;
@@ -51,6 +52,8 @@ public class Robot extends IterativeRobot {
     private ArmPosition armPosition;
     private ElevatorPosition elevatorPosition;
     private CloseClaw closeClawCmd;
+    private CrateDetector crateDetector;
+    private HumanInput humanInput;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -134,6 +137,9 @@ public class Robot extends IterativeRobot {
         // chooser.addDefault("Default Auto", new MoveElevator());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         // SmartDashboard.putData("Auto mode", chooser);
+
+        this.crateDetector = crateDetector;
+        this.humanInput = humanInput;
 
         this.driveFeedback = driveFeedback;
 
@@ -224,6 +230,10 @@ public class Robot extends IterativeRobot {
         // Attach sensor-based command triggers
         ArmDownJustNowTrigger armDownJustNowTrigger = new ArmDownJustNowTrigger(armPosition);
         armDownJustNowTrigger.whenActive(slowArmDecent);
+
+        (new CubeCollectedTrigger(crateDetector)).whenActive(new CubeCollected(humanInput));
+
+
     }
 
     /**
