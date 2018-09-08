@@ -23,6 +23,13 @@ hs_err_pid*
 
 #intellij idea files
 .idea/*
+*.iml
 
 #gradle files
 .gradle/*
+
+#Mac finder files
+.DS_Store
+
+#Output dir
+/build
