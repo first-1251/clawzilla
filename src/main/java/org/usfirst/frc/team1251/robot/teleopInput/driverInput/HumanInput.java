@@ -22,6 +22,8 @@ public class HumanInput {
     private final GamePadButtonTrigger collectCrateTrigger;
     private final GamePadButtonTrigger openClawTrigger;
     private final GamePadButtonTrigger sustainElevatorTrigger;
+    private final GamePadButtonTrigger slowTurnRightTrigger;
+    private final GamePadButtonTrigger slowTurnLeftTrigger;
 
     private boolean commandTriggersAttached = false;
 
@@ -72,6 +74,9 @@ public class HumanInput {
         this.rightWheelSmoothing = new StickSmoothing(
                 this.driverGamePad.rs(),StickSmoothing.StickAxis.VERTICAL, WHEEL_SPEED_SMOOTHING_SAMPLES);
 
+        this.slowTurnRightTrigger = new GamePadButtonTrigger(this.driverGamePad.rb());
+        this.slowTurnLeftTrigger = new GamePadButtonTrigger(this.driverGamePad.lb());
+
         // Use the right-bumper to trigger create collection.
         this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
         this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
@@ -100,7 +105,9 @@ public class HumanInput {
                                       ShiftElevator shiftElevatorDown,
                                       Eject eject,
                                       OpenClaw openClaw,
-                                      SustainElevator sustainElevator) {
+                                      SustainElevator sustainElevator,
+                                      Turn slowTurnRight,
+                                      Turn slowTurnLeft) {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -108,6 +115,9 @@ public class HumanInput {
         commandTriggersAttached = true;
 
         // Bind buttons.
+        slowTurnLeftTrigger.whileHeld(slowTurnLeft);
+        slowTurnRightTrigger.whileHeld(slowTurnRight);
+
         collectCrateTrigger.whileHeld(collectCrate);
         ejectCrateTrigger.whileHeld(eject);
 

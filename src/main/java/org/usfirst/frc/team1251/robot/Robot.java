@@ -115,8 +115,8 @@ public class Robot extends IterativeRobot {
         ShiftElevator shiftElevatorDown = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.LOW);
         Eject cubeEject = new Eject(collector, humanInput);
         SustainElevator sustainElevator = new SustainElevator(elevator);
-
-
+        Turn slowTurnLeft = new Turn(driveTrain, Turn.Direction.LEFT, 0.25);
+        Turn slowTurnRight = new Turn(driveTrain, Turn.Direction.RIGHT, 0.25);
 
 
         // Assign default commands
@@ -126,7 +126,8 @@ public class Robot extends IterativeRobot {
 
         // assign driver-initiated command triggers.
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,
-                shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw, sustainElevator);
+                shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw, sustainElevator,
+                slowTurnRight, slowTurnLeft);
 
 
         // Uncomment to test a controller on port 5
