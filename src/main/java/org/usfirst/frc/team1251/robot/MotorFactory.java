@@ -24,14 +24,14 @@ public class MotorFactory {
     public static class Configuration {
         public boolean LIMIT_SWITCH_NORMALLY_OPEN = true;
         public boolean ENABLE_VOLTAGE_LIMIT = true;
-        public double MAX_OUTPUT_VOLTAGE = 9.0;
+        public double MAX_OUTPUT_VOLTAGE = 9.6;
         public double NOMINAL_VOLTAGE = 0;
         public double PEAK_VOLTAGE = 9;
         public NeutralMode ENABLE_BRAKE = NeutralMode.Coast;
-        public boolean ENABLE_CURRENT_LIMIT = false;
+        public boolean ENABLE_CURRENT_LIMIT = true;
         public boolean ENABLE_SOFT_LIMIT = false;
         public boolean ENABLE_LIMIT_SWITCH = false;
-        public int CURRENT_LIMIT = 0;
+        public int CURRENT_LIMIT = 20;
         public double EXPIRATION_TIMEOUT_SECONDS = MotorSafety.DEFAULT_SAFETY_EXPIRATION;
         public int FORWARD_SOFT_LIMIT = 0;
         public boolean INVERTED = false;
@@ -80,11 +80,15 @@ public class MotorFactory {
         talonSRX.enableVoltageCompensation(config.ENABLE_VOLTAGE_LIMIT);
         talonSRX.configVoltageCompSaturation(config.MAX_OUTPUT_VOLTAGE, 0);
         talonSRX.setNeutralMode(config.ENABLE_BRAKE);
-        talonSRX.enableCurrentLimit(config.ENABLE_CURRENT_LIMIT);
         talonSRX.configForwardSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
         talonSRX.configReverseSoftLimitEnable(config.ENABLE_SOFT_LIMIT, 0);
         talonSRX.setSensorPhase(false);
-        talonSRX.configContinuousCurrentLimit(config.CURRENT_LIMIT, 0);
+
+        // Enable current limiting -- never allow more than 20Amps of draw.
+        talonSRX.enableCurrentLimit(config.ENABLE_CURRENT_LIMIT);
+        talonSRX.configContinuousCurrentLimit(config.CURRENT_LIMIT, 20);
+        talonSRX.configPeakCurrentLimit(0, 20);
+
         talonSRX.configForwardSoftLimitThreshold(config.FORWARD_SOFT_LIMIT, 0);
         talonSRX.setInverted(config.INVERTED);
         talonSRX.selectProfileSlot(0, 0);
