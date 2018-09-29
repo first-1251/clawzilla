@@ -115,8 +115,8 @@ public class Robot extends IterativeRobot {
         ShiftElevator shiftElevatorDown = new ShiftElevator(elevatorShifter, ElevatorShifter.Gear.LOW);
         Eject cubeEject = new Eject(collector, humanInput);
         SustainElevator sustainElevator = new SustainElevator(elevator);
-        Turn slowTurnLeft = new Turn(driveTrain, Turn.Direction.LEFT, 0.25);
-        Turn slowTurnRight = new Turn(driveTrain, Turn.Direction.RIGHT, 0.25);
+        Turn slowTurnLeft = new Turn(driveTrain, Turn.Direction.LEFT, driveTrainShifter);
+        Turn slowTurnRight = new Turn(driveTrain, Turn.Direction.RIGHT, driveTrainShifter);
 
 
         // Assign default commands
