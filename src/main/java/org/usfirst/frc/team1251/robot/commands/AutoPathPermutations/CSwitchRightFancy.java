@@ -1,9 +1,8 @@
 package org.usfirst.frc.team1251.robot.commands.AutoPathPermutations;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team1251.robot.commands.DropCube;
+import org.usfirst.frc.team1251.robot.commands.AutoDropCube;
 import org.usfirst.frc.team1251.robot.commands.autoMotions.CRightSwitchCollectSecondCube;
-import org.usfirst.frc.team1251.robot.commands.autoMotions.CRightSwitchCollectThirdCube;
 import org.usfirst.frc.team1251.robot.commands.autoMotions.CRightSwitchInitialApproach;
 import org.usfirst.frc.team1251.robot.commands.autoMotions.CRightSwitchSecondApproach;
 import org.usfirst.frc.team1251.robot.subsystems.*;
@@ -28,7 +27,7 @@ public class CSwitchRightFancy extends CommandGroup {
         addSequential(new CRightSwitchInitialApproach(driveFeedback, driveTrain, arm, armPosition, elevator));
 
         // Drop the cube
-        addSequential(new DropCube(claw, collector));
+        addSequential(new AutoDropCube(claw, collector));
 
         // Get the 2nd cube.
         addSequential(new CRightSwitchCollectSecondCube(driveFeedback, driveTrain, arm, armPosition, elevator, elevatorPosition, claw, collector));

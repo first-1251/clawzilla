@@ -33,7 +33,7 @@ public class CSwitchRight extends CommandGroup {
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 
-        addSequential(new DropCube(claw, collector));
+        addSequential(new AutoDropCube(claw, collector));
 
         addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
     }

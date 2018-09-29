@@ -27,7 +27,7 @@ public class LSwitchAwayScaleAway extends CommandGroup {
 
         addSequential(new ArmevatorFromStartingToSwitch(elevator, arm, armPosition));
 
-        addSequential(new DropCube(claw, collector));
+        addSequential(new AutoDropCube(claw, collector));
 
         addSequential(new ArmevatorToStarting(elevator, elevatorPosition, arm, armPosition));
         // Bring arm down to 90 degrees
