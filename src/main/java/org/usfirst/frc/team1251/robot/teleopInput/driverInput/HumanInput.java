@@ -25,6 +25,7 @@ public class HumanInput {
     private final GamePadButtonTrigger sustainElevatorTrigger;
     private final GamePadButtonTrigger slowTurnRightTrigger;
     private final GamePadButtonTrigger slowTurnLeftTrigger;
+    private final GamePadButtonTrigger dropTrigger;
 
     private boolean commandTriggersAttached = false;
 
@@ -79,7 +80,6 @@ public class HumanInput {
         this.slowTurnLeftTrigger = new GamePadButtonTrigger(this.driverGamePad.lb());
 
         // Use the right-bumper to trigger create collection.
-        this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
         this.collectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.rb());
         this.openClawTrigger = new GamePadButtonTrigger(this.operatorGamePad.rt());
 
@@ -90,6 +90,9 @@ public class HumanInput {
         this.shiftElevatorDownTrigger = new GamePadButtonTrigger(this.operatorGamePad.b());
 
         this.sustainElevatorTrigger = new GamePadButtonTrigger(this.operatorGamePad.lt());
+
+        this.ejectCrateTrigger = new GamePadButtonTrigger(this.operatorGamePad.x());
+        this.dropTrigger = new GamePadButtonTrigger(this.operatorGamePad.lb());
     }
 
     /**
@@ -108,7 +111,8 @@ public class HumanInput {
                                       OpenClaw openClaw,
                                       Command sustainElevator,
                                       Turn slowTurnRight,
-                                      Turn slowTurnLeft) {
+                                      Turn slowTurnLeft,
+                                      Command drop) {
         // Prevent duplicate bindings.
         if (commandTriggersAttached) {
             return;
@@ -131,6 +135,7 @@ public class HumanInput {
         openClawTrigger.whileHeld(openClaw);
 
         sustainElevatorTrigger.whileHeld(sustainElevator);
+        dropTrigger.whileHeld(drop);
     }
 
     /**

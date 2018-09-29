@@ -129,7 +129,7 @@ public class Robot extends IterativeRobot {
         // assign driver-initiated command triggers.
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,
                 shiftElevatorUp, shiftElevatorDown, cubeEject, openClaw, sustainElevator,
-                slowTurnRight, slowTurnLeft);
+                slowTurnRight, slowTurnLeft, teleopDropCube);
 
 
         // Uncomment to test a controller on port 5
