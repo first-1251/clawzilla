@@ -118,11 +118,13 @@ public class Robot extends IterativeRobot {
         Turn slowTurnLeft = new Turn(driveTrain, Turn.Direction.LEFT, driveTrainShifter);
         Turn slowTurnRight = new Turn(driveTrain, Turn.Direction.RIGHT, driveTrainShifter);
 
-
         // Assign default commands
         armDefaultCmdSupplier.set(moveArm);
         elevatorDefaultCmdSupplier.set(moveElevator);
 
+        // Create a couple of alternates
+        SustainArmEvator sustainArmEvator = new SustainArmEvator(arm, elevator); // replacement for `sustatainElevator`
+        TeleopDropCube teleopDropCube = new TeleopDropCube(collector, claw); // replacement for `eject`
 
         // assign driver-initiated command triggers.
         humanInput.attachCommandTriggers(collectCrate, shiftDriveTrainUp, shiftDriveTrainDown,

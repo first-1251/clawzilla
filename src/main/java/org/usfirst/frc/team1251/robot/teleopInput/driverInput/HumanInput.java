@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1251.robot.teleopInput.driverInput;
 
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1251.robot.commands.*;
 import org.usfirst.frc.team1251.robot.teleopInput.gamepad.GamePad;
 import org.usfirst.frc.team1251.robot.teleopInput.triggers.GamePadButtonTrigger;
@@ -103,9 +104,9 @@ public class HumanInput {
                                       ShiftDriveTrain shiftDriveTrainDown,
                                       ShiftElevator shiftElevatorUp,
                                       ShiftElevator shiftElevatorDown,
-                                      Eject eject,
+                                      Command eject,
                                       OpenClaw openClaw,
-                                      SustainElevator sustainElevator,
+                                      Command sustainElevator,
                                       Turn slowTurnRight,
                                       Turn slowTurnLeft) {
         // Prevent duplicate bindings.
